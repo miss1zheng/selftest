@@ -1,2 +1,0 @@
-# selftest
-myself file
