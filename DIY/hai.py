@@ -261,3 +261,203 @@ print time.mktime(time.strptime(a,"%a %b %d %H:%M:%S %Y"))#½«¸ñÊ½×Ö·û´®×ª»»ÎªÊ±¼
 import calendar#´¦ÀíÄêÀúºÍÔÂÀú
 print calendar.month(2020,7)
 print calendar.isleap(2020)
+#ÆäËû´¦ÀíÈÕÆÚºÍÊ±¼äµÄÄ£¿é£ºdatetime¡¢pytz¡¢dateutil
+#×Ô¶¨Òåº¯Êı£ºÒÔdef¹Ø¼ü´Ê¿ªÍ·£¬ºó½Óº¯Êı±êÊ¶·ûÃûºÍÔ²À¨ºÅ()£¬º¯ÊıÄÚÈİÒÔÃ°ºÅÆğÊ¼²¢Ëõ½ø£¬return½áÊøº¯Êı
+def func(arg1,arg2):
+    "º¯Êı¿ªÊ¼"
+    print "function start......"
+    total=arg1+arg2
+    return total#ÍË³öº¯Êı£¬Ñ¡ÔñĞÔµØÏòµ÷ÓÃ·½·µ»ØÒ»¸ö±í´ïÊ½¡£²»´ø²ÎÊıÖµµÄreturnÓï¾ä·µ»ØNone
+print func(20,30)
+#ÀàĞÍÊôÓÚ¶ÔÏó£¬±äÁ¿ÊÇÃ»ÓĞÀàĞÍµÄ£¬Èç£ºa=[1£¬2£¬3]£¬ÕâÀï[]ÀïÃæÊÇlistÀàĞÍ£¬¶ø±äÁ¿aÊÇÃ»ÓĞÀàĞÍµÄ£¬Ëü½ö½öÊÇÒ»¸ö¶ÔÏóµÄÒıÓÃ(Ò»¸öÖ¸Õë)
+#¿É¸ü¸ÄÓë²»¿É¸ü¸Ä¶ÔÏó£ºstrings¡¢tuplesºÍnumbersÊÇ²»¿É¸ü¸ÄµÄ¶ÔÏó£¬¶ølistºÍdictÊÇ¿É¸ü¸ÄµÄ¶ÔÏó£¬±ÈÈç£ºa=10,a=20£¬Êµ¼ÊÊÇĞÂÉú³ÉÒ»¸öintÖµ¶ÔÏó20£¬ÔÙÈÃaÖ¸ÏòËü£¬¶ø10±»¶ªÆú£¬²»ÊÇ¸Ä±äaµÄÖµ£¬Ïàµ±ÓÚĞÂÉú³ÉÁËa¡£¿É±äÀàĞÍ£º±äÁ¿¸³Öµla=[1,2,3,4]ºóÔÙ¸³Öµla[2]=5ÔòÊÇ½«list laµÄµÚÈı¸öÔªËØÖµ¸ü¸Ä£¬±¾ÉílaÃ»ÓĞ¶¯£¬Ö»ÊÇÆäÄÚ²¿µÄÒ»²¿·ÖÖµ±»ĞŞ¸ÄÁË
+#º¯ÊıµÄ²ÎÊı´«µİ£º²»¿É±äÀàĞÍ£ºÀàËÆ c++ µÄÖµ´«µİ£¬Èç ÕûÊı¡¢×Ö·û´®¡¢Ôª×é¡£Èçfun£¨a£©£¬´«µİµÄÖ»ÊÇaµÄÖµ£¬Ã»ÓĞÓ°Ïìa¶ÔÏó±¾Éí¡£±ÈÈçÔÚ fun£¨a£©ÄÚ²¿ĞŞ¸ÄaµÄÖµ£¬Ö»ÊÇĞŞ¸ÄÁíÒ»¸ö¸´ÖÆµÄ¶ÔÏó£¬²»»áÓ°Ïìa±¾Éí¡£¿É±äÀàĞÍ£ºÀàËÆc++µÄÒıÓÃ´«µİ£¬ÈçÁĞ±í£¬×Öµä¡£Èçfun£¨la£©£¬ÔòÊÇ½«laÕæÕıµÄ´«¹ıÈ¥£¬ĞŞ¸ÄºófunÍâ²¿µÄlaÒ²»áÊÜÓ°Ïì
+b=20
+def changeinit(a):
+    a=10
+changeinit(b)
+print b#ÆäÖµÊÇ20¶ø²»»áÊÇ10£¨ÊµÀıÖĞÓĞint¶ÔÏó2£¬Ö¸ÏòËüµÄ±äÁ¿ÊÇb£¬ÔÚ´«µİ¸øChangeIntº¯ÊıÊ±£¬°´´«ÖµµÄ·½Ê½¸´ÖÆÁË±äÁ¿ b£¬aºÍb¶¼Ö¸ÏòÁËÍ¬Ò»¸öInt¶ÔÏó£¬ÔÚa=10Ê±£¬ÔòĞÂÉú³ÉÒ»¸öintÖµ¶ÔÏó10£¬²¢ÈÃaÖ¸ÏòËü£©
+
+def changeme(mylist):
+    mylist.append([1,2,3,4])
+    #mylist=[1,2,3,4]
+    print mylist#mylist.appendÊä³öµÄÊÇ[10, 20, 30, [1, 2, 3, 4]]£¬mylist=Êä³öµÄÊÇ[1, 2, 3, 4]
+mylist=[10,20,30]
+changeme(mylist)
+print mylist#mylist.appendÊä³öµÄÊÇ[10, 20, 30, [1, 2, 3, 4]]£¬mylist=Êä³öµÄÊÇ[10, 20, 30]
+
+#º¯ÊıµÄ²ÎÊı
+#¿ÉĞ´º¯ÊıËµÃ÷£¬1.±Ø±¸²ÎÊı
+def printme( str ):
+   "´òÓ¡ÈÎºÎ´«ÈëµÄ×Ö·û´®"
+   print str
+   return
+#µ÷ÓÃprintmeº¯Êı
+printme("hello,change.")
+#printme()#±¨´í
+
+#¿ÉĞ´º¯ÊıËµÃ÷£¬2.¹Ø¼ü×Ö²ÎÊı
+def printinfo( name, age ):
+   "´òÓ¡ÈÎºÎ´«ÈëµÄ×Ö·û´®"
+   print "Name: ", name
+   print "Age ", age
+   return
+#µ÷ÓÃprintinfoº¯Êı
+printinfo( age=50, name="miki" )
+
+#¿ÉĞ´º¯ÊıËµÃ÷£¬3.Ä¬ÈÏ²ÎÊı
+def printinfo( name, age = 35 ):
+   "´òÓ¡ÈÎºÎ´«ÈëµÄ×Ö·û´®"
+   print "Name: ", name
+   print "Age ", age
+   return
+#µ÷ÓÃprintinfoº¯Êı
+printinfo( age=50, name="miki" )
+printinfo( name="miki" )
+
+"""
+------º¯ÊıµÄ²»¶¨³¤²ÎÊı------
+def functionname([formal_args,] *var_args_tuple ):#¼ÓÁËĞÇºÅ£¨*£©µÄ±äÁ¿Ãû»á´æ·ÅËùÓĞÎ´ÃüÃûµÄ±äÁ¿²ÎÊı
+   "º¯Êı_ÎÄµµ×Ö·û´®"
+   function_suite
+   return [expression]
+"""
+# ¿ÉĞ´º¯ÊıËµÃ÷£¬4.²»¶¨³¤²ÎÊı
+def printinfo( arg1, *vartuple ):
+   "´òÓ¡ÈÎºÎ´«ÈëµÄ²ÎÊı"
+   print "Êä³ö: "
+   print arg1
+   for var in vartuple:
+      print var
+   return
+# µ÷ÓÃprintinfo º¯Êı
+printinfo( 10 )
+printinfo( 70, 60, 50 )
+
+"""
+ÄäÃûº¯Êı£ºÊ¹ÓÃlambdaÀ´´´½¨ÄäÃûº¯Êı
+1.lambdaÖ»ÊÇÒ»¸ö±í´ïÊ½£¬º¯ÊıÌå±Èdef¼òµ¥ºÜ¶à¡£
+2.lambdaµÄÖ÷ÌåÊÇÒ»¸ö±í´ïÊ½£¬¶ø²»ÊÇÒ»¸ö´úÂë¿é¡£½ö½öÄÜÔÚlambda±í´ïÊ½ÖĞ·â×°ÓĞÏŞµÄÂß¼­½øÈ¥¡£
+3.lambdaº¯ÊıÓµÓĞ×Ô¼ºµÄÃüÃû¿Õ¼ä£¬ÇÒ²»ÄÜ·ÃÎÊ×ÔÓĞ²ÎÊıÁĞ±íÖ®Íâ»òÈ«¾ÖÃüÃû¿Õ¼äÀïµÄ²ÎÊı¡£
+4.ËäÈ»lambdaº¯Êı¿´ÆğÀ´Ö»ÄÜĞ´Ò»ĞĞ£¬È´²»µÈÍ¬ÓÚC»òC++µÄÄÚÁªº¯Êı£¬ºóÕßµÄÄ¿µÄÊÇµ÷ÓÃĞ¡º¯ÊıÊ±²»Õ¼ÓÃÕ»ÄÚ´æ´Ó¶øÔö¼ÓÔËĞĞĞ§ÂÊ£©
+Óï·¨£ºlambda [arg1 [,arg2,.....argn]]:expression
+"""
+sum = lambda arg1, arg2: arg1 + arg2
+# µ÷ÓÃsumº¯Êı
+print "Ïà¼ÓºóµÄÖµÎª : ", sum( 10, 20 )
+print "Ïà¼ÓºóµÄÖµÎª : ", sum( 20, 20 )
+
+#±äÁ¿×÷ÓÃÓò£ºÈ«¾Ö±äÁ¿ºÍ¾Ö²¿±äÁ¿£¬ºÍcÓïÑÔ²î²»¶à
+"""
+------Python Ä£¿é(Module)------
+ÊÇÒ»¸ö Python ÎÄ¼ş£¬ÒÔ .py ½áÎ²£¬°üº¬ÁË Python ¶ÔÏó¶¨ÒåºÍPythonÓï¾ä¡£Ä£¿é¶¨ÒåºÃºó£¬ÎÒÃÇ¿ÉÒÔÊ¹ÓÃ import Óï¾äÀ´ÒıÈëÄ£¿é£¬µ±½âÊÍÆ÷Óöµ½importÓï¾ä£¬ÈôÄ£¿éÔÚµ±Ç°ËÑË÷Â·¾¶Ôò»á±»µ¼Èë£¬Ò»¸öÄ£¿éÖ»»á±»µ¼ÈëÒ»´Î
+Ä£¿éµÄÓï·¨£ºimport module1[,module2......]£¬ÔÚµ÷ÓÃÄ£¿éÄÚµÄº¯ÊıÊ±£¬ÒıÓÃ£ºÄ£¿éÃû.º¯ÊıÃû
+from modname import name1[,name2...]Óï¾ä£º´ÓmodnameÄ£¿éÀïµÄname1º¯ÊıÒıÈëµ½Ö´ĞĞÕâ¸öÉùÃ÷µÄÄ£¿éµÄÈ«¼Ò·ûºÅ±í
+from modname import* Óï¾ä£º°ÑÄ£¿éµÄËùÓĞÄÚÈİµ¼Èëµ½µ±Ç°ÃüÃû¿Õ¼ä£¬²»ÄÜ±»¹ı¶àÊ¹ÓÃ
+ËÑË÷Â·¾¶£º1µ±Ç°Ä¿Â¼£»2ÔÚshell±äÁ¿PYTHONPATHµÄÃ¿¸öÄ¿Â¼£»3²é¿´Ä¬ÈÏÂ·¾¶£¬ÔÚunixÏÂÄ¬ÈÏÒ»°ãÎª/usr/local/lib/pthon/
+"""
+#PYTHONPATH ±äÁ¿£º»·¾³±äÁ¿
+#set PYTHONPATH=c:\python27\lib;#windowsÏÂµÄ»·¾³±äÁ¿
+#et PYTHONPATH=/usr/local/lib/python#ÔÚunixÏÂµÄ»·¾³±äÁ¿
+#Èç¹ûÒª¸øº¯ÊıÄÚµÄÈ«¾Ö±äÁ¿¸³Öµ£¬±ØĞëÊ¹ÓÃ global Óï¾ä
+print dir(math)# º¯ÊıÒ»¸öÅÅºÃĞòµÄ×Ö·û´®ÁĞ±í£¬ÄÚÈİÊÇÒ»¸öÄ£¿éÀï¶¨Òå¹ıµÄÃû×Ö
+"""
+Èç¹ûÔÚº¯ÊıÄÚ²¿µ÷ÓÃ locals()£¬·µ»ØµÄÊÇËùÓĞÄÜÔÚ¸Ãº¯ÊıÀï·ÃÎÊµÄÃüÃû¡£
+
+Èç¹ûÔÚº¯ÊıÄÚ²¿µ÷ÓÃ globals()£¬·µ»ØµÄÊÇËùÓĞÔÚ¸Ãº¯ÊıÀïÄÜ·ÃÎÊµÄÈ«¾ÖÃû×Ö¡£
+
+Á½¸öº¯ÊıµÄ·µ»ØÀàĞÍ¶¼ÊÇ×Öµä¡£ËùÒÔÃû×ÖÃÇÄÜÓÃ keys() º¯ÊıÕªÈ¡¡£
+
+reload() º¯Êı:µ±Ò»¸öÄ£¿é±»µ¼Èëµ½Ò»¸ö½Å±¾£¬Ä£¿é¶¥²ã²¿·ÖµÄ´úÂëÖ»»á±»Ö´ĞĞÒ»´Î¡£Òò´Ë£¬Èç¹ûÄãÏëÖØĞÂÖ´ĞĞÄ£¿éÀï¶¥²ã²¿·ÖµÄ´úÂë£¬¿ÉÒÔÓÃ reload() º¯Êı¡£¸Ãº¯Êı»áÖØĞÂµ¼ÈëÖ®Ç°µ¼Èë¹ıµÄÄ£¿é¡£Óï·¨Îªreload(modname),modnameÎªÄ£¿éµÄÃû×Ö
+"""
+print dir(math)
+#__init__.py ÓÃÓÚ±êÊ¶µ±Ç°ÎÄ¼ş¼ĞÊÇÒ»¸ö°ü£¨ __init__.py ÎÄ¼ş·ÅÔÚ´ËÎÄ¼ş¼ĞÀïÃæ£©
+
+"""
+------ÎÄ¼şI/O------
+printÓï¾ä£ºÊä³öµ½ÆÁÄ»
+input/raw_inputÓï¾ä£º¶ÁÈ¡¼üÅÌÊäÈë,input([prompt]) º¯ÊıºÍ raw_input([prompt]) º¯Êı»ù±¾ÀàËÆ£¬µ«ÊÇ input ¿ÉÒÔ½ÓÊÕÒ»¸öPython±í´ïÊ½×÷ÎªÊäÈë£¬²¢½«ÔËËã½á¹û·µ»Ø
+openº¯Êı£º´ò¿ªÎÄ¼ş£¬Óï·¨Îªfile object = open(file_name [, access_mode][, buffering])
+openÖ®ºóµÄÎÄ¼ş¿ÉÊ¹ÓÃÓëfile¶ÔÏóÏà¹ØµÄÊôĞÔÊ¹ÓÃ£ºobject.closedÊÇ·ñ¹Ø±Õ£»object.nameÎÄ¼şÃû³Æ£»object.mode·ÃÎÊÄ£Ê½
+close£º¹Ø±ÕÎÄ¼ş¡£Ê¹ÓÃÎª¡¾openµÄ·µ»ØÖµ.close£¬ÈçÇ°ÃæµÄobject.close¡¿Ë¢ĞÂ»º³åÇøÀïÈÎºÎ»¹Ã»Ğ´ÈëµÄĞÅÏ¢£¬²¢¹Ø±Õ¸ÃÎÄ¼ş£¬ÕâÖ®ºó±ã²»ÄÜÔÙ½øĞĞĞ´Èë
+write£ºĞ´ÎÄ¼ş£¬object.write(string)
+read£º¶ÁÎÄ¼ş£¬object.read(length)
+tell£º¸æËßÄãÎÄ¼şÄÚµÄµ±Ç°Î»ÖÃ, »»¾ä»°Ëµ£¬ÏÂÒ»´ÎµÄ¶ÁĞ´»á·¢ÉúÔÚÎÄ¼ş¿ªÍ·ÕâÃ´¶à×Ö½ÚÖ®ºó
+seek£¨offset [,from]£©£º¸Ä±äµ±Ç°ÎÄ¼şµÄÎ»ÖÃ¡£Offset±äÁ¿±íÊ¾ÒªÒÆ¶¯µÄ×Ö½ÚÊı¡£From±äÁ¿Ö¸¶¨¿ªÊ¼ÒÆ¶¯×Ö½ÚµÄ²Î¿¼Î»ÖÃ
+"""
+"""
+#ÈôÊäÈëÎª£º[x*5 for x in range(2,10,2)]
+str=raw_input("please input: ")
+print "input context is: ",str#½á¹ûÊÇ£º[x*5 for x in range(2,10,2)]
+str=input("please input: ")
+print "input context is: ",str#½á¹ûÊÇ£º[10, 20, 30, 40]
+"""
+#ÀàµÄ·½·¨ÓëÆÕÍ¨µÄº¯ÊıÖ»ÓĞÒ»¸öÌØ±ğµÄÇø±ğ¡ª¡ªËüÃÇ±ØĞëÓĞÒ»¸ö¶îÍâµÄµÚÒ»¸ö²ÎÊıÃû³Æ, °´ÕÕ¹ßÀıËüµÄÃû³ÆÊÇ self
+#Ê¹ÓÃµãºÅ . À´·ÃÎÊ¶ÔÏóµÄÊôĞÔ.
+class Employee:
+    'ËùÓĞÔ±¹¤µÄ»ùÀà'
+    empCount = 0#Àà±äÁ¿£¬¿ÉÒÔÔÚÄÚ²¿Àà»òÍâ²¿ÀàÊ¹ÓÃ Employee.empCount ·ÃÎÊ
+ 
+    def __init__(self, name="bob", salary=5000):#ÀàµÄ¹¹Ôìº¯Êı»ò³õÊ¼»¯·½·¨£¬self ´ú±íÀàµÄÊµÀı£¬self ÔÚ¶¨ÒåÀàµÄ·½·¨Ê±ÊÇ±ØĞëÓĞµÄ£¬ËäÈ»ÔÚµ÷ÓÃÊ±²»±Ø´«ÈëÏàÓ¦µÄ²ÎÊı
+        self.name = name
+        self.salary = salary
+        Employee.empCount += 1
+   
+    def displayCount(self):
+        print "Total Employee %d" % Employee.empCount
+ 
+    def displayEmployee(self):
+        print "Name : ", self.name,  ", Salary: ", self.salary
+
+    def __del__(self):#Ïú»Ùº¯Êı
+      class_name = self.__class__.__name__
+      print class_name, "Ïú»Ù"
+      
+t=Employee("bob","55$")
+t.displayEmployee()
+if hasattr(t,'displayEmployee'):#hasattrÊÇÅĞ¶ÏtÀàÖĞÊÇ·ñ´æÔÚµ¥ÒıºÅµÄÊôĞÔ£¬ÕâÀïÊÇ´æÔÚµÄ
+    print "this is class"
+else:
+    print "this isn't class"
+print "Employee.__doc__:", Employee.__doc__#ÀàµÄÎÄµµ×Ö·û´®
+print "Employee.__name__:", Employee.__name__#ÀàÃû
+print "Employee.__module__:", Employee.__module__#Àà¶¨ÒåËùÔÚµÄÄ£¿é£¨ÀàµÄÈ«ÃûÊÇ'__main__.className'£¬Èç¹ûÀàÎ»ÓÚÒ»¸öµ¼ÈëÄ£¿émymodÖĞ£¬ÄÇÃ´className.__module__ µÈÓÚ mymod£©
+print "Employee.__bases__:", Employee.__bases__#ÀàµÄËùÓĞ¸¸Àà¹¹³ÉÔªËØ£¨°üº¬ÁËÒ»¸öÓÉËùÓĞ¸¸Àà×é³ÉµÄÔª×é£©
+print "Employee.__dict__:", Employee.__dict__#ÀàµÄÊôĞÔ£¨°üº¬Ò»¸ö×Öµä£¬ÓÉÀàµÄÊı¾İÊôĞÔ×é³É£©
+class Child(Employee): # ¶¨Òå×ÓÀà
+    def __init__(self):
+        print "µ÷ÓÃ×ÓÀà¹¹Ôì·½·¨"
+ 
+    def childMethod(self):
+        print 'µ÷ÓÃ×ÓÀà·½·¨'
+c=Child()
+c.childMethod()
+c.displayCount()
+del t
+#ÔËËã·ûÖØÔØ
+class Vector:
+    __secretCount = 0  # Ë½ÓĞ±äÁ¿,²»ÄÜÔÚÀàµÄÍâ²¿µ÷ÓÃ,µ«¿ÉÒÔÊ¹ÓÃ object._className__attrName£¨ ¶ÔÏóÃû._ÀàÃû__Ë½ÓĞÊôĞÔÃû £©·ÃÎÊÊôĞÔ
+    publicCount = 0    # ¹«¿ª±äÁ¿
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def count(self):
+        self.__secretCount+=1
+        self.publicCount+=1
+        print self.__secretCount
+ 
+    def __str__(self):
+        return 'Vector (%d, %d)' % (self.a, self.b)
+   
+    def __add__(self,other):
+        return Vector(self.a + other.a, self.b + other.b)
+ 
+v1 = Vector(2,10)
+print v1.publicCount
+print v1._Vector__secretCount#·ÃÎÊË½ÓĞÊôĞÔ
+v2 = Vector(5,-2)
+print v1 + v2
+
+import socket
+sockid=socket.socket(AF_INET,SOCK_STREAM,0)
