@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>命令行解析</title>
+	<style>
+		a{ text-decoration:none;}
+	</style>
+<head>
+</head>
+<body>
+	<a href="#argparse" title="命令行选项、参数和子命令解析器" style="text-decoration:none;text-align:center;"><h3>argparse 模块</h3></a><br>
+	<a href="#argumentparser" title="创建一个解析器">ArgumentParser</a>
+		<ol>
+			<li><a href="#prog">prog：程序名称</a></li>
+			<li><a href="#description">description：帮助文档前文本</a></li>
+			<li><a href="#usage">usage：描述程序用途</a></li>
+			<li><a href="#epilog">epilog：帮助文档后文本</a></li>
+			<li><a href="#formatter_class">formatter_class：自定义帮助文档输出格式</a></li>
+			<li><a href="#prefix_chars">prefix_chars：可选参数的前缀字符集合</a></li>
+			<li><a href="#add_help">add_help：添加 -h/--help 选项</a></li>
+			<li><a href="#parents">parents：解析器对象的列表，它们的参数也应包含在内</a></li>
+			<li><a href="#allow_abbrev">allow_abbrev：缩写长选项</a></li>
+			<li><a href="#fromfile_prefix_chars">fromfile_prefix_chars：从文件中读取其他参数时，标识文件名的前缀字符集合</a></li>
+			<li><a href="#argument_default">argument_default：参数的全局默认值</a></li>
+			<li><a href="#conflict_handler">conflict_handler：解决冲突选项的策略</a></li>
+			<li><a href="#exit_on_error">exit_on_error：当错误发生时是否让解析器附带错误信息退出。</a></li>
+		</ol>
+	<hr>
+	<a href="#add_argument" title="添加参数">add_argument</a>
+		<ol>
+			<li><a href="#nameorflags">name or flags：必选，指定参数的形式</a></li>
+			<li><a href="#default">default：参数默认值</a></li>
+			<li><a href="#action">action：布尔参数</a></li>
+			<li><a href="#help">help：帮助信息</a></li>
+			<li><a href="#metavar">metavar：参数在帮助信息中的名称</a></li>
+			<li><a href="#required">required：必需参数</a></li>
+			<li><a href="#type">type：参数类型</a></li>
+			<li><a href="#choices">choices：设置参数的范围</a></li>
+			<li><a href="#nargs">nargs：指定参数后面的 value 有多少个</a></li>
+			<li><a href="#dest">dest：解析出来的 value 放入设置的属性中</a></li>
+			<li><a href="#const">const：被一些 action 和 nargs 选择所需求的常数</a></li>
+		</ol>
+	<hr>
+	<a href="#parse_args" title="解析参数">parse_args</a>
+		<ol>
+			<li><a href="#args">args：要解析的字符串列表</a></li>
+			<li><a href="#namespace">namespace：用于获取属性的对象</a></li>
+		</ol>
+	<hr>
+	<a href="#add_subparsers" title="子命令">add_subparsers</a>
+		<ol>
+			<li><a href="#title">title ：输出帮助的子解析器分组的标题</a></li>
+			<li><a href="#description0">description：输出帮助中对子解析器的描述</a></li>
+			<li><a href="#title">prog：将与子命令帮助一同显示的用法信息，默认为程序名称和子解析器参数之前的任何位置参数。</a></li>
+			<li><a href="#parser_class0">parser_class：将被用于创建子解析器实例的类，默认为当前解析器类（例如 ArgumentParser）</a></li>
+			<li><a href="#action0">action：当此参数在命令行中出现时要执行动作的基本类型</a></li>
+			<li><a href="#dest0">dest：将被用于保存子命令名称的属性名；默认为 None 即不保存任何值</a></li>
+			<li><a href="#required0">required：是否必须要提供子命令，默认为 False (在 3.7 中新增)</a></li>
+			<li><a href="#help0">help：在输出帮助中的子解析器分组帮助信息，默认为 None</a></li>
+			<li><a href="#metavar0">metavar：帮助信息中表示可用子命令的字符串；</a></li>
+		</ol>
+	<hr>
+
+	<div id="argumentparser">
+		<h4 style="text-decoration:none;text-align:center;">ArgumentParser：创建一个解析器</h4>
+		<div id="prog">
+			<p>prog：程序的名称（默认：sys.argv[0），可用“%(prog)s”获取此参数。<br>
+			默认解析器使直接使用sys.argv[0]确定程序名称，如test.py则此名称就是test.py</p>
+			<form>
+				<fieldset>
+				<legend>** <b>prog 举例 </b>**</legend>
+				import argparse<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(prog="argparse")<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/prog.png" alt="prog">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="description">
+			<p>description：在参数帮助文档之前显示的文本（默认值：无）。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>description 举例 </b>**</legend>
+				import argparse<br>
+				decript="""<br>
+				-----------------<br>
+				argparse module.<br>
+				-----------------<br>
+				"""<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(description=decript)<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/description.png" alt="description">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="usage">
+			<p>usage：描述程序用途的字符串（默认值：从添加到解析器的参数生成）。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>usage 举例 </b>**</legend>
+				import argparse<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(prog="argparse", usage="%(prog)s [option]")<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/usage.png" alt="usage">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="epilog">
+			<p>epilog：在参数帮助文档之后显示的文本（默认值：无）</p>
+			<form>
+				<fieldset>
+				<legend>** <b>epilog 举例 </b>**</legend>
+				import argparse<br>
+				decript="""<br>
+				-----------------<br>
+				argparse module.<br>
+				-----------------<br>
+				"""<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(epilog=decript)<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/epilog.png" alt="epilog">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="formatter_class">
+			<p>formatter_class：通过指定备用格式化类来自定义帮助格式。目前有四类：<br><br>
+			&nbsp1.class argparse.RawDescriptionHelpFormatter：在正文的描述和展示上给与了更多的控制。对象会将 description 和 epilog 的文字在命令行中自动换行。传此类给 formatter_class= 表示 description 和 epilog 已经被正确的格式化了，不能在命令行中被自动换行。注意：多重的新行（什么信息都没有直接换行）则只会被替换成一行，若想保留多重空白行则可在新行之间加空格。<br><br>
+			&nbsp2.class argparse.RawTextHelpFormatter：功能和第一个一样<br><br>
+			&nbsp3.class argparse.ArgumentDefaultsHelpFormatter：自动添加默认值的信息到每一个帮助信息参数中<br><br>
+			&nbsp4.class argparse.MetavarTypeHelpFormatter：为它的值在每一个参数中使用 type 的参数名当作它的显示名（而不是使用通常的格式 dest )</p>
+			<form>
+				<fieldset>
+				<legend>** <b>formatter_class 举例 </b>**</legend>
+				例1：<br>import argparse<br>
+				decript="""<br>
+				-----------------<br>
+				&nbsp<br>&nbsp<br>
+				argparse module.<br>
+				-----------------<br>
+				"""<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(description=decript,epilog=decript,formatter_class=argparse.RawDescriptionHelpFormatter)<br>
+					&nbspargs=parser.parse_args()<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/formatter_class.png" alt="formatter_class"><br>
+				<br>例2：<br>import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)<br>
+					&nbspparser.add_argument('--foo', type=int, default=42, help='FOO!')<br>
+					&nbspparser.add_argument('bar', nargs='*', default=[1, 2, 3], help='BAR!')<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<p>未加 formatter_class=argparse.ArgumentDefaultsHelpFormatter：<br>
+				<img src="./0/formatter_class0.png" alt="formatter_class0"><br>
+				加了 formatter_class=argparse.ArgumentDefaultsHelpFormatter：<br>
+				<img src="./0/formatter_class1.png" alt="formatter_class1"></p>
+				例3：<br>import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(formatter_class=argparse.MetavarTypeHelpFormatter)<br>
+					&nbspparser.add_argument('--foo', type=int, help='FOO!')<br>
+					&nbspparser.add_argument('bar', type=float, help='BAR!')<br>
+					&nbspparser.add_argument('--boo', type=str, help='BOO!')<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<p>未加 formatter_class=argparse.MetavarTypeHelpFormatter：<br>
+				<img src="./0/formatter_class2.png" alt="formatter_class2"><br>
+				加了 formatter_class=argparse.MetavarTypeHelpFormatter：<br>
+				<img src="./0/formatter_class3.png" alt="formatter_class3"></p>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="prefix_chars">
+			<p>prefix_chars：可选参数的前缀字符集合（默认"-"）。若想使用其他前缀，最好加 上“-”，否则“--help”不能使用。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>prefix_chars 举例</b> **</legend>
+				import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(prefix_chars="@-")<br>
+					&nbspparser.add_argument('@f')<br>
+					&nbspparser.add_argument('++b')<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/prefix_chars.png" alt="prefix_chars">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="add_help">
+			<p>add_help：为解析器添加一个 -h/--help 选项（默认值： True），若设置成False则无法使用--help 选项了</p>
+			<form>
+				<fieldset>
+				<legend>** <b>add_help 举例 </b>**</legend>
+				import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(add_help=False)<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<p>默认：<br><img src="./0/add_help0.png" alt="add_help0"><br>add_help=False：<br><img src="./0/add_help.png" alt="add_help">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="parents">
+			<p>parents：解析器使用一系列相同参数时，单个解析器中参数可直接通过parents=使用相同的参数而不是重复这些参数的定义<br>
+			（此时要将父解析器 add_help 置为 false，否则会报错有多个 --help 功能）<br>
+			注意：1.若父解析器使用了特殊的 @，则子解析器要使用相同参数时必须也要指定 此特殊符号；<br>
+			&nbsp&nbsp&nbsp2.令父解析器 add_help 为 false，否则父子解析器都有 --help 功能会产生错误)。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>parents 举例 </b>**</legend>
+				import argparse<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(prefix_chars="@-",add_help=False) #此处必须使add_help为False<br>
+					&nbspparser.add_argument("@info") <br>
+					&nbspchild=argparse.ArgumentParser(prefix_chars="@-",parents=[parser]) <br>
+					&nbspchild.parse_args(['@info',"123"])<br>
+					&nbspbar_parser = argparse.ArgumentParser(parents=[parser])<br>
+					&nbspbar_parser.add_argument('--bar')<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/parents.png" alt="parents">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="allow_abbrev">
+			<p>allow_abbrev：若缩写无歧义则允许缩写长选项（默认值：True），若设置为False则长选项必须全部写完整。</p>
+		</div>
+		<br><div id="fromfile_prefix_chars">
+			<p>fromfile_prefix_chars：当处理一个特别长的参数列表的时候，把它存入一个文件中而不是在命令行打出来会很有意义。如果 fromfile_prefix_chars= 参数提供给 ArgumentParser 构造函数，之后所有类型的字符的参数都会被当成文件处理，并且会被文件包含的参数替代。
+			<br>&nbsp&nbsp从文件读取的参数在默认情况下必须一个一行（但是可参见 convert_arg_line_to_args()）并且它们被视为与命令行上的原始文件引用参数位于同一位置。<br>
+			&nbsp&nbsp默认为 None，意味着参数不会被当作文件对待</p>
+			<form>
+				<fieldset>
+				<legend>** <b>fromfile_prefix_chars 举例 </b>**</legend>
+				import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspwith open('args.txt', 'w') as fp:<br>
+						&nbsp&nbspfp.write('-f\nbar')<br>
+					&nbspparser = argparse.ArgumentParser(fromfile_prefix_chars='@')<br>
+					&nbspparser.add_argument('-f')<br>
+					&nbspparser.parse_args(['-f', 'foo', '@args.txt'])#相当于['-f', 'foo', '-f', 'bar']<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="argument_default">
+			<p>argument_default：一般情况下，参数默认会通过设置一个默认到 add_argument() 或者调用带一组指定键值对的 ArgumentParser.set_defaults() 方法。但是有些时候，为参数指定一个普遍适用的解析器会更有用。这能够通过传输 argument_default= 关键词参数给 ArgumentParser 来完成。</p>
+		</div>
+		<br><div id="conflict_handler">
+			<p>conflict_handler：默认情况下，对象不允许在相同选项字符串下有两种行为，若有则会异常保错，有些时候（例如：使用 parents），重写旧的有相同选项字符串的参数会更有用。为了产生这种行为， 'resolve' 值可以提供给 ArgumentParser 的 conflict_handler= 参数</p>
+			<form>
+				<fieldset>
+				<legend>** <b>conflict_handler 举例 </b>**</legend>
+				import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(conflict_handler='resolve')<br>
+					&nbspparser.add_argument('-f','--f',help="old funtion.")<br>
+					&nbspparser.add_argument('--f',help="new funtion.") #这里的--f被重写<br>
+					&nbspparser.print_help()<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				<img src="./0/conflict_handler.png" alt="conflict_handler">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="exit_on_error">
+			<p>exit_on_error：正常情况下，当你向 ArgumentParser 的 parse_args() 方法传入一个无效的参数列表时，它将会退出并发出错误信息。
+			<br>如果用户想要手动捕获错误，可通过将 exit_on_error 设为 False 来启用该特性。注意：此为 3.9 新版功能.</p>
+			<form>
+				<fieldset>
+				<legend>** <b>exit_on_error 举例 </b>**</legend>
+				import argparse<br>
+				<br>
+				def funt():<br>
+					&nbspparser = argparse.ArgumentParser(exit_on_error=False)<br>
+					&nbspparser.add_argument('--integers', type=int)<br>
+					&nbsptry:<br>
+						&nbsp&nbspparser.parse_args('--integers a'.split())<br>
+					&nbspexcept argparse.ArgumentError:<br>
+						&nbsp&nbspprint('Catching an argumentError')<br>
+				<br>
+				if __name__ == "__main__":<br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+	</div><br><hr>
+	<div id="add_argument">
+		<h4 style="text-decoration:none;text-align:center;">add_argument：添加参数</h4>
+		<div id="nameorflags">
+			<p>name or flags：必选，指定参数的形式，一般两个，一个短参数，一个长参数。当 parse_args() 被调用，选项会以 - 前缀识别，剩下的参数则会被假定为位置参数。</p>
+			<form>
+				<fieldset>
+				<legend>**<b> name or flags 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					&nbspparser.add_argument("abc") #位置参数 <br>
+					&nbsp#parser.add_argument("--abc","-ABC")<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+					&nbsp#print (args.abc)<br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="default">
+			<p>default：参数默认值，指定了在命令行参数未出现时应当使用的值，可通过 %(default)s 来获取默认参数，默认值为 None<br>
+			对于 nargs 等于 ? 或 * 的位置参数， default 值在没有命令行参数出现时使用。（如：<br>
+			&nbspparser.add_argument('foo', nargs='?', default=42)<br> &nbspparser.parse_args(['a'])<br> &nbspparser.parse_args([])<br>）<br>
+			提供 default=argparse.SUPPRESS 导致命令行参数未出现时没有属性被添加，如：<br></p>
+			<form>
+				<fieldset>
+				<legend>** <b>default 举例</b> **</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					parser.add_argument("--abc","-ABC",default="yes")<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="action">
+			<p>action：将命令行参数与动作相关联。这些动作可以做与它们相关联的命令行参数的任何事，尽管大多数动作只是简单的向 parse_args() 返回的对象上添加属性。<br>
+			<br>&nbspstore：存储参数值，<br>
+			<br>&nbspstore_const：存储被const命名参数指定的值<br>
+			<br>&nbspstore_true和store_false：只有真假两种结果 bool 类型，若有指定参数时为真，否则为假<br>
+			<br>&nbspappend：存储一个列表并将每个参数值追加到列表中<br>
+			<br>&nbspappend_const：存储一个列表并将const命名参数指定的值追加到列表中（注意 const 命名参数默认为 None。）<br>
+			<br>&nbspcount：计算一个关键字参数出现的次数，默认为None，除非显示的设为0<br>
+			<br>&nbsphelp：打印所有当前解析器中的选项和参数的完整帮助信息，然后退出。默认情况下，一个 help 动作会被自动加入解析器。<br>
+			<br>&nbspversion：打印版本信息并在调用后退出<br>
+			<br>&nbspextend：存储一个列表，并将每个参数值加入到列表中。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>action 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					parser.add_argument("--abc","-ABC",action='store_true')<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="help">
+			<p>help：帮助信息</p>
+			<form>
+				<fieldset>
+				<legend>** <b>help 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					&nbspparser.add_argument("--abc","-ABC",help="this is test project.")<br>
+					&nbspparser.print_help()<br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				<img src="./0/help.png" alt="help">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="metavar">
+			<p>metavar：参数在帮助信息中的名称<br>请注意 metavar 仅改变 显示的 名称 - parse_args() 对象的属性名称仍然会由 dest 值确定</p>
+			<form>
+				<fieldset>
+				<legend>** <b>metavar 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					parser = argparse.ArgumentParser()<br>
+					parser.add_argument('--foo', metavar='YYY')<br>
+					parser.add_argument('bar', metavar='XXX')<br>
+					parser.print_help()<br>
+				if __name__ == "__main__": <br>
+					funt()<br>
+				<br>未加前：<br>
+				<img src="./0/metavar.png" alt="metavar"><br>
+				加了后：<br>
+				<img src="./0/metavar0.png" alt="metavar0">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="required">
+			<p>required：必需参数，若此值为 true，则参数必须要写。若未出现在命令行则会报错。</p>
+		</div>
+		<br><div id="type">
+			<p>type：参数类型，不能和 action 参数一起使用。类型有 int、str、float、tuple、dict、open 等。可通过 %(type)s 获取 type 参数。<br>
+			<br>为方便使用不同类型的文件，argparse 模块提供了 FileType 工厂类，该类接受 mode=, bufsize=, encoding= 和 errors= 等 open() 函数参数。 例如，FileType('w') 可被用来创建一个可写文件。<br>
+			由于帮助字符串支持 %-formatting，如果你希望在帮助字符串中显示 % 字面值，你必须将其转义为 %%。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>type 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					&nbspparser.add_argument('bar', type=argparse.FileType('w'))<br>
+					&nbspparser.parse_args(['out.txt'])<br>
+					&nbspprint (parser)<br>
+				<br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				<img src="./0/type.png" alt="type">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="choices">
+			<p>choices：设置参数的范围</p>
+			<form>
+				<fieldset>
+				<legend>** <b>choices 举例</b> **</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					parser.add_argument("--abc","-ABC",type=int,choices=[1,3])<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="nargs">
+			<p>nargs：指定参数后面的 value 有多少个。<br>
+			"N"：整数，有几个参数<br>
+			"*"：表示若该位置有参数则所有的输入都将作为参数值；<br>
+			"+"：表示至少有一个，其他的和*类似<br>
+			"?"：表示没有参数或只有一个参数。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>nargs 举例</b> **</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					parser.add_argument("--abc","-ABC",nargs="+")<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="dest">
+			<p>dest：解析出来的 value 放入设置的属性中</p>
+			<form>
+				<fieldset>
+				<legend>**<b> dest 举例 </b>**</legend>
+				import argparse <br>
+				def funt(): <br>
+					&nbspparser = argparse.ArgumentParser()<br> 
+					&nbspparser.add_argument("--abc","-ABC",dest="start")<br>
+					&nbspargs=parser.parse_args() <br>
+					&nbspprint (args) <br>
+					&nbspprint ("start:",args.start)<br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				<img src="./0/dest.png" alt="dest">
+				</fieldset>
+			</form>
+		</div>
+		<br><div id="const">
+			<p>const：保存不从命令行中读取但被各种 ArgumentParser 动作需求的常数值。最常用的两例为：<br>
+			当 add_argument() 通过 action='store_const' 或 action='append_const 调用时。这些动作将 const 值添加到 parse_args() 返回的对象的属性中。在 action 的描述中查看案例。<br>
+			当 add_argument() 通过选项（例如 -f 或 --foo）调用并且 nargs='?' 时。这会创建一个可以跟随零个或一个命令行参数的选项。当解析命令行时，如果选项后没有参数，则将用 const 代替。在 nargs 描述中查看案例。<br>
+			对 'store_const' 和 'append_const' 动作， const 命名参数必须给出。对其他动作，默认为 None。</p>
+		</div>
+	</div><br><hr>
+	<div id="parse_args">
+		<h4 style="text-decoration:none;text-align:center;">parse_args方法</h4>
+		<div id="args">
+			<p>args：要解析的字符串列表，默认值从 sys.argv 中获取。<br>
+			<br>对于长选项（名称长度超过一个字符的选项），选项和值也可以作为单个命令行参数传入，使用 = 分隔它们即可。如：<br>&nbspparser.parse_args(['--foo=FOO'])<br>
+			<br>对于短选项（长度只有一个字符的选项），选项和它的值可以拼接在一起。如：<br>&nbspparser.add_argument('-x') <br>&nbspparser.parse_args(['-xX'])<br>
+			<br>有些短选项可以使用单个 - 前缀来进行合并，如果仅有最后一个选项（或没有任何选项）需要值的话，如：<br>&nbspparser.add_argument('-x', action='store_true')
+			<br>&nbspparser.add_argument('-y', action='store_true') <br>&nbspparser.add_argument('-z') <br>&nbspparser.parse_args(['-xyzZ'])</p>
+		</div>
+		<div id="namespace">
+			<p>namespace：用于获取属性的对象。默认值为 None。</p>
+			<form>
+				<fieldset>
+				<legend>** <b>namespace 举例</b> **</legend>
+				import argparse <br>
+				class C:<br>
+					&nbsppass<br>
+				def funt(): <br>
+					&nbspc=C()<br>
+					&nbspparser = argparse.ArgumentParser()<br>
+					&nbspparser.add_argument("--abc","-ABC")<br>
+					&nbspparser.parse_args(args=['--abc', 'BAR'], namespace=c)<br>
+					&nbspprint (c.abc) <br>
+				<br>
+				if __name__ == "__main__": <br>
+					&nbspfunt()<br>
+				<img src="./0/namespace.png" alt="namespace">
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	
+	<br><p>本文摘自：<a href="https://docs.python.org/zh-cn/3/library/argparse.html"><i>https://docs.python.org/zh-cn/3/library/argparse.html</i></a></p>
+</body>
+</html>

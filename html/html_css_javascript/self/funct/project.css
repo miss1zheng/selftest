@@ -1,0 +1,51 @@
+/*使用 #abcd{;} 这种格式的样式，获取时是用id="abcd"
+  使用 p.abcd{;} 这种是使用id="abcd"获取，并且这个只能用于p段落，若想应用于标题则需把p改成h1-h6
+  使用 .abcd{;} 这种是使用id="abcd"获取
+*/
+body
+{
+	background-color:rgb(255,255,255);/*背景颜色。rgb(255,255,255) 或 white 或 #ffffff*/
+	background-image:url('beijing.png');/*默认情况下背景图会在页面的水平或垂直方向平铺*/
+	background-repeat:no-repeat;/*背景图像平铺，1.repeat-x:在水平方向平铺（改成repeat-y就是垂直方向了）；2.no-repeat:不平铺；3.repeat:重复水平和垂直方向*/
+	background-attachment:fixed;/*背景图像是否固定或者随着页面的其余部分滚动，1.scroll:随着页面的滚动而滚动；2.fixed:固定;3.local:随着元素内容的滚动而滚动;4.initial:设置该属性的默认值;5.inherit:从父元素继承*/	
+	background-position:right top;/*背景图位置.1.right top/left center/left bottom/center top/center center/center bottom/x% y%(水平位置，垂直位置，左上角为0% 0%，右下角为100% 100%)/xpos ypos（第一个水平位置，第二个垂直位置，左上角0，单位可为像素或其他值，如50px 100px）/inherit:从父元素继承/
+	/*以上可直接简写成：background:#ffffff url('img_tree.png') no-repeat right top;
+	简写的背景图优先级别：background-color > background-image > background-repeat > background-attachment > background-position*/
+
+	color:red;/*字体颜色*/
+	text-align:left;/*文本对齐方式1.center：居中；2.right：右对齐；3.left：左对齐*/
+	text-indent:5px;/*用来指定文本的第一行的缩进*/
+	text-decoration:none;/*用来设置或删除文本的装饰，1.none:什么都不要，如删除链接的下划线；2.overline:上划线；3.line-through:中划线，删除线；4.underline:下划线*/
+	.uppercase {text-transform:uppercase;}/*控制元素中的字母，1.uppercase:全大写;2.lowercase:全小写;3.capitalize:首字母大写*/
+
+	letter-spacing:2px;/*设置字符间距*/
+	line-height:200%;/*设置行高，行与行的间隔*/
+	direction:ltr;/*元素的文本方向*/
+	word-spacing:30px;/*单词间的空白间隔*/
+	white-space:nowrap;/*设置元素中空白的处理方式。1.nowrap:禁止元素环绕;2.normal:默认值；3.pre:类似于html中的pre标签；4.pre-wrap:保留空白符序列，但是正常地进行换行；5.pre-line:合并空白符序列，但是保留换行符；6.inherit:规定应该从父元素继承*/
+	.top {vertical-align:text-top;}/*垂直对齐元素，top顶部对齐，buttom底部对齐*/
+	text-shadow:2px 2px #FF0000;/*添加文本阴影*/
+	font-family:"Times New Roman", Times, serif;/*字体设置，其中逗号分隔的是若第一个不支持则使用后面的其他字体*/
+	.normal {font-style:normal;}/*字体样式。normal:默认；2.italic:斜体；3.oblique:倾斜的文字（和斜体很类似）*/
+	font-size:40px;/*字体大小，font-size:2.5em;*/
+	font-weight:normal;/*字体加粗，1.normal：常规；2.lighter：弱化；3.bold：加粗；4.900：具体的数值*/
+	font-variant:small-caps;/*1.small-caps：把段落设置为小型大写字母字体，所有的小写字母均会被转换为大写，但是所有使用小型大写字体的字母与其余文本相比，其字体尺寸更小*/
+	/*设置所有字体：font:15px arial,sans-serif;
+	简写优先级：[font-style] > [font-variant] > [font-weight] > [font-size/line-height] > [font-family]，其中family和size是必须的。*/
+
+	/*当设置为若干链路状态的样式，也有一些顺序规则：a:hover 必须跟在 a:link 和 a:visited后面；a:active 必须跟在 a:hover后面*/
+	a:link {color:#000000;}      /* 未访问链接*/
+	a:visited {color:#00FF00;}  /* 已访问链接 */
+	a:hover {color:#FF00FF;}  /* 鼠标移动到链接上 */
+	a:active {color:#0000FF;}  /* 鼠标点击时 */
+	a:link {background-color:#B2FF99;}    /* 未访问链接 */
+	a:visited {background-color:#FFFF85;} /* 已访问链接 */
+	a:hover {background-color:#FF704D;}   /* 鼠标移动到链接上 */
+	a:active {background-color:#FF704D;}  /* 鼠标点击时 */
+
+	ul.a {list-style-type:circle;}/*圆*/
+	ul.b {list-style-type:square;}/*方块*/
+	ol.c {list-style-type:upper-roman;}/*大写i开始*/
+	ol.d {list-style-type:lower-alpha;}/*字母a开始*/
+	ul.cc {list-style-image: url('sqpurple.gif');}/*嵌入图片*/
+}

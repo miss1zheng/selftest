@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>上海稳恒电子科技有限公司</title>
+</head>
+<body>
+	<h3>可使用 F12 按键进入浏览器调试页面.</h3>
+	<h4>调试：console界面获取log日志（console.log(c);其中 c 为调试的输出）</h4>
+	<!--文本输入，密码输入，提交按钮（点击"提交"按钮，表单数据将被发送到服务器上的“demo-form.php”），按钮、单选，复选、下拉列表、文本编辑等功能-->
+	<form name="input" action="html_form_action.php" method="get">
+		<fieldset>
+		<legend>Personal information:</legend>
+		username:<input type="text",name="username"><br>
+		password:<input type="password",name="password"><br>
+		<input type="submit" value="Submit"><br>
+		<input type="button" value="button">
+		</fieldset>
+	</form>
+	<form>
+	<hr>
+	<input type="radio" name="name" value="lisa">Lisa<br>
+	<input type="radio" name="name" value="bob">Bob<br>
+	<input type="radio" name="name" value="tim">Tim<br>
+	<hr>
+	<input type="checkbox" name="animal" value="dog">dog<br>
+	<input type="checkbox" name="animal" value="cat">cat<br>
+	<input type="checkbox" name="animal" value="pig">pig<br>
+	<input type="checkbox" name="animal" value="duck">duck<br>
+	<hr>
+	<select name="values">
+		<option value="1">1</option>
+		<option value="2" selected>2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+	</select>
+	<input type="reset">重置按钮<br>
+	<input type="hidden">safdsd<br>
+	</form>	
+	<hr>
+	<textarea rows="10" cols="30"></textarea>
+
+	<!--链接样式-->
+	<style>
+		a.one:link {color:#ff0000;}
+		a.one:visited {color:#0000ff;}
+		a.one:hover {color:#ffcc00;}
+
+		a.two:link {color:#ff0000;}
+		a.two:visited {color:#0000ff;}
+		a.two:hover {font-size:150%;}
+
+		a.three:link {color:#ff0000;}
+		a.three:visited {color:#0000ff;}
+		a.three:hover {background:#66ff66;}
+
+		a.four:link {color:#ff0000;}
+		a.four:visited {color:#0000ff;}
+		a.four:hover {font-family:Georgia, serif;}
+
+		a.five:link {color:#ff0000;text-decoration:none;}
+		a.five:visited {color:#0000ff;text-decoration:none;}
+		a.five:hover {text-decoration:underline;}
+	</style>
+	<p><b><a class="one" href="/css/" target="_blank">这个链接改变颜色</a></b></p>
+	<p><b><a class="two" href="/css/" target="_blank">这个链接改变字体大小</a></b></p>
+	<p><b><a class="three" href="/css/" target="_blank">这个链接改变背景颜色</a></b></p>
+	<p><b><a class="four" href="/css/" target="_blank">这个链接改变字体类型</a></b></p>
+	<p><b><a class="five" href="/css/" target="_blank">这个链接改变文字修饰，这里是增加下划线</a></b></p>
+
+	<!--链接框-->
+	<style>
+		a:link,a:visited
+		{
+			display:block;
+			font-weight:bold;
+			color:#FFFFFF;
+			background-color:#98bf21;
+			width:120px;
+			text-align:center;
+			padding:4px;
+			text-decoration:none;
+		}
+		a:hover,a:active
+		{
+			background-color:#7A991A;
+		}
+	</style>
+
+	<!--javascript-->
+	<p id="textdemo">
+		JavaScript 能改变 HTML 元素的内容。
+	</p>
+	<script src="./funct/project.js"></script>
+	<button type="button" onclick="textFunction()">点击改文本</button><br>
+	<input id="valuedemo" type="text" style="border-radius:5px;">	<!--border-radius：使输入框变成圆角-->
+	<button type="button" onclick="valueFunction()">点击判断值</button><br>
+	<img id="imagedemo" onclick="changeImage()" src="./funct/white.png"> <!--点击改变图像-->
+
+	<!--直接嵌入JavaScript-->
+	<script>
+		document.write("<h4>这是一个标题</h4>");
+		document.write("<p>这是一个段落</p>");
+		document.write(Date());
+		function myFunction()
+		{
+		    document.getElementById("demo").innerHTML="我的第一个 JavaScript 函数";//写入到html中
+		}
+		function clearFunction() 
+		{
+		    document.write(Date());//如果在文档已完成加载后执行 document.write，整个 HTML 页面将被覆盖
+		}
+	</script>
+	<p id="demo">一个段落。</p>
+	<button type="button" onclick="myFunction()">点击这里</button>
+	<button onclick="clearFunction()">点击清空</button><!--这里会清除页面的所有内容，只写入Date时间,一旦清空，原页面就会消失，只能重新打开-->
+
+	<!--sum-->
+	<form>
+		<input type="number" id="value_a">
+		<select id="suboradd">
+			<option>+</option>
+			<option>-</option>
+			<option>*</option>
+			<option>/</option>
+		</select>
+		<input type="number" id="value_b">
+		=<output id="value_sum"></output><br>
+		<button type="button" onclick="sumfunction()">sum</button>		
+
+	</form>
+<body>
+</html>

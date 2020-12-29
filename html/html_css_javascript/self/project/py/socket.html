@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=utf-8">
+	<title>socket</title>
+	<style>
+		p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<p style="color:red">公用函数</p>
+	<p><b>socket.socket(family[,type[,protocol]])</b>：创建套接字；<br>
+	&nbsp &nbsp family：AF_INET、AT_UNIX（一般为第一个）<br>
+	&nbsp &nbsp type：SOCK_DGRAW、SOCK_STREAM（第一个为TCP，第二个为UDP）<br>
+	&nbsp &nbsp protocol：（一般不填，默认为0）<br>
+	&nbsp &nbsp 返回值可作为下面函数引用</p>
+	<p><b>s.recv(bufsize[,flag])</b>：接收TCP数据，数据以字符串形式返回，s为socket创建时的返回值；<br>
+	&nbsp &nbsp bufsize：指定要接收的最大数据量。<br>
+	&nbsp &nbsp flag：提供有关消息的其他信息，通常可以忽略。<br>
+	&nbsp &nbsp 返回数据，以字符串形式返回。</p>
+	<p><b>s.send(string)</b>：发送TCP数据，将string中的数据发送到连接的套接字。<br>
+	&nbsp &nbsp string：要发送的数据<br>
+	&nbsp &nbsp 返回值是要发送的字节数量，该数量可能小于string的字节大小。</p>
+	<p><b>s.sendall(string)</b>：完整发送TCP数据，将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。
+	&nbsp &nbsp string：要发送的数据<br>
+	&nbsp &nbsp 成功返回None，失败则抛出异常。</p>
+	<p><b>s.recvfrom(bufsize)</b>：接收UDP数据，与recv()类似，<br>
+	&nbsp &nbsp bufsize：指定要接收的最大数据量。<br>
+	&nbsp &nbsp 返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。</p>
+	<p><b>s.sendto(data,addr)</b>：发送UDP数据，将数据发送到套接字。<br>
+	&nbsp &nbsp data：要发送的数据。<br>
+	&nbsp &nbsp address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。<br>
+	&nbsp &nbsp 返回值是要发送的字节数量。</p>
+	<p><b>s.close()</b>：关闭套接字</p>
+	<p><b>s.getpeername()</b>：返回连接套接字的远程地址。返回值通常是元组（ipaddr,port）。</p>
+	<p><b>s.getsockname()</b>：返回套接字自己的地址。通常是一个元组(ipaddr,port)</p>
+	<p><b>s.setsockopt(level,optname,value)</b>：设置给定套接字选项的值。</p>
+	<p><b>s.getsockopt(level,optname[.buflen])</b>：返回套接字选项的值。</p>
+	<p><b>s.settimeout(timeout)</b>：设置套接字操作的超时期，timeout是一个浮点数，单位是秒。值为None表示没有超时期。一般，超时期应该在刚创建套接字时设置，因为它们可能用于连接的操作（如connect()）</p>
+	<p><b>s.gettimeout()</b>：返回当前超时期的值，单位是秒，如果没有设置超时期，则返回None。</p>
+	<p><b>s.fileno()</b>：返回套接字的文件描述符。</p>
+	<p><b>s.setblocking(flag)</b>：如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。</p>
+	<p><b>s.makefile()</b>：创建一个与该套接字相关连的文件</p>
+	<p><b></b></p>
+	<p style="color:red">服务器端函数</p>
+	<p><b>s.bind(address)</b>：绑定地址address到套接字在AF_INET下,以元组（host,port）的形式表示地址。<br>
+	&nbsp &nbsp address：一般写成("ip",port)</p>
+	<p><b>s.listen(backlog)</b>：开始TCP监听。<br>
+	&nbsp &nbsp backlog：指定在拒绝连接之前，操作系统可以挂起的最大连接数量。该值至少为1，大部分应用程序设为5就可以了。</p>
+	<p><b>s.accept()</b>：被动接受TCP客户端连接,(阻塞式)等待连接的到来。<br>
+	&nbsp &nbsp connection,address：此为返回值，其中第一个元素（connection）是新的socket对象，服务器通过它与客户通信；第二个元素（address）是客户的internet地址。</p>
+	<p><b></b></p>
+	<p style="color:red">客户端函数</p>
+	<p><b>s.connect()</b>：主动初始化TCP服务器连接，。一般address的格式为元组（hostname,port），如果连接出错，返回socket.error错误。</p>
+	<p><b>s.connect_ex()</b>：connect()函数的扩展版本,出错时返回出错码,而不是抛出异常</p>
+	<p><b></b></p>
+	<p>关于TCP的“三次握手和四次挥手”：<br>
+	1.三次握手：<br>
+	&nbsp &nbsp 客户端向服务器端发送连接（我要连接到你了）<br>
+	&nbsp &nbsp 服务器告诉客户端可以连接（你可以连接了）<br>
+	&nbsp &nbsp 服务器开始正式连接，之后就可以通信接收和发送数据了（开始发送和接收数据了）<br>
+	2.四次挥手：<br>
+	&nbsp &nbsp 客户端向服务器端发送断开请求（我要断开了）<br>
+	&nbsp &nbsp 服务器告诉客户端可以断开响应（那你断开吧）<br>
+	&nbsp &nbsp 服务器断开连接（我断开了）<br>
+	&nbsp &nbsp 客户端断开连接（我也断开了）<br>
+	&nbsp &nbsp <img src="./0/socket.png" alt="socket function">
+	</p>
+	<form>
+		<fieldset>
+			<legend>** <b>TCP 举例 </b>**</legend>
+			TCP 客户端和服务器端模拟聊天功能：<br>
+			<b>TCP SERVICE：</b>
+				import os<br>
+				import socket<br>
+				s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)<br>
+				port=10099<br>
+				#s.bind(("127.0.0.1",port))<br>
+				s.bind(('localhost',port))<br>
+				s.listen(5)<br>
+				while True:<br>
+					&nbsp print ("waiting for connection.....")<br>
+					&nbsp c,addr=s.accept()<br>
+					&nbsp print ("connect from:",addr)<br>
+					&nbsp while True:<br>
+						&nbsp &nbsp data=c.recv(1024)<br>
+						&nbsp &nbsp print ("你：",data.decode())<br>
+						&nbsp &nbsp str1=input("我：")<br>
+						&nbsp &nbsp if str1 == "拜拜":<br>
+							&nbsp &nbsp &nbsp s.close()<br>
+							&nbsp &nbsp &nbsp exit() <br>
+						&nbsp &nbsp c.send(str1.encode())  <br>   
+				s.close()<br>  
+				exit()<br><br>
+			<b>TCP CLIENT：</b>
+				import os<br>
+				import socket<br>
+				c=socket.socket()<br>
+				c.connect(('127.0.0.1',10099))<br>
+				while True:<br>
+					&nbsp data=input("我：")<br>
+					&nbsp c.send(data.encode())<br>
+					&nbsp if data == "拜拜":<br>
+						&nbsp &nbsp c.close()<br>
+						&nbsp &nbsp exit() <br>
+					&nbsp recv_data=c.recv(1024)<br>
+					&nbsp print ("你：",recv_data.decode())<br> 
+				c.close()<br>
+			<img src="./0/socket_tcp.png" alt="socket tcp">
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>** <b>UDP 举例 </b>**</legend>
+			TCP 客户端和服务器端模拟聊天功能：<br>
+			<b>UDP SERVICE：</b>
+			import socket<br>
+			s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)<br>
+			s.bind(('127.0.0.1',10099))<br>
+			print ("waiting client connect...")<br>
+			while True:<br>
+				&nbsp data,addr=s.recvfrom(1024)<br>
+				&nbsp print ('received from %s:%s' % (addr,data.decode()))<br>
+				&nbsp if data=='kill':<br>
+					&nbsp &nbsp s.close()<br>
+					&nbsp &nbsp exit()<br>
+				&nbsp else:<br>
+					&nbsp &nbsp str1=input("输入：")<br>
+					&nbsp &nbsp senddata=s.sendto(str1.encode(),addr)<br>
+			s.close()<br><br>
+			<b>UDP CLIENT：</b>
+			import socket<br>
+			while True:<br>
+				&nbsp senddata=input("输入：")<br>
+				&nbsp c= socket.socket(socket.AF_INET,socket.SOCK_DGRAM)<br>
+				&nbsp c.sendto(senddata.encode(), ('127.0.0.1',10099))<br>
+				&nbsp if senddata=='kill':<br>
+					&nbsp &nbsp c.close()<br>
+					&nbsp &nbsp exit()<br>
+				&nbsp data,addr = c.recvfrom(1024)<br>
+				&nbsp print (data.decode())<br>
+				&nbsp del senddata<br>
+			c.close()<br>
+			<img src="./0/socket_udp.png" alt="socket udp">
+		</fieldset>
+	</form>
+	<p>后续有更强的功能，可在此补充</p>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!--基本结构（多数使用的）
+---------------header------------------
+----------------nav--------------------
+----article-----  -------aside--------
+---*********----  --------------------
+---*section*----  --------------------
+---*******------  --------------------
+--------------footer------------------
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>上海稳恒电子科技有限公司</title>
+	<link href="./file_test/Cygwin.ico" rel="shortcut icon"> <!--放在title位置上的标识图标-->
+	<style type="text/css">
+		#div0 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+	</style>
+	<script>
+	function allowDrop0(ev)
+	{
+	    ev.preventDefault();//设置允许将数据/元素放置到其他元素中
+	}
+	function drag0(ev)//被拖动的数据
+	{
+	    ev.dataTransfer.setData("Text0",ev.target.id);//设置被拖数据的数据类型和值；Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id ("drag1")。
+	}
+	function drop0(ev)//放置被拖数据
+	{
+	    ev.preventDefault();//避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）
+	    var data=ev.dataTransfer.getData("Text0");//获得被拖的数据,该方法将返回在 setData() 方法中设置为相同类型的任何数据
+	    ev.target.appendChild(document.getElementById(data));
+	}
+	</script>
+
+	<style type="text/css">
+	#div1, #div2
+	{float:left; width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+	</style>
+	<script>
+	function allowDrop(ev)
+	{
+		ev.preventDefault();
+	}
+	function drag(ev)
+	{
+		ev.dataTransfer.setData("Text",ev.target.id);
+	}
+	function drop(ev)
+	{
+		ev.preventDefault();
+		var data=ev.dataTransfer.getData("Text");
+		ev.target.appendChild(document.getElementById(data));
+	}
+	</script>
+</head>
+<body>
+	<!--canvas定义图形，该标签基于JavaScript的绘图api-->
+	<canvas id="myCanvas"></canvas><!--这里的canvas的实现在script里面实现-->
+	<script type="text/javascript">
+	var c=document.getElementById('myCanvas');//获取canvas元素
+	var ctx=c.getContext('2d');//创建context对象，getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法
+	//创建并填充渐变
+	//左右渐变
+	var grd=ctx.createLinearGradient(0,0,200,0);
+	grd.addColorStop(0,"red");
+	grd.addColorStop(1,"blue");
+	ctx.fillStyle=grd;
+	ctx.fillRect(0,0,80,100);//定义了矩形当前的填充方式
+	//径向或圆渐变
+	var grd=ctx.createRadialGradient(75,50,5,90,60,100);
+	grd.addColorStop(0,"red");
+	grd.addColorStop(1,"white");
+	ctx.fillStyle=grd;
+	ctx.fillRect(10,10,150,80);
+	//绘线
+	ctx.moveTo(0,0);//开始坐标
+	ctx.lineTo(80,100);//结束坐标
+	ctx.stroke();//绘制线条
+	//绘矩形
+	ctx.beginPath();//开始或重置当前路径
+	ctx.arc(80,100,40,0,2*Math.PI);//绘制圆，(x,y,r,start，stop)，x坐标，y坐标，半径
+	ctx.stroke();
+	//文字
+	ctx.font="30px Arial";//字体属性
+	ctx.strokeText("Hello World",80,50);//空心字体
+
+	</script>
+
+	<!--这里显示的是一个框图，框显示为红色，ff0000为红色，border为框的大小（前面显示的是整个框都填充为红色）-->
+	<canvas id="myCanvas" width="200" height="100" style="border:1px solid #FF0000;">
+		您的浏览器不支持 HTML5 canvas 标签。
+	</canvas>
+
+	<!--把一幅图像放置到画布上-->
+	<p>Image to use:</p>
+	<img id="scream" src="./file_test/baike.png" alt="The Scream" width="100" height="100"><p>Canvas:</p>
+	<canvas id="myCanvas1" width="250" height="300" style="border:1px solid #d3d3d3;">
+		您的浏览器不支持 HTML5 canvas 标签。</canvas>
+	<script>
+		var c=document.getElementById("myCanvas1");
+		var ctx=c.getContext("2d");
+		var img=document.getElementById("scream");
+		img.onload = function() {
+			ctx.drawImage(img,10,10);
+		} 
+	</script>
+
+	<!--audio：音频内容-->
+	<!--1.autoplay:一打开立马播放；2.controls：向用户显示音频控件（比如播放/暂停按钮）；3.loop：每当音频结束时重新开始播放；4.muted：音频输出为静音；5.src：音频文件的url；
+	6.preload：当网页加载时，音频是否默认被加载以及如何被加载，none/auto/metadata-->
+	<audio controls autoplay loop muted preload="none">
+		<!--多媒体资源video和audio-->
+	  	<source src="./file_test/horse.ogg" type="audio/ogg"><!--若不支持.ogg文件的音频则使用下面的.mp3音频，若都不支持则显示下面的文字信息-->
+	  	<source src="./file_test/horse.mp3" type="audio/mpeg">
+	  	您的浏览器不支持 audio 元素。
+	</audio>
+
+	<!--video：视频播放-->
+	<!--属性：1.autoplay/controls/loop/muted/preloadsrc：和音频功能一样；2.height/width：视频的高宽度；3.poster：视频正在下载时显示的图像，直到用户点击播放按钮-->
+	<video width="320" height="240" controls>
+		<source src="./file_test/movie.mp4" type="video/mp4">
+	  	<source src="./file_test/movie.ogg"  type="video/ogg">
+	  	您的浏览器不支持 HTML5 video 标签。
+	</video>
+
+	<!--embed：嵌入内容-->
+	<embed type="image/jpg" src="./file_test/baidu.png" width="300" height="390">
+	<embed type="text/html" src="../other.html" width="500" height="200"><!--在一个页面里显示另一个页面，类似于iframe功能-->
+	<embed type="video/webm" src="./file_test/movie.mp4" width="400" height="300"><!--类似video，但是video功能更多-->
+
+	<!--audio中嵌入embed-->
+	<audio controls height="100" width="100">
+  		<source src="/file_test/horse.mp3" type="audio/mpeg">
+  		<source src="./file_test/horse.ogg" type="audio/ogg">
+  		<embed height="50" width="100" src="/file_test/horse.mp3">
+	</audio>
+	<p><a href="horse.mp3">点击此处播放</a></p> <!--音频的超链接模式，点击了此处就会自动跳转到mp3播放-->
+	<p><a href="horse.mp3" accesskey="h">点击此处播放</a></p> <!--accesskey:快捷键功能-->
+	<!--各浏览器中的快捷键使用
+Browser				Windows						Linux						Mac
+Internet Explorer	[Alt] + accesskey			N/A	
+Chrome				[Alt] + accesskey			[Alt] + accesskey			[Control] [Alt] + accesskey
+Firefox				[Alt] [Shift] + accesskey	[Alt] [Shift] + accesskey	[Control] [Alt] + accesskey
+Safari				[Alt] + accesskey			N/A	[Control] 				[Alt] + accesskey
+Opera	Opera 15 or newer: [Alt] + accesskey
+Opera 12.1 or older: [Shift] [Esc] + accesskey
+	-->
+	<!--object:定义了在 HTML 文档中嵌入的对象,例如在网页中嵌入 Java 小程序, PDF 阅读器, Flash 播放器-->
+	<object width="400" height="50" data="./file_test/baike.png"></object>
+	<object width="100%" height="100px" data="funct_5.html"></object>
+	<object width="100px" height="100px" data="./file_test/movie.MP4"></object>
+	<object width="100%" height="100px" data="USR-730+GPS使用说明.pdf"></object>
+	<object data="/file_test/horse.mp3">
+  		<param name="autoplay" value="true"> <!--autoplay：值为true时，音频载入后会自动播放-->
+	</object>
+
+	<!--track:在.mp4视频中加入.vtt字幕（字幕文件可用source insight打开）-->
+	<video width="320" height="240" controls>
+		<source src="./file_test/movie.mp4" type="video/mp4">
+		<source src="./file_test/movie.ogg" type="video/ogg">
+		<!--1.default:;该轨道是默认的。如果用户没有选择任何轨道，则使用默认轨道;2.kind:文本轨道的文本类型，有captions、chapters、descriptions、metadata、subtitles这几种
+		3.label：规定文本轨道的标签和标题；4.src：必需的。规定轨道文件的 URL；5.srclang：规定轨道文本数据的语言。如果 kind 属性值是 "subtitles"，则该属性是必需的-->
+ 		<track src="./file_test/4331982.vtt" kind="subtitles" srclang="en" label="English">
+		<track src="./file_test/test.vtt" kind="subtitles" srclang="no" label="Norwegian">
+	</video>
+
+	<!--datalist:定义列表项，输入域的选项列表,可和input配合使用-->
+	<form action="demo-form.php" method="get">
+	<input list="browsers" name="browser">
+	<datalist id="browsers"> <!---->
+	  <option value="Internet Explorer">
+	  <option value="Firefox">
+	  <option value="Chrome">
+	  <option value="Opera">
+	  <option value="Safari">
+	</datalist>
+	<input type="submit">
+
+	<!--input:表单输入类型-->
+	</form>
+	<form action="demo-form.php">
+  		选择你喜欢的颜色: <input type="color" name="favcolor"> <!--color：选取颜色，在取色库中取色然后提交，就可以得到想要的颜色值了-->
+  		<input type="submit"><br>
+  		生日: <input type="date" name="bday"><br>	<!--date:鼠标在此位置可选择指定的日期-->
+  		生日 (日期和时间): <input type="datetime" name="bdaytime"><br> <!--datetime:允许你选择一个日期（UTC 时间）-->
+  		生日 (日期和时间): <input type="datetime-local" name="bdaytime"><br> <!--允许你选择一个日期和时间 (无时区).-->
+		生日 (月和年): <input type="month" name="bdaymonth"><br> <!--month:定义月和年-->
+		选择周: <input type="week" name="week_year"><br> <!--week：定义周和年 (无时区)-->
+		E-mail: <input type="email" name="email"><br> <!--email:在提交邮箱时会判断此值是否合法有效-->
+		数量(1到5之间): <input type="number" name="quantity" min="1" max="5"><br> <!--number:取值范围-->
+		<input type="number" name="points" min="0" max="10" step="3" value="6"> <!--value：规定输入字段的默认值；step：输入字段的合法数字间隔；disabled：规定输入字段是禁用的；max：允许的最大值；maxlength：输入字段的最大字符长度；min：允许的最小值；pattern：用于验证输入字段的模式；readonly：输入字段的值无法修改；required：规定输入字段的值是必需的；size：规定输入字段中的可见字符数-->
+		<input type="submit"><br>
+		Search Google: <input type="search" name="googlesearch"><br> <!--search：搜索字段 (类似站点搜索或者Google搜索)-->
+		电话号码: <input type="tel" name="usrtel"><br> <!--tel：电话号码-->
+		选择时间: <input type="time" name="usr_time"><br> <!--time：选择一个时间，定义可输入时间控制器（无时区）-->
+		添加您的主页: <input type="url" name="homepage"><br> <!--url：输入url，会自动验证 url 域的值-->
+	</form>
+
+	<!--keygen:规定用于表单的密钥对生成器字段.当提交表单时，会生成两个键，一个是私钥，一个公钥，私钥（private key）存储于客户端，公钥（public key）则被发送到服务器。公钥可用于之后验证用户的客户端证书-->
+	<form action="demo_keygen.asp" method="get">
+	  	用户名: <input type="text" name="usr_name">
+	  	<!--1.autofocus:使 <keygen> 字段在页面加载时获得焦点;2.challenge:如果使用，则将 keygen 的值设置为在提交时询问;3.disabled:禁用 <keygen> 元素字段;4.form:定义该 <keygen> 字段所属的一个或多个表单
+	  	5.keytype:定义密钥的安全算法,有rsa、dsa、ec等；6.name：定义 <keygen> 元素的唯一名称。 name 属性用于在提交表单时搜集字段的值-->
+	  	加密: <keygen name="security" autofocus challenge disabled>
+	  	<input type="submit">
+	</form>
+
+	<!--output:-->
+	<!--1.for:描述计算中使用的元素与计算结果之间的关系;2.form:定义输入字段所属的一个或多个表单;3.name:定义对象的唯一名称（表单提交时使用）-->
+	<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+		<input type="range" id="a" value="50">100 <!--range：取值范围，这里是通过滑动条实现的-->
+		+<input type="number" id="b" value="50">
+		=<output name="x" for="a b">100</output>
+	</form>
+
+	<!--article:定义独立的内容,如论坛帖子，博客文章，新闻故事，评论等-->
+	<article>
+	  	<h1>Internet Explorer 9</h1>
+	 	<p> Windows Internet Explorer 9(缩写为 IE9 )在2011年3月14日21:00 发布。</p>
+	</article>
+
+	<!--aside:侧边栏内容，标签定义 <article> 标签外的内容，aside 的内容应该与附近的内容相关-->
+	<aside>
+  		<h4>Epcot Center</h4>
+  		<p>The Epcot Center is a theme park in Disney World, Florida.</p>
+	</aside>
+
+	<!--bdi:允许您设置一段文本，使其脱离其父元素的文本方向设置，如论坛帖子的评论用户名-->
+	<ul>
+		<li>用户 <bdi>hrefs</bdi>: 60 分</li>
+		<li>用户 <bdi>jdoe</bdi>: 80 分</li>
+		<li>用户 <bdi>إيان</bdi>: 90 分</li>
+	</ul>
+
+	<!--command:定义命令按钮，比如单选按钮、复选框或按钮,注意：只有 IE 9 支持 <command> 标签-->
+	<menu>
+		<command type="command" label="Save" onclick="save()">Save</command>
+	</menu>
+
+	<!--details:用于描述文档或文档某个部分的细节,可用于掩藏summary以外的内容，箭头控制是否下拉使内容可见-->
+	<details>
+		<summary>Copyright 1999-2011.</summary><!--summary:标签包含 details 元素的标题-->
+		<p> - by Refsnes Data. All Rights Reserved.</p>
+		<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+	</details>
+
+	<!--dialog:定义对话框，比如提示框,其中open规定 dialog 元素是有效的，用户可以与它进行交互-->
+	<table border="1">
+	<tr>
+	  <th>January <dialog open>This is an open dialog window</dialog></th>
+	  <th>February</th>
+	  <th>March</th>
+	</tr>
+	<tr>
+	  <td>31</td>
+	  <td>28</td>
+	  <td>31</td>
+	</tr>
+	</table>
+
+	<!--figure:规定独立的流内容（图像、图表、照片、代码等等）-->
+	<figure>
+  		<img loading="lazy" src="./file_test/baike.png" alt="The Pulpit Rock" width="304" height="228">
+		<figcaption>Fig1. - A view of the pulpit rock in Norway.</figcaption> <!--为 <figure> 元素定义标题,应该被置于 <figure> 元素的第一个或最后一个子元素的位置-->
+	</figure>
+
+	<article>
+		<!--header:定义文档或者文档的一部分区域的页眉,应该作为介绍内容或者导航链接栏的容器。注意：<header> 标签不能被放在 <footer>、<address> 或者另一个 <header> 元素内部-->
+	    <header>
+	        <h1>Internet Explorer 9</h1>
+	        <p><time pubdate datetime="2011-03-15"></time></p>
+	    </header>
+	    <!--footer:定义文档或者文档的一部分区域的页脚,在典型情况下，该元素会包含文档创作者的姓名、文档的版权信息、使用条款的链接、联系信息等等-->
+		<footer>
+	  		<p>Posted by: Hege Refsnes</p>
+	  		<p><time pubdate datetime="2012-03-01"></time></p>
+		</footer>
+    <p> Windows Internet Explorer 9(缩写为 IE9 )是在<mark>2011年3月14日21:00</mark>发布的</p> <!--mark:带有记号的文本,即此字段会自动加入黄色背景色-->
+	</article>
+
+	<form action="demo_form.html" method="get" id="form1">
+		First name: <input type="text" name="fname"><br>
+		<input type="submit" value="Submit">
+	</form>
+
+	<!--meter:定义度量衡。仅用于已知最大和最小值的度量,比如：磁盘使用情况，查询结果的相关性等-->
+	<meter form="form1" name="x1" value="2" min="0" max="10">2 out of 10</meter><br> <!--1.value:必需。规定度量的当前值。2.min/max：规定范围的最小/大值。3.optimum：规定度量的最优值。4.low/high：规定被界定为低/高的值的范围。form：规定 <meter> 元素所属的一个或多个表单-->
+	<meter value="0.6">60%</meter>
+
+	<!--progress:定义任何类型的任务的进度，比如下载进度-->
+	<progress value="22" max="100"></progress>	<!--1.max：规定需要完成的值；2.value：规定进程的当前值-->
+
+
+	<!--nav:定义导航链接的部分-->
+	<nav>
+  		<a href="/html/">HTML</a> |
+  		<a href="/css/">CSS</a> |
+  		<a href="/js/">JavaScript</a> |
+ 		<a href="/jquery/">jQuery</a>
+	</nav>
+
+	<!--ruby:定义 ruby 注释（中文注音或字符）,配合rp和rt一起使用-->
+	<ruby>
+  		汉 <rp>(</rp><rt>Han</rt><rp>)</rp>	<!--1.rt：定义字符（中文注音或字符）的解释或发音；2.rp：在 ruby 注释中使用，定义不支持 ruby 元素的浏览器所显示的内容-->
+  		字 <rp>(</rp><rt>zi</rt><rp>)</rp>
+	</ruby>
+
+	<!--section:定义了文档的某个区域。比如章节、头部、底部或者文档的其他区域-->
+	<section>
+		<h1>WWF</h1>
+		<p>The World Wide Fund for Nature (WWF) is....</p>
+	</section>
+	
+	<p>我们在每天早上 <time>9:00</time> 开始营业。</p>	<!--time：定义日期或时间，能够以机器可读的方式对日期和时间进行编码，这样，举例说，用户代理能够把生日提醒或排定的事件添加到用户日程表中，搜索引擎也能够生成更智能的搜索结果-->
+	<p>我们在每天早上 <datetime>9:00</datetime> 开始营业。</p> <!--datetime:规定日期/时间。另一种方式，则是由元素的内容给定日期/时间-->
+
+	<p>学习 AJAX ,您必须熟悉 <wbr>Http<wbr>Request 对象。</p> <!--wbr:规定在文本中的何处适合添加换行符,这里只有在缩小时才能看出效果，http可以和quest分行-->
+
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+  		<polygon points="100,10 40,180 190,60 10,60 160,180"
+  		style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+	</svg>
+	//a的2次方+b的2次方=c的2次方
+	<!--MathML 是数学标记语言，是一种基于XML（标准通用标记语言的子集）的标准，用来在互联网上书写数学符号和公式的置标语言-->
+	<math xmlns="http://www.w3.org/1998/Math/MathML">
+		<mrow>
+			<msup><mi>a</mi><mn>2</mn></msup>
+            <mo>+</mo>
+            <msup><mi>b</mi><mn>2</mn></msup>
+            <mo>=</mo>
+            <msup><mi>c</mi><mn>2</mn></msup>
+		</mrow>
+    </math>
+
+    <!--drag和drop拖放功能-->
+    <div id="div0" ondrop="drop0(event)" ondragover="allowDrop0(event)"></div> <!--ondragover 事件规定在何处放置被拖动的数据-->
+	<br>
+	<!--draggable="true"设置元素可拖放；ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据-->
+	<img loading="lazy" id="drag00" src="./file_test/baike.png" draggable="true" ondragstart="drag0(event)" width="336" height="69">
+
+	<br>
+	<!--来回拖动-->
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<img src="./file_test/baike.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31"></div>
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+	<!--地理位置获取-->
+	<p id="demo">点击按钮获取您当前坐标（可能需要比较长的时间获取）：</p>
+	<button onclick="getLocation()">点我</button>
+	<script>
+	var x=document.getElementById("demo");
+	function getLocation()//返回用户位置的经度和纬度
+	{
+		if (navigator.geolocation)//检测是否支持地理定位
+		{
+			navigator.geolocation.getCurrentPosition(showPosition,showError);//获得用户的位置
+		}
+		else
+		{
+			x.innerHTML="该浏览器不支持定位。";
+		}
+	}
+	function showPosition(position)//获得并显示经度和纬度
+	{
+		//coords.latitude:十进制数的纬度;coords.longitude:十进制数的经度;
+		x.innerHTML="纬度: " + position.coords.latitude + 
+		"<br>经度: " + position.coords.longitude;	
+
+		//在地图中显示结果，返回的经纬度数据在谷歌地图中显示位置（使用静态图像）
+		var latlon=position.coords.latitude+","+position.coords.longitude;
+    	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
+    	+latlon+"&zoom=14&size=400x300&sensor=false";
+    	document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+	}
+	function showError(error)//获取用户位置失败的错误处理
+	{
+		switch(error.code) 
+		{
+			case error.PERMISSION_DENIED:
+				x.innerHTML="用户拒绝对获取地理位置的请求。"
+				break;
+			case error.POSITION_UNAVAILABLE:
+				x.innerHTML="位置信息是不可用的。"
+				break;
+			case error.TIMEOUT:
+				x.innerHTML="请求用户地理位置超时。"
+				break;
+			case error.UNKNOWN_ERROR:
+				x.innerHTML="未知错误。"
+				break;
+		}
+	}
+	</script>
+
+	<!--这个是百度api获取的经纬度实现
+	<!DOCTYPE html>
+	<html>
+	<head>
+	    <meta charset="utf-8" />
+	    <title></title>
+	    <p>引入百度 API，"ak=" 后面一串码是密钥，最好自己申请</p>
+	    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=7a6QKaIilZftIMmKGAFLG7QT1GLfIncg"></script>
+	</head>
+	<body>
+	    <input type="button" onclick="getLocation()" value="确认" />
+	    <div id="position"></div>
+	    <script type="text/javascript">
+	    var x = document.getElementById('position');
+	    function getLocation() {
+	        // 创建百度地理位置实例，代替 navigator.geolocation
+	        var geolocation = new BMap.Geolocation();
+	        geolocation.getCurrentPosition(function(e) {
+	            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+	                // 百度 geolocation 的经纬度属性不同，此处是 point.lat 而不是 coords.latitude
+	                x.innerHTML = '纬度：' + e.point.lat + '<br/>经度：' + e.point.lng;
+	            } else {
+	                x.innerHTML = 'failed' + this.getStatus();
+	            }
+	        });
+	    }
+	    </script>
+	</body>
+	</html>
+	-->
+
+	<!--html5的表单新属性-->
+	<form id="form1" action="demo-form.php" method="post" autocomplete="on" novalidate>	<!--1.autocomplete:规定 form 或 input 域应该拥有自动完成功能,utocomplete 属性有可能在 form元素中是开启的，而在input元素中是关闭的;2.novalidate:布尔属性，在提交表单时不应该验证 form 或 input 域；3.-->
+	  	First name:<input type="text" name="fname" autofocus><br> <!--autofocus：布尔属性，在页面加载时，域自动地获得焦点-->
+	  	Last name: <input type="text" name="lname" required ><br> <!--required:布尔属性，规定必须在提交之前填写输入域（不能为空）-->
+	  	<input type="text" name="fname" placeholder="First name"><br> <!--placeholder:提供一种提示（hint），描述输入域所期待的值,这里的值会直接显示在输入框内，知道有数据写入才会没有-->
+	  	<input type="text" name="lname" placeholder="Last name"><br>
+	  	E-mail: <input type="email" name="email" autocomplete="off"><br> <!--autocomplete:规定 form 或 input 域应该拥有自动完成功能-->
+	  	<input type="submit" formtarget="_blank" ><br> <!--formtarget:指定一个名称或一个关键字来指明表单提交数据接收后的展示-->
+	  	<input type="submit" formaction="demo-admin.php" formnovalidate value="提交"><br> <!--1.formaction:用于描述表单提交的URL地址,用于 type="submit" 和 type="image";2.formnovalidate:会覆盖 <form> 元素的novalidate属性.与type="submit一起使用-->
+		<input type="submit" formthod="post" formenctype="multipart/form-data" value="以 Multipart/form-data 提交"><br> <!--1.formenctype:表单提交到服务器的数据编码 (只对form表单中 method="post" 表单),该属性与 type="submit" 和 type="image" 配合使用;2.formthod:表单提交的方式。-->
+	</form>
+	other name:<input type="text" name="oname" form="form1"><br> <!--form:定输入域所属的一个或多个表单,引用一个以上的表单，请使用空格分隔的列表,该 input 表单仍然属于form1表单的一部分-->
+
+	<form action="demo-form.php">
+ 		输入 1980-01-01 之前的日期:<input type="date" name="bday" max="1979-12-31"><br>	<!--max:最大值-->
+ 		输入 2000-01-01 之后的日期:<input type="date" name="bday" min="2000-01-02"><br>	<!--min：最小值-->
+		数量 (在1和5之间):<input type="number" name="quantity" min="1" max="5"><br>	<!---->
+		Select images: <input type="file" name="img" multiple><br> <!--multiple:规定<input> 元素中可选择多个值,适用于<input>的email 和 file-->
+		Country code: <input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code"><br> <!--pattern：正则表达式，适用于以下类型的 <input> 标签: text, search, url, tel, email, 和 password-->
+		<input type="submit">
+		<input type="number" name="points" step="3"><br> <!--step:为输入域规定合法的数字间隔，如果 step="3"，则合法的数是 -3,0,3,6 等-->
+	</form>
+
+	<div style="border: 2px dashed #ccc;width:320px;text-align:center;">
+		<label for="keyname">别名(key):</label>  
+        <input type="text" id="keyname" name="keyname" class="text"/>  
+        <br/>  
+        <label for="sitename">网站名：</label>  
+        <input type="text" id="sitename" name="sitename" class="text"/>  
+        <br/>  
+        <label for="siteurl">网 址：</label>  
+        <input type="text" id="siteurl" name="siteurl"/>  
+        <br/>  
+        <input type="button" onclick="save()" value="新增记录"/>      <!--在这里会卡死-->
+        <hr/>  
+        <label for="search_phone">输入别名(key)：</label>  
+        <input type="text" id="search_site" name="search_site"/>  
+        <input type="button" onclick="find()" value="查找网站"/><hr> 
+        <input type="text" id="del_site" name="del_site"/>
+        <input type="button" onclick="del()" value="删除网站"/>  
+        <p id="find_result"><br/></p>  
+    </div>  
+    <br/>  
+    <div id="list"></div>  
+
+    <script>
+    //保存数据，键/值对通常以字符串存储，你可以按自己的需要转换该格式
+    //localStorage - 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去除
+    //sessionStorage - 用于临时保存同一窗口(或标签页)的数据，在关闭窗口或标签页之后将会删除这些数据
+    function save(){  
+    	if(typeof(Storage)!=="undefined")
+		{
+    	// 是的! 支持 localStorage  sessionStorage 对象!
+        var site = new Object;
+        site.keyname = document.getElementById("keyname").value;
+        site.sitename = document.getElementById("sitename").value;  
+        site.siteurl = document.getElementById("siteurl").value;
+        var str = JSON.stringify(site); // 将对象转换为字符串
+        localStorage.setItem(site.keyname,str); //保存数据
+        //ocalStorage.removeItem(site.keyname);//删除单个数据
+        //localStorage.clear();//删除整个数据
+        alert("保存成功");
+		} else {
+    		// 抱歉! 不支持 web 存储。
+		}
+    }  
+    //查找数据  
+    function find(){  
+        var search_site = document.getElementById("search_site").value;  
+        var str = localStorage.getItem(search_site); //读取数据 
+        var find_result = document.getElementById("find_result");
+        var site = JSON.parse(str);  
+        find_result.innerHTML = search_site + "的网站名是：" + site.sitename + "，网址是：" + site.siteurl;  
+    }  
+    
+    //将所有存储在localStorage中的对象提取出来，并展现到界面上
+	// 确保存储的 keyname 对应的值为转换对象，否则JSON.parse会报错
+    function loadAll(){  
+        var list = document.getElementById("list");  
+        if(localStorage.length>0){  
+            var result = "<table border='1'>";  
+            result += "<tr><td>别名</td><td>网站名</td><td>网址</td></tr>";  
+            for(var i=0;i<localStorage.length;i++){ 
+                var keyname = localStorage.key(i);  //得到某个索引的key
+                var str = localStorage.getItem(keyname);  
+                var site = JSON.parse(str);  
+                result += "<tr><td>"+site.keyname+"</td><td>"+site.sitename+"</td><td>"+site.siteurl+"</td></tr>";  
+            }  
+            result += "</table>";  
+            list.innerHTML = result;  
+        }else{  
+            list.innerHTML = "数据为空...";  
+        }  
+    }  
+	function del(name) {
+  		localStorage.removeItem(name);
+  		alert("删除成功!");
+  		loadAll();
+	}
+    </script>
+
+	<!--class类的使用，h1为属性，intro为类名-->
+	<style>
+		h1.intro {color:blue;}
+		p.important {color:green;}
+	</style>
+	<h1 class="intro">标题 1</h1>
+	<p>段落。</p>
+	<p class="important" contenteditable="true">注意：这是一个很重要的段落。 :)</p><!--contenteditable:表示这是一段可编辑的段落-->
+
+	<bdo dir="rtl">文本方向从右到左!</bdo>
+	<bdo dir="ltr">文本方向从右到左!</bdo><!--dir:设置元素中内容的文本方向-->
+	<br><br><br><br>
+
+<style>
+.tong_hang { width:960px; margin:auto; border-bottom:solid 1px #d3d3d3; }/*固定整个head的长度，并且由下划线*/
+.tong_hang h2 { font-size:28px; margin:0px; padding:5px;}
+.tong_hang div { margin-top:-37px; float:right; display:inline-block; }
+.tong_hang div #name { width:250px; }
+</style>
+	<div class="tong_hang">
+	<h3>hahahaha</h3>
+	<div class="form-inline"> <!--class="form-inline":可使输入输出框在同一行-->
+            		<input type="text" placeholder="搜索其他工具" class="form-control" id="name">
+            		<input type="button" value=" 搜 索 " class="btn btn-success" id="search">
+        	</div>
+	</div>
+
+	
+</body>
+</html>

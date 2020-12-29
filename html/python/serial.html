@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>串口通信</title>
+	<style>
+		p,li{line-height:25px;}
+	</style>
+</head>
+<body>
+	<ul>
+	<li>Serial：串口创建</li>
+	<p><b>linux下：</b><br>
+	ser=serial.Serial("/dev/ttyUSB0",9600,timeout=0.5) #使用USB连接串行口<br>
+	ser=serial.Serial("/dev/ttyAMA0",9600,timeout=0.5) #使用树莓派的GPIO口连接串行口<br>
+	ser=serial.Serial("/dev/ttyS1",9600,timeout=0.5) #Linux系统使用com1口连接串行口<br>
+	<br><b>windows下：</b><br>
+	ser=Serial(1,115200,timeout=0.5) #winsows系统使用com1口连接串行口<br>
+	ser=serial.Serial("com1",9600,timeout=0.5) #winsows系统使用com1口连接串行口<br>
+	</p>
+	<li>ser.open() #打开端口，在serial.Serial()时也是打开，而这里可以用于改完参数之后重新打开串口实现</li>
+	<li>读取数据</li>
+	<p>data = ser.read(1024) #从端口读1024个字节,若数据少于则全部输出。若数据大于则只读取1024，后面的将会在下次读取时输出，这样的话，要是不使用 flushInput 清除则可能会影响下次的读取。可使用循环来读取直到全部读取完毕<br>
+	data = ser.readline() #读一行，以\n结束，要是没有\n就一直读，阻塞。可以设置超时时间timeout退出<br>
+	data = ser.readlines() #读取整个文件，以列表形式输出，需要设置超时时间<br>
+	data = ser.xreadlines() #此函数只能在python2中使用，3中已废弃。和readlines类似，需要设置超时时间。<br>
+	data = ser.readall() #读取整个数据，需要设置超时时间<br>
+	注意：1.ser.read(1024).hex() #读取十六进制<br>2.ser.read(1024).decode('utf-8') #输出的编码方式，有utf-8或gbk或gb2312或iso-8859-1或utf-16等</p>
+	<li>ser.write("hello") #向端口写数据，ser.write(chr(0x06)是以hex格式写入数据</li>
+	<li>ser.close() #关闭端口</li>
+	<li>ser.isOpen() #看看这个串口是否已经被打开，一般都是已打开状态（为什么？暂未找到原因）</li>
+	<li>串口属性：属性可用于serial.Serial()内</li>
+	<p>ser.name="测试1" #设备名字；<br>
+	ser.portstr #已废弃，用name代替；<br>
+	ser.port="com75" #读或者写端口，可设置成None，此时可以用户指定一个设备端口，一般用于串口初始化<br>
+	ser.baudrate=115200 #设置波特率<br>
+	ser.bytesize=8 #字节大小<br>
+	ser.bytesize=serial.EIGHTBITS #8位数据位，SEVENBITS/SIXBITS/FIVEBITS<br>
+	ser.parity=serial.PARITY_EVEN #偶校验，PARITY_NONE/PARITY_ODD/PARITY_MARK/PARITY_SPACE<br>
+	ser.stopbits=1 #停止位，STOPBITS_ONE/STOPBITS_ONE_POINT_FIVE/STOPBITS_TWO<br>
+	ser.timeout=0.5 #读超时设置，设置为None表示永远等待（单位秒）<br>
+	ser.writeTimeout=0.5 #写超时设置<br>
+	ser.xonxoff=True #软件流控<br>
+	ser.rtscts #硬件流控，使能RTS/CTS流控<br>
+	ser.dsrdtr #硬件流控，使能DSR/DTR流控<br>
+	ser.interCharTimeout=0.2 #字符间隔超时<br>
+	初始化Serial的方式之一：<br>
+	class serial.Serial()<br>
+	{<br>
+	   &nbsp def  __init__(port=None, baudrate=9600, bytesize=EIGHTBITS,parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=None, xonxoff=False, rtscts=False, writeTimeout=None, dsrdtr=False, interCharTimeout=None)<br>
+	}</p>
+	<li>print (serial) #查看当前串口的状态信息</li>
+	<li>ser.inWaiting() #判断当前接收的数据，返回接收缓存中的字节数，可配合read和sleep获取数据。</li>
+	<li>ser.out_waiting() #获取输出缓冲区的字节数</li>
+	<li>ser.flush() #等待所有数据写出缓存区。</li>
+	<li>ser.flushInput() #清除输入（接收）缓冲区数据，丢弃接收缓存中的所有数据</li>
+	<li>ser.flushOutput() #中止当前输出并清除输出缓冲区数据（终止写操作并丢弃发送缓存中数据），终止当前写操作，并丢弃发送缓存中的数据。</li>
+	<li>ser.sendBreadk(duration=0.25) #python3中不支持此函数，发送BREAK条件，并于duration时间之后返回IDLE</li>
+	<li>ser.setBreak(level=True) #python3中不支持此函数，根据level设置break条件。</li>
+	<li>ser.setRTS(level=True) #控制RTS管脚，如ser.setRTS(True)</li>
+	<li>ser.setDTR(level=True) #控制DTR管脚，如ser.setDTR(True)</li>
+	<li>ser.getCTS() #获取CTS管脚，返回False或True</li>
+	<li>ser.getDSR() #获取DSR管脚</li>
+	<li>ser.getRI() #获取RI管脚</li>
+	<li>ser.getCD() #获取CD管脚</li>
+	<li>ser.getSettingDict() #pyehon3不支持，返回当前串口设置的字典</li>
+	<li>ser.applySettingDict(d) #pyehon3不支持，应用字典到串口设置</li>
+	<li>serial.to_bytes(sequence) #接收一个字符串或整数列表sequence，返回bytes实例，sequence是read返回值，如：c=ser.read(20) print (serial.to_bytes(c)) 输出为b'ATI\r\nATI\r\n\r\nWH_Ltd\r\n'</li>
+	<li>serial.device(number) #pyehon3不支持</li>
+	<li>serial.serial_for_url(url, *args, **kwargs) <br>
+	函数serial_for_url()接受以下类型的URL：<br>
+	&nbsp rfc2217://&lthost>:&ltport>[?&ltoption>[&&ltoption>...]]<br>
+	&nbsp socket://&lthost>:&ltport>[?logging={debug|info|warning|error}]<br>
+	&nbsp loop://[?logging={debug|info|warning|error}]<br>
+	&nbsp hwgrep://&ltregexp>[&skip_busy][&n=N]<br>
+	&nbsp spy://port[?option[=value][&option[=value]]]<br>
+	&nbsp alt://port?class=&ltclassname><br>
+	<br>rfc2217://	用于连接 RFC 2217兼容服务器。支持所有串行端口功能。实施者rfc2217.Serial。<br>其中URL支持的选项为：<br>
+	&nbsp ign_set_control：不等待SET_CONTROL的确认。此选项可用于不兼容的服务器（即在连接时收到错误）。<br>
+	&nbsp poll_modem：客户端在读取状态行时发出NOTIFY_MODEMSTATE请求（CTS / DTR / RI / CD）。没有这个选项，它依赖于服务器自动发送通知（这是RFC建议的，大多数服务器都这样做）。如果cts不能按预期工作，即对于不发送通知的服务器，请启用此选项。<br>
+	&nbsp timeout=<value>：更改网络超时（默认为3秒）。当服务器花费更多时间发送答案时，这非常有用。超时适用于初始Telnet /RFC 2271协商以及更改端口设置或控制线路更改命令。<br>
+	&nbsp logging={debug|info|warning|error}：打印诊断消息（对最终用户无用）。它使用日志记录模块和一个被调用的记录器， pySerial.rfc2217以便应用程序可以设置日志记录处理程序等。它将调用logging.basicConfig()哪个初始化输出sys.stderr（如果没有设置日志记录）。<br>
+	&nbsp 注意：连接未加密，不支持身份验证！仅在受信任的环境中使用它。<br>
+	<br>socket:// 此连接类型的目的是使用pySerial的应用程序可以连接到TCP / IP到不支持的串行端口转换器 RFC 2217。使用TCP / IP套接字。所有串行端口设置，控制和状态行都将被忽略。仅传输和接收数据。<br>
+	其中URL支持的选项为：<br>
+	&nbsp logging={debug|info|warning|error}：打印诊断消息（对最终用户无用）。它使用日志记录模块和一个被调用的记录器， pySerial.socket以便应用程序可以设置日志记录处理程序等。它将调用logging.basicConfig()哪个初始化输出sys.stderr（如果没有设置日志记录）。<br>
+	&nbsp 注意：连接未加密，不支持身份验证！仅在受信任的环境中使用它。<br>
+	<br>loop:// 最不实用的类型。它模拟环回连接（RX<->TX RTS<->CTS DTR<->DSR）。它可用于测试应用程序或运行单元测试。<br>
+	URL中支持的选项是：<br>
+	&nbsp logging={debug|info|warning|error}：打印诊断消息（对最终用户无用）。它使用日志记录模块和一个被调用的记录器， pySerial.loop以便应用程序可以设置日志记录处理程序等。它将调用logging.basicConfig()哪个初始化输出sys.stderr（如果没有设置日志记录）。<br>
+	<br>hwgrep:// 此类型用于serial.tools.list_ports获取端口列表，并通过斜杠后面的正则表达式在列表中搜索匹配项（re有关详细语法信息，请参阅Pythons 模块）。<br>
+	注意：使用字符分隔选项&，这也适用于URL通常使用的第一个选项?。此异常是在regexp本身中使用问号时生成的。<br>
+	根据系统上list_ports模块的功能，可以搜索设备的描述或硬件ID，例如USB VID：PID或文本。不幸的是，在某些系统上list_ports只列出了端口名称的子集而没有其他信息。目前，在Windows和Linux以及OSX上，它应该找到其他信息。<br>
+	URL中支持的选项是：<br>
+	&nbsp n=N：选择第N个条目而不是第一个条目<br>
+	&nbsp skip_busy：跳过无法打开的端口，例如因为它们已在使用中。在文件未自动锁定的平台上（例如Posix），这可能无法正常工作。<br>
+	<br>spy://	通过包装本机串行端口，该协议可以拦截接收和发送的数据以及对控制线，中断和刷新命令的访问。它主要用于调试应用程序。<br>
+	URL中支持的选项是：<br>
+	&nbsp file=FILENAME 输出到给定的文件或设备而不是stderr<br>
+	&nbsp color 启用ANSI转义序列以着色输出<br>
+	&nbsp raw直接输出读取和写入的数据（默认是创建十六进制转储）。在此模式下，不记录控制线和其他命令。<br>
+	&nbsp all还显示in_waiting和清空read()呼叫（由于流量很大，默认隐藏）。<br>
+	<br>alt:// 此处理程序允许选择本机串行端口的备用实现。<br>
+	目前只有POSIX平台提供替代实现。<br>
+	PosixPollSerial：基于轮询的读取实现。并非所有系统都支持轮询。然而，这个更好地处理错误，例如设备在使用时断开连接（例如USB串行拔出）。<br>
+	VTIMESerial：使用VTIME/ VMINTTY设备实现超时而不是使用 select。这意味着不能同时使用字符间超时和总超时。使用字符间超时时，将禁用总体超时。错误处理降级。<br>
+	</li>
+	<li>serial.protocol_handler_packages() #协议处理</li>
+	<li>serial.VERSION #获取pyserial版本</li>
+	<li>异常处理</li>
+	<p>
+	1.SerialTimeoutException<br>try:<br>
+		&nbsp ser.write(("ATI\r\n").encode()) #向端口写数据<br>
+	exception serial.SerialTimeoutException: #写入数据超时产生异常<br>
+		&nbsp print("write timeout")<br>
+	finally: #无论是否异常，都将会执行到此。<br>
+		&nbsp print ("finally.")	<br><br>
+	2.SerialException<br>
+	try<br>
+		&nbsp ser=Serial("com75",115200,timeout=0.5)#打开串口<br>
+	exception serial.SerialException:#创建串口异常，如串口已被其他串口工具占用<br>
+	    &nbsp print("com open fail or opened for other software.")<br><br>
+	3.UnicodeDecodeError<br>
+	try<br>
+		&nbsp print (ser.read().decode())<br>
+	except UnicodeDecodeError: #编码异常（默认utf-8，可使用encode('gbk')定义其他编码）<br>
+		&nbsp print (ser.read().decode("gbk"))<br><br>
+	4.ValueError<br>
+	try:<br>
+		&nbsp ser.port=44 #正常应该为ser.port="com44"<br>
+		&nbsp ser.open()<br>
+	except ValueError：#参数异常<br>
+		&nbsp print ("param error.")<br><br>
+	5.其他<br>
+	try:<br>
+		&nbsp xxx<br>
+	except Exception as e: #出现异常<br>
+  		&nbsp print("---异常---：", e)<br><br>
+	其他异常：KeyboardInterrupt：命令行程序运行期间，如果用户想终止程序，一般都会采用Ctrl-C快捷键，这个快捷键会引发python程序抛出KeyboardInterrupt异常。我们可以捕获这个异常，在用户按下Ctrl-C的时候，进行一些清理工作。
+	</p>
+	</ul>
+	<form>
+		<fieldset>
+			<legend>** <b> 例1 </b>**</legend>
+		import serial<br> 
+		serial_fail=False<br>
+		def serialopen():<br>
+			&nbsp global serial_fail<br>
+			&nbsp try: #异常捕获，如其他串口工具已经打开此串口则会异常<br>
+				&nbsp &nbsp ser=serial.Serial("com75",115200,timeout=0.5) #打开串口，参1不能是整型，timeout会影响下面的 read/readline/ 读取（时间到来之后才输出，过小可能导致未接收数据）<br>
+			&nbsp except serial.SerialException:<br>
+				&nbsp &nbsp serial_fail=True<br>
+			&nbsp finally:<br>
+				&nbsp &nbsp pass<br>
+			&nbsp if serial_fail:<br>
+				&nbsp &nbsp print ("串口打开失败，请检查串口是否存在或串口已在其他地方打开！")<br>
+				&nbsp &nbsp return<br>
+			&nbsp if (ser.isOpen()):<br>
+				&nbsp &nbsp print ("端口已打开")<br>
+			&nbsp else:<br>
+				&nbsp &nbsp ser.open() #在Serial最好设置timeout，因为后面while循环，若不设置默认为None永久等待，执行到此处已打开时若不设置则会一直阻塞下去<br>
+			&nbsp c=ser.write(("ATI\r\n").encode()) #encode()默认为utf-8<br>
+			&nbsp while True:<br>
+				&nbsp &nbsp s=ser.read(10)#在timeout到来之前读取到数据并在超时时间之内可多次接收数据，超过超时时间无数据输入则会进入break退出<br>
+				&nbsp &nbsp try:#编码格式输出异常<br>
+				&nbsp &nbsp &nbsp print (s.decode(),end="")<br>
+				&nbsp &nbsp except UnicodeDecodeError:<br>
+				&nbsp &nbsp &nbsp print (s.decode('gbk'),end="") #加个end可以使输出的数据不换行<br>
+				&nbsp &nbsp if not s: #没有数据读取了<br>
+					&nbsp &nbsp &nbsp break<br>
+			&nbsp print ("read ok.")<br>
+			&nbsp ser.close()<br>
+		if __name__=="__main__":<br>
+			&nbsp serialopen()<br>
+		<br>注意：输出完整数据方式：<br>
+		<ol>
+		<li>可将while内部的改成s=ser.readline()。</li>
+		<li>用readlines代替：<br>c=ser.write(("ATI\r\n").encode())<br>
+		s=ser.readlines() #返回的是列表值 [b'ATI\r\n', b'ATI\r\n', b'\r\n', b'WH_Ltd\r\n', b'WH-GM5-release\r\n', b'W20.29.1_V1.0.04.076376.0005_201211-gunknown\r\n', b'\r\n', b'OK\r\n']<br>
+		for i in range(0,len(s)):<br>
+			&nbsp print (s[i].decode().strip()) #需要加上.decode()，否则输出的是b'xxx'形式，包括回车换行b'\r\n'，strip()为去掉每行头尾空白<br>
+		print ("read ok.")</li>
+		<li>用readall代替：<br>c=ser.write(("ATI\r\n").encode())
+		s=ser.readall() #返回整个数据 b'ATI\r\nATI\r\n\r\nWH_Ltd\r\nWH-GM5-release\r\nW20.29.1_V1.0.04.076376.0005_201211-gunknown\r\n\r\nOK\r\n'<br>
+		print (s.decode())<br>
+		print ("read ok.")</li>
+		<li>加上inWaiting代替：<br>from time import sleep<br>
+		c=ser.write(("ATI\r\n").encode())<br>
+		sleep(0.1) #加入一个睡眠时间，否则可能接收不到数据<br>
+		n=ser.inWaiting()<br>
+		s=ser.read(n)<br>
+		print (s.decode())<br>
+		print ("read ok.")</li>
+		注意：若ser.inWaiting()前面不加sleep(0.1)则可能导致inWaiting返回0字节，这时若将ser.read(1024)这里的n改成一个数值，同样也可以获得数据。即：<br>
+		n = ser.inWaiting()<br>
+		print (n) #这里的n将会是0<br>
+		data =ser.read(10)<br>
+		print (data) #此时若真的有数据则会输出10字节数据
+		 <li>写入缓存区再读取：<br>ser.write(("ATI\r\n").encode())<br>
+		 sleep(0.1)<br>
+		 ser.flush() #这时不需要返回值，可直接读取<br>
+		 print (ser.read(1024).decode())<br>
+		 print ("read ok.")</li>
+		</ol>
+		<img src="./0/serial0.png" alt="serial0">
+		<ol>
+		<li>fulshinput的使用：<br>
+		s=ser.write(("ATI\r\n").encode())<br>
+		while True:<br>
+			&nbsp sleep(0.01)<br>
+			&nbsp c=ser.read(20)<br>
+			&nbsp if not c.decode():<br>
+				&nbsp &nbsp break<br>
+			&nbsp print (c.decode(),end="")<br>
+			&nbsp ser.flushInput()<br>
+		print ("read ok.")<br>
+		ser.close()<br>
+		</ol>
+		<img src="./0/serial1.png" alt="serial1">
+		</fieldset>
+	</form>
+	<fieldset>
+		<legend>** <b> 例2 </b>**</legend>
+		import serial<br>
+		serial_fail=False<br>
+		def serialopen():<br>
+			&nbsp global serial_fail<br>
+			&nbsp try: <br>
+				&nbsp &nbsp ser=serial.Serial()<br>
+			&nbsp except serial.SerialException:<br>
+				&nbsp &nbsp serial_fail=True<br>
+			&nbsp finally:<br>
+				&nbsp &nbsp pass<br>
+			&nbsp if serial_fail:<br>
+				&nbsp &nbsp print ("串口打开失败，请检查串口是否存在或串口已在其他地方打开！")<br>
+				&nbsp &nbsp return<br>
+			&nbsp ser.name="测试"<br>
+			&nbsp ser.timeout=2<br>
+			&nbsp ser.port="com2"<br>
+			&nbsp ser.baudrate = 115200<br>
+			&nbsp ser.bytesize=8<br>
+			&nbsp ser.bytesize=serial.EIGHTBITS<br>
+			&nbsp ser.parity=serial.PARITY_NONE<br>
+			&nbsp ser.stopbits=1<br>
+			&nbsp ser.xonxoff=True<br>
+			&nbsp if (ser.isOpen()):<br>
+				&nbsp &nbsp print ("端口已打开")<br>
+			&nbsp else:<br>
+				&nbsp &nbsp ser.open()<br>
+			&nbsp c=ser.write(("hello,we start communication\r\n").encode())<br>
+			&nbsp s = ser.readall() #读取整个数据。<br>
+			&nbsp try:<br>
+				&nbsp &nbsp print (s.decode(),end="")<br>
+			&nbsp except UnicodeDecodeError:<br>
+				&nbsp &nbsp print (s.decode('gbk'),end="")<br>
+			&nbsp print ()<br>
+			&nbsp print ("read ok.")<br>
+			&nbsp ser.close()<br>
+		if __name__=="__main__":<br>
+			&nbsp serialopen()<br>
+		<img src="./0/serial2.png" alt="serial2"><br>
+		注意：bytesize奇偶校验不对可能导致乱码，从而解码失败，出现异常UnicodeDecodeError
+		</fieldset>
+	</form>
+	<fieldset>
+		<legend>** <b> 例3 spy://</b>**</legend>
+		import serial<br>
+		def serialopen():<br>
+		  &nbsp with serial.serial_for_url('spy://com2?file=test.txt', timeout=1) as s:<br>
+			&nbsp &nbsp s.dtr = False<br>
+			&nbsp &nbsp s.write(('hello world').encode())<br>
+			&nbsp &nbsp s.read(20)<br>
+			&nbsp &nbsp s.dtr = True<br>
+			&nbsp &nbsp s.write(serial.to_bytes(range(256)))<br>
+			&nbsp &nbsp s.read(400)<br>
+			&nbsp &nbsp s.send_break()<br>
+		 &nbsp with open('test.txt') as f:<br>
+			&nbsp &nbsp print (f.read())<br>
+		if __name__=="__main__":<br>
+		  &nbsp serialopen()<br>
+		<img src="./0/serial3.png" alt="serial3"><br>
+		</fieldset>
+	</form>
+	<fieldset>
+		<legend>** <b> 例4 socket://</b>**</legend>
+		import serial<br>
+		from time import sleep<br>
+		serial_fail=False<br>
+		def serialopen():<br>
+		  &nbsp try:<br>
+			&nbsp &nbsp ser=serial.Serial("com54",115200,timeout=2)<br>
+		  &nbsp except serial.SerialException:<br>
+			&nbsp &nbsp ser=serial.serial_for_url('socket://192.168.5.199:10000', timeout=1)<br>
+			&nbsp &nbsp ser.dtr = False<br>
+		  &nbsp ser.write(('hello world').encode())<br>
+		  &nbsp while True:<br>
+			&nbsp &nbsp s=ser.read(20)<br>
+			&nbsp &nbsp if not s:<br>
+			  &nbsp &nbsp &nbsp break<br>
+			&nbsp &nbsp print (s)<br>
+		  &nbsp print ("read finally.")<br>
+		if __name__=="__main__":<br>
+		  &nbsp serialopen()<br>
+		<img src="./0/serial4.png" alt="serial4"><br>
+		</fieldset>
+	</form>
+	<fieldset>
+		<legend>** <b> 例5 </b>**</legend>
+		import serial<br>
+		from time import sleep<br>
+		def recv(serial):<br>
+			&nbsp global data<br>
+			&nbsp while True:<br>
+				&nbsp &nbsp data = serial.read(1024)<br>
+				&nbsp &nbsp if not data:<br>
+					&nbsp &nbsp &nbsp break#continue<br>
+				&nbsp &nbsp else:<br>
+					&nbsp &nbsp &nbsp print ("recv>>>",data.decode('gbk'))<br>
+					&nbsp &nbsp &nbsp break<br>
+				&nbsp &nbsp sleep(0.2)<br>
+			&nbsp return data<br>
+		def serialopen():<br>
+			&nbsp ser = serial.Serial('com2', 115200, timeout=0.2)<br>
+			&nbsp while True:<br>
+				&nbsp &nbsp data = recv(ser)<br>
+				&nbsp &nbsp n=ser.write(("ATI\r\n").encode())<br>
+				&nbsp &nbsp if not n:<br>
+					&nbsp &nbsp &nbsp pass<br>
+				&nbsp &nbsp else:<br>
+					&nbsp &nbsp &nbsp print("send<<<","ATI\r\n")<br>
+		if __name__=="__main__":<br>
+			&nbsp serialopen()<br>
+		<img src="./0/serial5.png" alt="serial5"><br>
+		</fieldset>
+	</form>
+	<fieldset>
+		<legend>** <b> 例6 获取串口 </b>**</legend>
+		import serial<br>
+		import serial.tools.list_ports<br>
+		port_list = list(serial.tools.list_ports.comports())<br>
+		if len(port_list) == 0:<br>
+			print('无可用串口')<br>
+		else:<br>
+			&nbsp for i in range(0,len(port_list)):<br>
+				&nbsp &nbsp print(port_list[i])<br>
+			&nbsp for i in list(port_list):<br>
+				&nbsp &nbsp print(i.name,end=',')<br>
+			&nbsp plist_0 =list(port_list[0])<br>
+			&nbsp serialName = plist_0[0]<br>
+			&nbsp serialFd = serial.Serial(serialName,9600,timeout = 60)<br>
+			&nbsp print ("\ncheck which port was really used >",serialFd.name)<br>
+		<img src="./0/serial6.png" alt="serial6"><br>
+		</fieldset>
+	</form>
+	
+	<br><a href="https://pyserial.readthedocs.io/en/latest/pyserial.html" style="text-decoration:none;line-height:2em">serial文档说明：<i>https://pyserial.readthedocs.io/en/latest/pyserial.html</i></a>
+	<br><a href="https://pypi.python.org/pypi/pyserial" style="text-decoration:none;line-height:2em">官方文档和serial模块下载：<i>https://pypi.python.org/pypi/pyserial</i></a>
+	<br><a href="https://github.com/pyserial/pyserial" style="text-decoration:none;line-height:2em">git例子：<i>https://github.com/pyserial/pyserial</i></a>
+</body>
+</html>

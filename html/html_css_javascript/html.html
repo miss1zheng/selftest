@@ -1,0 +1,992 @@
+<!DOCTYPE html>	<!--声明为 HTML5 文档-->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>html实现</title>
+	<style>
+		body,html{width:100%;height:100%;margin:0;padding:0}
+		.main_body{width:80%;float:left}
+		.table_body{width:20%;float:right}
+		a{text-decoration:none}
+	</style>
+</head>
+<body>
+	<div class="table_body">
+	<ol>
+		<a href="#jianjie">简介<a><br><a href="#DOCTYPE">&lt!DOCTYPE html></a><br><a href="#html">html</a><br><a href="#head">head</a><br><a href="#body">body</a><br><a href="#title">title</a><br>
+		<a href="#h1-h6">h1-h6<a><br><a href="#p">p<a><br><a href="#a">a<a><br><a href="#img">img<a><br><a href="#map">map</a><br><a href="#area">area</a><br><a href="#!----">&lt!-- --><a><br><a href="#br">br</a><br><a href="#hr">hr</a><br>
+		<a href="#b">b</a><br><a href="#em">em</a><br><a href="#i">i</a><br><a href="#small">small</a><br><a href="#big">big</a><br><a href="#strong">strong</a><br><a href="#sub">sub</a><br><a href="#sup">sup</a><br><a href="#ins">ins</a><br><a href="#del">del</a><br>
+		<a href="#code">code</a><br><a href="#kbd">kbd</a><br><a href="#samp">samp</a><br><a href="#var">var</a><br><a href="#pre">pre</a><br><a href="#abbr">abbr</a><br><a href="#address">address</a><br><a href="#bdo">bdo</a><br><a href="#blockquote">blockquote</a><br><a href="#q">q</a><br><a href="#cite">cite</a><br><a href="#dfn">dfn</a><br><a href="#tt">tt</a><br><a href="#acronym">acronym</a><br>
+		<a href="#base">base</a><br><a href="#meta">meta</a><br><a href="#style">style</a><br><a href="#link">link</a><br><a href="#script">script</a><br><a href="#noscript">noscript</a><br>
+		<a href="#table">table</a><br><a href="#th">th</a><br><a href="#tr">tr</a><br><a href="#td">td</a><br><a href="#caption">caption</a><br><a href="#colgroup">colgroup</a><br><a href="#col">col</a><br><a href="#thead">thead</a><br><a href="#tbody">tbody</a><br><a href="#tfoot">tfoot</a><br>
+		<a href="#ol">ol</a><br><a href="#ul">ul</a><br><a href="#li">li</a><br><a href="#dl">dl</a><br><a href="#dt">dt</a><br><a href="#dd">dd</a><br>
+		<a href="#div">div</a><br><a href="#span">span</a><br>
+		
+		<a href="#form">form</a><br>
+		<a href="#input">input</a><br><a href="#output">output</a><br><a href="#textarea">textarea</a><br><a href="#label">label</a><br><a href="#fieldset">fieldset</a><br><a href="#legend">legend</a><br>
+		<a href="#select">select</a><br><a href="#optgroup">optgroup</a><br><a href="#option">option</a><br><a href="#button">button</a><br><a href="#datalist">datalist</a><br>
+		<a href="#keygen">keygen</a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		
+	</ol>
+	</div>
+	<div class="main_body">
+		<div id="jianjie">
+		<h3>简介</h3>
+		<p>html：超文本标记语言，是一种用于创建网页的标准标记语言。文档后缀为 .html 或 .html 。</p>
+		<p><b style="color:red">例如：</b><br>&lt!DOCTYPE html><br>&lthtml><br>&lthead><br>&nbsp &ltmeta charset="utf-8"><br>&nbsp &lttitle>html.&lt/title><br>&lt/head><br>&ltbody><br>&nbsp &ltp>html主体。&lt/p><br>&lt/body><br>&lt/html><br></p>
+		<p>解析：<br>&lt!DOCTYPE html> 声明为 HTML5 文档<br>&lthtml> 元素是 HTML 页面的根元素<br>&lthead> 元素包含了文档的元（meta）数据，如 &ltmeta charset="utf-8"> 定义网页编码格式为 utf-8。<br>&lttitle> 元素描述了文档的标题<br>&ltbody> 元素包含了可见的页面内容</p><p>注：在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签。</p><p>标签：1.HTML 标签是由尖括号包围的关键词，比如 &lthtml>；2.HTML 标签通常是成对出现的，比如 &ltb> 和 &lt/b>；3.标签对中的第一个标签是开始标签，第二个标签是结束标签；4.开始和结束标签也被称为开放标签和闭合标签</p><p>
+		HTML元素：1.包含了开始标签与结束标签，以开始标签起始，以结束标签终止；2.元素的内容是开始标签与结束标签之间的内容；3.某些 HTML 元素具有空内容（empty content），空元素在开始标签中进行关闭（以开始标签的结束而结束）；4.大多数 HTML 元素可拥有属性</p><p>
+		HTML属性：1.HTML 元素可以设置属性;属性可以在元素中添加附加信息；2.属性一般描述于开始标签；3.属性总是以名称/值对的形式出现，比如：name="value"；4.属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没有问题。在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号。5.适用于大多数元素内的属性有：class/id/style/title等。
+		<p>html编辑器选择：1.VS Code；2.Sublime Text；3.source insight；4.Notepad++等。</p>
+		</div>
+		<div id="DOCTYPE">
+		<h3>&lt!DOCTYPE html>：声明为 HTML5 文档</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="html">
+		<h3>html： HTML 页面的根元素</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="head">
+		<h3>head：包含了文档的元（meta）数据</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="body">
+		<h3>body：包含了可见的页面内容</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="title">
+		<h3>title：描述了文档的标题</h3><p>title作为元素时描述文档的标题，浏览器工具栏的标题、当网页添加到收藏夹时，显示在收藏夹中的标题、在搜索引擎结果页面的标题，而作为属性时描述了元素的额外信息 (作为工具条使用)</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="h1-h6">
+		<h3>h1-h6：标题</h3><p>通过h1到h6定义从大到小标题。</p><p><b style="color:red">例如：</b></p><p>这是h1标题</h1><h2>这是h2标题</h2><h3>这是h3标题</h3><h4>这是h4标题</h4><h5>这是h5标题</h5><h6>这是h6标题</h6>
+		</div>
+		<div id="p"><h3>p：段落</h3><p>注意：浏览器会自动地在段落的前后添加空行。（&lt/p> 是块级元素）</p><p><b style="color:red">例如：</b></p><p>这是一个段落。</p><p>这是另一个段落。</p></div>
+		<div id="a">
+		<h3>a：链接</h3><p>设置超文本链接。超链接可以是一个字，一个词，或者一组词，也可以是一幅图像。点击这些内容来跳转到新的文档或者当前文档中的某个部分。</p><p>把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。</p>
+		<p>默认链接在浏览器中形式为：1.未访问过的链接显示为蓝色字体并带有下划线；2.访问过的链接显示为紫色并带有下划线；3.点击链接时，链接显示为红色并带有下划线。</p>
+		<p>属性：<br>href：指定链接地址，如href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是.xx文件则需要在后面加正斜杠）；<br>target：定义被链接文档在何处显示，如target="_blank"即在新窗口打开，而target="_top"直接在本窗口打开；<br>id：创建HTML文档书签标记，跳转到文档指定位置，如id="this1"(此时href="#this1")可从href定义处点击跳转到id使用处（也可以直接使用href="xxx/xx.html#this1"即从另一个页面跳转到xx页面的this处）。</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="img">
+		<h3>img：图像</h3><p></p><p>属性：<br>src：指定图像地址，源属性的值是图像的 URL 地址，URL 指存储图像的位置，可以是网页图链接//www.baidu.com/xxx/xx.png，也可以是本地链接/xxx/xx.gif；<br>width和height：指定图像大小尺寸，默认单位为像素；<br>alt：属性标识图像无法载入时的可替换的文本描述；<br>border：边框大小，为0表示没有边框<br>usemap：映射，配合map、area元素使用</p>
+		<p><b style="color:red">例如：</b><br>
+		&ltimg src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"><br>
+		&ltmap name="planetmap"> &lt!--定义图像地图--><br>
+		  &nbsp &ltarea shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm"> &lt!--图像地图中的可点击区域--><br>
+		  &nbsp &ltarea shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm"><br>
+		  &nbsp &ltarea shape="circle" coords="124,58,8" alt="Venus" href="venus.htm"><br>
+		&lt/map></p>
+		</div>
+		<div id="map">
+		<h3>map：图像地图</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="area">
+		<h3>area：图像地图中的可点击区域</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="!----">
+		<h3>&lt!-- -->：注释</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="br">
+		<h3>br：换行</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="hr">
+		<h3>hr：水平线</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="b">
+		<h3>b：粗体文本</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="em">
+		<h3>em：着重文字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="i">
+		<h3>i：斜体字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="small">
+		<h3>small：小号字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="big">
+		<h3>big：大号字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="strong">
+		<h3>strong：加重语气</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="sub">
+		<h3>sub：下标字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="sup">
+		<h3>sup：上标字</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="ins">
+		<h3>ins：插入字</h3><p>插入字下面有横线</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="del">
+		<h3>del：删除字</h3><p>删除字中间有横线</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="code">
+		<h3>code：计算机代码</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="kbd">
+		<h3>kbd：键盘码</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="samp">
+		<h3>samp：计算机代码样本</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="var">
+		<h3>var：变量</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="pre">
+		<h3>pre：预格式文本</h3><p>可实现格式化输出，对空行与空格进行控制</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="abbr">
+		<h3>abbr：缩写</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="address">
+		<h3>address：地址</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="bdo">
+		<h3>bdo：文字方向</h3><p>dir属性：控制文字输出显示，dir="rtl"表示从右到左显示</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="blockquote">
+		<h3>blockquote：长的引用</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="q">
+		<h3>q：短的引用语</h3><p>自动在此引用文字前后加上双引号。</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="cite">
+		<h3>cite：引用、引证</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="dfn">
+		<h3>dfn：定义项目</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="tt">
+		<h3>tt：打印机文本</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="acronym">
+		<h3>acronym：首字母缩写</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="base">
+		<h3>base：页面链接标签的默认链接地址</h3><p>定义页面中所有链接默认的链接目标地址。href：指定连接地址</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="meta">
+		<h3>meta：描述了一些基本的元数据</h3><p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
+		<p><b style="color:red">例如：</b><br>&ltmeta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt!--为搜索引擎定义关键词--><br>
+		&ltmeta name="description" content="免费 Web & 编程 教程"> &lt!--为网页定义描述内容--><br>&ltmeta name="author" content="Runoob"> &lt!--定义网页作者--><br>&ltmeta http-equiv="refresh" content="30"> &lt!--每30秒钟刷新当前页面--></p>
+		</div>
+		<div id="style">
+		<h3>style：HTML文档的样式文件</h3><p>可直接添加样式来渲染 HTML 文档，既可以作为元素放在head中全局设置样式，也可以作为属性局部设置样式。可以使用link元素链接到一个外部样式表，即链接CSS渲染过的外部样式。可使用的属性也可直接在CSS中找到对应的说明。</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="link">
+		<h3>link：文档与外部资源之间的关系</h3><p>通常用于链接到样式表，href 指定连接样式的地址</p>
+		<p><b style="color:red">例如：</b><br>
+		&ltlink rel="stylesheet" type="text/css" href="xx/my.css"> &lt!--链接到外部样式--></p>
+		</div>
+		<div id="script">
+		<h3>script：客户端的脚本文件</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="noscript">
+		<h3>noscript：在脚本未被执行时的替代内容</h3><p>此标签可被用于可识别 &ltscript> 标签但无法支持其中的脚本的浏览器。</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="table">
+		<h3>table：创建表格</h3><p>属性：<br>border：边框<br>cellpadding：边距，单元格内容与其边框之间的空白<br>cellspacing：间距，单元格之间的距离</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="th">
+		<h3>th：表格的表头</h3><p>水平表头：&lttr>&ltth>&lt/th>...&ltth>&lt/th>&lttr>，即tr内部全是th就会显示水平表头；<br>垂直表头：&lttr>&ltth>&lt/th>&lttd>&lt/td>...&lttd>&lt/td>&lt/tr>，即tr内部只有第一个是th，其他的都是td内容就是垂直表头</p><p>属性：<br>colspan：跨列，列合并功能，如colspan="2"两列合并成一列<br>rowspan：跨行合并，如rowspan="2"两行合并成一行</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="tr">
+		<h3>tr：表格的行</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="td">
+		<h3>td：表格单元</h3><p>表格数据，即数据单元格的内容。数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="caption">
+		<h3>caption：表格标题</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="colgroup">
+		<h3>colgroup：表格列的组</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="col">
+		<h3>col：用于表格列的属性</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="thead">
+		<h3>thead：表格的页眉</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="tbody">
+		<h3>tbody：表格的主体</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="tfoot">
+		<h3>tfoot：表格的页脚</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="ol">
+		<h3>ol：有序列表</h3><p>属性：<br>start：从何处开始，如start="50"从50开始加<br>type：定义有序类型，如type="A"、"a"、"I"、"i"等</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="ul">
+		<h3>ul：无序列表</h3><p>属性：<br>style：列表显示方式，如tyle="list-style-type:disc"（圆点）、circle（圆圈）、square（正方形）等</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="li">
+		<h3>li：列表项</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="dl">
+		<h3>dl：列表</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="dt">
+		<h3>dt：自定义列表项目</h3><p>自定义列表以 &ltdl> 标签开始。每个自定义列表项以 &ltdt> 开始。每个自定义列表项的定义以 &ltdd> 开始。</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="dd">
+		<h3>dd：自定列表项的描述</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="div">
+		<h3>div：区块元素</h3><p>区块元素：通常以新行开始或结束。如h1、p、ul、table等；<br>内联元素：通常不会以新行开始，如span、td、img、a等</p><p>可用于网页布局，当然也可以使用表格table实现页面布局，不过不建议这样使用</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="span">
+		<h3>span：组合文档中的行内元素</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="form">
+		<h3>form：供用户输入的表单</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="input">
+		<h3>input：输入域</h3><p>属性：<br>type：type="text"为纯文本域，password为密码输入，radio单选按钮（配合value唯一值确定点击单一的input进行单选），checkbox复选（配合value一起），submit提交按钮（当用户单击确认按钮时，表单的内容会被传送到另一个文件，此文件定义在form里面的action属性里面）</p>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="output">
+		<h3>output：计算结果</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="textarea">
+		<h3>textarea：文本域 (一个多行的输入控件)</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="label">
+		<h3>label：定义了 &ltinput> 元素的标签，一般为输入标题</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="fieldset">
+		<h3>fieldset：相关的表单元素，并使用外框包含起来</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="legend">
+		<h3>legend：定义了 &ltfieldset> 元素的标题</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="select">
+		<h3>select：下拉选项列表</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="optgroup">
+		<h3>optgroup：选项组</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="option">
+		<h3>option：下拉列表中的选项</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="button">
+		<h3>button：点击按钮</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="datalist">
+		<h3>datalist：预先定义的输入控件选项列表</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="keygen">
+		<h3>keygen：表单的密钥对生成器字段</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div><div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+		<div id="">
+		<h3>：</h3>
+		<p><b style="color:red">例如：</b></p>
+		</div>
+	</div>
+</body>
+</html>

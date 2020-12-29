@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<!--以下style功能是：将footer部分固定在页面底部-->
+	<style>
+		*{
+		    margin: 0;
+		    padding: 0;
+		}
+		html,body{
+		    height: 100%;
+		    width: 100%;
+		}
+		#container{
+		    display: flex;
+		    flex-direction: column;
+		    height: 100%;
+		}
+		header{
+		    background: #999;
+		    flex: 0 0 auto;
+		}
+		.main{
+		    background: orange;
+		    flex: 1 0 auto;
+		}
+		footer{
+		    background: #333;
+		    flex: 0 0 auto;
+		}
+	</style>
+	<!--以下功能是为了鼠标经过链接的地方会变色-->
+	<style>
+		a {color:black;}
+		a {text-decoration:none;}
+		a:hover {color:blue;}
+	</style>
+	<style>
+		p {color:black;}
+		p {text-decoration:none;}
+		p:hover {color:blue;}
+	</style>
+	<!--下拉功能的实现-->
+	<style>
+		.dorp{
+			position: relative;
+		  	display: inline-block;
+		}
+		.dorp_con{
+		  	display: none;
+		  	position: absolute;
+		  	background-color: #f9f9f9;
+		  	min-width: 80px;
+		  	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
+		  	padding: 12px 16px;
+		}
+		.dorp:hover .dorp_con{display:block;}
+	</style>
+
+	<title>百度一下，你就知道</title>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+		<p>
+			<a href=".\other.html">新闻</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">hao123</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">地图</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">视频</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">贴吧</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">学术</a>&nbsp;&nbsp;&nbsp;
+			<div class="dorp">
+ 		 	<span><a href=".\other.html">更多</a></span>
+  				<div class="dorp_con">
+	     			<a href=".\other.html"><img src=".\funct\wangpan.png" alt="网盘" width="50" height="50"></img></a>
+					<a href=".\other.html"><img src=".\funct\baike.png" alt="百科" width="50" height="50"></img></a>
+					<a href=".\other.html"><img src=".\funct\yinyue.png" alt="音乐" width="50" height="50"></img></a>
+				</div>
+			</div>
+			<a href=".\other.html" style="color:white;float:right;">
+				<input type="submit" value="登录" style="color:blue">&nbsp;&nbsp;&nbsp;&nbsp;
+			</a>
+			<div class="dorp">
+ 		 	<span><a href=".\other.html" style="float:right;">设置&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+  				<div class="dorp_con">
+	     			<p>搜索设置</p>
+					<p>高级搜索</p>
+					<p>关闭预测</p>
+					<p>隐形设置</p>
+					<p>开启热榜</p>
+				</div>
+			</div>
+			
+		</p>
+		</div>
+
+		<div id="page" class="clearfix" style="text-align:center;">
+			<br><br><br><br><br><br><br><br><br><br>
+			<a href="other.html"><img src=".\funct\baidu.png" alt="baidu" width="320" height="150"></img></a>
+			<br>
+			<input type="text" style="width:500px; height:50px;">
+			<a href=".\other.html"><input type="submit" value="百度一下" style="width:100px; height:50px;color:blue"></a>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="dorp" style="float:right;">
+ 		 	<img src=".\funct\white.png" alt="二维码" width="30" height="30"></img>
+  				<div class="dorp_con">
+	     			<h4>百度app扫码登录</h4>
+					<p>有事扫一扫，没事看一看</p>
+				</div>
+			</div>
+		
+		<br><br>
+		<div style="background-color:#f9f9f9;">
+			<a href=".\other.html">设为首页</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">关于百度</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">About Baidu</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">百度营销</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">使用百度前必读</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">意见反馈</a>&nbsp;&nbsp;&nbsp;
+			<a href=".\other.html">帮助中心</a>
+			<a style="color:black;float:right;" >©2020 Baidu (京)-经营性-2017-0020京公网安备11000002000001号京ICP证030173号</a>
+		</div>
+	</div>
+
+</body>
+</html>
