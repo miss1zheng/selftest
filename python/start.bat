@@ -6,7 +6,7 @@
 
 ::在本地执行
 ::call %CSDTK4INSTALLDIR%\..\..\..\Python37\python app.py
-call python main_test.py
+call F:\RDA8955\Code\2G\CSDTK4.2\python27\python gui.py
 
 
 
