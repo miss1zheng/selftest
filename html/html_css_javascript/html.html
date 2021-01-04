@@ -23,8 +23,9 @@
 		<a href="#div">div</a><br><a href="#span">span</a><br><a href="#form">form</a><br><a href="#input">input</a><br><a href="#output">output</a><br><a href="#textarea">textarea</a><br><a href="#label">label</a><br><a href="#fieldset">fieldset</a><br><a href="#legend">legend</a><br><a href="#select">select</a><br><a href="#optgroup">optgroup</a><br><a href="#option">option</a><br><a href="#button">button</a><br><a href="#datalist">datalist</a><br><a href="#keygen">keygen</a><br>
 		<a href="#iframe">iframe</a><br><a href="#ziti">未显示的代替字体</a><br><a href="#html5">html5</a><br><a href="#canvas">canvas</a><br><a href="#audio">audio</a><br><a href="#video">video</a><br><a href="#source">source</a><br><a href="#embed">embed</a><br><a href="#track">track</a><br>
 		<a href="#article">article</a><br><a href="#aside">aside</a><br><a href="#bdi">bdi</a><br><a href="#command">command</a><br><a href="#details">details</a><br><a href="#dialog">dialog</a><br><a href="#summary">summary</a><br><a href="#figure">figure</a><br><a href="#figcaption">figcaption</a><br><a href="#footer">footer</a><br><a href="#header">header</a><br><a href="#mark">mark</a><br><a href="#meter">meter</a><br><a href="#nav">nav</a><br><a href="#progress">progress</a><br><a href="#ruby">ruby</a><br><a href="#rt">rt</a><br><a href="#rp">rp</a><br><a href="#section">section</a><br><a href="#time">time</a><br><a href="#wbr">wbr</a><br>
-		<a href="#math">math</a><br><a href="#object">object</a><br><a href="#param">param</a><br><a href="#biaoqian">标签</a><br>
-		<a href="#shijian">事件</a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
+		<a href="#math">math</a><br><a href="#object">object</a><br><a href="#param">param</a><br>
+		<a href="#biaoqian">标签</a><br><a href="#shijian">事件</a><br><a href="#huabu">画布</a><br><a href="#yinshipin">音频和视频</a><br><a href="#yanse">颜色</a><br>
+		<a href="#"></a><br>
 		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
 		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
 		<a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br><a href="#"></a><br>
@@ -40,49 +41,44 @@
 		<div id="jianjie">
 		<h3>简介</h3>
 		<p>html：超文本标记语言，是一种用于创建网页的标准标记语言。文档后缀为 .html 或 .html 。</p>
-		<p><b style="color:red">例如：</b><br>&lt!DOCTYPE html><br>&lthtml><br>&lthead><br>&nbsp &ltmeta charset="utf-8"><br>&nbsp &lttitle>html.&lt/title><br>&lt/head><br>&ltbody><br>&nbsp &ltp>html主体。&lt/p><br>&lt/body><br>&lt/html><br></p>
+		<p><b style="color:red">例如：</b><br>&lt!DOCTYPE html><br>&lthtml><br>&lthead><br>&nbsp &ltmeta charset="utf-8"><br>&nbsp &lttitle>html&lt;/title><br>&lt/head><br>&ltbody><br>&nbsp &ltp>html主体。&lt/p><br>&lt/body><br>&lt/html><br></p>
 		<p>解析：<br>&lt!DOCTYPE html> 声明为 HTML5 文档<br>&lthtml> 元素是 HTML 页面的根元素<br>&lthead> 元素包含了文档的元（meta）数据，如 &ltmeta charset="utf-8"> 定义网页编码格式为 utf-8。<br>&lttitle> 元素描述了文档的标题<br>&ltbody> 元素包含了可见的页面内容</p><p>注：在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签。</p><p>标签：1.HTML 标签是由尖括号包围的关键词，比如 &lthtml>；2.HTML 标签通常是成对出现的，比如 &ltb> 和 &lt/b>；3.标签对中的第一个标签是开始标签，第二个标签是结束标签；4.开始和结束标签也被称为开放标签和闭合标签</p><p>
 		HTML元素：1.包含了开始标签与结束标签，以开始标签起始，以结束标签终止；2.元素的内容是开始标签与结束标签之间的内容；3.某些 HTML 元素具有空内容（empty content），空元素在开始标签中进行关闭（以开始标签的结束而结束）；4.大多数 HTML 元素可拥有属性</p><p>
 		HTML属性：1.HTML 元素可以设置属性;属性可以在元素中添加附加信息；2.属性一般描述于开始标签；3.属性总是以名称/值对的形式出现，比如：name="value"；4.属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没有问题。在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号。5.适用于大多数元素内的属性有：class/id/style/title等。
-		<p>html编辑器选择：1.VS Code；2.Sublime Text；3.source insight；4.Notepad++等。</p>
-		</div>
+		<p>html编辑器选择：1.VS Code；2.Sublime Text；3.source insight；4.Notepad++等。</p></div><hr>
 		<div id="DOCTYPE">
-		<h3>&lt!DOCTYPE html>：声明为 HTML5 文档</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<h3>&lt!DOCTYPE html>：声明为 HTML5 文档</h3><p>必须位于 HTML5 文档中的第一行</p>
+		<p>HTML5的声明：&lt!DOCTYPE html><br>HTML 4.01的strict：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><br>HTML 4.01 transitional：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><br>
+		HTML 4.01 Frameset：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"><br>XHTML 1.0 Strict：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><br>
+		XHTML 1.0 Transitional：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><br>XHTML 1.0 Frameset：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"><br>XHTML 1.1：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"></p></div><hr>
 		<div id="html">
-		<h3>html： HTML 页面的根元素</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<h3>html： HTML 页面的根元素</h3><p>限定了文档的开始点和结束点</p><p>属性：<br>lang：支持的语言，如lang="en"，英语，中文为”zh"。</p></div><hr>
 		<div id="head">
-		<h3>head：包含了文档的元（meta）数据</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<h3>head：包含了文档的元（meta）数据</h3><p>用于定义文档的头部，它是所有头部元素的容器。&lthead> 中的元素可以引用脚本、指示浏览器在哪里找到样式表、提供元信息等等。文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。</p>
+		<p>可包含title、style、base、link、meta、script等元素</p></div><hr>
 		<div id="body">
-		<h3>body：包含了可见的页面内容</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<h3>body：包含了可见的页面内容</h3><p>定义文档的主体。包含文档的所有内容，比如文本、超链接、图像、表格和列表等等。</p></div><hr>
 		<div id="title">
 		<h3>title：描述了文档的标题</h3><p>title作为元素时描述文档的标题，浏览器工具栏的标题、当网页添加到收藏夹时，显示在收藏夹中的标题、在搜索引擎结果页面的标题，而作为属性时描述了元素的额外信息 (作为工具条使用)</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<p><b style="color:red">例如：</b><br>&lt;!DOCTYPE html><br>&lt;html><br>&lt;head><br>&nbsp; &lt;title>html&lt;/title><br>&lt;/head><br>&lt;body><br>&nbsp;&lt;p title="这个就是title属性的功能哟">请将鼠标移动到此处&lt;/p><br>&lt;/body><br>&lt;/html>
+		<br><b style="color:red">结果：</b><p title="这个就是title属性的功能哟">请将鼠标移动到此处</p></p></div><hr>
 		<div id="h1-h6">
-		<h3>h1-h6：标题</h3><p>通过h1到h6定义从大到小标题。</p><p><b style="color:red">例如：</b></p><p>这是h1标题</h1><h2>这是h2标题</h2><h3>这是h3标题</h3><h4>这是h4标题</h4><h5>这是h5标题</h5><h6>这是h6标题</h6>
-		</div>
-		<div id="p"><h3>p：段落</h3><p>注意：浏览器会自动地在段落的前后添加空行。（&lt/p> 是块级元素）</p><p><b style="color:red">例如：</b></p><p>这是一个段落。</p><p>这是另一个段落。</p></div>
+		<h3>h1-h6：标题</h3><p>通过h1到h6定义从大到小标题。</p><p><b style="color:red">例如：</b></p>&lt;h1>这是h1标题&lt;/h1><br>&lt;h2>这是h2标题&lt/h2><br>&lt;h3>这是h3标题&lt;/h3><br>&lt;h4>这是h4标题&lt;/h4><br>&lth5>这是h5标题&lt;/h5><br>&lt;h6>这是h6标题&lt;/h6>
+		</p><p><b style="color:red">结果：</b></p><h1>这是h1标题</h1><h2>这是h2标题</h2><h3>这是h3标题</h3><h4>这是h4标题</h4><h5>这是h5标题</h5><h6>这是h6标题</h6></div><hr>
+		<div id="p"><h3>p：段落</h3><p>注意：浏览器会自动地在段落的前后添加空行。（&lt/p> 是块级元素）</p><p><b style="color:red">例如：</b></p>&lt;p>这是一个段落。&lt;/p><br>&lt;p>这是另一个段落。&lt;/p><br><b style="color:red">结果：</b></p><p>这是一个段落。</p><p>这是另一个段落。</p></div><hr>
 		<div id="a">
 		<h3>a：链接</h3><p>设置超文本链接。超链接可以是一个字，一个词，或者一组词，也可以是一幅图像。点击这些内容来跳转到新的文档或者当前文档中的某个部分。</p><p>把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。</p>
 		<p>默认链接在浏览器中形式为：1.未访问过的链接显示为蓝色字体并带有下划线；2.访问过的链接显示为紫色并带有下划线；3.点击链接时，链接显示为红色并带有下划线。</p>
-		<p>属性：<br>href：指定链接地址，如href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是.xx文件则需要在后面加正斜杠）；<br>target：定义被链接文档在何处显示，如target="_blank"即在新窗口打开，而target="_top"直接在本窗口打开；<br>id：创建HTML文档书签标记，跳转到文档指定位置，如id="this1"(此时href="#this1")可从href定义处点击跳转到id使用处（也可以直接使用href="xxx/xx.html#this1"即从另一个页面跳转到xx页面的this处）。</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+		<p>属性：<br>href：指定链接地址，如href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是.xx文件则需要在后面加正斜杠）；<br>target：定义被链接文档在何处显示，如target="_blank"即在新窗口打开，而target="_top"直接在本窗口打开；<br>id：创建HTML文档书签标记，跳转到文档指定位置（若为空则会跳转到页面最顶端），如id="this1"(此时href="#this1")可从href定义处点击跳转到id使用处（也可以直接使用href="xxx/xx.html#this1"即从另一个页面跳转到xx页面的this处）。</p>
+		<p><b style="color:red">例如：</b><br>&lt;a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）&lt;/a>
+		<br><b style="color:red">结果：</b><br><a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）</a></p></div><hr>
 		<div id="img">
 		<h3>img：图像</h3><p></p><p>属性：<br>src：指定图像地址，源属性的值是图像的 URL 地址，URL 指存储图像的位置，可以是网页图链接//www.baidu.com/xxx/xx.png，也可以是本地链接/xxx/xx.gif；<br>width和height：指定图像大小尺寸，默认单位为像素；<br>alt：属性标识图像无法载入时的可替换的文本描述；<br>border：边框大小，为0表示没有边框<br>usemap：映射，配合map、area元素使用<br>
 		draggable="true"：使元素可拖动<br>
 		ondragstart：拖动对象<br>ondragover：放置位置<br>ondrop：进行放置</p>
 		<p><b style="color:red">例如：</b><br>&ltimg src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"><br>&ltmap name="planetmap"> &lt!--定义图像地图--><br>&nbsp &ltarea shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm"> &lt!--图像地图中的可点击区域--><br>&nbsp &ltarea shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm"><br>&nbsp &ltarea shape="circle" coords="124,58,8" alt="Venus" href="venus.htm"><br>&lt/map><br><br>
 		<b style="color:red">例如：</b><br>&ltstyle type="text/css"><br>#div1, #div2<br>{float:left; width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}<br>&lt/style><br>&ltscript><br>function allowDrop(ev)<br>{<br>&nbsp; ev.preventDefault();<br>}<br>function drag(ev) //被拖动的数据<br>{<br>&nbsp; ev.dataTransfer.setData("Text",ev.target.id); //设置被拖数据的数据类型和值<br>}<br>function drop(ev)<br>{<br>&nbsp; ev.preventDefault(); //避免浏览器对数据的默认处理(默认以链接形式打开)<br>&nbsp; var data=ev.dataTransfer.getData("Text"); //获得被拖的数据<br>&nbsp; ev.target.appendChild(document.getElementById(data));<br>}<br>&lt/script><br>&ltdiv id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><br>&nbsp; &ltimg src="./self/apple.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">&lt/div><br>&ltdiv id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">&lt/div><br></p>
-		</div>
+		</div><hr>
 		<div id="map">
 		<h3>map：图像地图</h3>
 		<p><b style="color:red">例如：</b></p>
@@ -675,7 +671,7 @@
 			<tr><td><a href="#">onstorage</a></td><td>script</td><td>当 Web Storage 区域更新时（存储空间中的数据发生变化时）运行脚本</td></tr>
 			<tr><td><a href="#">onundo</a></td><td>script</td><td>当文档执行撤销时运行脚本</td></tr>
 			<tr><td><a href="#">onunload</a></td><td>script</td><td>当用户离开文档时运行脚本</td></tr>
-			<tr><td colspan="3" style="text-align:center;">表单事件属性</td></tr>
+			<tr><td colspan="3" style="text-align:center;">表单事件</td></tr>
 			<tr><td><a href="#">onblur</a></td><td>script</td><td>当元素失去焦点时运行脚本</td></tr>
 			<tr><td><a href="#">onchange</a></td><td>script</td><td>当元素改变时运行脚本</td></tr>
 			<tr><td><a href="#">oncontextmenu</a></td><td>script</td><td>当触发上下文菜单时运行脚本</td></tr>
@@ -687,33 +683,359 @@
 			<tr><td><a href="#">onreset</a></td><td>script</td><td>当表单重置时运行脚本。HTML 5 不支持</td></tr>
 			<tr><td><a href="#">onselect</a></td><td>script</td><td>当选取元素时运行脚本</td></tr>
 			<tr><td><a href="#">onsubmit</a></td><td>script</td><td>当提交表单时运行脚本</td></tr>
-			<tr><td colspan="3" style="text-align:center;">键盘事件属性</td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-			<tr><td><a href="#"></a></td><td>script</td><td></td></tr>
-					
-
-			
+			<tr><td colspan="3" style="text-align:center;">键盘事件</td></tr>
+			<tr><td><a href="#">onkeydown</a></td><td>script</td><td>当按下按键时运行脚本</td></tr>
+			<tr><td><a href="#">onkeypress</a></td><td>script</td><td>当按下并松开按键时运行脚本</td></tr>
+			<tr><td><a href="#">onkeyup</a></td><td>script</td><td>当松开按键时运行脚本</td></tr>
+			<tr><td colspan="3" style="text-align:center;">鼠标事件</td></tr>
+			<tr><td><a href="#">onclick</a></td><td>script</td><td>当单击鼠标时运行脚本</td></tr>
+			<tr><td><a href="#">ondblclick</a></td><td>script</td><td>当双击鼠标时运行脚本</td></tr>
+			<tr><td><a href="#">ondrag</a></td><td>script</td><td>当拖动元素时运行脚本</td></tr>
+			<tr><td><a href="#">ondragend</a></td><td>script</td><td>当拖动操作结束时运行脚本</td></tr>
+			<tr><td><a href="#">ondragenter</a></td><td>script</td><td>当元素被拖动至有效的拖放目标时运行脚本</td></tr>
+			<tr><td><a href="#">ondragleave</a></td><td>script</td><td>当元素离开有效拖放目标时运行脚本</td></tr>
+			<tr><td><a href="#">ondragover</a></td><td>script</td><td>当元素被拖动至有效拖放目标上方时运行脚本</td></tr>
+			<tr><td><a href="#">ondragstart</a></td><td>script</td><td>当拖动操作开始时运行脚本</td></tr>
+			<tr><td><a href="#">ondrop</a></td><td>script</td><td>当被拖动元素正在被拖放时运行脚本</td></tr>
+			<tr><td><a href="#">onmousedown</a></td><td>script</td><td>当按下鼠标按钮时运行脚本</td></tr>
+			<tr><td><a href="#">onmousemove</a></td><td>script</td><td>当鼠标指针移动时运行脚本</td></tr>
+			<tr><td><a href="#">onmouseout</a></td><td>script</td><td>当鼠标指针移出元素时运行脚本</td></tr>
+			<tr><td><a href="#">onmouseover</a></td><td>script</td><td>当鼠标指针移至元素之上时运行脚本</td></tr>
+			<tr><td><a href="#">onmouseup</a></td><td>script</td><td>当松开鼠标按钮时运行脚本</td></tr>
+			<tr><td><a href="#">onmousewheel</a></td><td>script</td><td>当转动鼠标滚轮时运行脚本</td></tr>
+			<tr><td><a href="#">onscroll</a></td><td>script</td><td>当滚动元素的滚动条时运行脚本</td></tr>
+			<tr><td colspan="3" style="text-align:center;">多媒体事件</td></tr>
+			<tr><td><a href="#">onabort</a></td><td>script</td><td>当发生中止事件时运行脚本</td></tr>
+			<tr><td><a href="#">oncanplay</a></td><td>script</td><td>当媒介能够开始播放但可能因缓冲而需要停止时运行脚本</td></tr>
+			<tr><td><a href="#">oncanplaythrough</a></td><td>script</td><td>当媒介能够无需因缓冲而停止即可播放至结尾时运行脚本</td></tr>
+			<tr><td><a href="#">ondurationchange</a></td><td>script</td><td>当媒介长度改变时运行脚本</td></tr>
+			<tr><td><a href="#">onemptied</a></td><td>script</td><td>当媒介资源元素突然为空时（网络错误、加载错误等）运行脚本</td></tr>
+			<tr><td><a href="#">onended</a></td><td>script</td><td>当媒介已抵达结尾时运行脚本</td></tr>
+			<tr><td><a href="#">onerror</a></td><td>script</td><td>当在元素加载期间发生错误时运行脚本</td></tr>
+			<tr><td><a href="#">onloadeddata</a></td><td>script</td><td>当加载媒介数据时运行脚本</td></tr>
+			<tr><td><a href="#">onloadedmetadata</a></td><td>script</td><td>当媒介元素的持续时间以及其他媒介数据已加载时运行脚本</td></tr>
+			<tr><td><a href="#">onloadstart</a></td><td>script</td><td>当浏览器开始加载媒介数据时运行脚本</td></tr>
+			<tr><td><a href="#">onpause</a></td><td>script</td><td>当媒介数据暂停时运行脚本</td></tr>
+			<tr><td><a href="#">onplay</a></td><td>script</td><td>当媒介数据将要开始播放时运行脚本</td></tr>
+			<tr><td><a href="#">onplaying</a></td><td>script</td><td>当媒介数据已开始播放时运行脚本</td></tr>
+			<tr><td><a href="#">onprogress</a></td><td>script</td><td>当浏览器正在取媒介数据时运行脚本</td></tr>
+			<tr><td><a href="#">onratechange</a></td><td>script</td><td>当媒介数据的播放速率改变时运行脚本</td></tr>
+			<tr><td><a href="#">onreadystatechange</a></td><td>script</td><td>当就绪状态（ready-state）改变时运行脚本</td></tr>
+			<tr><td><a href="#">onseeked</a></td><td>script</td><td>当媒介元素的定位属性 [1] 不再为真且定位已结束时运行脚本</td></tr>
+			<tr><td><a href="#">onseeking</a></td><td>script</td><td>当媒介元素的定位属性为真且定位已开始时运行脚本</td></tr>
+			<tr><td><a href="#">onstalled</a></td><td>script</td><td>当取回媒介数据过程中（延迟）存在错误时运行脚本</td></tr>
+			<tr><td><a href="#">onsuspend</a></td><td>script</td><td>当浏览器已在取媒介数据但在取回整个媒介文件之前停止时运行脚本</td></tr>			
+			<tr><td><a href="#">ontimeupdate</a></td><td>script</td><td>当媒介改变其播放位置时运行脚本</td></tr>
+			<tr><td><a href="#">onvolumechange</a></td><td>script</td><td>当媒介改变音量亦或当音量被设置为静音时运行脚本</td></tr>
+			<tr><td><a href="#">onwaiting</a></td><td>script</td><td>当媒介已停止播放但打算继续播放时运行脚本</td></tr>
+			<tr><td colspan="3" style="text-align:center;">其他事件</td></tr>
+			<tr><td><a href="#">onshow</a></td><td>script</td><td>当 &ltmenu> 元素在上下文显示时触发</td></tr>
+			<tr><td><a href="#">ontoggle</a></td><td>script</td><td>当用户打开或关闭 &ltdetails> 元素时触发</td></tr>
 			</tbody>
 			</table>
 		</div>
+		<div id="huabu">
+		<h3>画布</h3>
+			<table class="reference notranslate" border="1" cellpadding="0" cellspacing="0"><tbody>
+			<tr><th align="left" width="15%">属性</th><th align="left" width="15%">值</th><th align="left" width="70%">描述</th></tr>
+			<tr><td colspan="3" style="text-align:center;">颜色、样式、阴影</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">fillStyle</a></td><td>JavaScript</td><td>设置或返回用于填充绘画的颜色、渐变或模式</td></tr>
+			<tr><td><a href="#">strokeStyle</a></td><td>JavaScript</td><td>设置或返回用于笔触的颜色、渐变或模式</td></tr>
+			<tr><td><a href="#">shadowColor</a></td><td>JavaScript</td><td>设置或返回用于阴影的颜色</td></tr>
+			<tr><td><a href="#">shadowBlur</a></td><td>JavaScript</td><td>设置或返回用于阴影的模糊级别</td></tr>
+			<tr><td><a href="#">shadowOffsetX</a></td><td>JavaScript</td><td>设置或返回阴影与形状的水平距离</td></tr>
+			<tr><td><a href="#">shadowOffsetY</a></td><td>JavaScript</td><td>设置或返回阴影与形状的垂直距离</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">createLinearGradient()</a></td><td>JavaScript</td><td>创建线性渐变（用在画布内容上）</td></tr>
+			<tr><td><a href="#">createPattern()</a></td><td>JavaScript</td><td>在指定的方向上重复指定的元素</td></tr>
+			<tr><td><a href="#">createRadialGradient()</a></td><td>JavaScript</td><td>创建放射状/环形的渐变（用在画布内容上）</td></tr>
+			<tr><td><a href="#">addColorStop()</a></td><td>JavaScript</td><td>规定渐变对象中的颜色和停止位置</td></tr>
+			<tr><td colspan="3" style="text-align:center;">线条样式</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">lineCap</a></td><td>JavaScript</td><td>设置或返回线条的结束端点样式</td></tr>
+			<tr><td><a href="#">lineJoin</a></td><td>JavaScript</td><td>设置或返回两条线相交时，所创建的拐角类型</td></tr>
+			<tr><td><a href="#">lineWidth</a></td><td>JavaScript</td><td>设置或返回当前的线条宽度</td></tr>
+			<tr><td><a href="#">miterLimit</a></td><td>JavaScript</td><td>设置或返回最大斜接长度</td></tr>
+			<tr><td colspan="3" style="text-align:center;">矩形</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">rect()</a></td><td>JavaScript</td><td>创建矩形</td></tr>
+			<tr><td><a href="#">fillRect()</a></td><td>JavaScript</td><td>填充矩形</td></tr>
+			<tr><td><a href="#">strokeRect()</a></td><td>JavaScript</td><td>绘制矩形（无填充）</td></tr>
+			<tr><td><a href="#">clearRect()</a></td><td>JavaScript</td><td>在给定的矩形内清除指定的像素</td></tr>
+			<tr><td colspan="3" style="text-align:center;">路径</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">fill()</a></td><td>JavaScript</td><td>填充当前绘图（路径）</td></tr>
+			<tr><td><a href="#">stroke()</a></td><td>JavaScript</td><td>绘制已定义的路径</td></tr>
+			<tr><td><a href="#">beginPath()</a></td><td>JavaScript</td><td>起始一条路径，或重置当前路径</td></tr>
+			<tr><td><a href="#">moveTo()</a></td><td>JavaScript</td><td>把路径移动到画布中的指定点，不创建线条</td></tr>
+			<tr><td><a href="#">closePath()</a></td><td>JavaScript</td><td>创建从当前点回到起始点的路径</td></tr>
+			<tr><td><a href="#">lineTo()</a></td><td>JavaScript</td><td>添加一个新点，然后在画布中创建从该点到最后指定点的线条</td></tr>
+			<tr><td><a href="#">clip()</a></td><td>JavaScript</td><td>从原始画布剪切任意形状和尺寸的区域</td></tr>
+			<tr><td><a href="#">quadraticCurveTo()</a></td><td>JavaScript</td><td>创建二次贝塞尔曲线</td></tr>
+			<tr><td><a href="#">bezierCurveTo()</a></td><td>JavaScript</td><td>创建三次贝塞尔曲线</td></tr>
+			<tr><td><a href="#">arc()</a></td><td>JavaScript</td><td>创建弧/曲线（用于创建圆形或部分圆）</td></tr>
+			<tr><td><a href="#">arcTo()</a></td><td>JavaScript</td><td>创建两切线之间的弧/曲线</td></tr>
+			<tr><td><a href="#">isPointInPath()</a></td><td>JavaScript</td><td>如果指定的点位于当前路径中，则返回 true，否则返回 false</td></tr>
+			<tr><td colspan="3" style="text-align:center;">转换</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">scale()</a></td><td>JavaScript</td><td>缩放当前绘图至更大或更小</td></tr>
+			<tr><td><a href="#">rotate()</a></td><td>JavaScript</td><td>旋转当前绘图</td></tr>
+			<tr><td><a href="#">translate()</a></td><td>JavaScript</td><td>重新映射画布上的 (0,0) 位置</td></tr>
+			<tr><td><a href="#">transform()</a></td><td>JavaScript</td><td>替换绘图的当前转换矩阵</td></tr>
+			<tr><td><a href="#">setTransform()</a></td><td>JavaScript</td><td>将当前转换重置为单位矩阵。然后运行 transform()</td></tr>
+			<tr><td colspan="3" style="text-align:center;">文本</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">font</a></td><td>JavaScript</td><td>设置或返回文本内容的当前字体属性</td></tr>
+			<tr><td><a href="#">textAlign</a></td><td>JavaScript</td><td>设置或返回文本内容的当前对齐方式</td></tr>
+			<tr><td><a href="#">textBaseline</a></td><td>JavaScript</td><td>设置或返回在绘制文本时使用的当前文本基线</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">fillText()</a></td><td>JavaScript</td><td>填充文本</td></tr>
+			<tr><td><a href="#">strokeText()</a></td><td>JavaScript</td><td>在画布上绘制文本（无填充）</td></tr>
+			<tr><td><a href="#">measureText()</a></td><td>JavaScript</td><td>返回包含指定文本宽度的对象</td></tr>
+			<tr><td colspan="3" style="text-align:center;">图像绘制</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">width</a></td><td>JavaScript</td><td>返回 ImageData 对象的宽度</td></tr>
+			<tr><td><a href="#">height</a></td><td>JavaScript</td><td>返回 ImageData 对象的高度</td></tr>
+			<tr><td><a href="#">data</a></td><td>JavaScript</td><td>返回一个对象，其包含指定的 ImageData 对象的图像数据</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">drawImage()</a></td><td>JavaScript</td><td>向画布上绘制图像、画布或视频</td></tr>
+			<tr><td><a href="#">createImageData()</a></td><td>JavaScript</td><td>创建新的、空白的 ImageData 对象</td></tr>
+			<tr><td><a href="#">getImageData()</a></td><td>JavaScript</td><td>返回 ImageData 对象，该对象为画布上指定的矩形复制像素数据</td></tr>
+			<tr><td><a href="#">putImageData()</a></td><td>JavaScript</td><td>把图像数据（从指定的 ImageData 对象）放回画布上</td></tr>
+			<tr><td colspan="3" style="text-align:center;">合成</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">globalAlpha</a></td><td>JavaScript</td><td>设置或返回绘图的当前 alpha 或透明值</td></tr>
+			<tr><td><a href="#">globalCompositeOperation</a></td><td>JavaScript</td><td>设置或返回新图像如何绘制到已有的图像上</td></tr>
+			<tr><td colspan="3" style="text-align:center;">其他</td></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">save()</a></td><td>JavaScript</td><td>保存当前环境的状态</td></tr>
+			<tr><td><a href="#">restore()</a></td><td>JavaScript</td><td>返回之前保存过的路径状态和属性</td></tr>
+			<tr><td><a href="#">createEvent()</a></td><td>JavaScript</td><td></td></tr>
+			<tr><td><a href="#">getContext()</a></td><td>JavaScript</td><td></td></tr>
+			<tr><td><a href="#">toDataURL()</a></td><td>JavaScript</td><td></td></tr>
+			</tbody>
+			</table>
+		</div>
+		<div id="yinshipin">
+		<h3>音频和视频</h3>
+			<table class="reference notranslate" border="1" cellpadding="0" cellspacing="0"><tbody>
+			<tr><th align="left" width="15%">属性</th><th align="left" width="15%">值</th><th align="left" width="70%">描述</th></tr>
+			<tr><td colspan="3" style="text-align:center;">方法</td></tr>
+			<tr><td><a href="#">addTextTrack()</a></td><td>JavaScript</td><td>向音频/视频添加新的文本轨道</td></tr>
+			<tr><td><a href="#">canPlayType()</a></td><td>JavaScript</td><td>检测浏览器是否能播放指定的音频/视频类型</td></tr>
+			<tr><td><a href="#">load()</a></td><td>JavaScript</td><td>重新加载音频/视频元素</td></tr>
+			<tr><td><a href="#">play()</a></td><td>JavaScript</td><td>开始播放音频/视频</td></tr>
+			<tr><td><a href="#">pause()</a></td><td>JavaScript</td><td>暂停当前播放的音频/视频</td></tr>
+			<tr><td colspan="3" style="text-align:center;">属性</td></tr>
+			<tr><td><a href="#">audioTracks</a></td><td>JavaScript</td><td>返回表示可用音频轨道的 AudioTrackList 对象</td></tr>
+			<tr><td><a href="#">autoplay</a></td><td>JavaScript</td><td>设置或返回是否在加载完成后随即播放音频/视频</td></tr>
+			<tr><td><a href="#">buffered</a></td><td>JavaScript</td><td>返回表示音频/视频已缓冲部分的 TimeRanges 对象</td></tr>
+			<tr><td><a href="#">controller</a></td><td>JavaScript</td><td>返回表示音频/视频当前媒体控制器的 MediaController 对象</td></tr>
+			<tr><td><a href="#">controls</a></td><td>JavaScript</td><td>设置或返回音频/视频是否显示控件（比如播放/暂停等）</td></tr>
+			<tr><td><a href="#">crossOrigin</a></td><td>JavaScript</td><td>设置或返回音频/视频的 CORS 设置</td></tr>
+			<tr><td><a href="#">currentSrc</a></td><td>JavaScript</td><td>返回当前音频/视频的 URL</td></tr>
+			<tr><td><a href="#">currentTime</a></td><td>JavaScript</td><td>设置或返回音频/视频中的当前播放位置（以秒计）</td></tr>
+			<tr><td><a href="#">defaultMuted</a></td><td>JavaScript</td><td>设置或返回音频/视频默认是否静音</td></tr>
+			<tr><td><a href="#">defaultPlaybackRate</a></td><td>JavaScript</td><td>设置或返回音频/视频的默认播放速度</td></tr>
+			<tr><td><a href="#">duration</a></td><td>JavaScript</td><td>返回当前音频/视频的长度（以秒计）</td></tr>
+			<tr><td><a href="#">ended</a></td><td>JavaScript</td><td>返回音频/视频的播放是否已结束</td></tr>
+			<tr><td><a href="#">error</a></td><td>JavaScript</td><td>返回表示音频/视频错误状态的 MediaError 对象</td></tr>
+			<tr><td><a href="#">loop</a></td><td>JavaScript</td><td>设置或返回音频/视频是否应在结束时重新播放</td></tr>
+			<tr><td><a href="#">mediaGroup</a></td><td>JavaScript</td><td>设置或返回音频/视频所属的组合（用于连接多个音频/视频元素）</td></tr>
+			<tr><td><a href="#">muted</a></td><td>JavaScript</td><td>设置或返回音频/视频是否静音</td></tr>
+			<tr><td><a href="#">networkState</a></td><td>JavaScript</td><td>返回音频/视频的当前网络状态</td></tr>
+			<tr><td><a href="#">paused</a></td><td>JavaScript</td><td>设置或返回音频/视频是否暂停</td></tr>
+			<tr><td><a href="#">playbackRate</a></td><td>JavaScript</td><td>设置或返回音频/视频播放的速度</td></tr>
+			<tr><td><a href="#">played</a></td><td>JavaScript</td><td>返回表示音频/视频已播放部分的 TimeRanges 对象</td></tr>
+			<tr><td><a href="#">preload</a></td><td>JavaScript</td><td>设置或返回音频/视频是否应该在页面加载后进行加载</td></tr>
+			<tr><td><a href="#">readyState</a></td><td>JavaScript</td><td>返回音频/视频当前的就绪状态</td></tr>
+			<tr><td><a href="#">seekable</a></td><td>JavaScript</td><td>返回表示音频/视频可寻址部分的 TimeRanges 对象</td></tr>
+			<tr><td><a href="#">seeking</a></td><td>JavaScript</td><td>返回用户是否正在音频/视频中进行查找</td></tr>
+			<tr><td><a href="#">src</a></td><td>JavaScript</td><td>设置或返回音频/视频元素的当前来源</td></tr>
+			<tr><td><a href="#">startDate</a></td><td>JavaScript</td><td>返回表示当前时间偏移的 Date 对象</td></tr>
+			<tr><td><a href="#">textTracks</a></td><td>JavaScript</td><td>返回表示可用文本轨道的 TextTrackList 对象</td></tr>
+			<tr><td><a href="#">videoTracks</a></td><td>JavaScript</td><td>返回表示可用视频轨道的 VideoTrackList 对象</td></tr>
+			<tr><td><a href="#">volume</a></td><td>JavaScript</td><td>设置或返回音频/视频的音量</td></tr>
+			<tr><td colspan="3" style="text-align:center;">事件</td></tr>
+			<tr><td><a href="#">abort</a></td><td>JavaScript</td><td>当音频/视频的加载已放弃时触发</td></tr>
+			<tr><td><a href="#">canplay</a></td><td>JavaScript</td><td>当浏览器可以开始播放音频/视频时触发</td></tr>
+			<tr><td><a href="#">canplaythrough</a></td><td>JavaScript</td><td>当浏览器可在不因缓冲而停顿的情况下进行播放时触发</td></tr>
+			<tr><td><a href="#">durationchange</a></td><td>JavaScript</td><td>当音频/视频的时长已更改时触发</td></tr>
+			<tr><td><a href="#">emptied</a></td><td>JavaScript</td><td>当目前的播放列表为空时触发</td></tr>
+			<tr><td><a href="#">ended</a></td><td>JavaScript</td><td>当目前的播放列表已结束时触发</td></tr>
+			<tr><td><a href="#">error</a></td><td>JavaScript</td><td>当在音频/视频加载期间发生错误时触发</td></tr>
+			<tr><td><a href="#">loadeddata</a></td><td>JavaScript</td><td>当浏览器已加载音频/视频的当前帧时触发</td></tr>
+			<tr><td><a href="#">loadedmetadata</a></td><td>JavaScript</td><td>当浏览器已加载音频/视频的元数据时触发</td></tr>
+			<tr><td><a href="#">loadstart</a></td><td>JavaScript</td><td>当浏览器开始查找音频/视频时触发</td></tr>
+			<tr><td><a href="#">pause</a></td><td>JavaScript</td><td>当音频/视频已暂停时触发</td></tr>
+			<tr><td><a href="#">play</a></td><td>JavaScript</td><td>当音频/视频已开始或不再暂停时触发</td></tr>
+			<tr><td><a href="#">playing</a></td><td>JavaScript</td><td>当音频/视频在因缓冲而暂停或停止后已就绪时触发</td></tr>
+			<tr><td><a href="#">progress</a></td><td>JavaScript</td><td>当浏览器正在下载音频/视频时触发</td></tr>
+			<tr><td><a href="#">ratechange</a></td><td>JavaScript</td><td>当音频/视频的播放速度已更改时触发</td></tr>
+			<tr><td><a href="#">seeked</a></td><td>JavaScript</td><td>当用户已移动/跳跃到音频/视频中的新位置时触发</td></tr>
+			<tr><td><a href="#">seeking</a></td><td>JavaScript</td><td>当用户开始移动/跳跃到音频/视频中的新位置时触发</td></tr>
+			<tr><td><a href="#">stalled</a></td><td>JavaScript</td><td>当浏览器尝试获取媒体数据，但数据不可用时触发</td></tr>
+			<tr><td><a href="#">suspend</a></td><td>JavaScript</td><td>当浏览器刻意不获取媒体数据时触发</td></tr>
+			<tr><td><a href="#">timeupdate</a></td><td>JavaScript</td><td>当目前的播放位置已更改时触发</td></tr>
+			<tr><td><a href="#">volumechange</a></td><td>JavaScript</td><td>当音量已更改时触发</td></tr>
+			<tr><td><a href="#">waiting</a></td><td>JavaScript</td><td>当视频由于需要缓冲下一帧而停止时触发</td></tr>
+			</tbody>
+			</table>
+		</div>
+		<div id="yanse">
+		<h3>颜色</h3>
+			<table class="reference notranslate" border="1" cellpadding="0" cellspacing="0"><tbody>
+			<tr><th align="left" width="15%">名称</th><th align="left" width="15%">hex</th><th align="left" width="70%">颜色</th></tr>
+			<tr><td>AliceBlue </td><td>#F0F8FF</td><td style="background-color:AliceBlue"></td></tr>
+			<tr><td>AntiqueWhite</td><td>#FAEBD7</td><td style="background-color:AntiqueWhite"></td></tr>
+			<tr><td>Aqua</td><td>#00FFFF</td><td style="background-color:Aqua"></td></tr>
+			<tr><td>Aquamarine</td><td>#7FFFD4</td><td style="background-color:Aquamarine"></td></tr>
+			<tr><td>Azure</td><td>#F0FFFF</td><td style="background-color:Azure"></td></tr>
+			<tr><td>Beige</td><td>#F5F5DC</td><td style="background-color:Beige"></td></tr>
+			<tr><td>Bisque</td><td>#FFE4C4</td><td style="background-color:Bisque"></td></tr>
+			<tr><td>Black</td><td>#000000</td><td style="background-color:Black"></td></tr>
+			<tr><td>BlanchedAlmond</td><td>#FFEBCD</td><td style="background-color:BlanchedAlmond"></td></tr>
+			<tr><td>Blue</td><td>#0000FF</td><td style="background-color:Blue"></td></tr>
+			<tr><td>BlueViolet</td><td>#8A2BE2</td><td style="background-color:BlueViolet"></td></tr>
+			<tr><td>Brown</td><td>#A52A2A</td><td style="background-color:Brown"></td></tr>
+			<tr><td>BurlyWood</td><td>#DEB887</td><td style="background-color:BurlyWood"></td></tr>
+			<tr><td>CadetBlue</td><td>#5F9EA0</td><td style="background-color:CadetBlue"></td></tr>
+			<tr><td>Chartreuse</td><td>#7FFF00</td><td style="background-color:Chartreuse"></td></tr>
+			<tr><td>Chocolate</td><td>#D2691E</td><td style="background-color:Chocolate"></td></tr>
+			<tr><td>Coral</td><td>#FF7F50</td><td style="background-color:Coral"></td></tr>
+			<tr><td>CornflowerBlue</td><td>#6495ED</td><td style="background-color:CornflowerBlue"></td></tr>
+			<tr><td>Cornsilk</td><td>#FFF8DC</td><td style="background-color:Cornsilk"></td></tr>
+			<tr><td>Crimson</td><td>#DC143C</td><td style="background-color:Crimson"></td></tr>
+			<tr><td>Cyan</td><td>#00FFFF</td><td style="background-color:Cyan"></td></tr>
+			<tr><td>DarkBlue</td><td>#00008B</td><td style="background-color:DarkBlue"></td></tr>
+			<tr><td>DarkCyan</td><td>#008B8B</td><td style="background-color:DarkCyan"></td></tr>
+			<tr><td>DarkGoldenRod</td><td>#B8860B</td><td style="background-color:DarkGoldenRod"></td></tr>	 
+			<tr><td>DarkGray</td><td>#A9A9A9</td><td style="background-color:DarkGray"></td></tr>
+			<tr><td>DarkGreen</td><td>#006400</td><td style="background-color:DarkGreen"></td></tr>
+			<tr><td>DarkKhaki</td><td>#BDB76B</td><td style="background-color:DarkKhaki"></td></tr>	
+			<tr><td>DarkMagenta</td><td>#8B008B</td><td style="background-color:DarkMagenta"></td></tr>
+			<tr><td>DarkOliveGreen</td><td>#556B2F</td><td style="background-color:DarkOliveGreen"></td></tr>
+			<tr><td>DarkOrange</td><td>#FF8C00</td><td style="background-color:DarkOrange"></td></tr>	
+			<tr><td>DarkOrchid</td><td>#9932CC</td><td style="background-color:DarkOrchid"></td></tr>
+			<tr><td>DarkRed</td><td>#8B0000</td><td style="background-color:DarkRed"></td></tr>
+			<tr><td>DarkSalmon</td><td>#E9967A</td><td style="background-color:">DarkSalmon</td></tr>	
+			<tr><td>DarkSeaGreen</td><td>#8FBC8F</td><td style="background-color:DarkSeaGreen"></td></tr>
+			<tr><td>DarkSlateBlue</td><td>#483D8B</td><td style="background-color:DarkSlateBlue"></td></tr>
+			<tr><td>DarkSlateGray</td><td>#2F4F4F</td><td style="background-color:DarkSlateGray"></td></tr>	
+			<tr><td>DarkTurquoise</td><td>#00CED1</td><td style="background-color:DarkTurquoise"></td></tr>
+			<tr><td>DarkViolet</td><td>#9400D3</td><td style="background-color:DarkViolet"></td></tr>
+			<tr><td>DeepPink</td><td>#FF1493</td><td style="background-color:DeepPink"></td></tr>	
+			<tr><td>DeepSkyBlue</td><td>#00BFFF</td><td style="background-color:DeepSkyBlue"></td></tr>
+			<tr><td>DimGray</td><td>#696969</td><td style="background-color:DimGray"></td></tr>
+			<tr><td>DodgerBlue</td><td>#1E90FF</td><td style="background-color:DodgerBlue"></td></tr>
+			<tr><td>FireBrick</td><td>#B22222</td><td style="background-color:FireBrick"></td></tr>
+			<tr><td>FloralWhite</td><td>#FFFAF0</td><td style="background-color:FloralWhite"></td></tr>
+			<tr><td>ForestGreen</td><td>#228B22</td><td style="background-color:ForestGreen"></td></tr>	
+			<tr><td>Fuchsia</td><td>#FF00FF</td><td style="background-color:Fuchsia"></td></tr>
+			<tr><td>Gainsboro</td><td>#DCDCDC</td><td style="background-color:Gainsboro"></td></tr>
+			<tr><td>GhostWhite</td><td>#F8F8FF</td><td style="background-color:GhostWhite"></td></tr>
+			<tr><td>Gold</td><td>#FFD700</td><td style="background-color:Gold"></td></tr>
+			<tr><td>GoldenRod</td><td>#DAA520</td><td style="background-color:GoldenRod"></td></tr>	
+			<tr><td>Gray</td><td>#808080</td><td style="background-color:Gray"></td></tr>
+			<tr><td>Green</td><td>#008000</td><td style="background-color:Green"></td></tr>
+			<tr><td>GreenYellow</td><td>#ADFF2F</td><td style="background-color:GreenYellow"></td></tr>
+			<tr><td>HoneyDew</td><td>#F0FFF0</td><td style="background-color:HoneyDew"></td></tr>
+			<tr><td>HotPink</td><td>#FF69B4</td><td style="background-color:"></td></tr>
+			<tr><td>IndianRed</td><td>#CD5C5C</td><td style="background-color:IndianRed"></td></tr>	
+			<tr><td>Indigo</td><td>#4B0082</td><td style="background-color:Indigo"></td></tr>
+			<tr><td>Ivory</td><td>#FFFFF0</td><td style="background-color:Ivory"></td></tr>
+			<tr><td>Khaki</td><td>#F0E68C</td><td style="background-color:Khaki"></td></tr>
+			<tr><td>Lavender</td><td>#E6E6FA</td><td style="background-color:Lavender"></td></tr>
+			<tr><td>LavenderBlush</td><td>#FFF0F5</td><td style="background-color:LavenderBlush"></td></tr>
+			<tr><td>LawnGreen</td><td>#7CFC00</td><td style="background-color:LawnGreen"></td></tr>	
+			<tr><td>LemonChiffon</td><td>#FFFACD</td><td style="background-color:LemonChiffon"></td></tr>
+			<tr><td>LightBlue</td><td>#ADD8E6</td><td style="background-color:LightBlue"></td></tr>
+			<tr><td>LightCoral</td><td>#F08080</td><td style="background-color:LightCoral"></td></tr>
+			<tr><td>LightCyan</td><td>#E0FFFF</td><td style="background-color:LightCyan"></td></tr>
+			<tr><td>LightGoldenRodYellow</td><td>#FAFAD2</td><td style="background-color:LightGoldenRodYellow"></td></tr>
+			<tr><td>LightGray</td><td>#D3D3D3</td><td style="background-color:LightGray"></td></tr>	
+			<tr><td>LightGreen</td><td>#90EE90</td><td style="background-color:LightGreen"></td></tr>
+			<tr><td>LightPink</td><td>#FFB6C1</td><td style="background-color:LightPink"></td></tr>
+			<tr><td>LightSalmon</td><td>#FFA07A</td><td style="background-color:LightSalmon"></td></tr>
+			<tr><td>LightSeaGreen</td><td>#20B2AA</td><td style="background-color:LightSeaGreen"></td></tr>
+			<tr><td>LightSkyBlue</td><td>#87CEFA</td><td style="background-color:LightSkyBlue"></td></tr>
+			<tr><td>LightSlateGray</td><td>#778899</td><td style="background-color:LightSlateGray"></td></tr>
+			<tr><td>LightSteelBlue</td><td>#B0C4DE</td><td style="background-color:LightSteelBlue"></td></tr>	
+			<tr><td>LightYellow</td><td>#FFFFE0</td><td style="background-color:LightYellow"></td></tr>
+			<tr><td>Lime</td><td>#00FF00</td><td style="background-color:Lime"></td></tr>
+			<tr><td>LimeGreen</td><td>#32CD32</td><td style="background-color:LimeGreen"></td></tr>
+			<tr><td>Linen</td><td>#FAF0E6</td><td style="background-color:Linen"></td></tr>
+			<tr><td>Magenta</td><td>#FF00FF</td><td style="background-color:Magenta"></td></tr>
+			<tr><td>Maroon</td><td>#800000</td><td style="background-color:Maroon"></td></tr>
+			<tr><td>MediumAquaMarine</td><td>#66CDAA</td><td style="background-color:MediumAquaMarine"></td></tr>	
+			<tr><td>MediumBlue</td><td>#0000CD</td><td style="background-color:MediumBlue"></td></tr>
+			<tr><td>MediumOrchid</td><td>#BA55D3</td><td style="background-color:MediumOrchid"></td></tr>
+			<tr><td>MediumPurple</td><td>#9370DB</td><td style="background-color:MediumPurple"></td></tr>
+			<tr><td>MediumSeaGreen</td><td>#3CB371</td><td style="background-color:MediumSeaGreen"></td></tr>
+			<tr><td>MediumSlateBlue</td><td>#7B68EE</td><td style="background-color:MediumSlateBlue"></td></tr>
+			<tr><td>MediumSpringGreen</td><td>#00FA9A</td><td style="background-color:MediumSpringGreen"></td></tr>
+			<tr><td>MediumTurquoise</td><td>#48D1CC</td><td style="background-color:MediumTurquoise"></td></tr>
+			<tr><td>MediumVioletRed</td><td>#C71585</td><td style="background-color:MediumVioletRed"></td></tr>	
+			<tr><td>MidnightBlue</td><td>#191970</td><td style="background-color:MidnightBlue"></td></tr>
+			<tr><td>MintCream</td><td>#F5FFFA</td><td style="background-color:MintCream"></td></tr>
+			<tr><td>MistyRose</td><td>#FFE4E1</td><td style="background-color:MistyRose"></td></tr>
+			<tr><td>Moccasin</td><td>#FFE4B5</td><td style="background-color:Moccasin"></td></tr>
+			<tr><td>NavajoWhite</td><td>#FFDEAD</td><td style="background-color:NavajoWhite"></td></tr>
+			<tr><td>Navy</td><td>#000080</td><td style="background-color:Navy"></td></tr>
+			<tr><td>OldLace</td><td>#FDF5E6</td><td style="background-color:OldLace"></td></tr>
+			<tr><td>Olive</td><td>#808000</td><td style="background-color:Olive"></td></tr>	
+			<tr><td>OliveDrab</td><td>#6B8E23</td><td style="background-color:OliveDrab"></td></tr>
+			<tr><td>Orange</td><td>#FFA500</td><td style="background-color:Orange"></td></tr>
+			<tr><td>OrangeRed</td><td>#FF4500</td><td style="background-color:OrangeRed"></td></tr>
+			<tr><td>Orchid</td><td>#DA70D6</td><td style="background-color:Orchid"></td></tr>
+			<tr><td>PaleGoldenRod</td><td>#EEE8AA</td><td style="background-color:PaleGoldenRod"></td></tr>
+			<tr><td>PaleGreen</td><td>#98FB98</td><td style="background-color:PaleGreen"></td></tr>
+			<tr><td>PaleTurquoise</td><td>#AFEEEE</td><td style="background-color:PaleTurquoise"></td></tr>
+			<tr><td>PaleVioletRed</td><td>#DB7093</td><td style="background-color:PaleVioletRed"></td></tr>
+			<tr><td>PapayaWhip</td><td>#FFEFD5</td><td style="background-color:PapayaWhip"></td></tr>	
+			<tr><td>PeachPuff</td><td>#FFDAB9</td><td style="background-color:PeachPuff"></td></tr>
+			<tr><td>Peru</td><td>#CD853F</td><td style="background-color:Peru"></td></tr>
+			<tr><td>Pink</td><td>#FFC0CB</td><td style="background-color:Pink"></td></tr>
+			<tr><td>Plum</td><td>#DDA0DD</td><td style="background-color:Plum"></td></tr>	
+			<tr><td>PowderBlue</td><td>#B0E0E6</td><td style="background-color:PowderBlue"></td></tr>
+			<tr><td>Purple</td><td>#800080</td><td style="background-color:Purple"></td></tr>
+			<tr><td>Red</td><td>#FF0000</td><td style="background-color:Red"></td></tr>
+			<tr><td>RosyBrown</td><td>#BC8F8F</td><td style="background-color:RosyBrown"></td></tr>	
+			<tr><td>RoyalBlue</td><td>#4169E1</td><td style="background-color:RoyalBlue"></td></tr>
+			<tr><td>SaddleBrown</td><td>#8B4513</td><td style="background-color:SaddleBrown"></td></tr>
+			<tr><td>Salmon</td><td>#FA8072</td><td style="background-color:Salmon"></td></tr>
+			<tr><td>SandyBrown</td><td>#F4A460</td><td style="background-color:SandyBrown"></td></tr>	
+			<tr><td>SeaGreen</td><td>#2E8B57</td><td style="background-color:SeaGreen"></td></tr>
+			<tr><td>SeaShell</td><td>#FFF5EE</td><td style="background-color:SeaShell"></td></tr>
+			<tr><td>Sienna</td><td>#A0522D</td><td style="background-color:Sienna"></td></tr>
+			<tr><td>Silver</td><td>#C0C0C0</td><td style="background-color:Silver"></td></tr>	
+			<tr><td>SkyBlue</td><td>#87CEEB</td><td style="background-color:SkyBlue"></td></tr>
+			<tr><td>SlateBlue</td><td>#6A5ACD</td><td style="background-color:SlateBlue"></td></tr>
+			<tr><td>SlateGray</td><td>#708090</td><td style="background-color:SlateGray"></td></tr>
+			<tr><td>Snow</td><td>#FFFAFA</td><td style="background-color:Snow"></td></tr>
+			<tr><td>SpringGreen</td><td>#00FF7F</td><td style="background-color:SpringGreen"></td></tr>
+			<tr><td>SteelBlue</td><td>#4682B4</td><td style="background-color:SteelBlue"></td></tr>
+			<tr><td>Tan</td><td>#D2B48C</td><td style="background-color:Tan"></td></tr>
+			<tr><td>Teal</td><td>#008080</td><td style="background-color:Teal"></td></tr>
+			<tr><td>Thistle</td><td>#D8BFD8</td><td style="background-color:Thistle"></td></tr>
+			<tr><td>Tomato</td><td>#FF6347</td><td style="background-color:Tomato"></td></tr>
+			<tr><td>Turquoise</td><td>#40E0D0</td><td style="background-color:Turquoise"></td></tr>
+			<tr><td>Violet</td><td>#EE82EE</td><td style="background-color:Violet"></td></tr>
+			<tr><td>Wheat</td><td>#F5DEB3</td><td style="background-color:Wheat"></td></tr>
+			<tr><td>White</td><td>#FFFFFF</td><td style="background-color:White"></td></tr>
+			<tr><td>WhiteSmoke</td><td>#F5F5F5</td><td style="background-color:WhiteSmoke"></td></tr>
+			<tr><td>Yellow</td><td>#FFFF00</td><td style="background-color:Yellow"></td></tr>
+			<tr><td>YellowGreen</td><td>#9ACD32</td><td style="background-color:YellowGreen"></td></tr>
+			</tbody>
+			</table>
+		</div>
+		
 		<div id="">
 		<h3>：</h3>
+		<form name="input" action="html_form_action.php" method="get" id="form1">
+  color: <input type="color" name="colorvalue"> <!--文本域-->
+</form>
 		<p><b style="color:red">例如：</b></p>
 		</div>
 	</div>
