@@ -16,7 +16,7 @@
 		<a href="#jianjie">简介<a><br><a href="#DOCTYPE">&lt!DOCTYPE html></a><br><a href="#html">html</a><br><a href="#head">head</a><br><a href="#body">body</a><br><a href="#title">title</a><br>
 		<a href="#h1-h6">h1-h6<a><br><a href="#p">p<a><br><a href="#a">a<a><br><a href="#img">img<a><br><a href="#map">map</a><br><a href="#area">area</a><br><a href="#!----">&lt!-- --><a><br><a href="#br">br</a><br><a href="#hr">hr</a><br>
 		<a href="#b">b</a><br><a href="#em">em</a><br><a href="#i">i</a><br><a href="#u">u</a><br><a href="#small">small</a><br><a href="#big">big</a><br><a href="#strong">strong</a><br><a href="#sub">sub</a><br><a href="#sup">sup</a><br><a href="#ins">ins</a><br><a href="#del">del</a><br><a href="#strike">strike/s</a><br>
-		<a href="#code">code</a><br><a href="#kbd">kbd</a><br><a href="#samp">samp</a><br><a href="#var">var</a><br><a href="#pre">pre</a><br><a href="#abbr">abbr</a><br><a href="#address">address</a><br><a href="#bdo">bdo</a><br><a href="#blockquote">blockquote</a><br><a href="#q">q</a><br><a href="#cite">cite</a><br><a href="#dfn">dfn</a><br><a href="#tt">tt</a><br><a href="#acronym">acronym</a><br>
+		<a href="#code">code</a><br><a href="#kbd">kbd</a><br><a href="#samp">samp</a><br><a href="#tt">tt</a><br><a href="#var">var</a><br><a href="#pre">pre</a><br><a href="#abbr">abbr</a><br><a href="#address">address</a><br><a href="#bdo">bdo</a><br><a href="#blockquote">blockquote</a><br><a href="#q">q</a><br><a href="#cite">cite</a><br><a href="#dfn">dfn</a><br><a href="#acronym">acronym</a><br>
 		<a href="#base">base</a><br><a href="#meta">meta</a><br><a href="#style">style</a><br><a href="#link">link</a><br><a href="#script">script</a><br><a href="#noscript">noscript</a><br>
 		<a href="#table">table</a><br><a href="#th">th</a><br><a href="#tr">tr</a><br><a href="#td">td</a><br><a href="#caption">caption</a><br><a href="#colgroup">colgroup</a><br><a href="#col">col</a><br><a href="#thead">thead</a><br><a href="#tbody">tbody</a><br><a href="#tfoot">tfoot</a><br>
 		<a href="#ol">ol</a><br><a href="#ul">ul</a><br><a href="#li">li</a><br><a href="#dl">dl</a><br><a href="#dt">dt</a><br><a href="#dd">dd</a><br>
@@ -39,323 +39,733 @@
 	</div>
 	<div class="main_body">
 		<div id="jianjie">
-		<h3>简介</h3>
-		<p>html：超文本标记语言，是一种用于创建网页的标准标记语言。文档后缀为 .html 或 .html 。</p>
-		<p><b style="color:red">例如：</b><br>&lt!DOCTYPE html><br>&lthtml><br>&lthead><br>&nbsp &ltmeta charset="utf-8"><br>&nbsp &lttitle>html&lt;/title><br>&lt/head><br>&ltbody><br>&nbsp &ltp>html主体。&lt/p><br>&lt/body><br>&lt/html><br></p>
-		<p>解析：<br>&lt!DOCTYPE html> 声明为 HTML5 文档<br>&lthtml> 元素是 HTML 页面的根元素<br>&lthead> 元素包含了文档的元（meta）数据，如 &ltmeta charset="utf-8"> 定义网页编码格式为 utf-8。<br>&lttitle> 元素描述了文档的标题<br>&ltbody> 元素包含了可见的页面内容</p><p>注：在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签。</p><p>标签：1.HTML 标签是由尖括号包围的关键词，比如 &lthtml>；2.HTML 标签通常是成对出现的，比如 &ltb> 和 &lt/b>；3.标签对中的第一个标签是开始标签，第二个标签是结束标签；4.开始和结束标签也被称为开放标签和闭合标签</p><p>
-		HTML元素：1.包含了开始标签与结束标签，以开始标签起始，以结束标签终止；2.元素的内容是开始标签与结束标签之间的内容；3.某些 HTML 元素具有空内容（empty content），空元素在开始标签中进行关闭（以开始标签的结束而结束）；4.大多数 HTML 元素可拥有属性</p><p>
-		HTML属性：1.HTML 元素可以设置属性;属性可以在元素中添加附加信息；2.属性一般描述于开始标签；3.属性总是以名称/值对的形式出现，比如：name="value"；4.属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没有问题。在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号。5.适用于大多数元素内的属性有：class/id/style/title等。
-		<p>html编辑器选择：1.VS Code；2.Sublime Text；3.source insight；4.Notepad++等。</p></div><hr>
+			<h3>简介</h3>
+			<p>html：超文本标记语言，是一种用于创建网页的标准标记语言。文档后缀为 .html 或 .html 。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt!DOCTYPE html><br>
+			&lthtml><br>
+			&lthead><br>
+				&nbsp &ltmeta charset="utf-8"><br>
+				&nbsp &lttitle>html&lt;/title><br>
+			&lt/head><br>
+			&ltbody><br>
+				&nbsp &ltp>html主体。&lt/p><br>
+			&lt/body><br>
+			&lt/html><br></p>
+			<p>解析：<br>&lt!DOCTYPE html> 声明为 HTML5 文档<br>&lthtml> 元素是 HTML 页面的根元素<br>&lthead> 元素包含了文档的元（meta）数据，如 &ltmeta charset="utf-8"> 定义网页编码格式为 utf-8。<br>&lttitle> 元素描述了文档的标题<br>&ltbody> 元素包含了可见的页面内容</p><p>注：在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签。</p><p>标签：1.HTML 标签是由尖括号包围的关键词，比如 &lthtml>；2.HTML 标签通常是成对出现的，比如 &ltb> 和 &lt/b>；3.标签对中的第一个标签是开始标签，第二个标签是结束标签；4.开始和结束标签也被称为开放标签和闭合标签</p><p>
+			HTML元素：1.包含了开始标签与结束标签，以开始标签起始，以结束标签终止；2.元素的内容是开始标签与结束标签之间的内容；3.某些 HTML 元素具有空内容（empty content），空元素在开始标签中进行关闭（以开始标签的结束而结束）；4.大多数 HTML 元素可拥有属性</p><p>
+			HTML属性：1.HTML 元素可以设置属性;属性可以在元素中添加附加信息；2.属性一般描述于开始标签；3.属性总是以名称/值对的形式出现，比如：name="value"；4.属性值应该始终被包括在引号内，双引号是最常用的，不过使用单引号也没有问题。在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号。5.适用于大多数元素内的属性有：class/id/style/title等。
+			<p>html编辑器选择：1.VS Code；2.Sublime Text；3.source insight；4.Notepad++等。</p></div><hr>
 		<div id="DOCTYPE">
-		<h3>&lt!DOCTYPE html>：声明为 HTML5 文档</h3><p>必须位于 HTML5 文档中的第一行</p>
-		<p>HTML5的声明：&lt!DOCTYPE html><br>HTML 4.01的strict：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><br>HTML 4.01 transitional：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><br>
-		HTML 4.01 Frameset：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"><br>XHTML 1.0 Strict：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><br>
-		XHTML 1.0 Transitional：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><br>XHTML 1.0 Frameset：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"><br>XHTML 1.1：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"></p></div><hr>
+			<h3>&lt!DOCTYPE html>：声明为 HTML5 文档</h3><p>必须位于 HTML5 文档中的第一行</p>
+			<p>HTML5的声明：&lt!DOCTYPE html><br>HTML 4.01的strict：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><br>HTML 4.01 transitional：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><br>
+			HTML 4.01 Frameset：&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"><br>XHTML 1.0 Strict：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><br>
+			XHTML 1.0 Transitional：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><br>XHTML 1.0 Frameset：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"><br>XHTML 1.1：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"></p></div><hr>
 		<div id="html">
-		<h3>html： HTML 页面的根元素</h3><p>限定了文档的开始点和结束点</p><p>属性：<br>lang：支持的语言，如lang="en"，英语，中文为”zh"。</p></div><hr>
+			<h3>html： HTML 页面的根元素</h3><p>限定了文档的开始点和结束点</p>
+			<p>属性：<br>lang：支持的语言，如lang="en"，英语，中文为”zh"。</p></div><hr>
 		<div id="head">
-		<h3>head：包含了文档的元（meta）数据</h3><p>用于定义文档的头部，它是所有头部元素的容器。&lthead> 中的元素可以引用脚本、指示浏览器在哪里找到样式表、提供元信息等等。文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。</p>
-		<p>可包含title、style、base、link、meta、script等元素</p></div><hr>
+			<h3>head：包含了文档的元（meta）数据</h3><p>用于定义文档的头部，它是所有头部元素的容器。&lthead> 中的元素可以引用脚本、指示浏览器在哪里找到样式表、提供元信息等等。文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。</p>
+			<p>可包含title、style、base、link、meta、script等元素</p></div><hr>
 		<div id="body">
-		<h3>body：包含了可见的页面内容</h3><p>定义文档的主体。包含文档的所有内容，比如文本、超链接、图像、表格和列表等等。</p></div><hr>
+			<h3>body：包含了可见的页面内容</h3><p>定义文档的主体。包含文档的所有内容，比如文本、超链接、图像、表格和列表等等。</p></div><hr>
 		<div id="title">
-		<h3>title：描述了文档的标题</h3><p>title作为元素时描述文档的标题，浏览器工具栏的标题、当网页添加到收藏夹时，显示在收藏夹中的标题、在搜索引擎结果页面的标题，而作为属性时描述了元素的额外信息 (作为工具条使用)</p>
-		<p><b style="color:red">例如：</b><br>&lt;!DOCTYPE html><br>&lt;html><br>&lt;head><br>&nbsp; &lt;title>html&lt;/title><br>&lt;/head><br>&lt;body><br>&nbsp;&lt;p title="这个就是title属性的功能哟">请将鼠标移动到此处&lt;/p><br>&lt;/body><br>&lt;/html>
-		<br><b style="color:red">结果：</b><p title="这个就是title属性的功能哟">请将鼠标移动到此处</p></p></div><hr>
+			<h3>title：描述了文档的标题</h3><p>title作为元素时描述文档的标题，浏览器工具栏的标题、当网页添加到收藏夹时，显示在收藏夹中的标题、在搜索引擎结果页面的标题，而作为属性时描述了元素的额外信息 (作为工具条使用)</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;!DOCTYPE html><br>
+			&lt;html><br>
+			&lt;head><br>
+				&nbsp; &lt;title>html&lt;/title><br>
+			&lt;/head><br>
+			&lt;body><br>
+				&nbsp;&lt;p title="这个就是title属性的功能哟">请将鼠标移动到此处&lt;/p><br>
+			&lt;/body><br>
+			&lt;/html>
+			<br><b style="color:red">结果：</b>
+			<p title="这个就是title属性的功能哟">请将鼠标移动到此处</p></p></div><hr>
 		<div id="h1-h6">
-		<h3>h1-h6：标题</h3><p>通过h1到h6定义从大到小标题。</p><p><b style="color:red">例如：</b></p>&lt;h1>这是h1标题&lt;/h1><br>&lt;h2>这是h2标题&lt/h2><br>&lt;h3>这是h3标题&lt;/h3><br>&lt;h4>这是h4标题&lt;/h4><br>&lth5>这是h5标题&lt;/h5><br>&lt;h6>这是h6标题&lt;/h6>
-		</p><p><b style="color:red">结果：</b></p><h1>这是h1标题</h1><h2>这是h2标题</h2><h3>这是h3标题</h3><h4>这是h4标题</h4><h5>这是h5标题</h5><h6>这是h6标题</h6></div><hr>
-		<div id="p"><h3>p：段落</h3><p>注意：浏览器会自动地在段落的前后添加空行。（&lt/p> 是块级元素）</p><p><b style="color:red">例如：</b></p>&lt;p>这是一个段落。&lt;/p><br>&lt;p>这是另一个段落。&lt;/p><br><b style="color:red">结果：</b></p><p>这是一个段落。</p><p>这是另一个段落。</p></div><hr>
+			<h3>h1-h6：标题</h3><p>通过h1到h6定义从大到小标题。</p><p><b style="color:red">例如：</b><br>
+			&lt;h1>这是h1标题&lt;/h1><br>
+			&lt;h2>这是h2标题&lt/h2><br>
+			&lt;h3>这是h3标题&lt;/h3><br>
+			&lt;h4>这是h4标题&lt;/h4><br>
+			&lth5>这是h5标题&lt;/h5><br>
+			&lt;h6>这是h6标题&lt;/h6>
+			<br><b style="color:red">结果：</b>
+			<h1>这是h1标题</h1>
+			<h2>这是h2标题</h2>
+			<h3>这是h3标题</h3>
+			<h4>这是h4标题</h4>
+			<h5>这是h5标题</h5>
+			<h6>这是h6标题</h6></div><hr>
+		<div id="p">
+			<h3>p：段落</h3><p>注意：浏览器会自动地在段落的前后添加空行。（&lt/p> 是块级元素）</p><p><b style="color:red">例如：</b></p>&lt;p>这是一个段落。&lt;/p><br>&lt;p>这是另一个段落。&lt;/p><br><b style="color:red">结果：</b></p><p>这是一个段落。</p><p>这是另一个段落。</p></div><hr>
 		<div id="a">
-		<h3>a：链接</h3><p>设置超文本链接。超链接可以是一个字，一个词，或者一组词，也可以是一幅图像。点击这些内容来跳转到新的文档或者当前文档中的某个部分。</p><p>把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。</p>
-		<p>默认链接在浏览器中形式为：1.未访问过的链接显示为蓝色字体并带有下划线；2.访问过的链接显示为紫色并带有下划线；3.点击链接时，链接显示为红色并带有下划线。</p>
-		<p>属性：<br>href：指定链接地址，如href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是.xx文件则需要在后面加正斜杠）；<br>target：定义被链接文档在何处显示，如target="_blank"即在新窗口打开，而target="_top"直接在本窗口打开；<br>id：创建HTML文档书签标记，跳转到文档指定位置（若为空则会跳转到页面最顶端），如id="this1"(此时href="#this1")可从href定义处点击跳转到id使用处（也可以直接使用href="xxx/xx.html#this1"即从另一个页面跳转到xx页面的this处）。</p>
-		<p><b style="color:red">例如：</b><br>&lt;a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）&lt;/a>
-		<br><b style="color:red">结果：</b><br><a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）</a></p></div><hr>
+			<h3>a：链接</h3><p>设置超文本链接。超链接可以是一个字，一个词，或者一组词，也可以是一幅图像。点击这些内容来跳转到新的文档或者当前文档中的某个部分。</p><p>把鼠标指针移动到网页中的某个链接上时，箭头会变为一只小手。</p>
+			<p>默认链接在浏览器中形式为：1.未访问过的链接显示为蓝色字体并带有下划线；2.访问过的链接显示为紫色并带有下划线；3.点击链接时，链接显示为红色并带有下划线。</p>
+			<p>属性：<br>href：指定链接地址，如href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是.xx文件则需要在后面加正斜杠）；<br>target：定义被链接文档在何处显示，如target="_blank"即在新窗口打开，而target="_top"直接在本窗口打开；<br>id：创建HTML文档书签标记，跳转到文档指定位置（若为空则会跳转到页面最顶端），如id="this1"(此时href="#this1")可从href定义处点击跳转到id使用处（也可以直接使用href="xxx/xx.html#this1"即从另一个页面跳转到xx页面的this处）。</p>
+			<p><b style="color:red">例如：</b><br>&lt;a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）&lt;/a>
+			<br><b style="color:red">结果：</b><br><a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）</a></p></div><hr>
 		<div id="img">
-		<h3>img：图像</h3><p></p><p>属性：<br>src：指定图像地址，源属性的值是图像的 URL 地址，URL 指存储图像的位置，可以是网页图链接//www.baidu.com/xxx/xx.png，也可以是本地链接/xxx/xx.gif；<br>width和height：指定图像大小尺寸，默认单位为像素；<br>alt：属性标识图像无法载入时的可替换的文本描述；<br>border：边框大小，为0表示没有边框<br>usemap：映射，配合map、area元素使用<br>
-		draggable="true"：使元素可拖动<br>
-		ondragstart：拖动对象<br>ondragover：放置位置<br>ondrop：进行放置</p>
-		<p><b style="color:red">例如：</b><br>&ltimg src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"><br>&ltmap name="planetmap"> &lt!--定义图像地图--><br>&nbsp &ltarea shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm"> &lt!--图像地图中的可点击区域--><br>&nbsp &ltarea shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm"><br>&nbsp &ltarea shape="circle" coords="124,58,8" alt="Venus" href="venus.htm"><br>&lt/map><br><br>
-		<b style="color:red">例如：</b><br>&ltstyle type="text/css"><br>#div1, #div2<br>{float:left; width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}<br>&lt/style><br>&ltscript><br>function allowDrop(ev)<br>{<br>&nbsp; ev.preventDefault();<br>}<br>function drag(ev) //被拖动的数据<br>{<br>&nbsp; ev.dataTransfer.setData("Text",ev.target.id); //设置被拖数据的数据类型和值<br>}<br>function drop(ev)<br>{<br>&nbsp; ev.preventDefault(); //避免浏览器对数据的默认处理(默认以链接形式打开)<br>&nbsp; var data=ev.dataTransfer.getData("Text"); //获得被拖的数据<br>&nbsp; ev.target.appendChild(document.getElementById(data));<br>}<br>&lt/script><br>&ltdiv id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><br>&nbsp; &ltimg src="./self/apple.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">&lt/div><br>&ltdiv id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">&lt/div><br></p>
-		</div><hr>
+			<h3>img：图像</h3><p></p><p>属性：<br>src：指定图像地址，源属性的值是图像的 URL 地址，URL 指存储图像的位置，可以是网页图链接//www.baidu.com/xxx/xx.png，也可以是本地链接/xxx/xx.gif；<br>width和height：指定图像大小尺寸，默认单位为像素；<br>alt：属性标识图像无法载入时的可替换的文本描述；<br>border：边框大小，为0表示没有边框<br>usemap：映射，配合map、area元素使用<br>
+			draggable="true"：使元素可拖动<br>
+			ondragstart：拖动对象<br>ondragover：放置位置<br>ondrop：进行放置</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap"><br>
+			&lt;map name="planetmap"> &lt;!--定义图像地图--><br>
+				&nbsp; &lt;area shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm"> &lt;!--图像地图中的可点击区域--><br>
+				&nbsp; &lt;area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm"><br>
+				&nbsp; &lt;area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm"><br>
+			&lt;/map><br><br>
+			<b style="color:red">例如：</b><br>
+			&lt;style type="text/css"><br>
+				&nbsp; #div1, #div2{width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}<br>
+			&lt;/style><br>&ltscript><br>function allowDrop(ev)<br>{<br>&nbsp; ev.preventDefault();<br>}<br>function drag(ev) //被拖动的数据<br>{<br>&nbsp; ev.dataTransfer.setData("Text",ev.target.id); //设置被拖数据的数据类型和值<br>}<br>function drop(ev)<br>{<br>&nbsp; ev.preventDefault(); //避免浏览器对数据的默认处理(默认以链接形式打开)<br>&nbsp; var data=ev.dataTransfer.getData("Text"); //获得被拖的数据<br>&nbsp; ev.target.appendChild(document.getElementById(data));<br>}<br>&lt/script><br>&ltdiv id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"><br>&nbsp; &ltimg src="./self/apple.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">&lt/div><br>&ltdiv id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">&lt/div><br></p>
+			<b style="color:red">结果：</b><br>
+			<style type="text/css">
+				#div1, #div2{width:100px; height:35px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+			</style>
+			<script>
+				function allowDrop(ev){
+					ev.preventDefault();
+				}
+				function drag(ev) //被拖动的数据
+				{
+					ev.dataTransfer.setData("Text",ev.target.id); //设置被拖数据的数据类型和值
+				}
+				function drop(ev){
+					ev.preventDefault(); //避免浏览器对数据的默认处理(默认以链接形式打开)
+				var data=ev.dataTransfer.getData("Text"); //获得被拖的数据
+				ev.target.appendChild(document.getElementById(data));
+				}
+			</script>
+			<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img src="./self/apple.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+			</div>
+			<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div><hr>
 		<div id="map">
-		<h3>map：图像地图</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>map：图像地图</h3><p>定义一个客户端图像映射。图像映射（image-map）指带有可点击区域的一幅图像。</p><p>属性：<br>name：映射名称<br>id：对应于img中的usemap属性<br></p></div><hr>
 		<div id="area">
-		<h3>area：图像地图中的可点击区域</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>area：图像地图中的可点击区域</h3><p>area 元素永远嵌套在 map 元素内部。area 元素可定义图像映射中的区域。</p><p>属性：<br>shape：形状，如rect（长方形）、circle（圆）、poly（多边形）等<br>coords：区域坐标，对应于shape<br>href：资源地址</p></div><hr>
 		<div id="!----">
-		<h3>&lt!-- -->：注释</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>&lt!-- -->：注释</h3><p><b style="color:red">例如：</b><br>&lt;p>段落&lt;/p>&lt!--注释部分，<br>不会被显示出来--><br>&lt;p>另一段落&lt;/p><br><b style="color:red">结果：</b><br><p>段落</p><!--注释部分<br>不会被显示出来--><p>另一段落</p></p></div><hr>
 		<div id="br">
-		<h3>br：换行</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>br：换行</h3><p><b style="color:red">例如：</b><br>&lt;pre>这是一行&lt;br>这是另一行&lt;br>&lt;br>中间隔了两个换行符&lt;/pre><b style="color:red">结果：</b><br><pre>这是一行<br>这是另一行<br><br>中间隔了两个换行符</pre></p></div><hr>
 		<div id="hr">
-		<h3>hr：水平线</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>hr：水平线</h3><p><b style="color:red">例如：</b>&lt;p>这是一段&lt;/p>&lt;hr>&lt;p>这是另一段，中间隔了个水平线&lt;/p><b style="color:red">结果：</b><p>这是一段</p><hr><p>这是另一段，中间隔了个水平线</p></p></div><hr>
 		<div id="b">
-		<h3>b：粗体文本</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>b：粗体文本</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;b>粗体&lt;/b>文本&lt;p><br><b style="color:red">结果：</b><p>这是<b>粗体</b>文本</p></p></div><hr>
 		<div id="em">
-		<h3>em：着重文字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>em：着重文字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;em>着重&lt;/em>文本&lt;p><br><b style="color:red">结果：</b><p>这是<em>着重</em>文本</p></p></div><hr>
 		<div id="i">
-		<h3>i：斜体字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>i：斜体字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;i>斜体&lt;/i>文本&lt;p><br><b style="color:red">结果：</b><p>这是<i>斜体</i>文本</p></p></div><hr>
 		<div id="u">
-		<h3>u：下划线</h3><p><b style="color:red">例如：</b><br><u>这里有下划线</u></p>
-		</div>
+			<h3>u：下划线</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;u>下划线&lt;/u>文本&lt;p><br><b style="color:red">结果：</b><p>这是<u>下划线</u>文本</p></p></div><hr>
 		<div id="small">
-		<h3>small：小号字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>small：小号字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;small>小号&lt;/small>文本&lt;p><br><b style="color:red">结果：</b><p>这是<small>小号</small>文本</p></p></div><hr>
 		<div id="big">
-		<h3>big：大号字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>big：大号字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;big>大号&lt;/big>文本&lt;p><br><b style="color:red">结果：</b><p>这是<big>大号</big>文本</p></p></div><hr>
 		<div id="strong">
-		<h3>strong：加重语气</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>strong：加重语气</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;strong>加重语气&lt;/strong>文本&lt;p><br><b style="color:red">结果：</b><p>这是<strong>加重语气</strong>文本</p></p></div><hr>
 		<div id="sub">
-		<h3>sub：下标字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>sub：下标字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;sub>下标&lt;/sub>文本&lt;p><br><b style="color:red">结果：</b><p>这是<sub>下标</sub>文本</p></p></div><hr>
 		<div id="sup">
-		<h3>sup：上标字</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>sup：上标字</h3><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;sup>上标&lt;/sup>文本&lt;p><br><b style="color:red">结果：</b><p>这是<sup>上标</sup>文本</p></p></div><hr>
 		<div id="ins">
-		<h3>ins：插入字</h3><p>插入字下面有横线</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>ins：插入字</h3><p>插入字下面有横线</p><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;ins>插入&lt;/ins>文本&lt;p><br><b style="color:red">结果：</b><p>这是<ins>插入</ins>文本</p></p></div><hr>
 		<div id="del">
-		<h3>del：删除字</h3><p>删除字中间有横线</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>del：删除字</h3><p>删除字中间有横线</p><p><b style="color:red">例如：</b><br>&lt;p>这是&lt;del>删除&lt;/del>文本&lt;p><br><b style="color:red">结果：</b><p>这是<del>删除</del>文本</p></p></div><hr>
 		<div id="strike">
-		<h3>strike或s：删除线</h3><p>删除字中间有横线</p>
-		<p><b style="color:red">例如：</b><br>&lts>这是删除线&lt/s></p>
-		</div>
+			<h3>strike或s：删除线</h3><p>删除字中间有横线</p><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;s>删除线&lt;/s>&lt;p><br>
+			<b style="color:red">结果：</b><p>这是<s>删除线</s></p></p></div><hr>
 		<div id="code">
-		<h3>code：计算机代码</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>code：计算机代码</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;code>计算机代码&lt;/code>&lt;p><br>
+			<b style="color:red">结果：</b><p>这是<code>计算机代码</code></p></p></div><hr>
 		<div id="kbd">
-		<h3>kbd：键盘码</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>kbd：键盘码</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;kbd>键盘码&lt;/kbd>&lt;p><br>
+			<b style="color:red">结果：</b><p>这是<kbd>键盘码</kbd></p></p></div><hr>
 		<div id="samp">
-		<h3>samp：计算机代码样本</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="var">
-		<h3>var：变量</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="pre">
-		<h3>pre：预格式文本</h3><p>可实现格式化输出，对空行与空格进行控制</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="abbr">
-		<h3>abbr：缩写</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="address">
-		<h3>address：地址</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="bdo">
-		<h3>bdo：文字方向</h3><p>dir属性：控制文字输出显示，dir="rtl"表示从右到左显示</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="blockquote">
-		<h3>blockquote：长的引用</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="q">
-		<h3>q：短的引用语</h3><p>自动在此引用文字前后加上双引号。</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="cite">
-		<h3>cite：引用、引证</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
-		<div id="dfn">
-		<h3>dfn：定义项目</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>samp：计算机代码样本</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;samp>计算机代码样本&lt;/samp>&lt;p><br>
+			<b style="color:red">结果：</b><p>这是<samp>计算机代码样本</samp></p></p></div><hr>
 		<div id="tt">
-		<h3>tt：打印机文本</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>tt：打印机文本</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;tt>打印机文本&lt;/tt>&lt;p><br>
+			<b style="color:red">结果：</b><p>这是<tt>打印机文本</tt></p></p></div><hr>
+		<div id="var">
+			<h3>var：变量</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>这是&lt;var>变量&lt;/var>&lt;p><br>
+			<b style="color:red">结果：</b><br>这是<var>变量</var></p></p></div><hr>
+		<div id="pre">
+			<h3>pre：预格式文本</h3><p>可实现格式化输出，对空行与空格进行控制</p>
+			<p><b style="color:red">例如：</b><br>&lt;pre>这是&nbsp; &nbsp;空格与tab键，<br>换行&lt;pre> &lt;!--空格可以有多个，换行之后顶格输入，否则也会自动作为空格--><br>
+			<b style="color:red">结果：</b><pre>这是 	空格与tab键
+换行<pre></p></div><hr>
+		<div id="abbr">
+			<h3>abbr：缩写</h3><p><b style="color:red">例如：</b><br>
+			&lt;abbr title="etcetera">etc.&lt/abbr> &lt;!--若首字母都是大写，则和acronym类似--><br>
+			<b style="color:red">结果：</b><abbr title="etcetera">etc.</abbr></p></div><hr>
+		<div id="address">
+			<h3>address：地址</h3><p>定义文档或文章的作者/拥有者的联系信息。位于 &lt;body> 元素内，则它表示文档联系信息。位于 &lt;article> 元素内，则它表示文章的联系信息。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;address>作者：xx&lt;br>
+			e-mail邮箱：&lt;a href="mailto:488002573@qq.com">xxx@163.com&lt;/a>&lt;br>
+			日期：xx-xx-xx&lt;/address><br><b style="color:red">结果：</b>
+			<address>作者：xx<br>e-mail邮箱：<a href="mailto:488002573@qq.com">xxx@163.com</a><br>日期：xx-xx-xx</address></p></div><hr>
+		<div id="bdo">
+			<h3>bdo：文字方向</h3><p>dir属性：控制文字输出显示，dir="rtl"表示从右到左显示</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;bdo dir="rtl">滚滚长江东逝水，浪花淘尽英雄&lt;/bdo><br><b style="color:red">结果：</b><br>
+			<bdo dir="rtl">滚滚长江东逝水，浪花淘尽英雄</bdo></p></div><hr>
+		<div id="blockquote">
+			<h3>blockquote：长的引用</h3><p><b style="color:red">例如：</b><br>
+			&lt;p>注意：&lt;blockquote>这是一个长引用&lt;/blockquote>结束&lt;/p><br>
+			<b style="color:red">结果：</b><p>注意：<blockquote>这是一个长引用</blockquote>结束</p></p></div><hr>
+		<div id="q">
+			<h3>q：短的引用语</h3><p>自动在此引用文字前后加上双引号。</p><p><b style="color:red">例如：</b><br>
+			&lt;p>注意：&lt;q>这是一个短引用&lt;/q>结束&lt;/p><br><b style="color:red">结果：</b>
+			<p>注意：<q>这是一个短引用</q>结束</p></p></div><hr>
+		<div id="cite">
+			<h3>cite：引用、引证</h3><p>通常表示它所包含的文本对某个参考文献的引用，比如书籍或者杂志的标题，作品（书籍、歌曲、电影、绘画等等）的标题。</p><p><b style="color:red">例如：</b><br>&lt;p>&lt;cite>蒙娜丽莎&lt;/cite>是意大利画家达芬奇创造的油画，现收藏于法国罗浮宫博物馆。&lt;/p><br><b style="color:red">结果：</b><p><cite>蒙娜丽莎</cite>是意大利画家达芬奇创造的油画，现收藏于法国罗浮宫博物馆。</p></p></div><hr>
+		<div id="dfn">
+			<h3>dfn：定义项目</h3><p>是一个短语标签，用来定义一个定义项目。</p><p>标签尽量少用为妙。作为一种通用样式，尤其在技术文档中，当第一次新的术语时，应该将它们与普通文本分开，这样读者可以更好地理解文章当前的主题，而从那以后就不要再对这个术语进行任何标记了。</p></div><hr>
 		<div id="acronym">
-		<h3>acronym：首字母缩写</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>acronym：首字母缩写</h3><p><b style="color:red">例如：</b><br>
+			&lt;acronym title="Hyper Text Markup Language">HTML&lt;/acronym><br>
+			<b style="color:red">结果：</b><br>
+			<acronym title="Hyper Text Markup Language">HTML</acronym></p></div><hr>
 		<div id="base">
-		<h3>base：页面链接标签的默认链接地址</h3><p>定义页面中所有链接默认的链接目标地址。href：指定连接地址</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>base：页面链接标签的默认链接地址</h3><p>定义页面中所有链接默认的链接目标地址。href：指定连接地址</p>
+			<p><b style="color:red">例如：</b><br>&lt;base href="//www.baidu.com//images/" target="_blank"> &lt;!--定义基础路径，此元素位于 head元素内--></p></div><hr>
 		<div id="meta">
-		<h3>meta：描述了一些基本的元数据</h3><p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
-		<p><b style="color:red">例如：</b><br>&ltmeta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt!--为搜索引擎定义关键词--><br>
-		&ltmeta name="description" content="免费 Web & 编程 教程"> &lt!--为网页定义描述内容--><br>&ltmeta name="author" content="Runoob"> &lt!--定义网页作者--><br>&ltmeta http-equiv="refresh" content="30"> &lt!--每30秒钟刷新当前页面--></p>
-		</div>
+			<h3>meta：描述了一些基本的元数据</h3><p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
+			<p><b style="color:red">例如：</b><br>
+			&ltmeta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt!--为搜索引擎定义关键词--><br>
+			&ltmeta name="description" content="免费 Web & 编程 教程"> &lt!--为网页定义描述内容--><br>
+			&ltmeta name="author" content="Runoob"> &lt!--定义网页作者--><br>
+			&ltmeta http-equiv="refresh" content="30"> &lt!--每30秒钟刷新当前页面--></p></div><hr>
 		<div id="style">
-		<h3>style：HTML文档的样式文件</h3><p>可直接添加样式来渲染 HTML 文档，既可以作为元素放在head中全局设置样式，也可以作为属性局部设置样式。可以使用link元素链接到一个外部样式表，即链接CSS渲染过的外部样式。可使用的属性也可直接在CSS中找到对应的说明。</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>style：HTML文档的样式文件</h3><p>可直接添加样式来渲染 HTML 文档，既可以作为元素放在head中全局设置样式，也可以作为属性局部设置样式。可以使用link元素链接到一个外部样式表，即链接CSS渲染过的外部样式。可使用的属性也可直接在CSS中找到对应的说明。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;p style="color:gray;text-decoration:overline;font-family:楷体;font-size:20px;">样式&lt;/p><br>
+			<b style="color:red">结果：</b>
+			<p style="color:gray;text-decoration:overline;font-family:楷体;font-size:20px;">样式</p></p></div><hr>
 		<div id="link">
-		<h3>link：文档与外部资源之间的关系</h3><p>通常用于链接到样式表，href 指定连接样式的地址</p>
-		<p><b style="color:red">例如：</b><br>
-		&ltlink rel="stylesheet" type="text/css" href="xx/my.css"> &lt!--链接到外部样式--></p>
-		</div>
-		<div id="script"><p></p>
-		<h3>script：客户端的脚本文件</h3><p>详情实现可看javascript文档。</p>
-		<p><b style="color:red">例如：</b><br>&ltp id="demo"><br>这里的颜色会改变。<br>&lt/p><br>&ltscript><br>function myFunction()<br>{<br>&nbsp x=document.getElementById("demo") // 找到元素<br>&nbsp x.style.color="#ff0000";          // 改变样式<br>}<br>&lt/script><br>&ltbutton type="button" onclick="myFunction()">点击这里&lt/button><br>&ltnoscript>抱歉，你的浏览器不支持 JavaScript!&lt/noscript><br></p>
-		</div>
+			<h3>link：文档与外部资源之间的关系</h3><p>通常用于链接到样式表，href 指定连接样式的地址</p><p><b style="color:red">例如：</b><br>
+			&ltlink rel="stylesheet" type="text/css" href="xx/my.css"> &lt!--链接到外部样式--> &lt;!--此元素用于 head 元素内--></p></div><hr>
+		<div id="script">
+			<h3>script：客户端的脚本文件</h3><p>详情实现可看javascript文档。</p>
+			<p><b style="color:red">例如：</b><br>
+			&ltp id="demo">这里的颜色会改变。&lt/p><br>
+			&ltscript><br>
+				function myFunction(){<br>
+					&nbsp x=document.getElementById("demo") // 找到元素<br>
+					&nbsp x.style.color="#ff0000";          // 改变样式<br>
+				}<br>
+			&lt/script><br>
+			&ltbutton type="button" onclick="myFunction()">点击这里&lt/button><br>
+			&ltnoscript>抱歉，你的浏览器不支持 JavaScript!&lt/noscript><br>
+			<b style="color:red">结果：</b>
+			<p id="demo">这里的颜色会改变。</p>
+			<script>
+				function myFunction(){
+					x=document.getElementById("demo");
+					x.style.color="#ff0000";
+				}
+			</script>
+			<button type="button" onclick="myFunction()">点击这里</button>
+			<noscript>抱歉，你的浏览器不支持 JavaScript!</noscript></p></div><hr>
 		<div id="noscript">
-		<h3>noscript：在脚本未被执行时的替代内容</h3><p>此标签可被用于可识别 &ltscript> 标签但无法支持其中的脚本的浏览器。</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>noscript：在脚本未被执行时的替代内容</h3><p>此标签可被用于可识别 &ltscript> 标签但无法支持其中的脚本的浏览器。</p></div><hr>
 		<div id="table">
-		<h3>table：创建表格</h3><p>属性：<br>border：边框<br>cellpadding：边距，单元格内容与其边框之间的空白<br>cellspacing：间距，单元格之间的距离</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>table：创建表格</h3><p>简单的 HTML 表格由 table 元素以及一个或多个 tr、th 或 td 元素组成。<br>tr 元素定义表格行，th 元素定义表头，td 元素定义表格单元。<br>更复杂的 HTML 表格也可能包括 caption、col、colgroup、thead、tfoot 以及 tbody 元素。</p>
+			<p>属性：<br>border：边框<br>cellpadding：边距，单元格内容与其边框之间的空白<br>cellspacing：间距，单元格之间的距离<br>frame：外侧边框哪部分可见，如above、void、below、hsides、lhs、rhs、vsides、box、border<br>rules：内侧边框可见部分，如none、groups、rows、cols、all<br>summary：表格摘要<br>width：表格宽度</p></div><hr>
 		<div id="th">
-		<h3>th：表格的表头</h3><p>水平表头：&lttr>&ltth>&lt/th>...&ltth>&lt/th>&lttr>，即tr内部全是th就会显示水平表头；<br>垂直表头：&lttr>&ltth>&lt/th>&lttd>&lt/td>...&lttd>&lt/td>&lt/tr>，即tr内部只有第一个是th，其他的都是td内容就是垂直表头</p><p>属性：<br>colspan：跨列，列合并功能，如colspan="2"两列合并成一列<br>rowspan：跨行合并，如rowspan="2"两行合并成一行</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>th：表格的表头</h3><p>水平表头：&lttr>&ltth>&lt/th>...&ltth>&lt/th>&lttr>，即tr内部全是th就会显示水平表头；<br>垂直表头：&lttr>&ltth>&lt/th>&lttd>&lt/td>...&lttd>&lt/td>&lt/tr>，即tr内部只有第一个是th，其他的都是td内容就是垂直表头</p><p>属性：<br>colspan：跨列，列合并功能，如colspan="2"两列合并成一列<br>rowspan：跨行合并，如rowspan="2"两行合并成一行</p></div><hr>
 		<div id="tr">
-		<h3>tr：表格的行</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>tr：表格的行</h3><p><b style="color:red">例如：</b><br>
+			&lt;table border=“1”><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;th>第一行内容&lt;/th><br>
+					&nbsp; &nbsp; &lt;th>第一行内容&lt;/th><br>
+				&nbsp; &lt;/tr><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;th>第二行内容&lt;/th>><br>
+					&nbsp; &nbsp; &lt;th>第二行内容&lt;/th><br>
+				&nbsp; &lt;/tr><br>
+			&lt;/table><br><b style="color:red">结果：</b>
+			<table border=“1”>
+				<tr>
+					<th>第一行内容</th>
+					<th>第一行内容</th>
+				</tr>
+				<tr>
+					<th>第二行内容</th>
+					<th>第二行内容</th>
+				</tr>
+			</table></p></div><hr>
 		<div id="td">
-		<h3>td：表格单元</h3><p>表格数据，即数据单元格的内容。数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>td：表格单元</h3><p>表格数据，即数据单元格的内容。数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;table border=“1”><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;th>第一行表头&lt;/th><br>
+					&nbsp; &nbsp; &lt;th>第一行表头&lt;/th><br>
+				&nbsp; &lt;/tr><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;td>第二行内容&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>第二行内容&lt;/td><br>
+				&nbsp; &lt;/tr><br>
+			&lt;/table><br>
+			<b style="color:red">结果：</b>
+			<table border=“1”>
+				<tr>
+					<th>第一行表头</th>
+					<th>第一行表头</th>
+				</tr>
+				<tr>
+					<td>第二行内容</td>
+					<td>第二行内容</td>
+				</tr>
+			</table></p></div><hr>
 		<div id="caption">
-		<h3>caption：表格标题</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>caption：表格标题</h3><p><b style="color:red">例如：</b><br>
+			&lt;table border=“1”><br>
+				&nbsp; &lt;caption>标题&lt;/caption><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;th>第一行表头&lt;/th><br>
+					&nbsp; &nbsp; &lt;th>第一行表头&lt;/th><br>
+				&nbsp; &lt;/tr><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;td>第二行内容&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>第二行内容&lt;/td><br>
+				&nbsp; &lt;/tr><br>
+			&lt;/table><br>
+			<b style="color:red">结果：</b>	
+			<table border=“1”>
+				<caption>标题</caption>
+				<tr>
+					<th>第一行表头</th>
+					<th>第一行表头</th>
+				</tr>
+				<tr>
+					<td>第二行内容</td>
+					<td>第二行内容</td>
+				</tr>
+			</table></p></div><hr>
 		<div id="colgroup">
-		<h3>colgroup：表格列的组</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>colgroup：表格列的组</h3><p><b style="color:red">例如：</b><br/>
+			&lt;table width="100%" border="1"><br/>
+				&nbsp; &lt;colgroup span="2" align="center" style="background-color:lightgreen">&lt;/colgroup><br/>
+				&nbsp; &lt;colgroup align="center" style="background-color:lightyellow">&lt;/colgroup><br/>
+				&nbsp; &lt;tr><br/>
+					&nbsp; &nbsp; &lt;th>表头1&lt;/th><br/>
+					&nbsp; &nbsp; &lt;th>表头2&lt;/th><br/>
+					&nbsp; &nbsp; &lt;th>表头3&lt;/th><br/>
+				&nbsp; &lt;/tr><br/>
+				&nbsp; &lt;tr><br/>
+					&nbsp; &nbsp; &lt;td>内容1&lt;/td><br/>
+					&nbsp; &nbsp; &lt;td>内容2&lt;/td><br/>
+					&nbsp; &nbsp; &lt;td>内容3&lt;/td><br/>
+				&nbsp; &lt;/tr><br/>
+			&lt;/table><br/>
+			<b style="color:red">结果：</b>
+			<table width="100%" border="1">
+				<colgroup span="2" align="center" style="background-color:lightgreen"></colgroup>
+				<colgroup align="center" style="background-color:lightyellow"></colgroup>
+				<tr>
+					<th>表头1</th>
+					<th>表头2</th>
+					<th>表头3</th>
+				</tr>
+				<tr>
+					<td>内容1</td>
+					<td>内容2</td>
+					<td>内容3</td>
+				</tr>
+			</table></p></div><hr>
 		<div id="col">
-		<h3>col：用于表格列的属性</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>col：用于表格列的属性</h3><p>属性：<br>span：跨多数列</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;table border="1"><br>
+				&nbsp; &lt;colgroup><br>
+					&nbsp; &nbsp; &lt;col span="2" style="background-color:lightgreen"><br>
+					&nbsp; &nbsp; &lt;col style="background-color:lightyellow"><br>
+				&nbsp; &lt;/colgroup><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;th>表头1&lt;/th><br>
+					&nbsp; &nbsp; &lt;th>表头2&lt;/th><br>
+					&nbsp; &nbsp; &lt;th>表头3&lt;/th><br>
+				&nbsp; &lt;/tr><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;td>内容1&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>内容1&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>内容1&lt;/td><br>
+				&nbsp; &lt;/tr><br>
+				&nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &lt;td>内容2&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>内容2&lt;/td><br>
+					&nbsp; &nbsp; &lt;td>内容2&lt;/td><br>
+				&nbsp; &lt;/tr><br>
+			&lt;/table><br>
+			<b style="color:red">结果：</b>
+			<table border="1">
+				<colgroup><col span="2" style="background-color:lightgreen">
+					<col style="background-color:lightyellow">
+				</colgroup>
+				<tr>
+					<th>表头1</th>
+					<th>表头2</th>
+					<th>表头3</th>
+				</tr>
+				<tr>
+					<td>内容1</td>
+					<td>内容1</td>
+					<td>内容1</td>
+				</tr>
+				<tr>
+					<td>内容2</td>
+					<td>内容2</td>
+					<td>内容2</td>
+				</tr>
+			</table>
+			</p></div><hr>
 		<div id="thead">
-		<h3>thead：表格的页眉</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>thead：表格的页眉</h3><p>把对HTML表格里的表头集中起来。<br>应与&lt;tbody>和&lt;tfoot>元素联合使用。<br>&lt;tbody>用于集中主体内容，&lt;tfoot>用于集中表尾。<br>注意：&lt;tfoot>必须放在&lt;tbody>之前，以便浏览器可以在所有数据行接收完成之前显示表尾。<br>注意：这些元素不会改变表格的默认布局。不过，你可以通过CSS来利用这些元素改变表格的布局。</p></div><hr>
 		<div id="tbody">
-		<h3>tbody：表格的主体</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>tbody：表格的主体</h3><p>用于组合 HTML 表格的主体内容。<br>应该与 &lt;thead> and &lt;tfoot> 元素结合起来使用<br>注意：&lt;tbody> 元素内部必须包含一个或者多个 &lt;tr> 标签。</p></div><hr>
 		<div id="tfoot">
-		<h3>tfoot：表格的页脚</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>tfoot：表格的页脚</h3><p>用于组合 HTML 表格的页脚内容。<br>应该与 &lt;thead> 和 &lt;tbody> 元素结合起来使用，用来规定表格的各个部分（页脚、表头、主体）。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;table border="1" width="300px"><br>
+			  &nbsp; &lt;colgroup><br>
+				&nbsp; &nbsp; &lt;col style="background-color:lightgreen"><br>
+				&nbsp; &nbsp; &lt;col style="background-color:lightyellow"><br>
+			  &nbsp; &lt;/colgroup><br>
+			  &nbsp; &lt;thead style="color:gray"><br>
+				  &nbsp; &nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &nbsp; &lt;th>表头1&lt;/th><br>
+					&nbsp; &nbsp; &nbsp; &lt;th>表头2&lt;/th><br>
+				  &nbsp; &nbsp; &lt;/tr><br>
+			  &nbsp; &lt;/thead><br>
+			  &nbsp; &lt;tfoot style="color:gray"><br>
+				&nbsp; &nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>总结1&lt;/td><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>总结2&lt;/td><br>
+				&nbsp; &nbsp; &lt;/tr><br>
+			  &nbsp; &lt;/tfoot><br>
+			  &nbsp; &lt;tbody style="color:red"><br>
+				  &nbsp; &nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>内容1&lt;/td><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>内容1&lt;/td><br>
+				  &nbsp; &nbsp; &lt;/tr><br>
+				  &nbsp; &nbsp; &lt;tr><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>内容2&lt;/td><br>
+					&nbsp; &nbsp; &nbsp; &lt;td>内容2&lt;/td><br>
+				  &nbsp; &nbsp; &lt;/tr><br>
+			  &nbsp; &lt;/tbody><br>
+			&lt;/table><br>
+			<br><b style="color:red">结果：</b>
+			<table border="1" width="300px">
+			  <colgroup>
+				<col style="background-color:lightgreen">
+				<col style="background-color:lightyellow">
+			  </colgroup>
+			  <thead style="color:gray">
+				  <tr>
+					<th>表头1</th>
+					<th>表头2</th>
+				  </tr>
+			  </thead>
+			  <tfoot style="color:gray">
+				<tr>
+					<td>总结1</td>
+					<td>总结2</td>
+				</tr>
+			  </tfoot>
+			  <tbody style="color:red">
+				  <tr>
+					<td>内容1</td>
+					<td>内容1</td>
+				  </tr>
+				  <tr>
+					<td>内容2</td>
+					<td>内容2</td>
+				  </tr>
+			  </tbody>
+			</table></p></div><hr>
 		<div id="ol">
-		<h3>ol：有序列表</h3><p>属性：<br>start：从何处开始，如start="50"从50开始加<br>type：定义有序类型，如type="A"、"a"、"I"、"i"等</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>ol：有序列表</h3><p>属性：<br>start：从何处开始，如start="50"从50开始加<br>type：定义有序类型，如type="A"、"a"、"I"、"i"等</p></div><hr>
 		<div id="ul">
-		<h3>ul：无序列表</h3><p>属性：<br>style：列表显示方式，如tyle="list-style-type:disc"（圆点）、circle（圆圈）、square（正方形）等</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>ul：无序列表</h3><p>属性：<br>style：列表显示方式，如tyle="list-style-type:disc"（圆点）、circle（圆圈）、square（正方形）等</p></div><hr>
 		<div id="li">
-		<h3>li：列表项</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>li：列表项</h3>
+			<p><b style="color:red">例如：</b><br>
+			&lt;ol><br>
+				&nbsp; &lt;li>frist&lt;/li><br>
+				&nbsp; &lt;li>second&lt;/li><br>
+				&nbsp; &lt;li>third&lt;/li><br>
+			&lt;/ol><br>
+			&lt;ol start="10"><br>
+				&nbsp; &lt;li>frist&lt;/li><br>
+				&nbsp; &lt;li>second&lt;/li><br>
+				&nbsp; &lt;li>third&lt;/li><br>
+			&lt;/ol><br>
+			&lt;ol type="a"><br>
+				&nbsp; &lt;li>frist&lt;/li><br>
+				&nbsp; &lt;li>second&lt;/li><br>
+				&nbsp; &lt;li>third&lt;/li><br>
+			&lt;/ol><br>
+			&lt;ul><br>
+				&nbsp; &lt;li>frist&lt;/li><br>
+				&nbsp; &lt;li>second&lt;/li><br>
+				&nbsp; &lt;li>third&lt;/li><br>
+			&lt;/ul><br>
+			&lt;ol style="list-style-type:disc"><br>
+				&nbsp; &lt;li>frist&lt;/li><br>
+				&nbsp; &lt;li>second&lt;/li><br>
+				&nbsp; &lt;li>third&lt;/li><br>
+			&lt;/ol><br>
+			<b style="color:red">结果：</b>
+			<ol>
+				<li>frist</li>
+				<li>second</li>
+				<li>third</li>
+			</ol>
+			<ol start="10">
+				<li>frist</li>
+				<li>second</li>
+				<li>third</li>
+			</ol>
+			<ol type="a">
+				<li>frist</li>
+				<li>second</li>
+				<li>third</li>
+			</ol>
+			<ul>
+				<li>frist</li>
+				<li>second</li>
+				<li>third</li>
+			</ul>
+			<ol style="list-style-type:disc">
+				<li>frist</li>
+				<li>second</li>
+				<li>third</li>
+			</ol></p></div><hr>
 		<div id="dl">
-		<h3>dl：列表</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>dl：列表</h3><p>结合 &lt;dt> （定义列表中的项目）和 &lt;dd> （描述列表中的项目）。</p>
+			</div><hr>
 		<div id="dt">
-		<h3>dt：自定义列表项目</h3><p>自定义列表以 &ltdl> 标签开始。每个自定义列表项以 &ltdt> 开始。每个自定义列表项的定义以 &ltdd> 开始。</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>dt：自定义列表项目</h3><p>描述列表的项目名称。<br>自定义列表以 &ltdl> 标签开始。每个自定义列表项以 &ltdt> 开始。每个自定义列表项的定义以 &ltdd> 开始。</p>
+			</div><hr>
 		<div id="dd">
-		<h3>dd：自定列表项的描述</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>dd：自定列表项的描述</h3><p>对一个描述列表中的项目/名字进行描述。<br>与 &lt;dl> （定义一个描述列表）和 &lt;dt> （定义项目/名字）一起使用。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;dl><br>
+				 &nbsp; &lt;dt>cat&lt;/dt><br>
+					&nbsp; &nbsp; &lt;dd>雍懒&lt;/dd><br>
+				 &nbsp; &lt;dt>dog&lt;/dt><br>
+					&nbsp; &nbsp; &lt;dd>忠诚&lt;/dd><br>
+			&lt;/dl><br><b style="color:red">结果：</b>
+			<dl>
+				 <dt>cat</dt>
+					<dd>雍懒</dd>
+				 <dt>dog</dt>
+					<dd>忠诚</dd>
+			</dl>
+			</p></div><hr>
 		<div id="div">
-		<h3>div：区块元素</h3><p>区块元素：通常以新行开始或结束。如h1、p、ul、table等；<br>内联元素：通常不会以新行开始，如span、td、img、a等</p><p>可用于网页布局，当然也可以使用表格table实现页面布局，不过不建议这样使用</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>div：区块元素</h3><p>区块元素：通常以新行开始或结束。如h1、p、ul、table等；<br>内联元素：通常不会以新行开始，如span、td、img、a等</p><p>可用于网页布局，当然也可以使用表格table实现页面布局，不过不建议这样使用</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;div><br>
+				&nbsp; &lt;div style="background-color:lightgreen;height:20px;"><br>
+					&nbsp; &nbsp; &lt;p>标题&lt;/p><br>
+				&nbsp; &lt;/div><br>
+				&nbsp; &lt;div style="background-color:lightblue;width:10%;height:200px;float:left"><br>
+					&nbsp; &nbsp; &lt;p>菜单&lt;/p><br>
+				&nbsp; &lt;/div><br>
+				&nbsp; &lt;div style="background-color:lightyellow;width:90%;height:200px;float:right"><br>
+					&nbsp; &nbsp; &lt;p>主体&lt;/p><br>
+				&nbsp; &lt;/div><br>
+			&lt;/div><br>
+			<b style="color:red">结果：</b>
+			<div>
+				<div style="background-color:lightgreen;height:20px;">
+					<p>标题</p>
+				</div>
+				<div style="background-color:lightblue;width:10%;height:200px;float:left">
+					<p>菜单</p>
+				</div>
+				<div style="background-color:lightyellow;width:90%;height:200px;float:right">
+					<p>主体</p>
+				</div>
+			</div>
+			</p></div><hr>
 		<div id="span">
-		<h3>span：组合文档中的行内元素</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>span：组合文档中的行内元素</h3><p>用于对文档中的行内元素进行组合。<br>没有固定的格式表现。当对它应用样式时，它才会产生视觉上的变化。</p>
+			<p><b style="color:red">例如：</b><br>&lt;p>这是一段&lt;span style="color:red">加红&lt;/span>文本&lt;/p><br>
+			<b style="color:red">结果：</b><p>这是一段<span style="color:red;font:宋体">宋体加红</span>文本</p></p>
+			</div><hr>
 		<div id="form">
-		<h3>form：供用户输入的表单</h3><p>属性：<br>autocomplete：当用户在自动完成域中开始输入时，浏览器应该在该域中显示填写的选项。提示: autocomplete 属性有可能在 form元素中是开启的，而在input元素中是关闭的。<br>novalidate：布尔值，规定在提交表单时不应该验证 form 或 input 域。<br></p>
-		<p><b style="color:red">例如：</b><br>&ltform action="demo-form.php" autocomplete="on"><br>&nbsp; First name:&ltinput type="text" name="fname">&ltbr><br>&nbsp; Last name: &ltinput type="text" name="lname">&ltbr><br>&nbsp; E-mail: &ltinput type="email" name="email" autocomplete="off">&ltbr><br>&nbsp; &ltinput type="submit"><br>&lt/form></p>
-		</div>
+			<h3>form：供用户输入的表单</h3><p>属性：<br>autocomplete：当用户在自动完成域中开始输入时，浏览器应该在该域中显示填写的选项。提示: autocomplete 属性有可能在 form元素中是开启的，而在input元素中是关闭的。<br>novalidate：布尔值，规定在提交表单时不应该验证 form 或 input 域。<br></p>
+			<p><b style="color:red">例如：</b><br>
+			&ltform action="demo-form.php" autocomplete="on"><br>
+				&nbsp; First name:&ltinput type="text" name="fname">&ltbr><br>
+				&nbsp; Last name: &ltinput type="text" name="lname">&ltbr><br>
+				&nbsp; E-mail: &ltinput type="email" name="email" autocomplete="off">&ltbr><br>
+				&nbsp; &ltinput type="submit"><br>
+			&lt/form><br>
+			<b style="color:red">结果：</b>
+			<form action="demo-form.php" autocomplete="on">
+				First name:<input type="text" name="fname"><br>
+				Last name: <input type="text" name="lname"><br>
+				E-mail: <input type="email" name="email" autocomplete="off"><br>
+				<input type="submit">
+			</form>
+			</p></div><hr>
 		<div id="input">
-		<h3>input：输入域</h3><p>属性：<br>type：<br>1.type="text"为纯文本域；<br>2.password为密码输入；<br>3.radio单选按钮（配合value唯一值确定点击单一的input进行单选）；<br>4.checkbox复选（配合value一起）；<br>5.submit提交按钮（当用户单击确认按钮时，表单的内容会被传送到另一个文件，此文件定义在form里面的action属性里面）；<br>6.button为按钮；<br>7.color选择颜色；<br>8.date选择日期时间；<br>9.datetime设置日期时间；<br>10.datetime-local：选择日期时间；<br>11.email输入e-mail域；<br>12.month：只有年月；<br>13.number输入数值（可勇敢min和max属性进行范围限定）<br>14.range在指定范围内滑动选择数值；<br>15.search类似谷歌站点搜索；<br>16.tel电话号码；<br>17.time输入事件；<br>18.url输入url地址；<br>19.week选择年周；<br>20.file选择文件<br>
-		value：预输入值，开始的默认值。<br>name：提交时带有的键<br>checked：复选或单选框里预选勾上，默认选上。<br>form：规定输入域所属的一个或多个表单，位于form表单外的 input 字段引用了 HTML form，所以该 input 表单仍然属于form表单的一部分<br>autofocus：布尔值，规定在页面加载时，域自动地获得焦点。<br>formaction：描述表单提交的URL地址。会覆盖 &ltform> 元素中的action属性。 formaction 属性用于 type="submit" 和 type="image"。<br>formenctype：描述了表单提交到服务器的数据编码 (只对form表单中 method="post" 表单)<br>formmethod：表单提交的方式。覆盖了 &ltform> 元素的 method 属性。该属性可以与 type="submit" 和 type="image" 配合使用。<br>formnovalidate：布尔值，描述了 &ltinput> 元素在表单提交时无需被验证，会覆盖 &ltform> 元素的novalidate属性。注意: formnovalidate 属性与type="submit一起使用。<br>formtarget：指定一个名称或一个关键字来指明表单提交数据接收后的展示，覆盖 &ltform>元素的target属性。注意: formtarget 属性与type="submit" 和 type="image"配合使用。<br>height和width：h规定用于 image 类型的 &ltinput> 标签的图像高度和宽度。<br>list：输入域的 datalist。datalist 是输入域的选项列表。<br>min和max：min、max 和 step 属性用于为包含数字或日期的 input 类型规定限定（约束）。<br>multiple：布尔值，规定<input> 元素中可选择多个值。适用于type="email" 和 file类型。<br>pattern：描述了一个正则表达式用于验证 &ltinput> 元素的值。<br>placeholder：提供一种提示（hint），描述输入域所期待的值。简短的提示在用户输入值前会显示在输入域上。<br>required：布尔值，规定必须在提交之前填写输入域（不能为空）。<br>step：为输入域规定合法的数字间隔。如果 step="3"，则合法的数是 -3,0,3,6 等。step 属性可以与 max 和 min 属性创建一个区域值。</p>
-		<p><b style="color:red">例如：</b><br>&ltform name="input" action="html_form_action.php" method="get" id="form1"><br>&nbsp username: &ltinput type="text" name="name"> &lt!--文本域--><br>&nbsp password: &ltinput type="password" name="pwd"> &lt!--密码字段--><br>&nbsp &ltinput type="radio" name="put" value="input">input &lt!--单选--><br>&nbsp &ltinput type="radio" name="put" value="output">output<br>&nbsp &ltinput type="checkbox" name="tools" value="python">python &lt!--复选--><br>&nbsp &ltinput type="checkbox" name="tools" value="java">java<br>&nbsp &ltinput type="submit" value="Submit"> &lt!--提交按钮，提交到action里面--><br>&nbsp; &ltinput type="submit" formaction="demo-admin.php" value="提交"><br>&lt/form><br>Last name: &ltinput type="text" name="lname" form="form1"> &lt!--此处的form1即在form里的id，也就是该 input 表单仍然属于form表单的一部分-->
-		</p>
-		</div>
+			<h3>input：输入域</h3><p>属性：<br>type：<br>1.type="text"为纯文本域；<br>2.password为密码输入；<br>3.radio单选按钮（配合value唯一值确定点击单一的input进行单选）；<br>4.checkbox复选（配合value一起）；<br>5.submit提交按钮（当用户单击确认按钮时，表单的内容会被传送到另一个文件，此文件定义在form里面的action属性里面）；<br>6.button为按钮；<br>7.color选择颜色；<br>8.date选择日期时间；<br>9.datetime设置日期时间；<br>10.datetime-local：选择日期时间；<br>11.email输入e-mail域；<br>12.month：只有年月；<br>13.number输入数值（可勇敢min和max属性进行范围限定）<br>14.range在指定范围内滑动选择数值；<br>15.search类似谷歌站点搜索；<br>16.tel电话号码；<br>17.time输入事件；<br>18.url输入url地址；<br>19.week选择年周；<br>20.file选择文件<br>
+			value：预输入值，开始的默认值。<br>name：提交时带有的键<br>checked：复选或单选框里预选勾上，默认选上。<br>form：规定输入域所属的一个或多个表单，位于form表单外的 input 字段引用了 HTML form，所以该 input 表单仍然属于form表单的一部分<br>autofocus：布尔值，规定在页面加载时，域自动地获得焦点。<br>formaction：描述表单提交的URL地址。会覆盖 &ltform> 元素中的action属性。 formaction 属性用于 type="submit" 和 type="image"。<br>formenctype：描述了表单提交到服务器的数据编码 (只对form表单中 method="post" 表单)<br>formmethod：表单提交的方式。覆盖了 &ltform> 元素的 method 属性。该属性可以与 type="submit" 和 type="image" 配合使用。<br>formnovalidate：布尔值，描述了 &ltinput> 元素在表单提交时无需被验证，会覆盖 &ltform> 元素的novalidate属性。注意: formnovalidate 属性与type="submit一起使用。<br>formtarget：指定一个名称或一个关键字来指明表单提交数据接收后的展示，覆盖 &ltform>元素的target属性。注意: formtarget 属性与type="submit" 和 type="image"配合使用。<br>height和width：h规定用于 image 类型的 &ltinput> 标签的图像高度和宽度。<br>list：输入域的 datalist。datalist 是输入域的选项列表。<br>min和max：min、max 和 step 属性用于为包含数字或日期的 input 类型规定限定（约束）。<br>multiple：布尔值，规定 &lt;input> 元素中可选择多个值。适用于type="email" 和 file类型。<br>
+			pattern：描述了一个正则表达式用于验证 &ltinput> 元素的值。<br>placeholder：提供一种提示（hint），描述输入域所期待的值。简短的提示在用户输入值前会显示在输入域上。<br>required：布尔值，规定必须在提交之前填写输入域（不能为空）。<br>step：为输入域规定合法的数字间隔。如果 step="3"，则合法的数是 -3,0,3,6 等。step 属性可以与 max 和 min 属性创建一个区域值。</p>
+			<p><b style="color:red">例如：</b><br>
+			&ltform name="input" action="html_form_action.php" method="get" id="form1"><br>
+				&nbsp username: &ltinput type="text" name="name">&ltbr> &lt!--文本域--><br>
+				&nbsp password: &ltinput type="password" name="pwd">&ltbr> &lt!--密码字段--><br>
+				&nbsp &ltinput type="radio" name="put" value="input">input &lt!--单选--><br>
+				&nbsp &ltinput type="radio" name="put" value="output">output&ltbr><br>
+				&nbsp &ltinput type="checkbox" name="tools" value="python">python &lt!--复选--><br>
+				&nbsp &ltinput type="checkbox" name="tools" value="java">java&ltbr><br>
+				&nbsp &ltinput type="submit" value="Submit">&ltbr> &lt!--提交按钮，提交到action里面--><br>
+				&nbsp; &ltinput type="submit" formaction="demo-admin.php" value="提交"><br>
+			&lt/form><br>
+			Last name: &ltinput type="text" name="lname" form="form1"> &lt!--此处的form1即在form里的id，也就是该 input 表单仍然属于form表单的一部分--><br>
+			<b style="color:red">结果：</b>
+			<form name="input" action="html_form_action.php" method="get" id="form1">
+				username: <input type="text" name="name"><br>
+				password: <input type="password" name="pwd"><br>
+				<input type="radio" name="put" value="input">input
+				<input type="radio" name="put" value="output">output<br>
+				<input type="checkbox" name="tools" value="python">python
+				<input type="checkbox" name="tools" value="java">java<br>
+				<input type="submit" value="Submit"><br>
+				<input type="submit" formaction="demo-admin.php" value="提交">
+			</form>
+			Last name: <input type="text" name="lname" form="form1">
+			</p></div><hr>
 		<div id="output">
-		<h3>output：计算结果</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>output：计算结果</h3>
+			<p><b style="color:red">例如：</b><br>
+			&lt;form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0<br>
+				&nbsp; &lt;input type="range" id="a" value="50">100<br>
+				&nbsp; + &lt;input type="number" id="b" value="50"><br>
+				&nbsp; = &lt;output name="x" for="a b">100&lt;/output><br>
+			&lt;/form><br>
+			<b style="color:red">结果：</b>
+			<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+				<input type="range" id="a" value="50">100
+				+ <input type="number" id="b" value="50">
+				= <output name="x" for="a b">100</output>
+			</form> </p></div><hr>
 		<div id="textarea">
-		<h3>textarea：文本域 (一个多行的输入控件)</h3><p>属性：<br>rows：列高，文本域可见高度<br>cols：行高，文本域可见宽度</p>
-		<h3>textarea：文本域 (一个多行的输入控件)</h3><p>属性：<br>rows：列高，文本域可见高度<br>cols：行高，文本域可见宽度</p>
-		<p><b style="color:red">例如：</b><br>&lttextarea rows="10" cols="30">&lt/textarea></p>
-		</div>
+			<h3>textarea：文本域 (一个多行的输入控件)</h3><p>属性：<br>rows：列高，文本域可见高度<br>cols：行高，文本域可见宽度</p>
+			<p><b style="color:red">例如：</b><br>&lttextarea rows="10" cols="30">这里可输入文本&lt/textarea><br>
+			<b style="color:red">结果：</b><br><textarea rows="10" cols="30">这里可输入文本</textarea></p>
+			</div><hr>
 		<div id="label">
-		<h3>label：定义了 &ltinput> 元素的标签，一般为输入标题</h3>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>label：定义了 &ltinput> 元素的标签，一般为输入标题</h3><p>为 input 元素定义标注（标记）。<br>不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。如果您在 label 元素内点击文本，就会触发此控件。就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。</p>
+			<p>属性：<br>for：绑定到哪个表单元素。可配合id一起使用（这时相同的id就是绑定的表单元素）<br>form：所属的一个或多个表单。</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;form action="html_form_action.php" id="form1"><br>
+				&nbsp; &lt;input type="radio" name="animal" id="dog" id=""/>&lt;br><br>
+				&nbsp; &lt;label for="cat">cat&lt;/label><br>
+				&nbsp; &lt;input type="radio" name="animal" id="cat"/>&lt;br/><br>
+				&nbsp; &lt;label for="hamster">hamster&lt;/label><br>
+				&nbsp; &lt;input type="radio" name="animal" id="hamster"/>&lt;br><br>
+				&nbsp; &lt;input type="submit" value="提交"><br>
+			&lt;/form><br>
+			&lt;label for="dog" form="form1">dog&lt;/label><br>
+			<b style="color:red">结果：</b>
+			<form action="html_form_action.php" id="form1">
+				<input type="radio" name="animal" id="dog" id=""/><br>
+				<label for="cat">cat</label>
+				<input type="radio" name="animal" id="cat"/><br/>
+				<label for="hamster">hamster</label>
+				<input type="radio" name="animal" id="hamster"/><br>
+				<input type="submit" value="提交">
+			</form>
+			<label for="dog" form="form1">dog</label></p>
+			</div><hr>
 		<div id="fieldset">
-		<h3>fieldset：相关的表单元素，并使用外框包含起来</h3><p>带有边框</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>fieldset：相关的表单元素，并使用外框包含起来</h3><p>带有边框</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;form><br>
+				&nbsp; &lt;fieldset>&lt;/fieldset><br>
+				&nbsp; &lt;fieldset>&lt;/fieldset><br>
+			&lt;/form><br>
+			<b style="color:red">结果：</b>
+			<form>
+				<fieldset></fieldset>
+				<fieldset></fieldset>
+			</form>
+			</p>
+			</div><hr>
 		<div id="legend">
-		<h3>legend：定义了 &ltfieldset> 元素的标题</h3><p>边框左上方的文字描述</p>
-		<p><b style="color:red">例如：</b></p>
-		</div>
+			<h3>legend：定义了 &ltfieldset> 元素的标题</h3><p>边框左上方的文字描述</p>
+			<p><b style="color:red">例如：</b><br>
+			&lt;form><br>
+				&nbsp; &lt;fieldset>&lt;legend>标题1&lt;/legend>&lt;/fieldset><br>
+				&nbsp; &lt;fieldset>&lt;legend>标题2&lt;/legend>&lt;/fieldset><br>
+			&lt;/form><br>
+			<b style="color:red">结果：</b>
+			<form>
+				<fieldset><legend>标题1</legend></fieldset>
+				<fieldset><legend>标题2</legend></fieldset>
+			</form>
+			</p>
+			</div><hr>
 		<div id="select">
-		<h3>select：下拉选项列表</h3>
-		<p><b style="color:red">例如：</b><br>&ltform action=""><br>&nbsp &ltselect name="tools"><br>&nbsp &nbsp &ltoption value="python">python&lt/option><br>&nbsp &nbsp &ltoption value="java">java&lt/option><br>&nbsp &nbsp &ltoption value="c++" selected>c++&lt/option> &lt!--预选项--><br>&nbsp &lt/select><br>&lt/form><br>
-		</p>
-		</div>
+			<h3>select：下拉选项列表</h3>
+			<p><b style="color:red">例如：</b><br>
+			&ltform action=""><br>
+				&nbsp &ltselect name="tools"><br>
+					&nbsp &nbsp &ltoption value="python">python&lt/option><br>
+					&nbsp &nbsp &ltoption value="java">java&lt/option><br>
+					&nbsp &nbsp &ltoption value="c++" selected>c++&lt/option> &lt!--预选项--><br>
+				&nbsp &lt/select><br>
+			&lt/form><br><b style="color:red">结果：</b>
+			<form action="">
+				<select name="tools">
+					<option value="python">python</option>
+					<option value="java">java</option>
+					<option value="c++" selected>c++</option>
+				</select>
+			</form>
+
+			</p>
+			</div><hr>
 		<div id="optgroup">
 		<h3>optgroup：选项组</h3>
-		<p><b style="color:red">例如：</b></p>
+		<p><b style="color:red">例如：</b><b style="color:red">结果：</b></p>
 		</div>
 		<div id="option">
 		<h3>option：下拉列表中的选项</h3>
-		<p><b style="color:red">例如：</b></p>
+		<p><b style="color:red">例如：</b><b style="color:red">结果：</b></p>
 		</div>
 		<div id="button">
 		<h3>button：点击按钮</h3>
-		<p><b style="color:red">例如：</b></p>
+		<p><b style="color:red">例如：</b><b style="color:red">结果：</b></p>
 		</div>
 		<div id="datalist">
 		<h3>datalist：预先定义的输入控件选项列表</h3>
-		<p><b style="color:red">例如：</b><br>
+		<p><b style="color:red">例如：</b><b style="color:red">结果：</b><br>
 		&ltinput list="browsers"><br>&ltdatalist id="browsers"><br>&nbsp; &ltoption value="Internet Explorer"><br>&nbsp; &ltoption value="Firefox"><br>&nbsp; &ltoption value="Chrome"><br>&nbsp; &ltoption value="Opera"><br>&nbsp; &ltoption value="Safari"><br>&lt/datalist></p>
 		</div>
 		<div id="keygen">
 		<h3>keygen：表单的密钥对生成器字段</h3><p>提供一种验证用户的可靠方法。规定用于表单的密钥对生成器字段。</p><p>当提交表单时，会生成两个键，一个是私钥，一个公钥。私钥（private key）存储于客户端，公钥（public key）则被发送到服务器。公钥可用于之后验证用户的客户端证书（client certificate）。</p>
-		<p><b style="color:red">例如：</b></p>
+		<p><b style="color:red">例如：</b><b style="color:red">结果：</b></p>
 		</div>
 		<div id="iframe">
 		<h3>iframe：框架</h3><p>通过使用框架，你可以在同一个浏览器窗口中显示不止一个页面。也可以显示目标链接页面。</p><p>属性：<br>src：url指定内嵌的网页<br>height和width：定义框架的高宽<br>frameborder：是否显示边框，为0移除边框<br>name：此属性的值可以作为其他链接target的值，此时点击其他链接则会显示在此框架里。</p>
