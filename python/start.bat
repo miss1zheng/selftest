@@ -6,7 +6,7 @@
 
 ::在本地执行
 ::call %CSDTK4INSTALLDIR%\..\..\..\Python37\python app.py
-call python gui.py
+call python qipan.py
 
 
 

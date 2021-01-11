@@ -153,33 +153,44 @@ void write_sed_run(edu *edu_tmp)
 	else{
 		return -1;
 	}
-}*/
+}
 hhh(char *da)
 {
 	return *da;
-}
+}*/
+
+#include <time.h>
 int main()
 {
-	/*unsigned char hz[]="仨";
-	unsigned char b[20];
-	char hex[50];
-	memcpy((void *)b,(void *)hz,20);
-	for (int i=0;i<20;i++) 
-		sprintf((char *)hex+i*2,"%02X",(unsigned char)b[i]);//hex转换成ascii
-*/
-	/*FILE *fp;
-	fp=fopen("H:\run.txt",'r+');
-	if(!fp)
-		fclose(fp);
-		printf("get file failed.");
-	else{
-		
-	}*/
-	
-	printf("%c\n",hhh("123456"));
-
-	
-
+	int year,month,day,all_day;
+	char run =0;
+	printf("please input your birth year:");
+	scanf("%d",&year);
+	printf("month:");
+	scanf("%d",&month);
+	printf("day:");
+	scanf("%d",&day);
+	for(int i=year+1;i<2021;i++)
+	{
+		if((i%100!=0)&&(i%4==0)||(i%400==0))
+		{
+			run=1;
+			all_day+=1;
+		}
+		all_day +=365;
+	}
+	for(int i=month+1;month<=12;i++)
+	{
+		if(month == 1)&&(month == 3)&&(month == 5)&&(month == 7)&&(month == 8)&&(month == 10)&&(month == 12)
+			all_day+=31;
+		else if(month ==2)&&(run==1)
+			all_day+=29;
+		else if(month ==2)
+			all_day+=28;
+		else
+			all_day+30;
+	}
+	printf("your age is %d,and your all day is %d",2021-year,all_day);
 	system("pause");
 	return 0;
 }
