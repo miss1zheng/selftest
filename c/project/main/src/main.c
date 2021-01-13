@@ -160,37 +160,155 @@ hhh(char *da)
 }*/
 
 #include <time.h>
+int out_day(int in,int set_value)
+{
+	int out;
+	if(set_value==1){//开始
+		out=in;
+	}
+	else if(set_value==2){//结束
+		out=1;
+	}
+	else{//全年
+		out=1;
+	}
+	return out;
+	printf("out is %d\n",out);
+}
+int time_one(int year,int month,int day,int set_value){
+	int reseult=0;
+	int run =0,end=0,all_day;
+	int i,j,start_month,start_day;
+	
+	if(set_value==1){//开始
+		i=month,j=day,start_month=12;
+	}
+	else if(set_value==2){//结束
+		i=1,j=1,start_month=month,end=1;
+	}
+	else{//全年
+		i=1,j=1,start_month=12;
+	}
+	if((year%100!=0)&&(year%4==0)||(year%400==0))
+	{
+		run = 1;
+	}
+	for(i;i<=start_month;i++)
+	{
+		printf("\n%i month\n",i);
+		if((i==1)||(i==3)||(i==5)||(i==7)||(i==8)||(i==10)||(i==12))
+		{
+			if(end)
+				all_day=day;
+			else
+				all_day=31;
+			j=out_day(day,set_value);
+			for(j;j<=all_day;j++)
+			{
+				printf("%4d",j);
+				reseult++;
+				if(j % 8 == 0)
+				{
+					printf("\n");
+				}
+			}
+		}
+		else if((i==2)&&(run))
+		{
+			if(end)
+				all_day=day;
+			else
+				all_day=29;
+			j=out_day(day,set_value);
+			for(j;j<=29;j++)
+			{
+				printf("%4d",j);
+				reseult++;
+				if(j % 8 == 0)
+				{
+					printf("\n");
+				}
+			}
+		}
+		else if(i==2)
+		{
+			if(end)
+				all_day=day;
+			else
+				all_day=28;
+			j=out_day(day,set_value);
+			for(j;j<=28;j++)
+			{
+				printf("%4d",j);
+				reseult++;
+				if(j % 8 == 0)
+				{
+					printf("\n");
+				}
+			}
+		}
+		else{
+			if(end)
+				all_day=day;
+			else
+				all_day=30;
+			j=out_day(day,set_value);
+			for(j;j<=30;j++)
+			{
+				printf("%4d",j);
+				reseult++;
+				if(j % 8 == 0)
+				{
+					printf("\n");
+				}
+			}
+		}
+		printf("\n");
+	}
+	return reseult;
+}
+int sum_date(int year,int month,int day)
+{
+	int sum_day=0;
+	time_t curtime;
+	struct tm *info;
+
+	time ( &curtime );
+	info = localtime(&curtime);
+	int curr_year,curr_month,curr_day;
+	curr_year = 1900 + info->tm_year;
+	curr_month = info->tm_mon+1;
+	curr_day = info->tm_mday;
+    
+	if(year<curr_year)
+	{
+		sum_day += time_one(year,month,day,1);
+		sum_day += time_one(curr_year,curr_month,curr_day,2);
+	}
+	else if(year==curr_year)
+	{
+		int start=time_one(year,month,day,2);
+		int end= time_one(curr_year,curr_month,curr_day,2);
+		sum_day=end-start;
+		printf("2021time is %d=%d-%d\n",sum_day,start,end);
+	}
+	else
+	{
+		printf("you input big.\n");
+	}
+	for(int i=year+1;i<=curr_year-1;i++)
+	{
+		sum_day += time_one(i,0,0,0);
+	}
+
+	return sum_day;
+}
+
 int main()
 {
-	int year,month,day,all_day;
-	char run =0;
-	printf("please input your birth year:");
-	scanf("%d",&year);
-	printf("month:");
-	scanf("%d",&month);
-	printf("day:");
-	scanf("%d",&day);
-	for(int i=year+1;i<2021;i++)
-	{
-		if((i%100!=0)&&(i%4==0)||(i%400==0))
-		{
-			run=1;
-			all_day+=1;
-		}
-		all_day +=365;
-	}
-	for(int i=month+1;month<=12;i++)
-	{
-		if(month == 1)&&(month == 3)&&(month == 5)&&(month == 7)&&(month == 8)&&(month == 10)&&(month == 12)
-			all_day+=31;
-		else if(month ==2)&&(run==1)
-			all_day+=29;
-		else if(month ==2)
-			all_day+=28;
-		else
-			all_day+30;
-	}
-	printf("your age is %d,and your all day is %d",2021-year,all_day);
+	int toes=10;
+	printf("toes=%d,toes square=%d,toes twice=%d",toes,toes*toes,2*toes);
+  
 	system("pause");
 	return 0;
 }

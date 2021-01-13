@@ -3,6 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<title>GIT 版本管理</title>
+	<style>
+	li{line-height:2em;}
+	</style>
 </head>
 <body>
 	<ol>
@@ -25,7 +28,7 @@
 		<li>git show -a --color=always：若commit之后还想再看下提交前后之间的有哪些地方改变了，则可以使用此命令查看</li>
 		<li>git push origin --delete xxx：删除远程分支，需要输入用户名和密码。</li>
 		<li>git branch -d xxx：删除本地分支，此分支未被改动过。此时应该切换到其他分支或主分支上进行操作。若想强制删除则将 -d 改成 -D 即可。</li>
-		<li></li>
+		<li>错误解决：<ul><li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li></ul></li>
 		<li></li>
 		<li></li>
 		<li></li>

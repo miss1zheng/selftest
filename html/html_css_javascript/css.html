@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>html实现</title>
+	<title>css实现</title>
 	<style>
 		body,html{width:100%;height:100%;margin:0;padding:0}
 		.main_body{width:80%;float:left}
@@ -11,14 +11,145 @@
 	</style>
 </head>
 <body>
-	<p>text-decoration:none 没有下划线
-	color:red 文本颜色为红色
-	background-color:yellow 背景色为黄色
-	margin:20px 外边距宽度
-	padding:0 内边距宽度
-	font-family:verdana 字体设置
-	font-size:20px 字体大小
-	text-align:center 文本对齐方式</p>
+	<div class="table_body">
+		<a href="#jianjie">简介</a><br/>
+		<a href="#background">background</a><br/>
+		<a href="#background-clip">background-clip</a><br/>
+		<a href="#background-attachment">background-attachment</a><br/>
+		<a href="#background-color">background-color</a><br/>
+		<a href="#background-image">background-image</a><br/>
+		<a href="#background-origin">background-origin</a><br/>
+		<a href="#background-position">background-position</a><br/>
+		<a href="#background-repeat">background-repeat</a><br/>
+		<a href="#background-size">background-size</a><br/>
+		<a href="#color">color</a><br/>
+		<a href="#text-align">text-align</a><br/>
+		<a href="#text-decoration">text-decoration</a><br/>
+		<a href="#text-transform">text-transform</a><br/>
+		<a href="#text-indent">text-indent</a><br/>
+		<a href="#letter-spacing">letter-spacing</a><br/>
+		<a href="#line-height">line-height</a><br/>
+		<a href="#text-shadow">text-shadow</a><br/>
+		<a href="#direction">direction</a><br/>
+		<a href="#word-spacing">word-spacing</a><br/>
+		<a href="#white-space">white-space</a><br/>
+		<a href="#vertical-align">vertical-align</a><br/>
+		<a href="#margin">margin</a><br/>
+		<a href="#padding">padding</a><br/>
+		<a href="#font-family">font-family</a><br/>
+		<a href="#font-size">font-size</a><br/>
+		<a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		</div>
+	<div class="main_body">
+		<h3 id="jianjie">简介</h3>
+		<p>CSS 指层叠样式表，使用 CSS 同时控制多重网页的样式和布局。</p>
+		<p>CSS规则主要组成：选择器以及一条或多条声明，如h1{color:red;font-size:20px;}<br/>选择器通常是需要改变样式的元素。<br/>每条声明由一个属性和一个值组成，属性和值使用冒号隔开。<br/>声明总以分号 ; 结束，而声明总以大括号 {} 括起来。<br/>CSS注释以/*xxx*/来进行注释</p>
+		<p>id选择器：可以为标有特定id的html元素指定特定样式。<br/>id选择器以“#”来定义，如：使用#xx{x:xxx;xx:xx;}定义，然后在html中元素属性 id="xx" 来进行使用。<br/>注意：id属性不要以数字开头，因为在Mozilla/Firefox浏览器不起作用。</p>
+		<p>class选择器：用于描述一组元素样式。class可以在多个元素中使用，在html中以class属性表示，<br/>类选择器以点 . 号显示，如.center{text-align:center;}<br/>也可以指定特定的HTML元素使用class，如使所有的p元素使用class="center"让该元素文本居中。p.center {text-align:center;}<br/>类名的第一个字符不能使用数字！它无法在 Mozilla 或 Firefox 中起作用。</p>
+		<p>样式表：外部样式表（即通过link标签链接到.css样式）、内部样式表（使用&lt;style>&lt;/style>建立样式）、内联样式（直接在每个元素的属性设置style）<br/>外部样式表链接如 &lt;link rel="stylesheet" type="text/css" href="my.css"> 链接到my.css<br/>注意：不要在属性值与单位之间留有空格（如："margin-left: 20 px" ），正确的写法是 "margin-left: 20px" 。</p>
+		<p>若内联、内部、外部样式表三者同时存在，则设置了一样属性的值 内联>内部>外部>浏览器默认样式，而内部没有设置的外部属性则会保留继承下来。如：<br/>外部设置 h3{color:red;text-align:left;font-size:8pt;}<br/>内部设置 h3{text-align:right;font-size:20pt;}<br/>则结果是：h3{color:red;text-align:right;font-size:20pt;}</p>
+		<p>优先级：内联样式 > id选择器 > 伪类 > 属性选择器 > 类选择器 > 元素（类型）选择器 > 通用选择器（*）<br/>注意：!important规则除外，当这个被应用在一个样式声明中，该样式声明会覆盖CSS中任何其他的声明，无论它处在声明列表中的何处<br/>当一样时后出现的样式表设置要优先于先出现的样式表设置，在同一组属性设置中标有!important规则的优先级最大。如：p{/*两个color属性在同一组*/ color:#00f !important; /* 优先级最大 */ color:#f00; }</p>
+		<p>css的7种选择器优先级：内联样式 > id 选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 标签选择器 = 伪元素选择器</p>
+
+		<hr/><h3 id="background">background：背景设置</h3>
+		<p>优先级为 color > image > position/size > repeat > origin > clip > attachment > 默认/继承。整个背景简写如background:#ffffff url('img_tree.png') no-repeat fixed right top;</p>
+		
+		<hr/><h3 id="background-attachment">background-attachment：背景是否滚动</h3>
+		<p>scroll：背景图随页面的滚动而滚动，默认<br/>fixed：背景图不随页面滚动而滚动<br/>local：背景图随元素内容的滚动二滚动<br/>initial：默认值<br/>inherit：从父元素继承</p>
+
+		<hr/><h3 id="background-clip">background-clip：背景图的绘画区域</h3>
+		<p>border-box：背景绘制在边框方框内（剪切成边框方框），默认值<br/>padding-box：背景绘制在衬距方框内（剪切成衬距方框）<br/>content-box：背景绘制在内容方框内（剪切成内容方框）</p>
+	
+		<hr/><h3 id="background-color">background-color：背景色</h3>
+		<p>1.名称：red、green、yellow、gray<br/>2.RGB值：rgb(255,0,0)<br/>3.十六进制：#ffffff<br/>transparent：背景色透明，默认值<br/>inherit：从父元素继承</p>
+		<p>此背景色还可以用于标识文字的背景色，相当于标亮</p>
+
+		<hr/><h3 id="background-image">background-image：背景图</h3>
+		<p>背景图片设置：url('xx.png')<br/>none：无背景图，默认<br/>linear-gradient()：创建一个线性渐变图（从上到下）<br/>radial-gradient()：用径向渐变创建图像（中间到边缘）<br/>repeating-linear-gradient()：创建重复的线性渐变图<br/>repeating-radial-gradient()：创建重复的径向渐变图<br/>inherit：从父元素继承</p>
+		<p>多层背景图层叠：<br/>#example1 {<br/>background-image: url(img_flwr.gif), url(paper.gif);/*第一个在第二个的上面*/<br/>background-position: right bottom, left top;<br/>background-repeat: no-repeat, repeat;<br/>padding: 15px;<br/>}</p>
+
+		<hr/><h3 id="background-origin">background-origin：背景图的定位区域</h3>
+		<p>padding-box：背景图填充框的相对位置<br/>border-box：背景图边界框的相对位置<br/>content-box：背景图的相对位置的内容框</p>
+		
+		<hr/><h3 id="background-position">background-position：背景图片起始位置</h3>
+		<p>left top<br/>left center<br/>left bottom<br/>right top<br/>right center<br/>right bottom<br/>center top<br/>center center<br/>center bottom<br/>x% x%：第一个为水平位置，第二个十垂直位置。默认0% 0%（左上角，100% 100%为右下角，若指定一个值则其他值为50%）<br/>
+		注意：若只指定一个关键字，其他值将会是center<br/>xpos ypos：水平位置和垂直位置，左上角为0，单位可以是像素px、em、ex、cm、mm、in、pt、pc、ch、rem、wh、vw、vmin、vmax等<br/>inherit：从父元素继承</p>
+		<p></p>
+		
+		<hr/><h3 id="background-repeat">background-repeat：水平或垂直平铺（重复）</h3>
+		<p>repeat：在页面水平或垂直方向平铺，默认<br/>repeat-x：只水平平铺<br/>repeat-y：只垂直平铺<br/>no-repeat：不平铺<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="background-size">background-size：背景图大小</h3>
+		<p>length：背景图高宽，第一个值为宽度，第二个值为高度，若只给一个值则第二个值默认auto（自动）<br/>percentage：百分比，第一个宽，第二个高，若只设置一个，则第二个默认auto，如100% 100%<br/>cover：保持图像的纵横比并将图像缩放成将完全覆盖背景定位区域的最小大小<br/>contain：保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小</p>
+		
+		<hr/><h3 id="color">color：文本颜色</h3>
+		<p>名称：red、green、yellow、gray、blue、black、white、lightseagreen<br/>十六进制：#0000ff（6bit或3bit）<br/>RGB值：rgb(255,255,255)、rgb(100%,0%,30%)<br/>RGBA（红绿蓝和阿尔法）：rgba(255,0,0,0.2)，其中0.2表示20%不透明，若为1则不透明，为0则透明</p>
+		<p>一个网页的背景色是指在主体内的选择，如body{color:red;}</p>
+		
+		<hr/><h3 id="text-align">text-align：文本对齐方式</h3>
+		<p>center、left、right、justify</p>
+
+		<hr/><h3 id="text-decoration">text-decoration：设置或删除文本的装饰</h3>
+		<p>none：删除链接下划线<br/>overline：<br/>line-through：<br/>underline</p>
+		
+		<hr/><h3 id="text-transform">text-transform：文本转换</h3>
+		<p>用来指定在一个文本中的大写和小写字母，或每个单词的首字母大写。</p>
+		<p>uppercase：<br/>lowercase：<br/>capitalize：</p>
+		
+		<hr/><h3 id="text-indent">text-indent：文本缩进</h3>
+		<p>用来指定文本的第一行的缩进。</p>
+		<p></p>
+		
+		<hr/><h3 id="letter-spacing">letter-spacing：字符之间的间距</h3>
+		<p>px、em</p>
+		
+		<hr/><h3 id="line-height">line-height：行间距</h3>
+		<p>px、em</p>
+		
+		<hr/><h3 id="text-shadow">text-shadow：设置文本阴影</h3>
+		<p>rtl：从右到左</p>
+
+		<hr/><h3 id="direction">direction：文本方向</h3>
+		<p>rtl：从右到左</p>
+		
+		<hr/><h3 id="word-spacing">word-spacing：单词之间的空白空间</h3>
+		<p>px、em</p>
+		
+		<hr/><h3 id="white-space">white-space：文字环绕</h3>
+		<p>nowrap：</p>
+		
+		<hr/><h3 id="vertical-align">vertical-align：设置文本的垂直对齐图像</h3>
+		<p>text-top：<br/>text-bottom：</p>
+
+		<hr/><h3 id="margin">margin：外边距宽度</h3>
+		<p>rtl：从右到左</p>
+		
+		<hr/><h3 id="padding">padding：内边距宽度</h3>
+		<p>px、em</p>
+		
+		<hr/><h3 id="font-family">font-family：字体设置</h3>
+		<p>宋体、楷体、黑体、verdana</p>
+		
+		<hr/><h3 id="font-size">font-size：字体大小</h3>
+		<p>px、em</p>
+		
+		
+		
+		<hr/><h3>：</h3>
+		<p></p>
+	</div>
 	
 </body>
 </html>
