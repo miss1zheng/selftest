@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>python</title>
+</head>
+<body>
+	<h3>类型变量</h3>
+	<p>数字：数字数据类型用于存储数值，python支持四种不同的数据类型：int、long、float、complex。，如a=23+3.14j</p>
+	<p>字符串：由数字、字母和下划线组成。如b="hello world"</p>
+	<p>列表：可实现集合类的数据结构。可支持数字、字符、字符串甚至列表(嵌套)，以[ ]方括号为标识。如a=[1,2,"3",'45']</p>
+	<p>元组：类似列表，但元组不能二次赋值，也就是仅只读功能，以( )括号作为标识。如a=(1,2,"3",'45')</p>
+	<p>字典：字典的每个键值都使用冒号 : 隔开，每个键值对之间使用逗号 , 隔开，以{}花括号作为标识。如a={1:2,"3":'45'}，其中a[1]为2，a["3"]为'45'。<br/>注意：键是唯一的，值可以一样，一旦键设置一样，则后面设置的会覆盖前面设置的。</p>
+	<h3>运算符</h3>
+	<p>算术运算：加、减、乘、除、取余等，如<br/>a=10<br/>b=20<br/>c=30<br/>print (b+c-a)<br/>print (b*c/a)%13</p>
+	<p>比较运算符：等于、不等于、大于、小于、大于等于等，返回值为True或False。如<br/>a=10<br/>b=20<br/>c=30<br/>print(a>=b)<br/>print(a==b)<br/>print(a!=b)</p>
+	<p>赋值运算：加法赋值、减法赋值、乘法赋值、除法赋值等。如<br/>a=10<br/>b=20<br/>c=30<br/>a+=b<br/>c-=b<br/>b*=2<br/>b/=a<br/>b%=a</p>
+	<p>位运算：按位与、按位或、按位异或、左移、右移等，如<br/>a=10<br/>b=20<br/>print(a&b)<br/>print(a|b)<br/>print(a^b)<br/>print(a<<1)</p>
+	<p>逻辑运算：与、或、非等，如<br/>a=10<br/>b=0<br/>print(a and b)<br/>print(a or b)<br/>print(not(a or b))</p>
+	<p>条件语句，如<br/>a=10<br/>b=0<br/> if a>b:<br/>&nbsp; print (a)<br>elif a==b:<br/>&nbsp; print(a,b)<br/>else:<br/>&nbsp; print(b)</p>
+	<p>循环语句，如<br/>a=2<br/>for i in range(0,10):<br/>&nbsp; a*=2<br/>&nbsp; print(a)<br/>b=10<br/>while b:<br/>&nbsp; print(b)<br/>&nbsp b-=2</p>
+	<p>函数，如<br/>def function():<br/>&nbsp; print("this is funtion.")</p>
+	<p>模块，如<br/>import sys #使用时需要加前缀sys.xx<br/>from time import time,localtime #在模块内只使用这两个函数<br/>from tkinter import * #导入tkinter模块，使用时不用加前缀，如a=Tk()</p>
+	<h3>面向对象</h3>
+	<p>面向对象三要素：封装、继承、多态<p>
+	<p>类Class：<br/>
+	<p>封装：即在类中的参数，在外部是不可见的，要想获取或设置需要类设置一个外部接口</p>
+	<p>继承：子类继承了父类/基类中的功能</p>
+	<p>多态：子类继承父类的同时，若想子类和父类同函数前提下，子类的函数会覆盖父类，这时子类和父类的这个同函数使用时是不同功能实现的</p>
+</body>
+</html>
