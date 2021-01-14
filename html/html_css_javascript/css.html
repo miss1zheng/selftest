@@ -62,7 +62,9 @@
 		<p>若内联、内部、外部样式表三者同时存在，则设置了一样属性的值 内联>内部>外部>浏览器默认样式，而内部没有设置的外部属性则会保留继承下来。如：<br/>外部设置 h3{color:red;text-align:left;font-size:8pt;}<br/>内部设置 h3{text-align:right;font-size:20pt;}<br/>则结果是：h3{color:red;text-align:right;font-size:20pt;}</p>
 		<p>优先级：内联样式 > id选择器 > 伪类 > 属性选择器 > 类选择器 > 元素（类型）选择器 > 通用选择器（*）<br/>注意：!important规则除外，当这个被应用在一个样式声明中，该样式声明会覆盖CSS中任何其他的声明，无论它处在声明列表中的何处<br/>当一样时后出现的样式表设置要优先于先出现的样式表设置，在同一组属性设置中标有!important规则的优先级最大。如：p{/*两个color属性在同一组*/ color:#00f !important; /* 优先级最大 */ color:#f00; }</p>
 		<p>css的7种选择器优先级：内联样式 > id 选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 标签选择器 = 伪元素选择器</p>
-
+		<p>分组选择器：在样式表中有很多具有相同样式的元素，此时可使用分组选择器（每个选择器使用逗号 , 隔开），如h1{color:red;}h2{color:red;}p{color:red;}，使用分组选择器之后h1,h2,p{color:red;}</p>
+		<p>嵌套选择器：适用于选择器内部的选择器的样式<br/>p{}为所有p元素指定一个样式，这里每个p元素都会是此样式<br/>.marked{}为所有class="marked"元素指定一个样式，如&lt;div class="marked">这里的div内部都是是此样式<br/>.marked p{}为所有class="marked"元素内的p元素指定一个样式，如&lt;div class="marked">&lt;p>这里指定的就是div里面的p元素<br/>p.marked{}为所有的class="marked"的p元素指定一个样式，如&lt;p class="marked">这里的p元素就是此样式</p>
+		
 		<hr/><h3>链接</h3>
 		<p>四个链接状态：<br/>a:link：正常，未访问过的链接<br/>a:visited：用户已访问过的链接<br/>a:hover：用户鼠标发在链接时<br/>a:active：链接被点击的那刻<br/>注意：当多个样式设置时，hover必须在link和visited后面，而active必须在hover后面</p>
 		
@@ -163,16 +165,35 @@
 
 		<hr/><h3 id="margin">margin：外边距宽度</h3>
 		<p>优先级：四个值为上右下左，三个值为上（左右）下；两个值为（上下）（左右）</p>
-		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度<br/>百分比：使用百分比边距</p>
+		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度，如2cm<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="margin-top">margin-top：顶部外边距</h3>
+		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度，如2cm<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="margin-bottom">margin-bottom：底部外边距</h3>
+		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度，如2cm<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="margin-right">margin-right：右边外边距</h3>
+		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度，如2cm<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="margin-left">margin-left：左边外边距</h3>
+		<p>auto：设置浏览器边距。这样做的结果会依赖于浏览器<br/>length：自定义宽度，如2cm<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
 		
 		<hr/><h3 id="padding">padding：内边距宽度</h3>
-		<p>px、em</p>
+		<p>优先级：四个值为上右下左，三个值为上（左右）下；两个值为（上下）（左右）</p>
+		<p>length：固定填充<br/>百分比：</p>
 		
 		<hr/><h3 id="padding-top">padding-top：</h3>
-		<p>px、em</p>
+		<p>length：固定填充<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
 		
 		<hr/><h3 id="padding-bottom">padding-bottom：</h3>
-		<p>px、em</p>
+		<p>length：固定填充<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="padding-right">padding-right：</h3>
+		<p>length：固定填充<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="padding-left">padding-left：</h3>
+		<p>length：固定填充<br/>百分比：使用百分比，如25%<br/>inherit：从父元素继承</p>
 		
 		<hr/><h3 id="font">font：字体设置</h3>
 		<p>优先级：font-style > font-variant > font-weight > font-size/line-height > font-family<br/>font-size和font-family的值是必需的。如果缺少了其他值，默认值将被插入，如果有默认值的话。如 15px arial,sans-serif 或 font:italic bold 12px/30px Georgia,serif</p>
@@ -308,14 +329,27 @@
 		<hr/><h3 id="border-top-color">border-top-color：上边框颜色</h3>
 		<p>名称，如red<br/>RGB：如rgb(255,0,0)<br/>十六进制：如#ff0000<br/>transparent：透明，默认值<br/>inherit：从父元素继承</p>
 
-		<hr/><h3 id="width">width：</h3>
-		<p></p>
-		<hr/><h3 id="height">height：</h3>
-		<p></p>
+		<hr/><h3 id="width">width：宽度</h3>
+		<p>length：固定值，如px<br/>百分比：如100%<br/>auto：默认。浏览器会计算出实际的高度。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="max-width">max-width：最大宽度</h3>
+		<p>length：固定值，如px<br/>百分比：如100%<br/>auto：默认。浏览器会计算出实际的高度。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="min-width">min-width：最小宽度</h3>
+		<p>length：固定值，如px<br/>百分比：20%<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="height">height：高度</h3>
+		<p>length：固定值，如px<br/>百分比：如100%<br/>auto：默认。浏览器会计算出实际的高度。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="max-height">max-height：最大高度</h3>
+		<p>length：固定值，如px<br/>百分比：如100%<br/>auto：默认。浏览器会计算出实际的高度。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="min-height">min-height：最小高度</h3>
+		<p>length：固定值，如px<br/>百分比：20%<br/>inherit：从父元素继承</p>
+		
 		<hr/><h3 id="caption-side">caption-side：</h3>
 		<p>bottom</p>
-		
-		
+
 		<hr/><h3 id="outline">outline：轮廓</h3>
 		<p>绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用。<br/>顺序：outline-color > outline-style > outline-width</p>
 		<p>outline-color：轮廓颜色<br/>outline-style：轮廓样式<br/>outline-width：轮廓宽度<br/>inherit：从父元素继承</p>
@@ -330,20 +364,29 @@
 		<p>绘制于元素周围的一条线，位于边框边缘的外围。<br/>注意：请始终在outline-width属性之前声明outline-style属性。</p>
 		<p>thin：细轮廓。<br/>medium：默认。中等轮廓。<br/>thick：粗轮廓。<br/>length：自定义设置<br/>inherit：从父元素继承</p>
 		
-		<hr/><h3>：</h3>
+		<hr/><h3 id="visibility">visibility：是否可见</h3>
+		<p>visibility与display的隐藏元素区别：<br/>visibility:hidden可以隐藏某个元素，但隐藏的元素仍需占用与未隐藏之前一样的空间。也就是说，该元素虽然被隐藏了，但仍然会影响布局。<br/>display:none可以隐藏某个元素，且隐藏的元素不会占用任何空间。也就是说，该元素不但被隐藏了，而且该元素原本占用的空间也会从页面布局中消失。</p>
+		<p>hidden：隐藏元素，但占用空间<br/>collapse：一般的元素显示和hidden一样也占用空间，但与table元素则显示和none一样不占用空间<br/></p>
+		
+		<hr/><h3 id="display">display：是否显示</h3>
+		<p>visibility与display的隐藏元素区别：<br/>visibility:hidden可以隐藏某个元素，但隐藏的元素仍需占用与未隐藏之前一样的空间。也就是说，该元素虽然被隐藏了，但仍然会影响布局。<br/>display:none可以隐藏某个元素，且隐藏的元素不会占用任何空间。也就是说，该元素不但被隐藏了，而且该元素原本占用的空间也会从页面布局中消失。</p>
+		<p>none：隐藏元素，并且不占用空间<br/>inline：更改为内联元素，也就是不会自动换行的元素<br/>block：更改为块元素，会自动换行的元素<br/>inline-block：内联块元素，表现为同行显示并可修改宽高内外边距等属性，如<li>元素加上display:inline-block样式，这样原本垂直的列表就可以水平显示了。</p>
+		
+		<hr/><h3 id="position">position：定位</h3>
+		<p>static：默认值，即没有定位，遵循正常的文档流对象，不会受到 top, bottom, left, right影响。<br/>relative：相对定位元素的定位是相对其正常位置<br/>fixed：元素的位置相对于浏览器窗口是固定位置，即使窗口是滚动的它也不会移动，移动相对定位元素，但它原本所占的空间不会改变，相对定位元素经常被用来作为绝对定位元素的容器块<br/>absolute：绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于&lt;html><br/>sticky：粘性定位，基于用户的滚动位置来定位，依赖于用户的滚动，在 position:relative 与 position:fixed 定位之间切换。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位。这个特定阈值指的是 top, right, bottom 或 left 之一，换言之，指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。</p>
+
+		<hr/><h3 id=“z-index”>z-index：重叠元素</h3>
+		<p>指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面），可以有正数或负数的堆叠顺序，具有更高堆叠顺序的元素总是在较低的堆叠顺序元素的前面。<br/>注意： 如果两个定位元素重叠，没有指定 z-index，最后定位在HTML代码中的元素将被显示在最前面。</p>
 		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
+		
+		<hr/><h3 id="clip">clip：裁剪区域</h3>
+		<p>rect(0px,60px,200px,0px)</p>
+		
+		<hr/><h3 id=“overflow”>overflow：溢出显示</h3>
+		<p>scroll<br/>hidden<br/>auto<br/>visible</p>
+		
+		<hr/><h3 id="cursor">cursor：更改光标</h3>
+		<p>auto<br/>crosshair<br/>default<br/>e-resize<br/>help<br/>move<br/>n-resize<br/>ne-resize<br/>nw-resize<br/>pointer<br/>progress<br/>s-resize<br/>se-resize<br/>sw-resize<br/>text<br/>w-resize<br/>wait</p>
 		<hr/><h3>：</h3>
 		<p></p>
 		<hr/><h3>：</h3>
