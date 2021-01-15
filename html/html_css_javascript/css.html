@@ -74,6 +74,39 @@
 		<p>子元素选择器：相对于后代选择器，只能选择作为某元素子元素的元素，如<br/>&lt;style>div>p{color:yellow;}&lt;/style><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;div>&lt;span>&lt;p>yy&lt;/p>&lt;/span>&lt;/div><br/>这里xx是style样式，而yy不会显示成style样式</p>
 		<p>相邻兄弟选择器：可选择紧接在另一元素后的元素，且二者有相同父元素。如果需要选择紧接在另一个元素后的元素，而且二者有相同的父元素，可以使用相邻兄弟选择器。如：<br/>&lt;style>div+p{background-color:yellow;}&lt;/style><br/>&lt;div>&lt;p>xxx&lt;/p>&lt;/div><br/>&lt;p>xx&lt;/p><br/>&lt;p>yy&lt;/p><br/>这里只有xx可以显示从style样式，而xxx和yy都不会有style样式</p>
 		<p>后续兄弟选择器：选取所有指定元素之后的相邻兄弟元素。如：<br/>&lt;style>div~p{color:yellow;}&lt;/style><br/>&lt;p>xxx&lt;/p><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;p>yy&lt;/p><br/>&lt;p>yy&lt;/p><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;p>yy&lt;/p><br/>这里yy都会显示style样式，而xx和xxx不会有style样式</p>
+		<p>属性选择器：如[title]{color:blue;}，这里是把包含标题 title 的所有元素变蓝</p>
+		<p>属性和值选择器：如[title=bob]{color:red;}，这里是把包含 titile="bob" 的所有元素变红</p>
+		<p>属性和值选择器 多值：<br/>
+		1.使用波浪 ~ 分隔属性和值：<br/>[title~=hello] { color:blue; }<br/>&lt;h1 title="hello hai">Hello 嗨&lt;/h1><br/>&lt;p title="student hello">Hello CSS students!&lt;/p><br/>&lt;h2 title="student">Hi CSS students!&lt;/h2><br/>这里h1和p都会变蓝，而h2不会有效<br/>
+		2.使用位或 | 分隔属性和值：<br/>[lang|=en]{color:blue;}<br/>&lt;p lang="en">Hello!&lt;/p><br/>&lt;p lang="en-us">Hi!&lt;/p><br/>&lt;p lang="us">Hi!&lt;/p><br/>这里前面两个都会变蓝，最后一个无效<br/>
+		3.属性选择器无需使用class或id形式：<br/>
+		&lt;style><br/>
+		&nbsp; input[type="text"]
+		{
+			width:150px;
+			display:block;
+			margin-bottom:10px;
+			background-color:yellow;}<br/>
+		&nbsp; input[type="button"]
+		{
+			width:120px;
+			margin-left:35px;
+			display:block;}<br/>
+		&lt;/style><br/>
+		&lt;form method="get"><br/>
+			&nbsp; username:&lt;input type="text" value="name" size="20"><br/>
+			&nbsp; password:&lt;input type="text" value="password" size="20"><br/>
+			&nbsp; &lt;input type="button" value="Button"><br/>
+		&lt;/form></p>
+		<p>CSS 属性选择器 ~=, |=, ^=, $=, *= 的区别：<br/>
+		"value 是完整单词" 类型的比较符号: ~=, |=<br/>
+		"拼接字符串" 类型的比较符号: *=, ^=, $=<br/>
+		1.attribute 属性中包含 value：<br/>[attribute~=value] 属性中包含独立的单词为 value，如：<br/>[title~=value]{color:red;}<br/>&lt;p title="max value">hello&lt;/p><br/>显示为红色<br>
+		[attribute*=value] 属性中做字符串拆分，只要能拆出来 value 这个词就行，如：<br/>[title~=value]{color:red;}<br/>&lt;p title="max value">hello&lt;/p><br/>&ltp title="minvalue">hai&lt;/p><br/>都会显示为红色<br>
+		2.attribute 属性以 value 开头：<br/>[attribute|=value] 属性中必须是完整且唯一的单词，或者以 - 分隔开，如：<br/>[lang|=en]{color:red;}<br/>&lt;p lang="en-us">hello&lt;/p><br/>这里显示红色<br/>
+		attribute^=value] 属性的前几个字母是 value 就可以，如：<br/>[lang^=en]{color:red;}<br/>&lt;p lang="ennn">hai&lt;/p><br/>这里显示红色<br/>
+		3.attribute 属性以 value 结尾：<br/>[attibute$=value] 属性的后几个字母是 value 就可以，如：<br/>div[class$="test"]{color:red;}<br/>&lt;div class="first_test">第一个 div 元素。&lt;/div><br/>
+		&lt;div class="test">第二个 div 元素。&lt;/div><br/>&lt;div class="test22">第三个 div 元素。&lt;/div><br/>&lt;p class="test">这是段落中的文本。&lt;/p><br/>这里的前两个元素显示红色，后两个元素无效</p>
 		
 		<hr/><h3>伪类和伪元素</h3>
 		<p>伪类：用于添加一些选择器的特殊效果。<br/>伪元素：用来添加一些选择器的特殊效果。</p>
@@ -404,7 +437,7 @@
 		&lt;/div></p>
 		
 		<hr/><h3>提示框</h3>
-		<p>提示框在正下方：<br/>
+		<p>提示框在正下/上方：<br/>
 		&lt;style><br/>
 		&nbsp; .tooltip {
 			position: relative;
@@ -420,13 +453,13 @@
 			padding: 5px 0;
 			position: absolute;
 			z-index: 1;
-			top: 150%;
+			top: 150%; /*bottom*/
 			left: 50%;
 			margin-left: -60px;}<br/>
 		&nbsp; .tooltip .tooltiptext::after {
 			content: "";
 			position: absolute;
-			bottom: 100%;
+			bottom: 100%; /*top*/
 			left: 50%;
 			margin-left: -5px;
 			border-width: 5px;
@@ -436,10 +469,200 @@
 			visibility: visible;}<br/>
 		&lt;/style><br/>
 		&lt;body style="text-align:center;"><br/>
+		&lt;h3 style="font-size:60px;">&lt;/h3><br/>
 		&lt;div class="tooltip">鼠标移动到这<br/>
 		  &nbsp; &lt;span class="tooltiptext">提示文本&lt;/span><br/>
 		&lt;/div><br/>
 		&lt;/body><br/></p>
+		<p>提示框在正右方/左方：<br/>
+		&lt;style><br/>
+		&nbsp; .tooltip {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px dotted black;}<br/>
+		&nbsp; .tooltip .tooltiptext {
+			visibility: hidden;
+			width: 120px;
+			background-color: black;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			top: -5px;
+			left: 110%; /*改成right*/}<br/>
+		&nbsp; .tooltip .tooltiptext::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			right: 100%; /*改成right*/
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent black transparent transparent;}<br/>
+		&nbsp; .tooltip:hover .tooltiptext {
+			&nbsp; visibility: visible;}<br/>
+		&lt;/style><br/>
+		&lt;body style="text-align:center;"><br/>
+		&lt;div class="tooltip">鼠标移动到我这<br/>
+			&nbsp; &lt;span class="tooltiptext">提示文本&lt;/span><br/>
+		&lt;/div></p>
+		<p>提示框淡入效果：<br/>
+		&lt;style><br/>
+		&nbsp; .tooltip {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px dotted black;}<br/>
+		&nbsp; .tooltip .tooltiptext {
+			visibility: hidden;
+			width: 120px;
+			background-color: black;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			bottom: 100%;
+			left: 50%;
+			margin-left: -60px; 
+			/* 淡入 - 1秒内从 0% 到 100% 显示: */
+			opacity: 0;
+			transition: opacity 1s;}
+		&nbsp; .tooltip:hover .tooltiptext {
+			visibility: visible;
+			opacity: 1;}<br/>
+		&lt;/style><br/>
+		&lt;body style="text-align:center;"><br/>
+		&lt;h2>提示工具淡入效果&lt;/h2><br/>
+		&lt;p>鼠标移动到以下元素，提示工具会再一秒内从 0% 到 100% 完全显示。&lt;/p><br/>
+		&lt;div class="tooltip">鼠标移动到我这<br/>
+			&nbsp; &lt;span class="tooltiptext">提示文本&lt;/span><br/>
+		&lt;/div><br/></p>
+		<hr/><h3>图片样式</h3>
+		<p>多个图片响应式排列：<br/>
+		&lt;style><br/>
+		&nbsp; div.img {
+			border: 1px solid #ccc;}<br/>
+		&nbsp; div.img:hover {
+			border: 1px solid #777;}<br/>
+		&nbsp; div.img img {
+			width: 100%;
+			height: auto;}<br/>
+		&nbsp; div.desc {
+			padding: 15px;
+			text-align: center;}<br/>
+		&nbsp; * {
+			box-sizing: border-box;}<br/>
+		&nbsp; .responsive {
+			padding: 0 6px;
+			float: left;
+			width: 24.99999%;}<br/>
+		&nbsp; @media only screen and (max-width: 700px){<br/>
+			&nbsp; &nbsp; .responsive {
+				width: 49.99999%;
+				margin: 6px 0;}}<br/>
+		&nbsp; @media only screen and (max-width: 500px){<br/>
+			&nbsp; &nbsp; .responsive {
+				width: 100%;}}<br/>
+		&nbsp; &nbsp; .clearfix:after {
+			content: "";
+			display: table;
+			clear: both;}<br/>
+		&lt;/style><br/>
+		&lt;div class="responsive"><br/>
+			&nbsp; &lt;div class="img"><br/>
+				&nbsp; &nbsp; &lt;a target="_blank" href="img_fjords.jpg"><br/>
+				&nbsp; &nbsp; &lt;img src="other/apple.png" alt="img1">&lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="desc">image1lt;/div><br/>
+			&nbsp; &lt;div><br/>
+		&lt;/div><br/>
+		&lt;div class="responsive"><br/>
+			&nbsp; &lt;div class="img"><br/>
+				&nbsp; &nbsp; &lt;a target="_blank" href="img_forest.jpg"><br/>
+				&nbsp; &nbsp; &lt;img src="other/apple.png" alt="img2">&lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="desc">image2&lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+		&lt;div class="responsive"><br/>
+			&nbsp; &lt;div class="img"><br/>
+				&nbsp; &nbsp; &lt;a target="_blank" href="img_lights.jpg"><br/>
+				&nbsp; &nbsp; &lt;img src="other/apple.png" alt="img3" width="600" height="400">&lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="desc">image3&lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+		&lt;div class="responsive"><br/>
+			&nbsp; &lt;div class="img"><br/>
+				&nbsp; &nbsp; &lt;a target="_blank" href="img_mountains.jpg"><br/>
+				&nbsp; &nbsp; &lt;img src="other/apple.png" alt="img4">&lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="desc">Add a description of the image here&lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+		&lt;div class="clearfix">&lt;/div><br/>
+		&lt;div style="padding:6px;"><br/>
+		&lt;/div><br/></p>
+		<p>图片透明实现：<br/>
+		&lt;style><br/>
+		&nbsp; div.background
+		{
+			width:500px;
+			height:250px;
+			background:url(/other/apple.png) repeat;
+			border:2px solid black;}<br/>
+		&nbsp; div.transbox
+		{
+			width:400px;
+			height:180px;
+			margin:30px 50px;
+			background-color:#ffffff;
+			border:1px solid black;
+			opacity:0.6;
+			filter:alpha(opacity=60); /* IE8 及更早版本 */}<br/>
+		&nbsp; div.transbox p
+		{
+			margin:30px 40px;
+			font-weight:bold;
+			color:#000000;}<br/>
+		&nbsp; img
+		{
+			opacity:0.4;
+			filter:alpha(opacity=40); /* 适用 IE8 及其更早版本 */}<br/>
+		&nbsp; img:hover
+		{
+			opacity:1.0;
+			filter:alpha(opacity=100); /* 适用 IE8 及其更早版本 */}<br/>
+		&lt;/style><br/>
+		&lt;div class="background"><br/>
+			&nbsp; &lt;div class="transbox"><br/>
+				&nbsp; &nbsp; &lt;img src="/other/apple.png" width="150" height="113" alt="apple"><br/>
+				&nbsp; &nbsp; &lt;img src="./other/apple.png" width="150" height="113" alt="apple"><br/>
+				&nbsp; &nbsp; &lt;p>这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。这些文本在透明框里。&lt;/p><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div></p>
+		<p>图像拼接：<br/>
+		&lt;style><br/>
+		&nbsp; #navlist{position:relative;}<br/>
+		&nbsp; #navlist li{margin:0;padding:0;list-style:none;position:absolute;top:0;}<br/>
+		&nbsp; #navlist li, #navlist a{height:44px;display:block;}<br/>
+		&nbsp; #home{left:0px;width:46px;}<br/>
+		&nbsp; #home{background:url('img_navsprites_hover.gif') 0 0;}<br/>
+		&nbsp; #home a:hover{background: url('img_navsprites_hover.gif') 0 -45px;}<br/>
+		&nbsp; #prev{left:63px;width:43px;}<br/>
+		&nbsp; #prev{background:url('img_navsprites_hover.gif') -47px 0;}<br/>
+		&nbsp; #prev a:hover{background: url('img_navsprites_hover.gif') -47px -45px;}<br/>
+		&nbsp; #next{left:129px;width:43px;}<br/>
+		&nbsp; #next{background:url('img_navsprites_hover.gif') -91px 0;}<br/>
+		&nbsp; #next a:hover{background: url('img_navsprites_hover.gif') -91px -45px;}<br/>
+		&lt;/style><br/>
+		&lt;ul id="navlist"><br/>
+			&nbsp; &lt;li id="home">&lt;a href="/">&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li id="prev">&lt;a href="/css/">&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li id="next">&lt;a href="/html/">&lt;/a>&lt;/li><br/>
+		&lt;/ul></p>
+		
+		<hr/><h3>媒体样式</h3>
+		<p></p>
 		
 		<hr/><h3 id="background">background：背景设置</h3>
 		<p>优先级为 color > image > position/size > repeat > origin > clip > attachment > 默认/继承。整个背景简写如background:#ffffff url('img_tree.png') no-repeat fixed right top;</p>
