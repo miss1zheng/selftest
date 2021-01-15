@@ -8,6 +8,7 @@
 		.main_body{width:80%;float:left}
 		.table_body{width:20%;float:right}
 		a{text-decoration:none}
+		p{line-height:25px;}
 	</style>
 </head>
 <body>
@@ -56,14 +57,80 @@
 		<h3 id="jianjie">简介</h3>
 		<p>CSS 指层叠样式表，使用 CSS 同时控制多重网页的样式和布局。</p>
 		<p>CSS规则主要组成：选择器以及一条或多条声明，如h1{color:red;font-size:20px;}<br/>选择器通常是需要改变样式的元素。<br/>每条声明由一个属性和一个值组成，属性和值使用冒号隔开。<br/>声明总以分号 ; 结束，而声明总以大括号 {} 括起来。<br/>CSS注释以/*xxx*/来进行注释</p>
-		<p>id选择器：可以为标有特定id的html元素指定特定样式。<br/>id选择器以“#”来定义，如：使用#xx{x:xxx;xx:xx;}定义，然后在html中元素属性 id="xx" 来进行使用。<br/>注意：id属性不要以数字开头，因为在Mozilla/Firefox浏览器不起作用。</p>
-		<p>class选择器：用于描述一组元素样式。class可以在多个元素中使用，在html中以class属性表示，<br/>类选择器以点 . 号显示，如.center{text-align:center;}<br/>也可以指定特定的HTML元素使用class，如使所有的p元素使用class="center"让该元素文本居中。p.center {text-align:center;}<br/>类名的第一个字符不能使用数字！它无法在 Mozilla 或 Firefox 中起作用。</p>
+		
+		<hr/><h3>样式表</h3>
 		<p>样式表：外部样式表（即通过link标签链接到.css样式）、内部样式表（使用&lt;style>&lt;/style>建立样式）、内联样式（直接在每个元素的属性设置style）<br/>外部样式表链接如 &lt;link rel="stylesheet" type="text/css" href="my.css"> 链接到my.css<br/>注意：不要在属性值与单位之间留有空格（如："margin-left: 20 px" ），正确的写法是 "margin-left: 20px" 。</p>
 		<p>若内联、内部、外部样式表三者同时存在，则设置了一样属性的值 内联>内部>外部>浏览器默认样式，而内部没有设置的外部属性则会保留继承下来。如：<br/>外部设置 h3{color:red;text-align:left;font-size:8pt;}<br/>内部设置 h3{text-align:right;font-size:20pt;}<br/>则结果是：h3{color:red;text-align:right;font-size:20pt;}</p>
 		<p>优先级：内联样式 > id选择器 > 伪类 > 属性选择器 > 类选择器 > 元素（类型）选择器 > 通用选择器（*）<br/>注意：!important规则除外，当这个被应用在一个样式声明中，该样式声明会覆盖CSS中任何其他的声明，无论它处在声明列表中的何处<br/>当一样时后出现的样式表设置要优先于先出现的样式表设置，在同一组属性设置中标有!important规则的优先级最大。如：p{/*两个color属性在同一组*/ color:#00f !important; /* 优先级最大 */ color:#f00; }</p>
 		<p>css的7种选择器优先级：内联样式 > id 选择器 > 类选择器 = 伪类选择器 = 属性选择器 > 标签选择器 = 伪元素选择器</p>
+		
+		<hr/><h3>选择器</h3>
+		<p>id选择器：可以为标有特定id的html元素指定特定样式。<br/>id选择器以“#”来定义，如：使用#xx{x:xxx;xx:xx;}定义，然后在html中元素属性 id="xx" 来进行使用。<br/>注意：id属性不要以数字开头，因为在Mozilla/Firefox浏览器不起作用。</p>
+		<p>class选择器：用于描述一组元素样式。class可以在多个元素中使用，在html中以class属性表示，<br/>类选择器以点 . 号显示，如.center{text-align:center;}<br/>也可以指定特定的HTML元素使用class，如使所有的p元素使用class="center"让该元素文本居中。p.center {text-align:center;}<br/>类名的第一个字符不能使用数字！它无法在 Mozilla 或 Firefox 中起作用。</p>
 		<p>分组选择器：在样式表中有很多具有相同样式的元素，此时可使用分组选择器（每个选择器使用逗号 , 隔开），如h1{color:red;}h2{color:red;}p{color:red;}，使用分组选择器之后h1,h2,p{color:red;}</p>
 		<p>嵌套选择器：适用于选择器内部的选择器的样式<br/>p{}为所有p元素指定一个样式，这里每个p元素都会是此样式<br/>.marked{}为所有class="marked"元素指定一个样式，如&lt;div class="marked">这里的div内部都是是此样式<br/>.marked p{}为所有class="marked"元素内的p元素指定一个样式，如&lt;div class="marked">&lt;p>这里指定的就是div里面的p元素<br/>p.marked{}为所有的class="marked"的p元素指定一个样式，如&lt;p class="marked">这里的p元素就是此样式</p>
+		<p>组合选择符：说明了两个选择器直接的关系。<br/>四种组合方式：后代选择器（以空格 分隔）、子元素选择器（以大于>分隔）、相邻兄弟选择器（以加号+分隔）、普通兄弟选择器（以波浪~分隔）</p>
+		<p>后代选择器：用于选取某元素的后代元素，如：<br/>&lt;style>div p{color:red}&lt;/style><br/>&lt;div>&lt;p>xxx&lt/p>&lt/div> <br/>这里的p就会是style里设置的样式</p>
+		<p>子元素选择器：相对于后代选择器，只能选择作为某元素子元素的元素，如<br/>&lt;style>div>p{color:yellow;}&lt;/style><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;div>&lt;span>&lt;p>yy&lt;/p>&lt;/span>&lt;/div><br/>这里xx是style样式，而yy不会显示成style样式</p>
+		<p>相邻兄弟选择器：可选择紧接在另一元素后的元素，且二者有相同父元素。如果需要选择紧接在另一个元素后的元素，而且二者有相同的父元素，可以使用相邻兄弟选择器。如：<br/>&lt;style>div+p{background-color:yellow;}&lt;/style><br/>&lt;div>&lt;p>xxx&lt;/p>&lt;/div><br/>&lt;p>xx&lt;/p><br/>&lt;p>yy&lt;/p><br/>这里只有xx可以显示从style样式，而xxx和yy都不会有style样式</p>
+		<p>后续兄弟选择器：选取所有指定元素之后的相邻兄弟元素。如：<br/>&lt;style>div~p{color:yellow;}&lt;/style><br/>&lt;p>xxx&lt;/p><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;p>yy&lt;/p><br/>&lt;p>yy&lt;/p><br/>&lt;div>&lt;p>xx&lt;/p>&lt;/div><br/>&lt;p>yy&lt;/p><br/>这里yy都会显示style样式，而xx和xxx不会有style样式</p>
+		
+		<hr/><h3>伪类和伪元素</h3>
+		<p>伪类：用于添加一些选择器的特殊效果。<br/>伪元素：用来添加一些选择器的特殊效果。</p>
+		<p>伪类的语法：<br/>selector:pseudo-class {property:value;}<br/>CSS类也可以使用伪类：<br/>selector.class:pseudo-class {property:value;}</p>
+		<p>伪元素的语法：<br/>selector:pseudo-element {property:value;}<br/>CSS类也可以使用伪元素：<br/>selector.class:pseudo-element {property:value;}</p>
+		<p>伪类和css类配合使用：a.red:visited {color:#FF0000;} &lt;a class="red" href="css-syntax.html">CSS 语法&lt;/a>，链接已被访问，它会显示为红色。</p>
+		<p>anchor伪类：a:link、a:visited、a:hover、a:active</p>
+		<p>first-child 伪类：选择父元素的第一个子元素。如<br/>p:first-child{color:blue;}<br/>&lt;p>xx&lt;/p><br/>&lt;p>yy&lt;/p><br/>xx有效，yy无效<br/>
+		如：<br/>p > i:first-child{color:blue;}<br/><&lt;p>x&lt;i>ii&lt;/i>xx&lt;/p><br/>&lt;p>x&lt;i>ii&lt;/i>xx&lt;i>iiii&lt;/i>x&lt;/p><br/>这里只有ii显示出style样式
+		<br/>如：<br/>p:first-child i{color:blue;}<br/>&lt;p>x&lt;i>ii&lt;/i>xx&lt;i>ii&lt;/i>x&lt;/p><br/>&lt;p>x&lt;i>iii&lt;/i>xx&lt;i>iii&lt;/i>x&lt;/p><br/>只有ii有效，即选择器匹配所有作为元素的第一个子元素的 &lt;p> 元素中的所有 &lt;i> 元素</p>
+		<p>:lang 伪类：为不同的语言定义特殊的规则。如：<br/>q:lang(no){quotes: "~" "~";}<br/>&lt;p>Some text &lt;q lang="no">A quote in a paragraph&lt;/q> Some text.&lt;/p><br/>在q的开始和结束位置上加入了 ~ 符号</p>
+		<p>:first-line 伪元素：用于向文本的首行设置特殊样式。如：<br/>p:first-line {color:red;}<br/>&lt;p>xx&lt;/p><br/>xx显示为红色<br/>注意："first-line" 伪元素只能用于块级元素。</p>
+		<p>:first-letter 伪元素：用于向文本的首字母设置特殊样式，如：<br/>p:first-letter {color:red;}<br/>&lt;p>xxx&lt;/p><br/>首个x会变红色<br/>注意："first-letter" 伪元素只能用于块级元素。</p>
+		<p>伪元素和css类配合使用：如：<br/>p.article:first-letter {color:#ff0000;}<br/>&lt;p class="article">文章段落&lt;/p><br/>首字母变为红色</p>
+		<p>多个伪元素：如：<br/>p:first-letter{color:red}<br/>p:first-line {color:blue;}<br/>&lt;p>你可以结合使用"first-line"和"first-letter"伪元素向文本的首行和首字母设置特殊样式。&lt;/p><br/>第一个字为红色，首行是蓝色</p>
+		<p>:before 伪元素：可以在元素的内容前面插入新内容。如：<br/>h1:before {content:url(smiley.gif);}<br/>&lt;h1>xx&lt;/h1><br/>在xx文本前面有个.gif图像</p>
+		<p>:after 伪元素：可以在元素的内容之后插入新内容。如：<br/>h1:after {content:url(smiley.gif);}<br/>&lt;h1>xx&lt;/h1><br/>在xx文本后面有个.gif图像</p>
+		
+		<table cellspacing="0" cellpadding="0" border="1">
+		<caption>所有CSS伪类/元素</caption>
+		<tr><th>选择器</th><th>示例</th><th>示例说明</th></tr>
+		<tr><td>:checked</td><td>input:checked</td><td>选择所有选中的表单元素</td></tr>
+		<tr><td>:disabled</td><td>input:disabled</td><td>选择所有禁用的表单元素</td></tr>
+		<tr><td>:empty</td><td>p:empty</td><td>选择所有没有子元素的p元素</td></tr>
+		<tr><td>:enabled</td><td>input:enabled</td><td>选择所有启用的表单元素</td></tr>
+		<tr><td>:first-of-type</td><td>p:first-of-type</td><td>选择的每个 p 元素是其父元素的第一个 p 元素</td></tr>
+		<tr><td>:in-range</td><td>input:in-range</td><td>选择元素指定范围内的值</td></tr>
+		<tr><td>:invalid</td><td>input:invalid</td><td>选择所有无效的元素</td></tr>
+		<tr><td>:last-child</td><td>p:last-child</td><td>选择所有p元素的最后一个子元素</td></tr>
+		<tr><td>:last-of-type</td><td>p:last-of-type</td><td>选择每个p元素是其母元素的最后一个p元素</td></tr>
+		<tr><td>:not(selector)</td><td>:not(p)</td><td>选择所有p以外的元素</td></tr>
+		<tr><td>:nth-child(n)</td><td>p:nth-child(2)</td><td>选择所有 p 元素的父元素的第二个子元素</td></tr>
+		<tr><td>:nth-last-child(n)</td><td>p:nth-last-child(2)</td><td>选择所有p元素倒数的第二个子元素</td></tr>
+		<tr><td>:nth-last-of-type(n)</td><td>p:nth-last-of-type(2)</td><td>选择所有p元素倒数的第二个为p的子元素</td></tr>
+		<tr><td>:nth-of-type(n)</td><td>p:nth-of-type(2)</td><td>选择所有p元素第二个为p的子元素</td></tr>
+		<tr><td>:only-of-type</td><td>p:only-of-type</td><td>选择所有仅有一个子元素为p的元素</td></tr>
+		<tr><td>:only-child</td><td>p:only-child</td><td>选择所有仅有一个子元素的p元素</td></tr>
+		<tr><td>:optional</td><td>input:optional</td><td>选择没有"required"的元素属性</td></tr>
+		<tr><td>:out-of-range</td><td>input:out-of-range</td><td>选择指定范围以外的值的元素属性</td></tr>
+		<tr><td>:read-only</td><td>input:read-only</td><td>选择只读属性的元素属性</td></tr>
+		<tr><td>:read-write</td><td>input:read-write</td><td>选择没有只读属性的元素属性</td></tr>
+		<tr><td>:required</td><td>input:required</td><td>选择有"required"属性指定的元素属性</td></tr>
+		<tr><td>:root</td><td>root</td><td>选择文档的根元素</td></tr>
+		<tr><td>:target</td><td>#news:target</td><td>选择当前活动#news元素(点击URL包含锚的名字)</td></tr>
+		<tr><td>:valid</td><td>input:valid</td><td>选择所有有效值的属性</td></tr>
+		<tr><td>:link</td><td>a:link</td><td>选择所有未访问链接</td></tr>
+		<tr><td>:visited</td><td>a:visited</td><td>选择所有访问过的链接</td></tr>
+		<tr><td>:active</td><td>a:active</td><td>选择正在活动链接，可用于选中目标</td></tr>
+		<tr> <td>:hover</td><td>a:hover</td><td>把鼠标放在链接上的状态</td></tr>
+		<tr><td>:focus</td><td>input:focus</td><td>选择元素输入后具有焦点</td></tr>
+		<tr><td>:first-letter</td><td>p:first-letter</td><td>选择每个&lt;p&gt; 元素的第一个字母</td></tr>
+		<tr><td>:first-line</td><td>p:first-line</td><td>选择每个&lt;p&gt; 元素的第一行</td></tr>
+		<tr><td>:first-child</td><td>p:first-child</td><td>选择器匹配属于任意元素的第一个子元素的 &lt;p&gt; 元素</td></tr>
+		<tr><td>:before</td><td>p:before</td><td>在每个&lt;p&gt;元素之前插入内容</td></tr>
+		<tr><td>:after</td><td>p:after</td><td>在每个&lt;p&gt;元素之后插入内容</td></tr>
+		<tr><td>:lang(<i>language</i>)</td><td>p:lang(it)</td><td>为&lt;p&gt;元素的lang属性选择一个开始值</td></tr>
+		</table>
 		
 		<hr/><h3>链接</h3>
 		<p>四个链接状态：<br/>a:link：正常，未访问过的链接<br/>a:visited：用户已访问过的链接<br/>a:hover：用户鼠标发在链接时<br/>a:active：链接被点击的那刻<br/>注意：当多个样式设置时，hover必须在link和visited后面，而active必须在hover后面</p>
@@ -72,6 +139,307 @@
 		<p>在css中定义后，在html使用为class="xx"，如css中为ul.a{url('other/apple.png');}或ol.b{list-style-type: circle;}，则在html中引用为&lt;ul class="a"></p>
 		<p>在所有浏览器中都能显示图像：css中为<br/>ul{<br/>&nbsp; list-style-type: none;<br/>&nbsp; padding: 0px;<br/>&nbsp; margin: 0px;}<br/>ul li{<br/>&nbsp; background-image: url('other/apple.png');<br/>&nbsp; background-repeat: no-repeat;<br/>&nbsp; background-position: 0px 5px;<br/>&nbsp; padding-left: 14px; }<br/>在html中为<br/>&lt;ul>&lt;li>hello&lt;/li>&lt;/ul></p>
 		<p>默认情况下列表 &lt;ul> 或 &lt;ol> 还设置了内边距和外边距，可使用 margin:0 和 padding:0 来移除</p>
+		
+		<hr/><h3>导航栏</h3>
+		<p>左侧栏：<br/>
+		&lt;style><br/>
+		&nbsp; body {margin: 0;}<br/>
+		&nbsp; ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 25%;
+			background-color: #f1f1f1;
+			position: fixed;
+			height: 100%;
+			overflow: auto;}<br/>
+		&nbsp; li a {
+			display: block;
+			color: #000;
+			padding: 8px 16px;
+			text-decoration: none;}<br/>
+		&nbsp; li a.active {background-color: #4CAF50;color: white;}<br/>
+		&nbsp; li a:hover:not(.active) {background-color: #555;color: white;}<br/>
+		&lt;/style><br/>
+		&lt;ul><br/>
+			&nbsp; &lt;li>&lt;a class="active" href="#home">主页&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#news">新闻&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#contact">联系&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#about">关于&lt;/a>&lt;/li><br/>
+		&lt;/ul><br/>
+		&lt;div style="margin-left:25%;padding:1px 16px;height:1000px;"><br/>
+			&nbsp; &lt;h3>Fixed Full-height Side Nav&lt;/h3><br/>
+			&nbsp; &lt;pre style="line-height:25px;">Try to scroll this area, and see how the sidenav sticks to the page<br/>
+			Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.<br/>
+			Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..&lt;/pre><br/>&lt;/div></p>
+		<p>顶部导航栏：<br/>
+		&lt;style><br/>
+		&nbsp; ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			border: 1px solid #e7e7e7;
+			background-color: #f3f3f3;
+			position: fixed;
+			top: 0;
+			width: 100%;}<br/>
+		&nbsp; li {float: left;}<br/>
+		&nbsp; li a {
+			display: block;
+			color: #666;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;}<br/>
+		&nbsp; li a:hover:not(.active) {background-color: #ddd;}<br/>
+		&nbsp; li a.active {color: white;background-color: #4CAF50;}<br/>
+		&lt;/style><br/>
+		&lt;ul><br/>
+			&nbsp; &lt;li>&lt;a class="active" href="#home">主页&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li><&lt;a href="#news">新闻&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#contact">联系&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#about">关于&lt;/a>&lt;/li><br/>
+		&lt;/ul><br/>
+		&lt;div style="margin-left:25%;padding:1px 16px;height:1000px;"><br/>
+			&nbsp; &lt;h3>Fixed Full-height Side Nav&lt;/h3><br/>
+			&nbsp; &lt;pre>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div.<br/>
+			Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it).<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..&lt;/pre><br/>&lt;/div><br/></p>
+		<p>响应边侧导航栏，即边侧和顶端的转换：<br/>
+		&lt;style><br/>
+		&nbsp; body {margin: 0;}<br/>
+		&nbsp; ul.sidenav {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			width: 25%;
+			background-color: #f1f1f1;
+			position: fixed;
+			height: 100%;
+			overflow: auto;}<br/>
+		&nbsp; ul.sidenav li a {
+			display: block;
+			color: #000;
+			padding: 8px 16px;
+			text-decoration: none;}<br/>
+		&nbsp; ul.sidenav li a.active {
+			background-color: #4CAF50;
+			color: white;}<br/>
+		&nbsp; ul.sidenav li a:hover:not(.active) {
+			background-color: #555;
+			color: white;}<br/>
+		&nbsp; div.content {
+			margin-left: 25%;
+			padding: 1px 16px;
+			height: 1000px;}<br/>
+		&nbsp; @media screen and (max-width: 900px) {<br/>
+			&nbsp; &nbsp; ul.sidenav {
+				width: 100%;
+				height: auto;
+				position: relative;}<br/>
+			&nbsp; &nbsp; ul.sidenav li a {
+				float: left;
+				padding: 15px;}<br/>
+			&nbsp; &nbsp; div.content {margin-left: 0;}}<br/>
+		&nbsp; @media screen and (max-width: 400px) {<br/>
+			&nbsp; &nbsp; ul.sidenav li a {
+				text-align: center;
+				float: none;
+			}}<br/>
+		&lt;/style><br/>
+		&lt;ul class="sidenav"><br/>
+			&nbsp; &lt;li>&lt;a class="active" href="#home">主页&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#news">新闻&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#contact">联系&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#about">关于&lt;/a>&lt;/li><br/>
+		&lt;/ul><br/>
+		&lt;div class="content"><br/>
+			&nbsp; &lt;h3>Fixed Full-height Side Nav&lt;/h3><br/>
+			&nbsp; &lt;pre>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div. Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it). Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>&lt;/pre><br/>
+			&nbsp; &lt;p>该实例在屏幕宽度小于 900px 时导航栏为顶部水平导航栏，如果大于 900px 导航栏会在左边，且是固定的。&lt;/p><br/>
+			&nbsp; &lt;p>如果屏幕宽度小于 400px 会变为垂直导航栏。&lt;/p><br/>
+			&nbsp; &lt;h3>重置浏览器窗口大小，查看效果。&lt;/h3><br/>
+		&lt;/div><br/></p>
+		<p>下拉菜单：<br/>
+		&lt;style><br/>
+		&nbsp; ul{
+			list-style-type:none;
+			margin:0;
+			padding:0;
+			overflow:hidden;
+			background-color:#333;}<br/>
+		&nbsp; li{
+			float:left;}<br/>
+		&nbsp; li a, .dropbtn{
+			display:inline-block;
+			color:white;
+			text-align:center;
+			padding:14px 16px;
+			text-decoration:none;}<br/>
+		&nbsp; li a:hover, .dropdown:hover, .dropbtn{
+			background-color:#111;}<br/>
+		&nbsp; .dropdown{
+			display:inline-block;}<br/>
+		&nbsp; .dropdown-content{
+			display:none;
+			position:absolute;
+			background-color:#f9f9f9;
+			min-width:160px;
+			box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);}<br/>
+		&nbsp; .dropdown-content a{
+			color:black;
+			padding:12px 16px;
+			text-decoration:none;
+			display:block;}<br/>
+		&nbsp; .dropdown-content a:hover {background-color: #f1f1f1}<br/>
+		&nbsp; .dropdown:hover .dropdown-content{
+			display:block;}<br/>
+		&lt;/style><br/>
+		&lt;ul class="sidenav"><br/>
+			&nbsp; &lt;li>&lt;a class="active" href="#home">主页&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#news">新闻&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#contact">联系&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#about">关于&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;div class="dropdown"><br/>
+				&nbsp; &nbsp; &lt;a href="#" class="dropbtn">下拉菜单 &lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="dropdown-content"><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 1 &lt;/a><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 2 &lt;/a><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 3 &lt;/a><br/>
+				&nbsp; &nbsp; &lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		 &lt;/ul><br/>
+		&lt;div class="content"><br/>
+			&nbsp; &lt;h3>Fixed Full-height Side Nav&lt;/h3><br/>
+			&nbsp; &lt;pre>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div. Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it). Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..&lt;/pre><br/>
+		&lt;/div><br/></p>
+		
+		<hr/><h3>下拉列表</h3>
+		<p>文本/图片下拉（导航栏下拉详看导航栏部分）：<br/>
+		&lt;style><br/>
+		&nbsp; .dropbtn {
+			background-color: #4CAF50;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+			cursor: pointer;}<br/>
+		&nbsp; .dropdown {
+			position: relative;
+			display: inline-block;}<br/>
+		&nbsp; .dropdown-content {
+			display: none;
+			position: absolute;
+			right: 0;
+			background-color: #f9f9f9;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);}<br/>
+		&nbsp; .dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;}<br/>
+		&nbsp; .dropdown-content a:hover {background-color: #f1f1f1}<br/>
+		&nbsp; .dropdown:hover .dropdown-content {
+			display: block;}<br/>
+		&nbsp; .dropdown:hover .dropbtn {
+			background-color: #3e8e41;}<br/>
+		&nbsp; .desc {
+			padding: 15px;
+			text-align: center;}<br/>
+		&lt;/style><br/>
+		&lt;ul class="sidenav"><br/>
+			&nbsp; &lt;li>&lt;a class="active" href="#home">主页&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#news">新闻&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#contact">联系&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;li>&lt;a href="#about">关于&lt;/a>&lt;/li><br/>
+			&nbsp; &lt;div class="dropdown"><br/>
+				&nbsp; &nbsp; &lt;a href="#" class="dropbtn">下拉菜单&lt;/a><br/>
+				&nbsp; &nbsp; &lt;div class="dropdown-content"><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 1&lt;/a><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 2&lt;/a><br/>
+					&nbsp; &nbsp; &nbsp; &lt;a href="#">链接 3&lt;/a><br/>
+				&nbsp; &nbsp; &lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/ul><br/>
+		&lt;div class="content"><br/>
+			&nbsp; &lt;h3>Fixed Full-height Side Nav&lt;/h3><br/>
+			&nbsp; &lt;pre>Notice that this div element has a left margin of 25%. This is because the side navigation is set to 25% width. If you remove the margin, the sidenav will overlay/sit on top of this div. Also notice that we have set overflow:auto to sidenav. This will add a scrollbar when the sidenav is too long (for example if it has over 50 links inside of it). Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>
+			Some text..<br/>Some text..<br/>Some text..<br/>&lt;/pre><br/>
+		&lt;div class="dropdown" style="float:left;"><br/>
+			&nbsp; &lt;button class="dropbtn">左&lt;/button><br/>
+			&nbsp; &lt;div class="dropdown-content" style="left:0;"><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 1&lt;/a><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 2&lt;/a><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 3&lt;/a><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+
+		&lt;div class="dropdown" style="float:right;"><br/>
+			&nbsp; &lt;button class="dropbtn">右&lt;/button><br/>
+			&nbsp; &lt;div class="dropdown-content"><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 1&lt;/a><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 2&lt;/a><br/>
+				&nbsp; &nbsp; &lt;a href="#">下拉 3&lt;/a><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+		&lt;p>点击这里的”左“或”右“可以看到下拉的实现&lt;/p><br/>
+			&nbsp; &lt;div class="dropdown"><br/>
+			&nbsp; &lt;p style="text-align:center;">点击此处会有图片下拉出现&lt;/p><br/>
+			&nbsp; &lt;div class="dropdown-content" style="left:0;"><br/>
+				&nbsp; &nbsp; &lt;img src="./other/apple.png" alt="apple"><br/>
+				&nbsp; &nbsp; &lt;div class="desc">苹果&lt;/div><br/>
+			&nbsp; &lt;/div><br/>
+		&lt;/div><br/>
+		&lt;/div></p>
+		
+		<hr/><h3>提示框</h3>
+		<p>提示框在正下方：<br/>
+		&lt;style><br/>
+		&nbsp; .tooltip {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px dotted black;}<br/>
+		&nbsp; .tooltip .tooltiptext {
+			visibility: hidden;
+			width: 120px;
+			background-color: black;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			top: 150%;
+			left: 50%;
+			margin-left: -60px;}<br/>
+		&nbsp; .tooltip .tooltiptext::after {
+			content: "";
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent transparent black transparent;}<br/>
+		&nbsp; .tooltip:hover .tooltiptext {
+			visibility: visible;}<br/>
+		&lt;/style><br/>
+		&lt;body style="text-align:center;"><br/>
+		&lt;div class="tooltip">鼠标移动到这<br/>
+		  &nbsp; &lt;span class="tooltiptext">提示文本&lt;/span><br/>
+		&lt;/div><br/>
+		&lt;/body><br/></p>
 		
 		<hr/><h3 id="background">background：背景设置</h3>
 		<p>优先级为 color > image > position/size > repeat > origin > clip > attachment > 默认/继承。整个背景简写如background:#ffffff url('img_tree.png') no-repeat fixed right top;</p>
@@ -373,30 +741,56 @@
 		<p>none：隐藏元素，并且不占用空间<br/>inline：更改为内联元素，也就是不会自动换行的元素<br/>block：更改为块元素，会自动换行的元素<br/>inline-block：内联块元素，表现为同行显示并可修改宽高内外边距等属性，如<li>元素加上display:inline-block样式，这样原本垂直的列表就可以水平显示了。</p>
 		
 		<hr/><h3 id="position">position：定位</h3>
-		<p>static：默认值，即没有定位，遵循正常的文档流对象，不会受到 top, bottom, left, right影响。<br/>relative：相对定位元素的定位是相对其正常位置<br/>fixed：元素的位置相对于浏览器窗口是固定位置，即使窗口是滚动的它也不会移动，移动相对定位元素，但它原本所占的空间不会改变，相对定位元素经常被用来作为绝对定位元素的容器块<br/>absolute：绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于&lt;html><br/>sticky：粘性定位，基于用户的滚动位置来定位，依赖于用户的滚动，在 position:relative 与 position:fixed 定位之间切换。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位。这个特定阈值指的是 top, right, bottom 或 left 之一，换言之，指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。</p>
+		<p>static：默认值，即没有定位，遵循正常的文档流对象，不会受到 top, bottom, left, right或z-index影响。<br/>relative：相对定位元素的定位是相对其正常位置<br/>fixed：元素的位置相对于浏览器窗口是固定位置，即使窗口是滚动的它也不会移动，移动相对定位元素，但它原本所占的空间不会改变，相对定位元素经常被用来作为绝对定位元素的容器块。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定<br/>absolute：绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于&lt;html>。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定<br/>sticky：粘性定位，基于用户的滚动位置来定位，依赖于用户的滚动，在 position:relative 与 position:fixed 定位之间切换。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位。这个特定阈值指的是 top, right, bottom 或 left 之一，换言之，指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效。否则其行为与相对定位相同。<br/>initial：设置该属性为它的默认值<br/>inherit：从父元素继承</p>
 
-		<hr/><h3 id=“z-index”>z-index：重叠元素</h3>
-		<p>指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面），可以有正数或负数的堆叠顺序，具有更高堆叠顺序的元素总是在较低的堆叠顺序元素的前面。<br/>注意： 如果两个定位元素重叠，没有指定 z-index，最后定位在HTML代码中的元素将被显示在最前面。</p>
-		<p></p>
+		<hr/><h3 id="z-index">z-index：元素堆叠顺序</h3>
+		<p>指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面），可以有正数或负数的堆叠顺序，具有更高堆叠顺序的元素总是在较低的堆叠顺序元素的前面。<br/>注意： 如果两个定位元素重叠，没有指定 z-index，最后定位在HTML代码中的元素将被显示在最前面。<br/>注意： z-index 进行定位元素(position:absolute, position:relative, or position:fixed)。</p>
+		<p>auto：默认。堆叠顺序与父元素相等<br/>number：设置元素的堆叠顺序<br/>inherit：从父元素继承</p>
 		
 		<hr/><h3 id="clip">clip：裁剪区域</h3>
-		<p>rect(0px,60px,200px,0px)</p>
+		<p>注意：如果先有"overflow：visible"，clip属性不起作用。</p>
+		<p>shape：设置元素的形状。唯一合法的形状值是：rect (top, right, bottom, left)<br/>auto：默认值。不应用任何剪裁。<br/>inherit：从父元素继承</p>
 		
-		<hr/><h3 id=“overflow”>overflow：溢出显示</h3>
-		<p>scroll<br/>hidden<br/>auto<br/>visible</p>
+		<hr/><h3 id="overflow">overflow：溢出显示</h3>
+		<p>scroll：内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容<br/>hidden：内容会被修剪，并且其余内容是不可见的<br/>auto：如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容<br/>visible：默认值。内容不会被修剪，会呈现在元素框之外<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="overflow-y">overflow-y：上下边的溢出显示</h3>
+		<p>指定如果它溢出了元素的内容区是否剪辑顶部/底部边缘内容。</p>
+		<p>visible：不裁剪内容，可能会显示在内容框之外<br/>hidden：裁剪内容，不提供滚动机制<br/>scroll：裁剪内容，提供滚动机制<br/>auto：如果溢出框，则应该提供滚动机制<br/>no-display：如果内容不适合内容框，则删除整个框<br/>no-content：如果内容不适合内容框，则隐藏整个内容</p>
+		
+		<hr/><h3 id="overflow-x">overflow-x：左右边边的溢出显示</h3>
+		<p>指定如果它溢出了元素的内容区是否剪辑左右边缘内容。</p>
+		<p>visible：不裁剪内容，可能会显示在内容框之外<br/>hidden：裁剪内容，不提供滚动机制<br/>scroll：裁剪内容，提供滚动机制<br/>auto：如果溢出框，则应该提供滚动机制<br/>no-display：如果内容不适合内容框，则删除整个框<br/>no-content：如果内容不适合内容框，则隐藏整个内容</p>
 		
 		<hr/><h3 id="cursor">cursor：更改光标</h3>
-		<p>auto<br/>crosshair<br/>default<br/>e-resize<br/>help<br/>move<br/>n-resize<br/>ne-resize<br/>nw-resize<br/>pointer<br/>progress<br/>s-resize<br/>se-resize<br/>sw-resize<br/>text<br/>w-resize<br/>wait</p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
-		<hr/><h3>：</h3>
-		<p></p>
+		<p>url：自定义光标，注意：请在此列表的末端始终定义一种普通的光标，以防没有由 URL 定义的可用光标。<br/>auto：默认，浏览器设置的光标<br/>crosshair：十字线<br/>default：默认值，一般是个箭头<br/>e-resize：光标指示矩形框的边缘可向右/东移动<br/>help：可用帮助（问号或气球）<br/>move：光标指示对象可被移动<br/>n-resize：矩形框边缘可向上/北移动<br/>ne-resize：矩形框边缘可向上/北及向右/东移动<br/>nw-resize：矩形框边缘可向上/北及向左/西移动<br/>pointer：一只手（链接）<br/>progress<br/>s-resize：矩形框边缘可向下/南移动<br/>se-resize：矩形框边缘可向下/南及向右/东移动<br/>sw-resize：矩形框边缘可向下/南及向左/西移动<br/>text：指示文本<br/>w-resize：矩形框边缘可向左/西移动<br/>wait：程序正在忙（表或沙漏）</p>
+		
+		<hr/><h3 id="top">top：规定元素的顶部边缘</h3>
+		<p>注意："position" 属性的值为 "static"，那么设置 "top" 属性不会产生任何效果。</p>
+		<p>length：固定值，可使用负值，如px<br/>百分比：可使用负值，如100%<br/>auto：默认。浏览器会计算出顶部边缘的位置。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="bottom">bottom：定义了定位元素下外边距边界与其包含块下边界之间的偏移</h3>
+		<p>对于绝对定位元素，bottom属性设置单位高于/低于包含它的元素的底边。<br/>对于相对定位元素，bottom属性设置单位高于/低于其正常位置的元素的底边<br/>position:static则底部没有任何效果<br/>对于 static 元素，为 auto；对于长度值，则为相应的绝对长度；对于百分比数值，为指定值；否则为 auto。 对于相对定义元素，如果 bottom 和 top 都是 auto，其计算值则都是 0；如果其中之一为 auto，则取另一个值的相反数；如果二者都不是 auto，bottom 将取 top 值的相反数。</p>
+		<p>auto：默认值。通过浏览器计算底部的位置。<br/>百分比：设置以包含元素的百分比计的底边位置。可使用负值。<br/>length：使用 px、cm 等单位设置元素的底边位置。可使用负值。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="left">left：规定元素的左边缘</h3>
+		<p>注意："position" 属性的值为 "static"，那么设置 "left" 属性不会产生任何效果。</p>
+		<p>length：固定值，可使用负值，如px<br/>百分比：可使用负值，如100%<br/>auto：默认。浏览器会计算出左边缘的位置。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="right">right：规定元素的右边缘</h3>
+		<p>注意："position" 属性的值为 "static"，那么设置 "right" 属性不会产生任何效果。</p>
+		<p>length：固定值，可使用负值，如px<br/>百分比：可使用负值，如100%<br/>auto：默认。浏览器会计算出右边缘的位置。<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="float">float：浮动</h3>
+		<p>会使元素向左或向右移动，其周围的元素也会重新排列。<br/>把几个浮动的元素放到一起，如果有空间的话，它们将彼此相邻。</p>
+		<p>right：右浮动<br/>left：左浮动<br/>none：默认值，不浮动,并会显示在其在文本中出现的位置<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="clear">clear：清除浮动</h3>
+		<p>both：使左右两边不能出现浮动元素<br/>left：左侧不浮动<br/>right：右侧不浮动<br/>none：默认值，允许两侧浮动<br/>inherit：从父元素继承</p>
+		
+		<hr/><h3 id="transform">transform：</h3>
+		<p>translate(-50%, -50%)</p>
+		
 		<hr/><h3>：</h3>
 		<p></p>
 		<hr/><h3>：</h3>
