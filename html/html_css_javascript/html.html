@@ -4,10 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<title>html实现</title>
 	<style>
-		body,html{width:100%;height:100%;margin:0;padding:0}
-		.main_body{width:80%;float:left}
-		.table_body{width:20%;float:right}
-		a{text-decoration:none}
+		body,html{width:100%;height:100%;margin:0;padding:0;}
+		.main_body{width:80%;float:left;}
+		.table_body{width:20%;float:right;}
+		a{text-decoration:none;}
+		p{line-height:25px;}
 	</style>
 </head>
 <body>
@@ -20,7 +21,7 @@
 		<a href="#table">table</a><br/><a href="#th">th</a><br/><a href="#tr">tr</a><br/><a href="#td">td</a><br/><a href="#caption">caption</a><br/><a href="#colgroup">colgroup</a><br/><a href="#col">col</a><br/><a href="#thead">thead</a><br/><a href="#tbody">tbody</a><br/><a href="#tfoot">tfoot</a><br/>
 		<a href="#ol">ol</a><br/><a href="#ul">ul</a><br/><a href="#li">li</a><br/><a href="#dl">dl</a><br/><a href="#dt">dt</a><br/><a href="#dd">dd</a><br/>
 		<a href="#div">div</a><br/><a href="#span">span</a><br/><a href="#form">form</a><br/><a href="#input">input</a><br/><a href="#output">output</a><br/><a href="#textarea">textarea</a><br/><a href="#label">label</a><br/><a href="#fieldset">fieldset</a><br/><a href="#legend">legend</a><br/><a href="#select">select</a><br/><a href="#optgroup">optgroup</a><br/><a href="#option">option</a><br/><a href="#button">button</a><br/><a href="#datalist">datalist</a><br/><a href="#keygen">keygen</a><br/>
-		<a href="#iframe">iframe</a><br/><a href="#ziti">未显示的代替字体</a><br/><a href="#html5">html5</a><br/><a href="#canvas">canvas</a><br/><a href="#audio">audio</a><br/><a href="#video">video</a><br/><a href="#source">source</a><br/><a href="#embed">embed</a><br/><a href="#track">track</a><br/>
+		<a href="#iframe">iframe</a><br/><a href="#bootstrap">bootstrap</a><br/><a href="#ziti">未显示的代替字体</a><br/><a href="#html5">html5</a><br/><a href="#canvas">canvas</a><br/><a href="#audio">audio</a><br/><a href="#video">video</a><br/><a href="#source">source</a><br/><a href="#picture">picture</a><br/><a href="#embed">embed</a><br/><a href="#track">track</a><br/>
 		<a href="#article">article</a><br/><a href="#aside">aside</a><br/><a href="#bdi">bdi</a><br/><a href="#command">command</a><br/><a href="#details">details</a><br/><a href="#dialog">dialog</a><br/><a href="#summary">summary</a><br/><a href="#figure">figure</a><br/><a href="#figcaption">figcaption</a><br/><a href="#footer">footer</a><br/><a href="#header">header</a><br/><a href="#mark">mark</a><br/><a href="#meter">meter</a><br/><a href="#nav">nav</a><br/><a href="#progress">progress</a><br/><a href="#ruby">ruby</a><br/><a href="#rt">rt</a><br/><a href="#rp">rp</a><br/><a href="#section">section</a><br/><a href="#time">time</a><br/><a href="#wbr">wbr</a><br/>
 		<a href="#math">math</a><br/><a href="#object">object</a><br/><a href="#param">param</a><br/>
 		<a href="#biaoqian">标签</a><br/><a href="#shijian">事件</a><br/><a href="#huabu">画布</a><br/><a href="#yinshipin">音频和视频</a><br/><a href="#yanse">颜色</a><br/>
@@ -238,12 +239,14 @@
 			<h3>base：页面链接标签的默认链接地址</h3><p>定义页面中所有链接默认的链接目标地址。href：指定连接地址</p>
 			<p><b style="color:red">例如：</b><br/>&lt;base href="//www.baidu.com//images/" target="_blank"> &lt;!--定义基础路径，此元素位于 head元素内--></p></div><hr/>
 		<div id="meta">
-			<h3>meta：描述了一些基本的元数据</h3><p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
+			<h3>meta：描述了一些基本的元数据</h3>
+			<p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
 			<p><b style="color:red">例如：</b><br/>
-			&ltmeta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt!--为搜索引擎定义关键词--><br/>
-			&ltmeta name="description" content="免费 Web & 编程 教程"> &lt!--为网页定义描述内容--><br/>
-			&ltmeta name="author" content="Runoob"> &lt!--定义网页作者--><br/>
-			&ltmeta http-equiv="refresh" content="30"> &lt!--每30秒钟刷新当前页面--></p></div><hr/>
+			&lt;meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt;!--为搜索引擎定义关键词--><br/>
+			&lt;meta name="description" content="免费 Web & 编程 教程"> &lt!;--为网页定义描述内容--><br/>
+			&lt;meta name="author" content="Runoob"> &lt;!--定义网页作者--><br/>
+			&lt;meta http-equiv="refresh" content="30"> &lt;!--每30秒钟刷新当前页面--><br/>
+			&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"> &lt;!--针对移动网页优化过的页面的 viewport meta 标签，其中width和height控制可视区域大小，initial-scale初始缩放比例（页面第一次加载时缩放比例，maximum-scale（minimum-scale）允许缩放最大或最小比例），user-scalable用户是否可以手动缩放--></p></div><hr/>
 		<div id="style">
 			<h3>style：HTML文档的样式文件</h3><p>可直接添加样式来渲染 HTML 文档，既可以作为元素放在head中全局设置样式，也可以作为属性局部设置样式。可以使用link元素链接到一个外部样式表，即链接CSS渲染过的外部样式。可使用的属性也可直接在CSS中找到对应的说明。</p>
 			<p><b style="color:red">例如：</b><br/>
@@ -855,6 +858,9 @@
 			</p>
 			</p>
 			</div><hr/>
+		<div id="bootstrap">
+			<h3>Bootstrap：响应式 Web 设计框架</h3>
+			</div><hr/>
 		<div id="ziti">
 			<h3>未能显示的字体代替实现</h3><p>HTML 中的预留字符必须被替换为字符实体。一些在键盘上找不到的字符也可以使用字符实体来替换。虽然 html 不区分大小写，但实体字符对大小写敏感。</p>
 			<p><b style="color:red">实例：</b>
@@ -949,8 +955,9 @@
 			<h3>audio：音频内容</h3>
 			<p><b style="color:red">例如：</b></p>
 			</div>
-			<div id="video">
+		<div id="video">
 			<h3>video：视频（video 或者 movie）</h3><p>也可以直接使用超链接&lta href="horse.mp3">Play the sound&lt/a>来进行播放</p>
+			<p>如果 width 属性设置为 100%，视频播放器会根据屏幕大小自动调整比例。这里调整比例大小可能会超过元素尺寸大小。<br/>如果 max-width 属性设置为 100%, 视频播放器会根据屏幕自动调整比例，但不会超过其原始大小</p>
 			<p><b style="color:red">例如：</b><br/>
 			&ltvideo width="500" height="400"><br/>
 				&nbsp; &ltsource src="movie.mp4" type="video/mp4"><br/>
@@ -972,6 +979,17 @@
 			</div><hr/>
 		<div id="source">
 			<h3>source：多媒体资源 &ltvideo> 和 &ltaudio></h3><p>属性：<br/>src：url媒体资源位置<br/>type：类型，type="video/mp4"是video视频或audio音频</p>
+			</div><hr/>
+		<div id="picture">
+			<h3>picture：设置多张图片</h3>
+			<p>类似于 &lt;video> 和 &lt;audio> 元素。可以设备不同的资源，第一个设置的资源为首选使用。<br/>rcset：属性的必须的，定义了图片资源。<br/>media：属性是可选的</p>
+			<p>例如：<br/>
+			&lt;picture>
+				&nbsp; &lt;source srcset="img_smallflower.jpg" media="(max-width: 400px)"><br/>
+				&nbsp; &lt;source srcset="img_flowers.jpg"><br/>
+				&nbsp; &lt;img src="img_flowers.jpg" alt="Flowers"><br/>
+			&lt;/picture>
+			</p>
 			</div><hr/>
 		<div id="embed">
 			<h3>embed：嵌入的内容，比如插件</h3>

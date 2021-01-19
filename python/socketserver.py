@@ -6,10 +6,8 @@ import tkinter
 def senddata(name,s):
     print("start %s..." % (name))
     while True:
-
-        #s.send(sendstr.get().encode())
         try:
-            s.send("".encode("gbk"))
+            s.send("abc".encode("gbk"))
         except ConnectionAbortedError:
             print ("客户端已断开")
             s.close()
@@ -36,26 +34,16 @@ def recvdata(name,s):
                 pass
         else:
             print ("recv data:",data.decode("gbk"))
-        #recvtext.insert(1.0,s.recv(1024))
         time.sleep(0.2) 
 def tcpserver():
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM,0)
-    s.bind(('127.0.0.1',10000))#s.bind(('localhost',10000))
+    host = socket.gethostname() # 获取本地主机名
+    s.bind((host,10000))#s.bind(('localhost',10000))
     s.listen(10)
-    alladdr=[]
     while True:
         c,addr=s.accept()
-        if addr == "":
-            alladdr.append(addr)
-        else:
-            for i in range(len(alladdr)):
-                if addr != i:
-                    alladdr.append(addr)
-        print (addr)
         send=threading.Thread(target=senddata, args=("sendThread",c),daemon=True )
         recv=threading.Thread(target=recvdata, args=("recvThread",c),daemon=True)
-        #send.setName("sendThread")
-        #recv.setName("recvThread")
         send.start()
         recv.start()
         send.join()   # 等待子线程运行结束
