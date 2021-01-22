@@ -6,7 +6,7 @@
 
 ::local
 ::call %CSDTK4INSTALLDIR%\..\..\..\Python37\python app.py
-call python threading_test.py
+call python server.py
 
 
 pause

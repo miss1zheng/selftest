@@ -6,7 +6,7 @@
 	<style>
 		body,html{width:100%;height:100%;margin:0;padding:0;}
 		.main_body{padding-right:200px;margin-right:20px;float:left;}
-		.table_body{width:200px;height:100%;float:right;z-index:1;display: block;}
+		.table_body{width:200px;height:0;float:right;z-index:1;display: block;}
 		a{text-decoration:none;}
 		p{line-height:25px;}
 	</style>
@@ -998,6 +998,31 @@
 			<p>visibility与display的隐藏元素区别：<br/>visibility:hidden可以隐藏某个元素，但隐藏的元素仍需占用与未隐藏之前一样的空间。也就是说，该元素虽然被隐藏了，但仍然会影响布局。<br/>display:none可以隐藏某个元素，且隐藏的元素不会占用任何空间。也就是说，该元素不但被隐藏了，而且该元素原本占用的空间也会从页面布局中消失。</p>
 			<p>none：隐藏元素，并且不占用空间<br/>inline：更改为内联元素，也就是不会自动换行的元素<br/>block：更改为块元素，会自动换行的元素<br/>inline-block：内联块元素，表现为同行显示并可修改宽高内外边距等属性，如<li>元素加上display:inline-block样式，这样原本垂直的列表就可以水平显示了。</p>
 			</div><hr/>
+		<div id="empty-cells">
+			<h3>empty-cells：是否显示表格中的空单元格（仅用于"分离边框"模式）。</h3>
+			<p>hide：不在空单元格周围绘制边框<br/>show：在空单元格周围绘制边框。默认<br/>inherit：规定应该从父元素继承 empty-cells 属性的值。</p>
+			</div><hr/>
+		<div id="flex-basis">
+			<h3>flex-basis：设置或检索弹性盒伸缩基准值。</h3>
+			<p>注意：如果元素不是弹性盒对象的元素，则 flex-basis 属性不起作用。</p>
+			<p>number：一个长度单位或者一个百分比，规定灵活项目的初始长度<br/>auto：默认值。长度等于灵活项目的长度。如果该项目未指定长度，则长度将根据内容决定<br/>initial：设置该属性为它的默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="flex-flow">
+			<h3>flex-flow：设置或检索弹性盒模型对象的子元素排列方式。</h3>
+			<p>是 flex-direction 和 flex-wrap 属性的复合属性。<br/>flex-direction 属性规定灵活项目的方向。<br/>flex-wrap 属性规定灵活项目是否拆行或拆列。</p>
+			<p>flex-direction：可能的值row、row-reverse、column、column-reverse、initial、inherit、默认值是 "row"。规定灵活项目的方向。
+			<br/>flex-wrap：可能的值nowrap、wrap、wrap-reverse、initial、inherit。默认值是 "nowrap"。规定灵活项目是否拆行或拆列。</p>
+			</div><hr/>
+		<div id="flex-grow">
+			<h3>flex-grow：设置或检索弹性盒子的扩展比率。</h3>
+			<p>注意：如果元素不是弹性盒对象的元素，则 flex-grow 属性不起作用。</p>
+			<p>number：一个数字，规定项目相对于其他灵活的项目进行扩展的量。默认值是 0<br/>initial：设置该属性为它的默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="flex-shrink">
+			<h3>flex-shrink：指定了 flex 元素的收缩规则。</h3>
+			<p>flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。<br/>注意：如果元素不是弹性盒对象的元素，则 flex-shrink 属性不起作用。</p>
+			<p>number：一个数字，规定项目将相对于其他灵活的项目进行收缩的量。默认值是 1<br/>initial：设置该属性为它的默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
 		<div id="float">
 			<h3>float：浮动</h3>
 			<p>会使元素向左或向右移动，其周围的元素也会重新排列。<br/>把几个浮动的元素放到一起，如果有空间的话，它们将彼此相邻。</p>
@@ -1483,7 +1508,7 @@
 			&lt;div id="myModal" class="modal"><br/>
 				&nbsp; &lt;span class="close">×</span><br/>
 				&nbsp; &lt;img class="modal-content" id="img01"><br/>
-				&nbsp; &lt;div id="caption"></div><br/>
+				&nbsp; &lt;div id="caption">&lt;/div><br/>
 			&lt;/div><br/>
 
 			&lt;script><br/>
@@ -1687,7 +1712,27 @@
 			<p>注意：随着box收缩和增长，元素是灵活的收缩或增长。</p>
 			<p>integer：一个整数（第一个Flex组1的值越高，后来的Flex-组越高）</p>
 			</div><hr/>
-			
+		<div id="box-lines">
+			<h3>box-lines：每当它运行在父级box的空间，列中是否会得到一个新的行</h3>
+			<p>提示： 默认情况下，横向盒里会在单一的行铺陈它的子元素，和一个纵向盒铺陈其在单个列中的子元素。</p>
+			<p>single：将被放置在单个行或列的所有子元素（元素不适合只会被认为是溢出）<br/>multiple：box允许扩大到多行，以适应其所有子项</p>
+			</div><hr/>
+		<div id="box-ordinal-group">
+			<h3>box-ordinal-group：指定一个box的子元素的显示顺序</h3>
+			<p>具有较低值的元素显示在那些具有较高的值的元素之前。<br/>注意： 同一组值的元素显示顺序取决于他们源顺序。</p>
+			<p>integer：一个整数，指示子元素的显示顺序</p>
+			</div><hr/>
+		<div id="box-orient">
+			<h3>box-orient：指定一个box子元素是否应按水平或垂直排列。</h3>
+			<p>注意：水平方向的box里的子元素是由左到右显示，垂直方向的box显示从上到下排列。然而，box-direction方向可由 box-ordinal-group属性改变这个顺序。</p>
+			<p>horizontal：指定子元素在一个水平线上从左至右排列<br/>vertical：从顶部向底部垂直布置子元素<br/>inline-axis：子元素沿着内联坐标轴（映射到横向）<br/>block-axis：子元素沿着块坐标轴（映射到垂直）<br/>inherit：box-orient 属性的值应该从父元素继承</p>
+			</div><hr/>
+		<div id="box-pack">
+			<h3>box-pack：指定一个box的子元素时，被置于该框的子元素小于该框</h3>
+			<p>指定横向框的水平位置，垂直位置的垂直框。</p>
+			<p>start：对于普通方向的boxes，左边缘的第一个子元素被放置在左侧（所有额外的空间放置后的最后一个子元素）。对于反向boxes，右边缘最后一个子元素放置在右侧（所有额外的空间放置前的第一个子元素）<br/>end：对于正常的方向的boxes，最后一个子元素的右边缘放置在右侧（所有额外的空间放置前的第一个子元素）。对于反向boxes，第一个孩子的左边缘放置在左侧（所有额外的空间放置后的最后一个子元素）
+			<br/>center：额外的空间划分均匀的两半，前一半放置第一个子元素，另一半放置最后一个子元素<br/>justify：额外的空间平均分配给每个子元素</p>
+			</div><hr/>
 		<div id="box-shadow">
 			<h3>box-shadow：添加阴影</h3>
 			<p>优先级：水平阴影 > 垂直阴影 > 模糊的距离（值越大越模糊） > 阴影的颜色</p>
@@ -1696,6 +1741,51 @@
 			<p>h-shadow：必需。水平阴影的位置。允许负值<br/>v-shadow：必需。垂直阴影的位置。允许负值<br/>blur：可选。模糊距离<br/>spread：可选。阴影的尺寸<br/>color：可选。阴影的颜色。请参阅 CSS 颜色值<br/>inset：可选。将外部阴影 (outset) 改为内部阴影</p>
 			</div><hr/>
 			<p>顺序：h-shadow > v-shadow blur > spread > color > inset</p>
+			</div><hr/>
+		<div id="column-count">
+			<h3>column-count：指定某个元素应分为的列数</h3>
+			<p>number：列的最佳数目将其中的元素的内容无法流出<br/>auto：列数将取决于其他属性，例如："column-width"</p>
+			</div><hr/>
+		<div id="column-fill">
+			<h3>column-fill：指定如何填充列</h3>
+			<p>balance：列长短平衡。浏览器应尽量减少改变列的长度<br/>auto：列顺序填充，他们将有不同的长度</p>
+			</div><hr/>
+		<div id="column-gap">
+			<h3>column-gap：指定的列之间的差距。</h3>
+			<p>注意： 如果指定了列之间的距离规则，它会取平均值。</p>
+			<p>length：一个指定的长度，将设置列之间的差距<br/>normal：指定一个列之间的普通差距。 W3C建议1EM值</p>
+			</div><hr/>
+		<div id="column-rule">
+			<h3>column-rule：设置列之间的宽度，样式和颜色</h3>
+			<p>优先级：column-rule-width > column-rule-style > column-rule-color</p>
+			<p>column-rule-width：设置列中之间的宽度规则<br/>column-rule-style：设置列中之间的样式规则<br/>column-rule-color：设置列中之间的颜色规则</p>
+			</div><hr/>
+		<div id="column-rule-color">
+			<h3>column-rule-color：指定列之间的颜色规则。</h3>
+			<p>color：指定颜色的规则</p>
+			</div><hr/>
+		<div id="column-rule-style">
+			<h3>column-rule-style：指定列之间的样式规则</h3>
+			<p>none：定义没有规则<br/>hidden：定义隐藏规则<br/>dotted：定义点状规则<br/>dashed；定义虚线规则<br/>solid：定义实线规则<br/>double：定义双线规则<br/>
+			groove：定义 3D grooved 规则。该效果取决于宽度和颜色值<br/>ridge：定义 3D ridged 规则。该效果取决于宽度和颜色值<br/>inset：定义 3D inset 规则。该效果取决于宽度和颜色值<br/>outset：定义 3D outset 规则。该效果取决于宽度和颜色值</p>
+			</div><hr/>
+		<div id="column-rule-width">
+			<h3>column-rule-width：指定列之间的宽度规则。</h3>
+			<p>thin：指定一个细边框的规则<br/>medium：定义一个中等边框规则<br/>thick：指定一个粗边框的规则<br/>length：指定宽度的规则</p>
+			</div><hr/>
+		<div id="column-span">
+			<h3>column-span：指定某个元素应该跨越多少列。</h3>
+			<p>1：元素应跨越一列<br/>all：该元素应该跨越所有列</p>
+			</div><hr/>
+		<div id="column-width">
+			<h3>column-width：指定列的宽度</h3>
+			<p>auto：浏览器将决定列的宽度<br/>length：指定列宽的长度</p>
+			</div><hr/>
+		<div id="columns">
+			<h3>columns：速记属性设置列宽和列数</h3>
+			<p>columns 是 column-width 与 column-count 的简写属性。</p>
+			<p>优先级：column-width > column-count</p>
+			<p>column-width：列的宽度<br/>column-count：列数</p>
 			</div><hr/>
 		<div id="filter">
 			<h3>filter：图片滤镜</h3>
@@ -1715,6 +1805,17 @@
 			<p>nowrap：默认，弹性容器为单行。该情况下弹性子项可能会溢出容器。<br/>wrap：弹性容器为多行。该情况下弹性子项溢出的部分会被放置到新行，子项内部会发生断行<br/>
 			wrap-reverse：反转 wrap 排列。<br/>initial：<br/>inherit：从父元素继承</p>
 			</div><hr/>
+		<div id="font-size-adjust">
+			<h3>font-size-adjust：控制字体大小，当第一个选择的字体不可用时。</h3>
+			<p>当一个字体不可用，浏览器使用第二个指定的字体。这可能会导致改变字体大小。为了防止这种情况，使用的font-size-adjust属性。<br/>
+			所有字体都能有"aspect值"，这是小写字母"X"和大写字母"X"的大小差异。<br/>当浏览器知道"aspect值"为第一选择的字体时，浏览器可以找出什么样的font-size使用第二选择字体显示文字。</p>
+			<p>number定义字体的 aspect 值比率。 可使用的公式： 首选字体的字体尺寸 * （font-size-adjust 值 / 可用字体的 aspect 值）=可应用到可用字体的字体尺寸 举例： 如果 14px 的 Verdana（aspect 值是 0.58）不可用，但是某个可用的字体的 aspect 值是 0.46，那么替代字体的尺寸将是 14 * (0.58/0.46) = 17.65px。<br/>none：默认。如果此字体不可用，则不保持此字体的 x-height。<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="font-stretch">
+			<h3>font-stretch：允许你使文字变宽或变窄</h3>
+			<p>wider：使得文本更宽<br/>narrower：使得文本窄<br/>ultra-condensed：使文本窄得不能再窄<br/>extra-condensed：指定紧缩程度第二大的字体<br/>
+			condensed：指定略微紧缩程度第二大的字体<br/>semi-condensed：指定略微紧缩的字体<br/>normal：指明字体既不紧缩也不加宽<br/>semi-expanded：指定略微加宽的字体<br/>expanded：指定加宽的字体<br/>extra-expanded：指定加宽程度第二大的字体<br/>ultra-expanded：指定加宽程度最大的字体<br/>inherit：从父元素继承</p>
+			</div><hr/>
 		<div id="Gradients">
 			<h3>Gradients：渐变</h3>
 			<p>线性渐变和径向渐变<br/>线性渐变：向下/向上/向左/向右/对角方向<br/>径向渐变：由中心定义。<br/>线性渐变相关属性：background-image</p>
@@ -1732,10 +1833,25 @@
 			<p>不同尺寸大小关键字的使用：closest-side、farthest-side、closest-corner、farthest-corner<br/>带有不同尺寸大小关键字的径向渐变<br/>background-image: radial-gradient(closest-side at 60% 55%, red, yellow, black);<br/>background-image: radial-gradient(farthest-side at 60% 55%, red, yellow, black);</p>
 			<p>重复的径向渐变：background-image: repeating-radial-gradient(red, yellow 10%, green 15%);</p>
 			</div><hr/>
+		<div id="grid-columns">
+			<h3>grid-columns：指定网格中的每一列的宽度。</h3>
+			<p>提示: 使用网格系统对于打印设计师来说具有巨大的价值。现在相同的改变被应用到在线内容上。网格属性提供了在可伸缩网格中调整标题、文本和图片尺寸和位置的能力。</p>
+			<p>length：参考包含块的网格<br/>百分比：参考包含块的宽度<br/>none：<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="grid-rows">
+			<h3>grid-rows：指定在网格中的每一行的高度</h3>
+			<p>提示: 使用网格系统对于打印设计师来说具有巨大的价值。现在相同的改变被应用到在线内容上。网格属性提供了在可伸缩网格中调整标题、文本和图片尺寸和位置的能力。</p>
+			<p>length：参考包含块的网格<br/>百分比：参考包含块的宽度<br/>none：<br/>inherit：从父元素继承</p>
+			</div><hr/>
 		<div id="hanging-punctuation">
 			<h3>hanging-punctuation：标点字符是否位于线框之外</h3>
 			<p>指定一个标点符号是否会在启动或在结束时文本行框以外。</p>
 			<p>none：不在文本整行的开头还是结尾的行框之外放置标签符号<br/>first：标点附着在首行开始边缘之外<br/>last：标点附着在首行结尾边缘之外<br/>allow-end<br/>force-end</p>
+			</div><hr/>
+		<div id="icon">
+			<h3>icon：为创作者提供了将元素设置为图标等价物的能力。</h3>
+			<p>注意：元素的图标是不可使用，除非"content"属性设置为"icon"！</p>
+			<p>auto：使用由浏览器提供的默认通用图标<br/>URL：引用列表中的一个或多个图标，列表用逗号分隔<br/>inherit：规定应从元素继承 icon 属性的值。</p>
 			</div><hr/>
 		<div id="justify-content">
 			<h3>justify-content：内容对齐</h3>
@@ -1746,6 +1862,43 @@
 			space-between：弹性项目平均分布在该行上。如果剩余空间为负或者只有一个弹性项，则该值等同于flex-start。否则，第1个弹性项的外边距和行的main-start边线对齐，而最后1个弹性项的外边距和行的main-end边线对齐，然后剩余的弹性项分布在该行上，相邻项目的间隔相等。<br/>
 			space-around：弹性项目平均分布在该行上，两边留有一半的间隔空间。如果剩余空间为负或者只有一个弹性项，则该值等同于center。否则，弹性项目沿该行分布，且彼此间隔相等（比如是20px），同时首尾两边和弹性容器之间留有一半的间隔（1/2*20px=10px）。</p>
 			</div><hr/>
+		<div id="mix-blend-mode">
+			<h3>mix-blend-mode：描述了元素的内容应该与元素的直系父元素的内容和元素的背景如何混合。</h3>
+			<p>normal;<br/>multiply;<br/>screen;<br/>overlay;<br/>darken;<br/>lighten;<br/>color-dodge<br/>color-burn;<br/>hard-light;<br/>soft-light;<br/>difference;<br/>exclusion;<br/>hue;<br/>saturation;<br/>color;<br/>luminosity;</p>
+			</div><hr/>
+		<div id="nav-down">
+			<h3>nav-down：规定当使用 nav-down 导航键时，向何处进行导航</h3>
+			<p>auto：浏览器决定导航到哪个元素<br/>id：规定被导航元素的 id<br/>target-name：规定被导航的目标框架<br/>inherit：规定应从父元素继承 </p>
+			</div><hr/>
+		<div id="nav-index">
+			<h3>nav-index：指定了连续的导航元素的顺序（"Tab键顺序"）。</h3>
+			<p>auto：浏览器指派的元素的Tab键顺序<br/>number：表示该元素的Tab键顺序。 1意味着首先<br/>inherit：从父元素继承</p>
+			<p></p>
+			</div><hr/>
+		<div id="nav-left">
+			<h3>nav-left：指定使用箭头向左导航键导航。</h3>
+			<p>auto：浏览器将决定哪个元素导航<br/>id：指定导航到该元素的ID<br/>target-name：指定导航到目标帧<br/>inherit：从父元素继承</p>
+			<p></p>
+			</div><hr/>
+		<div id="nav-right">
+			<h3>nav-right：指定使用箭头向右导航键导航。</h3>
+			<p>auto：浏览器将决定哪个元素导航<br/>id：指定导航到该元素的ID<br/>target-name：指定导航到目标帧<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="nav-up">
+			<h3>nav-up：指定使用箭头向上导航键导航。</h3>
+			<p>auto：浏览器将决定哪个元素导航<br/>id：指定导航到该元素的ID<br/>target-name：指定导航到目标帧<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="object-fit">
+			<h3>object-fit：如何去适应指定容器的高度与宽度。</h3>
+			<p>object-fit 一般用于 img 和 video 标签，一般可以对这些元素进行保留原始比例的剪切、缩放或者直接进行拉伸等。<br/>您可以通过使用 object-position 属性来切换被替换元素的内容对象在元素框内的对齐方式。</p>
+			<p>fill：默认，不保证保持原有的比例，内容拉伸填充整个内容容器<br/>contain：保持原有尺寸比例。内容被缩放<br/>cover：保持原有尺寸比例。但部分内容可能被剪切<br/>none：保留原有元素内容的长度和宽度，也就是说内容不会被重置
+			<br/>scale-down：保持原有尺寸比例。内容的尺寸与 none 或 contain 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些<br/>initial：设置为默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="object-position">
+			<h3>object-position：设置元素的位置。</h3>
+			<p>一般与 object-fit一起使用，object-position 一般用于 img 和 video 标签。</p>
+			<p>position：指定 image 或 video 在容器中的位置。第一个值为 x 坐标位置的值，第二个值为 y 坐标位置的值。表示的方式有：object-position: 50% 50%;object-position: right top;object-position: left bottom;object-position: 250px 125px;<br/>initial：设置为默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
 		<div id="opacity">
 			<h3>opacity：添加透明度</h3>
 			<p></p>
@@ -1755,10 +1908,96 @@
 			<p>设置弹性容器内弹性子元素的属性。</p>
 			<p>用整数值来定义排列顺序，数值小的排在前面。可以为负值。如order: -1;</p>
 			</div><hr/>
+		<div id="outline-offset">
+			<h3>outline-offset：设置轮廓框架在 border 边缘外的偏移</h3>
+			<p>length：轮廓与边框边缘的距离<br/>inherit：规定应从父元素继承</p>
+			</div><hr/>
+		<div id="page-break-after">
+			<h3>page-break-after：用于设置在指定元素后面插入分页符。</h3>
+			<p>注意：您不能对绝对定位的元素使用此属性。<br/>注意：请尽可能少地使用分页属性，并且避免在表格、浮动元素、带有边框的块元素中使用分页属性。</p>
+			<p>auto：默认。如果必要则在元素后插入分页符<br/>always：在元素后插入分页符<br/>avoid：避免在元素后插入分页符<br/>left：在元素之后足够的分页符，一直到一张空白的左页为止<br/>right：在元素之后足够的分页符，一直到一张空白的右页为止<br/>inherit：从父元素继承 </p>
+			</div><hr/>
+		<div id="page-break-before">
+			<h3>page-break-before：在指定元素前添加分页符。</h3>
+			<p>注意：您不能对绝对定位的元素使用此属性。<br/>注意：请尽可能少地使用分页属性，并且避免在表格、浮动元素、带有边框的块元素中使用分页属性。</p>
+			<p>auto：默认。如果必要则在元素前插入分页符<br/>always：在元素前插入分页符<br/>avoid：避免在元素前插入分页符<br/>left：在元素之前足够的分页符，一直到一张空白的左页为止<br/>right：在元素之前足够的分页符，一直到一张空白的右页为止<br/>inherit：从父元素继承 </p>
+			</div><hr/>
+		<div id="page-break-inside">
+			<h3>page-break-inside：用于设置是否在指定元素中插入分页符。</h3>
+			<p>注意：您不能对绝对定位的元素使用此属性。<br/>注意：请尽可能少地使用分页属性，并且避免在表格、浮动元素、带有边框的块元素中使用分页属性。</p>
+			<p>auto：默认。如果必要则在元素内部插入分页符<br/>avoid：避免在元素内部插入分页符<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="perspective">
+			<h3>perspective：改变3D元素是怎样查看透视图。</h3>
+			<p>定义时的perspective属性，它是一个元素的子元素，透视图，而不是元素本身。<br/>注意：perspective 属性只影响 3D 转换元素。<br/>提示: 请与 perspective-origin 属性一同使用该属性，这样您就能够改变 3D 元素的底部位置。</p>
+			<p>number：元素距离视图的距离，以像素计<br/>none：默认值。与 0 相同。不设置透视。</p>
+			</div><hr/>
+		<div id="perspective-origin">
+			<h3>perspective-origin：改变 3D 元素的底部位置。</h3>
+			<p>定义时的perspective -Origin属性，它是一个元素的子元素，透视图，而不是元素本身。</p>
+			<p>优先级：x-axis > y-axis</p>
+			<p>x-axis：定义该视图在 x 轴上的位置。默认值：50%。可能的值：left、center、right、length、%<br/>y-axis：定义该视图在 y 轴上的位置。默认值：50%。可能的值：top、center、bottom、length、%</p>
+			</div><hr/>
 		<div id="punctuation-trim">
 			<h3>punctuation-trim：是否对标点字符进行修剪</h3>
 			<p>指定是否应修饰，当它出现在一条线，或相邻的另一个全形标点符号字符开头或结束标点字符。</p>
 			<p>none	请勿修剪打开或关闭标点符号<br/>start：在每一行的开头放置开头标点符号<br/>end：在每一行的末尾修剪结束标点符号<br/>allow-end：如果另有不适合之前的理由，修剪每行末尾的结束标点符号<br/>adjacent：若以前相邻字符修剪开口punctuation是一个全形开口，中间或结束标点符号，或表意文字空间。修剪结束标点符号，如果下一个相邻的字符是一个全形关闭或中间punctuation，或表意文字空间</p>
+			</div><hr/>
+		<div id="quotes">
+			<h3>quotes：设置嵌套引用的引号类型。</h3>
+			<p>none：规定 "content" 属性的 "open-quote" 和 "close-quote" 的值不会产生任何引号<br/>string string string string	：定义要使用的引号。前两个值规定第一级引用嵌套，后两个值规定下一级引号嵌套<br/>inherit：从父元素继承</p>
+			<table border="1" cellspacing="0">
+				<caption>引号字符</caption>
+				<tr><th>实体编号</th><th>描述</th></tr>
+				<tr><td>"</td><td>双引号</td></tr>
+				<tr><td>'</td><td>单引号</td></tr>
+				<tr><td>&lt;</td><td>单一的左尖括号</td></tr>
+				<tr><td>&gt;</td><td>单一的右尖括号</td></tr>
+				<tr><td>&lt;&lt;</td><td>双的左尖括号</td></tr>
+				<tr><td>&gt;&gt;</td><td>双的右尖括号</td></tr>
+				<tr><td>'</td><td>左引号(单 high-6)</td></tr>
+				<tr><td>'</td><td>右引号(单 high-9)</td></tr>
+				<tr><td>"</td><td>左引号(双 high-6)</td></tr>
+				<tr><td>"</td><td>右引号(双 high-9)</td></tr>
+				<tr><td>„</td><td>双引号 (双 low-9)</td></tr>
+			</table>
+			</div><hr/>
+		<div id="resize">
+			<h3>resize：指定一个元素是否是由用户调整大小的。</h3>
+			<p>注意：resize属性适用于计算其他元素的溢出值是不是"visible"。</p>
+			<p>none：用户无法调整元素的尺寸<br/>both：用户可调整元素的高度和宽度<br/>horizontal：用户可调整元素的宽度<br/>vertical：用户可调整元素的高度</p>
+			</div><hr/>
+		<div id="rotation">
+			<h3>rotation：围绕由 rotation-point 属性定义的指定点，对块级元素进行逆时针旋转。</h3>
+			<p>angle：元素旋转角度。可能的值：0deg 到 360deg。</p>
+			</div><hr/>
+		<div id="tab-size">
+			<h3>tab-size：规定制表符（tab）字符的空格长度。</h3>
+			<p>在 HTML 中，制表符（tab）字符通常显示为一个单一的空格字符，除了一些元素，比如 &lt;textarea> 和 &lt;pre>，tab-size 属性的结果只对这些元素有效。</p>
+			<p>number：默认值是 8。规定每个制表符（tab）字符要显示的空格字符的数量<br/>length：规定制表符（tab）字符的长度。几乎所有的主流浏览器都不支持该属性值<br/>initial：设置该属性为它的默认值<br/>inherit：从父元素继承</p>
+			</div><hr/>
+		<div id="table-layout">
+			<h3>table-layout：为表设置表格布局算法。</h3>
+			<p>automatic：默认。列宽度由单元格内容设定<br/>fixed：列宽由表格宽度和列宽度设定<br/>inherit：规定应该从父元素继承</p>
+			</div><hr/>
+		<div id="target">
+			<h3>target：是一个速记属性设定target-name, target-new,和target-position属性。</h3>
+			<p>优先级：target-name > target-new > target-position</p>
+			<p>target-name：规定在何处打开超链接（target destination）<br/>target-new：规定应该在新窗口或已有窗口的新标签页中打开超链接<br/>target-position：规定在何处放置新的目的地链接</p>
+			</div><hr/>
+		<div id="target-name">
+			<h3>target-name：指定要打开的超链接（目标位置）。</h3>
+			<p>current：在链接所在的框架、标签页或窗口中打开超链接<br/>root：在当前标签页或窗口中超链接<br/>parent：在父框架中打开超链接。如果当前框架没有父框架，则将该值视作 root<br/>new：创建新的目的地（参阅 target-new）<br/>modal：在新的（暂时创建的）模态窗口中打开新窗口<br/>name：在已有框架、窗口或标签页中打开链接。如果 name 目的地不存在，则用该名称创建新的目的地</p>
+			</div><hr/>
+		<div id="target-new">
+			<h3>target-new：指定新的目标链接是否应该打开一个新窗口，或于一个现有的窗口打开新的选项卡。</h3>
+			<p>注意：只有当target-name属性创建一个新标签或一个新的窗口后才使用target-new属性。</p>
+			<p>window：在新窗口中打开超链接<br/>tab：在已有窗口的新标签页中打开超链接<br/>none：不创建新的目的地。</p>
+			</div><hr/>
+		<div id="target-position">
+			<h3>target-position：指定链接应置于新的目标。</h3>
+			<p>注意： 只有当 target-name属性创建一个新标签或一个新的窗口后才使用target-position属性。</p>
+			<p>above：在当前标签页/窗口之前放置新的目的地标签页/窗口<br/>behind：在当前标签页/窗口之后放置新的目的地标签页/窗口<br/>front：在所有其他标签页/窗口之前放置新的目的地标签页/窗口<br/>back：在所有其他标签页/窗口之后放置新的目的地标签页/窗口</p>
 			</div><hr/>
 		<div id="text-align-last">
 			<h3>text-align-last：如何对齐最后一行或紧挨着强制换行符之前的行</h3>
@@ -1816,6 +2055,11 @@
 				<tr><td>skewY(angle)</td><td>定义 2D 倾斜转换，沿着 Y 轴。</td><tr>
 			</table>
 			</div><hr/>
+		<div id="transform-style">
+			<h3>transform-style：指定嵌套元素是怎样在三维空间中呈现。</h3>
+			<p>注意： 使用此属性必须先使用 transform 属性.</p>
+			<p>flat：表示所有子元素在2D平面呈现<br/>preserve-3d：表示所有子元素在3D空间中呈现</p>
+			</div><hr/>
 		<div id="transition">
 			<h3>transition：一种样式逐渐改变为另一种的效果</h3>
 			<p>要实现这一点，必须规定两项内容：指定要添加效果的CSS属性；指定效果的持续时间。如transition: width 2s;<br/>注意： 如果未指定的期限，transition将没有任何效果，因为默认值是0。</p>
@@ -1829,9 +2073,24 @@
 				<tr><td>transition-delay</td><td>规定过渡效果何时开始。默认是 0</td><tr>
 			</table>
 			</div><hr/>
+		<div id="transition-delay">
+			<h3>transition-delay：指定何时将开始切换效果。</h3>
+			<p>time：指定秒或毫秒数之前要等待切换效果开始</p>
+			</div><hr/>transition-property
 		<div id="transition-duration">
 			<h3>transition-duration：动画耗费时间</h3>
-			<p></p>
+			<p>time：规定完成过渡效果需要花费的时间（以秒或毫秒计）。 默认值是 0，意味着不会有效果。</p>
+			</div><hr/>
+		<div id="transition-property">
+			<h3>transition-property：指定CSS属性的nametransition效果（transition效果时将会启动指定的CSS属性的变化）。</h3>
+			<p>提示:一个转场效果，通常会出现在当用户将鼠标悬停在一个元素上时。<br/>注意：始终指定transition-duration属性，否则持续时间为0，transition不会有任何效果。</p>
+			<p>none：没有属性会获得过渡效果<br/>all：所有属性都将获得过渡效果<br/>property：定义应用过渡效果的 CSS 属性名称列表，列表以逗号分隔。</p>
+			</div><hr/>
+		<div id="transition-timing-function">
+			<h3>transition-timing-function：指定切换效果的速度。</h3>
+			<p>此属性允许一个过渡效果，以改变其持续时间的速度。</p>
+			<p>linear：规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）<br/>ease：规定慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）<br/>ease-in：规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）<br/>
+			ease-out：规定以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）<br/>ease-in-out：规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）<br/>cubic-bezier(n,n,n,n)：在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。</p>
 			</div><hr/>
 		<div id="word-break">
 			<h3>word-break：规定非中日韩文本的换行规则</h3>
@@ -1842,50 +2101,88 @@
 			<p>允许长的内容可以自动换行。</p>
 			<p>normal：只在允许的断字点换行（浏览器保持默认处理）<br/>break-word：在长单词或 URL 地址内部进行换行。</p>
 			</div><hr/>
-		
-		
-		
-		
-
-		
-		
-		
-		<div id="">
-			<h3>：</h3>
-			<p></p>
-			<p></p>
-			</div><hr/>
-		<div id="">
-			<h3>：</h3>
-			<p></p>
-			<p></p>
+		<div id="writing-mode">
+			<h3>writing-mode：定义了文本在水平或垂直方向上如何排布。</h3>
+			<p>horizontal-tb：水平方向自上而下的书写方式。即 left-right-top-bottom<br/>vertical-rl：垂直方向自右而左的书写方式。即 top-bottom-right-left<br/>vertical-lr：垂直方向内内容从上到下，水平方向从左到右<br/>sideways-rl：内容垂直方向从上到下排列<br/>sideways-lr：内容垂直方向从下到上排列</p>
 			</div><hr/>
 		
-		
-			
-
-		
-		
-		
-		<div id="">
-			<h3>：</h3>
+		<div id="@font-face">
+			<h3>@font-face：设定自己的字体</h3>
+			<p>@font-face规则：<br/>1.字体的名称，如font-family: myFirstFont;<br/>字体文件包含在您的服务器上的某个地方，如src: url('Sansation_Light.ttf')或src: url('http://www.w3cschool.css/css3/Sansation_Light.ttf')</p>
+			<p>整体示例：<br/>div{font-family: myFirstFont;}<br/>@font-face{font-properties}</p>
 			<p></p>
+			<table border="1" cellspacing="0">
+				<tr><th>字体描述</th><th>值</th><th>说明</th></tr>
+				<tr><td>font-family</td><td>name</td><td>必需的。定义字体的名称</td></tr>
+				<tr><td>src</td><td>URL</td><td>必需的。定义该字体下载的网址（S）</td></tr>
+				<tr><td>font-stretch</td>normal、condensed、ultra-condensed<br/>extra-condensed、semi-condensed、expanded<br/>semi-expanded、extra-expanded、
+				ultra-expanded<td></td>可选。定义该字体应该如何被拉长。默认值是"正常"<td></td></tr>
+				<tr><td>font-style</td><td>normal、italic、oblique</td><td>可选。定义该字体应该是怎样样式。默认值是"正常"</td></tr>
+				<tr><td>font-weight</td><td>normal、bold、100、200、300<br/>400、500、600、700、800、900</td><td>可选。定义字体的粗细。默认值是"正常"</td></tr>
+				<tr><td>unicode-range</td><td>unicode-range</td><td>可选。定义该字体支持Unicode字符的范围。默认值是"ü+0-10 FFFF"</td></tr>
+			</table>
 			</div><hr/>
-		<div id="">
-			<h3>：</h3>
-			<p></p>
+		<div id="@keyframes">
+			<h3>@keyframes：创建动画</h3>
+			<p>创建动画是通过逐步改变从一个CSS样式设定到另一个。<br/>在动画过程中，您可以更改CSS样式的设定多次。<br/>指定的变化时发生时使用％，或关键字"from"和"to"，这是和0％到100％相同。<br/>
+			0％是开头动画，100％是当动画完成。<br/>为了获得最佳的浏览器支持，您应该始终定义为0％和100％的选择器。<br/>注意: 使用animation属性来控制动画的外观，还使用选择器绑定动画。</p>
+			<p>语法：@keyframes animationname {keyframes-selector {css-styles;}}</p>
+			<p>animationname：必需的。定义animation的名称<br/>keyframes-selector：必需的。动画持续时间的百分比<br/>合法值：0-100%、from (和0%相同)、to (和100%相同)<br/>注意： 您可以用一个动画keyframes-selectors。<br/>css-styles：必需的。一个或多个合法的CSS样式属性</p>
 			</div><hr/>
-		<div id="">
-			<h3>：</h3>
-			<p></p>
+		<div id="@media">
+			<h3>@media：自定义媒体样式</h3>
+			<p>@media 可以针对不同的屏幕尺寸设置不同的样式，特别是如果你需要设置设计响应式的页面，@media 是非常有用的。当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面。</p>
+			<p>语法：@media mediatype and|not|only (media feature) {CSS-Code;}<br/>&lt;link rel="stylesheet" media="mediatype and|not|only (media feature)" href="mystylesheet.css"></p>
+			<table border="1" cellspacing="0">
+				<tr><th>值</th><th>描述</th></tr>
+				<tr><th>媒体类型</th></tr>
+				<tr><td>all</td><td>用于所有设备</td></tr>
+				<tr><td>aural</td><td>已废弃。用于语音和声音合成器</td></tr>
+				<tr><td>braillebraille</td><td>已废弃。 应用于盲文触摸式反馈设备</td></tr>
+				<tr><td>embossed</td><td>已废弃。 用于打印的盲人印刷设备</td></tr>
+				<tr><td>handheld</td><td>已废弃。 用于掌上设备或更小的装置，如PDA和小型电话</td></tr>
+				<tr><td>print</td><td>用于打印机和打印预览</td></tr>
+				<tr><td>projection</td><td>已废弃。 用于投影设备</td></tr>
+				<tr><td>screen</td><td>用于电脑屏幕，平板电脑，智能手机等。</td></tr>
+				<tr><td>speech</td><td>应用于屏幕阅读器等发声设备</td></tr>
+				<tr><td>tty</td><td>已废弃。 用于固定的字符网格，如电报、终端设备和对字符有限制的便携设备</td></tr>
+				<tr><td>tv</td><td>已废弃。 用于电视和网络电视</td></tr>
+				<tr><th>媒体功能</th></tr>
+				<tr><td>aspect-ratio</td><td>定义输出设备中的页面可见区域宽度与高度的比率</td></tr>
+				<tr><td>color</td><td>定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0</td></tr>
+				<tr><td>color-index</td><td>定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0</td></tr>
+				<tr><td>device-aspect-ratio</td><td>定义输出设备的屏幕可见宽度与高度的比率</td></tr>
+				<tr><td>device-height</td><td>定义输出设备的屏幕可见高度</td></tr>
+				<tr><td>device-width</td><td>定义输出设备的屏幕可见宽度</td></tr>
+				<tr><td>grid</td><td>用来查询输出设备是否使用栅格或点阵</td></tr>
+				<tr><td>height</td><td>定义输出设备中的页面可见区域高度</td></tr>
+				<tr><td>max-aspect-ratio</td><td>定义输出设备的屏幕可见宽度与高度的最大比率</td></tr>
+				<tr><td>max-color</td><td>定义输出设备每一组彩色原件的最大个数</td></tr>
+				<tr><td>max-color-index</td><td>定义在输出设备的彩色查询表中的最大条目数</td></tr>
+				<tr><td>max-device-aspect-ratio</td><td>定义输出设备的屏幕可见宽度与高度的最大比率</td></tr>
+				<tr><td>max-device-height</td><td>定义输出设备的屏幕可见的最大高度</td></tr>
+				<tr><td>max-device-width</td><td>定义输出设备的屏幕最大可见宽度</td></tr>
+				<tr><td>max-height</td><td>定义输出设备中的页面最大可见区域高度</td></tr>
+				<tr><td>max-monochrome</td><td>定义在一个单色框架缓冲区中每像素包含的最大单色原件个数</td></tr>
+				<tr><td>max-resolution</td><td>定义设备的最大分辨率</td></tr>
+				<tr><td>max-width</td><td>定义输出设备中的页面最大可见区域宽度</td></tr>
+				<tr><td>min-aspect-ratio</td><td>定义输出设备中的页面可见区域宽度与高度的最小比率</td></tr>
+				<tr><td>min-color</td><td>定义输出设备每一组彩色原件的最小个数</td></tr>
+				<tr><td>min-color-index</td><td>定义在输出设备的彩色查询表中的最小条目数</td></tr>
+				<tr><td>min-device-aspect-ratio</td><td>定义输出设备的屏幕可见宽度与高度的最小比率</td></tr>
+				<tr><td>min-device-width</td><td>定义输出设备的屏幕最小可见宽度</td></tr>
+				<tr><td>min-device-height</td><td>定义输出设备的屏幕的最小可见高度</td></tr>
+				<tr><td>min-height</td><td>定义输出设备中的页面最小可见区域高度</td></tr>
+				<tr><td>min-monochrome</td><td>定义在一个单色框架缓冲区中每像素包含的最小单色原件个数</td></tr>
+				<tr><td>min-resolution</td><td>定义设备的最小分辨率</td></tr>
+				<tr><td>min-width</td><td>定义输出设备中的页面最小可见区域宽度</td></tr>
+				<tr><td>monochrome</td><td>定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0</td></tr>
+				<tr><td>orientation</td><td>定义输出设备中的页面可见区域高度是否大于或等于宽度</td></tr>
+				<tr><td>resolution</td><td>定义设备的分辨率。如：96dpi, 300dpi, 118dpcm</td></tr>
+				<tr><td>scan</td><td>定义电视类设备的扫描工序</td></tr>
+				<tr><td>width</td><td>定义输出设备中的页面可见区域宽度</td></tr>
+			</table>
 			</div><hr/>
-		<div id="">
-			<h3>：</h3>
-			<p></p>
-			</div><hr/>
-		
-		
-		
 		<div id="">
 			<h3>：</h3>
 			<p></p>

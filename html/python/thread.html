@@ -177,6 +177,58 @@
 	import threading<br>lock = threading.Lock()	#Lock对象<br>lock.acquire()<br>lock.acquire()  #产生了死琐。<br>
 	lock.release()<br>lock.release()<br>和<br>rLock = threading.RLock()  #RLock对象<br>
 	rLock.acquire()<br>rLock.acquire()	#在同一线程内，程序不会堵塞。<br>rLock.release()<br>rLock.release()</p>
+	<form>
+		<fieldset>
+			<legend>** <b>Lock和RLock 举例 </b>**</legend>
+			import threading<br/>
+			num=0<br/>
+			def funct1():<br/>
+				&nbsp; global num,lockid<br/>
+				&nbsp; print("enter frist function.")<br/>
+				&nbsp; lockid.acquire()<br/>
+				&nbsp; for i in range(10):<br/>
+					&nbsp; &nbsp; num +=1<br/>
+				&nbsp; print("num1 is",num)<br/>
+				&nbsp; #funct2() #RLock打开，而使用Lock会在此直接死锁<br/>
+				&nbsp; lockid.release()<br/>
+				&nbsp; funct2() #Lock打开<br/>
+			def funct2():<br/>
+				&nbsp; global num,lockid<br/>
+				&nbsp; print("enter second function.")<br/>
+				&nbsp; lockid.acquire()<br/>
+				&nbsp; for i in range(10):<br/>
+					&nbsp; &nbsp; num +=1<br/>
+				&nbsp; print("num2 is",num)<br/>
+				&nbsp; #funct3() #RLock打开<br/>
+				&nbsp; lockid.release()<br/>
+				&nbsp; funct3() ##Lock打开<br/>
+			def funct3():<br/>
+				&nbsp; global num,lockid<br/>
+				&nbsp; print("enter thrid function.")<br/>
+				&nbsp; lockid.acquire()<br/>
+				&nbsp; for i in range(10):<br/>
+					&nbsp; &nbsp; num +=1<br/>
+				&nbsp; print("num3 is",num)<br/>
+				&nbsp; lockid.release()<br/>
+
+			def all_funct():<br/>
+				&nbsp; global num,lockid<br/>
+				&nbsp; print("enter all function.")<br/>
+				&nbsp; lockid.acquire()<br/>
+				&nbsp; for i in range(10):<br/>
+					&nbsp; &nbsp; num += 1<br/>
+				&nbsp; print("num is",num)<br/>
+				&nbsp; #funct1() #RLock打开<br/>
+				&nbsp; lockid.release()<br/>
+				&nbsp; funct1() #Lock打开<br/>
+				
+			if __name__=="__main__":<br/>
+				&nbsp; lockid = threading.Lock() # 或 RLock()<br/>
+				&nbsp; funct=threading.Thread(target=all_funct)<br/>
+				&nbsp; funct.start()<br/>
+			<img src="./0/.png" alt="lock">
+		</fieldset>
+	</form>
 	
 	<hr/><h3>条件对象</h3>
 	<li>threading.Condition([lock])</li>
@@ -186,9 +238,9 @@
 	<p>release()：释放锁</p>
 	<p>wait([timeout])：wait方法释放内部所占用的琐，同时线程被挂起，直至接收到notify通知被唤醒或超时（如果提供了timeout参数的话，单位秒）。当线程被唤醒并重新占有琐的时候，程序才会继续执行下去。
 	wait()必须在已获得Lock前提下才能调用,否则会触发RuntimeError。调用wait()会释放Lock,直至该线程被Notify()、NotifyAll()或者超时线程又重新获得Lock</p>
-	<p>Condition.notify(n=1)：唤醒一个挂起的线程（如果存在挂起的线程）。注意：notify()方法不会释放所占用的琐。<br>
+	<p>notify(n=1)：唤醒一个挂起的线程（如果存在挂起的线程）。注意：notify()方法不会释放所占用的琐。<br>
 	通知其他线程,那些挂起的线程接到这个通知之后会开始运行,默认是通知一个正等待该condition的线程,最多则唤醒n个等待的线程。notify()必须在已获得Lock前提下才能调用,否则会触发RuntimeError。notifhri()不会主动释放Lock。</p>
-	<p>Condition.notifyAll()/Condition.notify_all()：唤醒所有挂起的线程（如果存在挂起的线程）。注意：这些方法不会释放所占用的琐。如果wait状态线程比较多,notifyAll的作用就是通知所有线程(这个一般用得少)</p>
+	<p>notifyAll()/Condition.notify_all()：唤醒所有挂起的线程（如果存在挂起的线程）。注意：这些方法不会释放所占用的琐。如果wait状态线程比较多,notifyAll的作用就是通知所有线程(这个一般用得少)</p>
 	<form>
 		<fieldset>
 			<legend>** <b>Condition 举例 </b>**</legend>
@@ -235,12 +287,12 @@
 			<img src="./0/0.png" alt="main">
 		</fieldset>
 	</form>
-	<li>threading.local</li>
+	<hr/><h3>threading.local</h3>
 	<p>表示线程局部数据的类。线程局部数据是其值是线程特定的数据。要管理线程本地数据，只需创建一个local（或子类）实例并在其上存储<br>
 	如：mydata = threading.local()<br>
 	mydata.x = 1</p>
 	
-	<li>threading.Event()</li>
+	<hr/><h3>threading.Event()</h3>
 	<p>条件变量的通用版本，任意数量的线程等待某个事件的发生，该事件发生后所有线程将被激活</p>
 	<p>is_set()/isSet()	//当且仅当内部标志为真时返回true。</p>
 	<p>set()	//将内部标志设置为true。等待它变为真的所有线程都被唤醒。wait()一旦标志为真，调用的线程将不会阻塞。</p>
@@ -251,31 +303,31 @@
 			<legend>** <b>Event 举例 </b>**</legend>
 			#---- 捉迷藏的游戏<br>
 			class Hider(threading.Thread):<br>
-				&nbsp def __init__(self, cond, name):<br>
-					&nbsp &nbsp super(Hider, self).__init__()<br>
-					&nbsp &nbsp self.cond = cond<br>
-					&nbsp &nbsp self.name = name<br>				
-				&nbsp def run(self):<br>
-					&nbsp &nbsp time.sleep(1) #确保先运行Seeker中的方法  <br> 				
-					&nbsp &nbsp print (self.name + ': 我已经把眼睛蒙上了')<br>				
-					&nbsp &nbsp self.cond.set()<br>				
-					&nbsp &nbsp time.sleep(1)  <br> 				
-					&nbsp &nbsp self.cond.wait()<br>
-					&nbsp &nbsp print (self.name + ': 我找到你了 ~_~')<br>				
-					&nbsp &nbsp self.cond.set()<br>									
-					&nbsp &nbsp print (self.name + ': 我赢了')<br>				
+				&nbsp; def __init__(self, cond, name):<br>
+					&nbsp; &nbsp; super(Hider, self).__init__()<br>
+					&nbsp; &nbsp; self.cond = cond<br>
+					&nbsp; &nbsp; self.name = name<br>				
+				&nbsp; def run(self):<br>
+					&nbsp; &nbsp; time.sleep(1) #确保先运行Seeker中的方法  <br> 				
+					&nbsp; &nbsp; print (self.name + ': 我已经把眼睛蒙上了')<br>				
+					&nbsp; &nbsp; self.cond.set()<br>				
+					&nbsp; &nbsp; time.sleep(1)  <br> 				
+					&nbsp; &nbsp; self.cond.wait()<br>
+					&nbsp; &nbsp; print (self.name + ': 我找到你了 ~_~')<br>				
+					&nbsp; &nbsp; self.cond.set()<br>									
+					&nbsp; &nbsp; print (self.name + ': 我赢了')<br>				
 			class Seeker(threading.Thread):<br>
-				&nbsp def __init__(self, cond, name):<br>
-					&nbsp &nbsp super(Seeker, self).__init__()<br>
-					&nbsp &nbsp self.cond = cond<br>
-					&nbsp &nbsp self.name = name<br>
-				&nbsp def run(self):<br>
-					&nbsp &nbsp self.cond.wait()<br>								
-					&nbsp &nbsp print (self.name + ': 我已经藏好了，你快来找我吧')<br>
-					&nbsp &nbsp self.cond.set()<br>			
-					&nbsp &nbsp time.sleep(1)<br>
-					&nbsp &nbsp self.cond.wait()<br>								
-					&nbsp &nbsp print (self.name + ': 被你找到了，哎~~~')<br>				
+				&nbsp; def __init__(self, cond, name):<br>
+					&nbsp; &nbsp; super(Seeker, self).__init__()<br>
+					&nbsp; &nbsp; self.cond = cond<br>
+					&nbsp; &nbsp; self.name = name<br>
+				&nbsp; def run(self):<br>
+					&nbsp; &nbsp; self.cond.wait()<br>								
+					&nbsp; &nbsp; print (self.name + ': 我已经藏好了，你快来找我吧')<br>
+					&nbsp; &nbsp; self.cond.set()<br>			
+					&nbsp; &nbsp; time.sleep(1)<br>
+					&nbsp; &nbsp; self.cond.wait()<br>								
+					&nbsp; &nbsp; print (self.name + ': 被你找到了，哎~~~')<br>				
 			cond = threading.Event()<br>
 			seeker = Seeker(cond, 'seeker')<br>
 			hider = Hider(cond, 'hider')<br>
@@ -284,20 +336,128 @@
 			<img src="./0/0.png" alt="main">
 		</fieldset>
 	</form>
-	<li>threading.Semaphore([值])</li>
+	<form>
+		<fieldset>
+			<legend>** <b>Event 举例 </b>**</legend>
+			import threading<br/>
+			import time<br/>
+			num=0<br/>
+			def frist():<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; global num,even<br/>
+					&nbsp; &nbsp; if num <10:<br/>
+						&nbsp; &nbsp; &nbsp; even.clear()<br/>
+						&nbsp; &nbsp; &nbsp; for i in range(15):<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; num = num + 2<br/>
+					&nbsp; &nbsp; if num >0:<br/>
+						&nbsp; &nbsp; &nbsp; even.set()<br/>
+					&nbsp; &nbsp; print("frist number is",num)<br/>
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+
+			def second():<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; global num,even<br/>
+					&nbsp; &nbsp; if (num>8) and even.is_set():<br/>
+						&nbsp; &nbsp; &nbsp; num -= 8<br/>
+						&nbsp; &nbsp; &nbsp; print("second number is",num)<br/>
+					&nbsp; &nbsp; if (num<8):<br/>
+						&nbsp; &nbsp; &nbsp; print("haven't numer.please add number.")<br/>
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+				
+			def thrid():<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; global num,even<br/>
+					&nbsp; &nbsp; if (num>5) and even.is_set():<br/>
+						&nbsp; &nbsp; &nbsp; num -= 5<br/>
+						&nbsp; &nbsp; &nbsp; print("thrid number is",num)<br/>
+					&nbsp; &nbsp; if (num<5):<br/>
+						&nbsp; &nbsp; &nbsp; print("haven't numer.please add number.")<br/>
+						
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+
+			if __name__=="__main__":<br/>
+				&nbsp; even = threading.Event()<br/>
+				&nbsp; fristid = threading.Thread(target=frist)<br/>
+				&nbsp; secondid = threading.Thread(target=second)<br/>
+				&nbsp; thridid = threading.Thread(target=thrid)<br/>
+				&nbsp; fristid.start()<br/>
+				&nbsp; secondid.start()<br/>
+				&nbsp; thridid.start()<br/>
+			<img src="./0/.png" alt="event">
+		</fieldset>
+	</form>
+	<hr/><h3>threading.Semaphore([值])</h3>
 	<p>为线程间的共享资源提供了一个计数器，如果没有可用资源时会被阻塞。可选参数给出内部计数器的初始值 ; 它默认为1。如果给定的值小于0，ValueError则引发。</p>
 	<p>acquire(block=true,timeout=None) 	//获取一个信号量。资源消耗，block为true时，若无法获得资源，将阻塞timeout时间等待其他线程释放资源。block为false时，无法获得资源将抛出ValueError</p>
 	<p>release() 	//释放一个信号量。资源增加</p>
-
+	<p>举个类似信号量例子：某停车场共有5个停车位，来了一辆车，则停车位-1=4，再来两辆车，则停车位-2=2，再来4辆车，此时停车位不够了，前面两个车进去，则停车位-2=0，后面两个车在外面等，前面已在停车位的车此时出去4辆，则停车位+4=4，此时有停车空位了，后面两辆车也可以进来了。若后面还有其他车进去或出来，都是一样的方式。</p>
+	<form>
+		<fieldset>
+			<legend>** <b>Semaphore 举例 </b>**</legend>
+			import threading<br/>
+			import time<br/>
+			num1=0<br/>
+			num2=0<br/>
+			num3=0<br/>
+			def frist():<br/>
+				&nbsp; global num1,sem<br/>
+				&nbsp; print("enter frist...")<br/>
+				&nbsp; sem.acquire()<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; if num1 <10:<br/>
+						&nbsp; &nbsp; &nbsp; num1 += 4<br/>
+						&nbsp; &nbsp; &nbsp; print("frist num:",num1)<br/>
+					&nbsp; &nbsp; else:<br/>
+						&nbsp; &nbsp; &nbsp; sem.release()<br/>
+						&nbsp; &nbsp; &nbsp; print("...exit frist")<br/>
+						&nbsp; &nbsp; &nbsp; break<br/>
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+			def second():<br/>
+				&nbsp; global num2,sem<br/>
+				&nbsp; print("enter second...")<br/>
+				&nbsp; sem.acquire()<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; if num2 <30:<br/>
+						&nbsp; &nbsp; &nbsp; num2 += 10<br/>
+						&nbsp; &nbsp; &nbsp; print("second num:",num2)<br/>
+					&nbsp; &nbsp; else:<br/>
+						&nbsp; &nbsp; &nbsp; sem.release()<br/>
+						&nbsp; &nbsp; &nbsp; print("...exit second")<br/>
+						&nbsp; &nbsp; &nbsp; break<br/>
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+			def thrid():<br/>
+				&nbsp; global num3,sem<br/>
+				&nbsp; print("enter thrid...")<br/>
+				&nbsp; sem.acquire()<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; if num3 < 20:<br/>
+						&nbsp; &nbsp; &nbsp; num3 += 8<br/>
+						&nbsp; &nbsp; &nbsp; print("thrid num:",num3)<br/>
+					&nbsp; &nbsp; else:<br/>
+						&nbsp; &nbsp; &nbsp; sem.release()<br/>
+						&nbsp; &nbsp; &nbsp; print("...exit thrid")<br/>
+						&nbsp; &nbsp; &nbsp; break<br/>
+					&nbsp; &nbsp; time.sleep(0.5)<br/>
+			if __name__=="__main__":<br/>
+				&nbsp; sem = threading.Semaphore(2)<br/>
+				&nbsp; fristid = threading.Thread(target=frist)<br/>
+				&nbsp; secondid = threading.Thread(target=second)<br/>
+				&nbsp; thridid = threading.Thread(target=thrid)<br/>
+				&nbsp; fristid.start()<br/>
+				&nbsp; secondid.start()<br/>
+				&nbsp; thridid.start()<br/>
+			<img src="./0/.png" alt="sem">
+		</fieldset>
+	</form>
 	<li>threading.BoundedSemaphore(value=1)</li>
 	<p>有界信号量。与Semaphore相似，不过它不允许超过初始值，创建的信号量不可超过初值，超过将抛出ValueError</p>
 
-	<li>threading.Timer(interval,function,args = None ,kwargs = None)</li>
+	<hr/><h3>threading.Timer(interval,function,args = None ,kwargs = None)</h3>
 	<p>与Thread相似，不过运行前要等待一段时间。是threading.Thread的子类，可以在指定时间间隔后执行某个操作。相当于一个定时器。</p>
 	<p>start()		//启动定时器</p>
 	<p>cancel() //停止计时器，取消执行计时器的操作。这只有在计时器仍处于等待阶段时才有效。</p>
 
-	<li>threading.Barrier(parties,action = None ,timeout = None)</li>
+	<hr/><h3>threading.Barrier(parties,action = None ,timeout = None)</h3>
 	<p>创建一个”障碍“,必须要达到指定数量的线程才能继续</p>
 	<p>wait(timeout = None)	//冲出栅栏。这个类对那些固定数量的,需要相互等待的线程。提供了一个简单的同步机制。
 	<p>reset()	//重置栅栏
@@ -306,7 +466,7 @@
 	<p>n_waiting	//当前正在栅栏中阻塞的线程数量
 	<p>broken	//True为栅栏处于破损态</p>
 
-<h3 style="text-align:center;">_thread模块</h3>
+	<hr/><h3 style="text-align:center;">_thread模块</h3>
 	<li>_thread.start_new_thread(function,args,kwargs=None)</li>
 	<p>派生一个新的线程，给定agrs和kwargs来执行function<br>
 	function：线程函数。<br>args：传递给线程函数的参数,他必须是个tuple类型。<br>kwargs：可选参数。

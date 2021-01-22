@@ -1,10 +1,296 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta >
-	<title>javascript<title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>javascript</title>
+	<style>
+		body,html{width:100%;height:100%;margin:0;padding:0;}
+		.main_body{padding-right:200px;margin-right:20px;float:left;}
+		.table_body{width:200px;height:0;float:right;z-index:1;display: block;}
+		a{text-decoration:none;}
+		p{line-height:25px;}
+	</style>
 </head>
 <body>
-	document.write()：向HTML输出流中插入括号里传入的内容，常用来网页向文档中输出内容
+	<div class="table_body">
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+		<a href=""></a><br/>
+	</div>
+	<div class="main_body">
+		<div id="jianjie">
+			<h3>简介</h3>
+			<p>脚本语言，和html、css一起用于web浏览器</p>
+			<p>对事件做出反应：如&lt;button type="button" onclick="alert('欢迎!')">点我!&lt;/button> <br/>点击后会出现警告，其中alert() 函数是发出警告，一般用于代码测试。<br/>onclick 事件在点击时发生的事件</p>
+			<p>javascript脚本在html中除了外部引用，在html内部使用必须位与&lt;script> 与 &lt;/script> 标签之间。<br/>
+			一般是将JavaScript放在head里面或者放在页面底部，这样放在一个位置不会干扰页面内容
+			<br/>外部引用，保存在.js文件中，然后在html中使用&lt;script src="myScript.js">&lt;/script>获取</p>
+			<p>浏览器中JavaScript的调试：在chrome浏览器中按下F12或右击页面，“检查”开启“开发者工具”，然后进入Coonsole窗口调试界面</p>
+			<p>字面量：固定值。<br/>数字字面量的整数或小数或科学计数；如var=123e4;<br/>字符串字面量的单双引号括起来；如var value='hello "bob"';<br/>表达式字面量的加减乘除等；如var a=b+c;<br/>数组字面量的中括号[]括起来；如var arr=new Array();arr[0]="a";arr[1]="b";或var arr=new Array("a","b");或var arr=["a","b"];<br/>对象字面量的花括号{}括起来；如var obj={first:"a",last:"b"};value=obj.first;//value=obj["first"];<br/>函数字面量的function定义一个函数；如function my(a,b){return a+b;}</p>
+			<p>变量：用于存储数据值，使用关键字var定义变量（多个变量可使用逗号 , 分隔），使用等号为变量赋值（若未赋值则默认是undefined），变量必须以字母开头（也可用$和_符号开头，但不推荐），变量前面用过后面再重新声明则前面的值依旧在，对大小写敏感。如var x; x=6<br/>
+			变量通常是可变的，而字面量是一个恒定的值。<br/>声明变量类型：<br/>var a = new String;<br/>var b = new Number;<br/>var c = new Boolean;<br/>var d = new Array;<br/>var e = new Object;</p>
+			<p>操作符：<br/>算术运算符：计算值，如(1+2)*3<br/>赋值运算符：给变量赋值，如x=x+1<br/>位运算符：<br/>条件运算符：<br/>比较运算符：<br/>逻辑运算符：</p>
+			<p>语句：使用分号 ; 隔开，可在一行上编写多条语句<br/>注释：使用双斜杠来单行注释；使用/**/进行多行注释<br/>空格：在JavaScript中多余的空格会被忽略，可用来提高代码可读性<br/>字母大小写：JavaScript对大小写敏感<br/>字符集：使用Unicode字符集<br/>折行：可使用反斜杠对文本字符串进行换行（注意：是文本字符串，即双引号内部的代码进行反斜杠换行）<br/>===：绝对相等，即数据类型与值必须相等</p>
+			<p>函数：语法为function yy(zz){x;xx;return xxx}，函数可以重复使用，JavaScript语句写在花括号{}内</p>
+			<p>数据类型：数字、字符串、数组、对象、布尔（true、false）、对空（Null，设置变量为null来清空变量）、未定义（Undefined）、函数、Symbol等，如<br/>var a=16; //Number 数字字面量赋值<br/>var b=a*10; //Number 表达式字面量赋值<br/>var c="hello"; // String 字符串字面量赋值<br/>var d=['hai',"hello",2]; //Array 数组字面量赋值<br/>var e={first:"a",last:"b"}; //Object 对象字面量赋值</p>
+			<p>关键字：用于标识要执行的操作</p>
+			<table border="1" cellspacing="0" style="text-align:center">
+				<caption>关键字</caption>
+				<tr><td>abstract</td><td>boolean</td><td title="跳出内部循环">break</td><td>byte</td></tr>
+				<tr><td>case</td><td title="在try语句块执行出错时执行此语句块">catch</td><td>char</td><td>class</td></tr>
+				<tr><td>const</td><td title="跳过本次循环，执行下一次循环">continue</td><td>debugger</td><td>default</td></tr>
+				<tr><td>delete</td><td>do</td><td>double</td><td>else</td></tr>
+				<tr><td>enum</td><td>export</td><td>extends</td><td>false</td></tr>
+				<tr><td>final</td><td>finally</td><td>float</td><td title="循环">for</td></tr>
+				<tr><td titile="定义函数">function</td><td>goto</td><td title="条件语句">if</td><td>implements</td></tr>
+				<tr><td>import</td><td>in</td><td>instanceof</td><td>int</td></tr>
+				<tr><td>interface</td><td>let</td><td>long</td><td>native</td></tr>
+				<tr><td>new</td><td>null</td><td>package</td><td>private</td></tr>
+				<tr><td>protected</td><td>public</td><td title="退出函数">return</td><td>short</td></tr>
+				<tr><td>static</td><td>super</td><td title="条件语句">switch</td><td>synchronized</td></tr>
+				<tr><td>this</td><td title="抛出错误">throw</td><td>throws</td><td>transient</td></tr>
+				<tr><td>true</td><td title="实现错误处理，和catch一起使用">try</td><td>typeof</td><td title="声明变量">var</td></tr>
+				<tr><td>void</td><td>volatile</td><td title="循环语句">while</td><td>with</td></tr>
+			</table>
+			<table border="1" cellspacing="0" style="text-align:center">
+				<caption>运算符</caption>
+				<tr><th>运算符</th><th>描述</th><th>举例</th></tr>
+				<tr><th>算术运算符</th></tr>
+				<tr><td>+</td><td>加法</td><td>a="hai,"+"bob"</td></tr>
+				<tr><td>-</td><td>减法</td><td>a=2-1</td></tr>
+				<tr><td>*</td><td>乘法</td><td>a=2*1</td></tr>
+				<tr><td>/</td><td>除法</td><td>a=2/1</td></tr>
+				<tr><td>%</td><td>取余</td><td>a=2%1</td></tr>
+				<tr><td>++</td><td>自增</td><td>a++或++a</td></tr>
+				<tr><td>--</td><td>自减</td><td>a--或--a</td></tr>
+				<tr><th>赋值运算符</th></tr>
+				<tr><td>=</td><td>等于</td><td>a=b</td></tr>
+				<tr><td>+=</td><td>类似a=a+x</td><td>a+=2</td></tr>
+				<tr><td>-=</td><td>类似于a=a-x</td><td>a-=2</td></tr>
+				<tr><td>*=</td><td>类似于a=a*x</td><td>a*=2</td></tr>
+				<tr><td>/=</td><td>类似于a=a/x</td><td>a/=2</td></tr>
+				<tr><td>%=</td><td>类似于a=a%x</td><td>a%=2</td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+				<tr><td></td><td></td><td></td></tr>
+			</table>
+			</div><hr/>
+		<div>
+			<h3>对象</h3>
+			<p>JavaScript 对象是拥有属性和方法的数据。是变量的容器，内部以键值对出现，分号前面的是变量，分号后面的是值</p>
+			<p>对象属性：键值对写法为name:value，在JavaScript对象中通常称为对象属性。<br/>可使用两种方式访问属性：1.obj.name; //一点来获取；2.obj["name"]; //以中括号获取</p>
+			<p>自定义对象方法：<br/>
+			&lt;p id="demo">&lt;/p><br/>
+			&lt;script><br/>
+			var person = {<br/>
+				&nbsp; firstName: "John",<br/>
+				&nbsp; lastName : "Doe",<br/>
+				&nbsp; id : 5566,<br/>
+				&nbsp; fullName : function(){ //自定义对象函数<br/>
+				&nbsp; &nbsp; return this.firstName + " " + this.lastName;} //返回变量组合的字符串<br/>};<br/>
+			document.getElementById("demo").innerHTML = person.fullName(); //赋值自定义对象方法，若没加括号，则回去的是fullName属性，返回的是function整个函数<br/>&lt;/script></p>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3>函数</h3>
+			<p>函数是由事件驱动的或者当它被调用时执行的可重复使用的代码块。可在某事件发生时直接调用函数（如点击按钮事件）</p>
+			<p>函数语法：包括在花括号内的代码块，前面使用关键字function，即function name(){xxx;return xx;}<br/>参数：在括号里面，多个参数由逗号 , 隔开<br/>返回值：可有可无，当函数遇到此关键字时将不再执行后面语句，并返回指定的值（也可直接不带值返回，返回return）</p>
+			<p>如果您把值赋给尚未声明的变量，该变量将被自动作为 window 的一个属性。如name="bob";//将声明window的一个属性name<br/>非严格模式下给未声明变量赋值创建的全局变量，是全局对象的可配置属性，可以删除。<br/>
+			var var1 = 1; // 不可配置全局属性<br/>var2 = 2; // 没有使用 var 声明，可配置全局属性<br/>console.log(this.var1); // 1<br/>console.log(window.var1); // 1<br/>console.log(window.var2); // 2<br/>
+			delete var1; // false 无法删除<br/>console.log(var1); //1<br/>delete var2; <br/>console.log(delete var2); // true<br/>console.log(var2); // 已经删除 报错变量未定义</p>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3>作用域</h3>
+			<p>可访问变量的集合，即在那个地方哪个变量是全局的还是局部的<br/>局部作用域：在函数内声明的变量只能在函数内使用，所以不同的函数可以使用相同的变量名（和C类似）<br/>全局作用域：变量在函数外定义即全局变量，变量在函数内没有声明（没有var关键字）则改变了也是全局变量，网页中所有脚本和函数均可使用</p>
+			<p>在 HTML 中, 全局变量是 window 对象: 所有数据变量都属于 window 对象。</p>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3>事件</h3>
+			<p>示例1：<br/>&lt;button onclick="getElementById('demo').innerHTML=Date()">现在的时间是?&lt;/button><br/>&lt;p id="demo">&lt;/p> &lt;!--点击按钮则这里会显示当前时间--></p>
+			<p>示例2：<br/>&lt;button onclick="this.innerHTML=Date()">现在的时间是?&lt;/button> &lt;!--点击之后直接按钮文本改成了当前时间--></p>
+			<p>示例3：<br/>&lt;button onclick="displayDate()">点这里&lt;/button><br/>&lt;script><br/>
+			function displayDate(){<br/>
+				&nbsp; document.getElementById("demo").innerHTML=Date();}<br/>
+			&lt;/script><br/>
+			&lt;p id="demo">&lt;/p> &lt;!--点击按钮后此处显示当前时间--></p>
+			<table border="1" cellspacing="0">
+				<caption>常见事件</caption>
+				<tr><th>事件</th><th>描述</th></tr>
+				<tr><td>onchange</td><td>HTML 元素改变</td></tr>
+				<tr><td>onclick</td><td>用户点击 HTML 元素</td></tr>
+				<tr><td>onmouseover</td><td>用户在一个HTML元素上移动鼠标</td></tr>
+				<tr><td>onmouseout</td><td>用户从一个HTML元素上移开鼠标</td></tr>
+				<tr><td>onkeydown</td><td>用户按下键盘按键</td></tr>
+				<tr><td>onload</td><td>浏览器已完成页面的加载</td></tr>
+			</table>
+			</div><hr/>
+		<div>
+			<h3>字符串</h3>
+			<p>用于存储和处理文本。使用单引号或双引号。使用索引（即中括号[]）位置来访问字符串中的每个字符，从0开始。在字符串中使用引号，字符串中的引号不要与字符串的引号相同</p>
+			<p>字符串转义字符：\'、\"、\\、\n、\r、\t、\b、\f等（对应于单双引号、反斜杠、换行、回车、制表符tab、退格符、换页符）</p>
+			<p>内置属性length计算字符串长度；typeof返回变量类型</p>
+			<p>字符串为对象的情况，var name=new String("bob");//不建议创建string对象</p>
+			<table>
+				<caption>属性和方法</caption>
+				<tr><th>属性</th><th>描述</th></tr>
+				<tr><td>constructor</td><td>返回创建字符串属性的函数</td></tr>
+				<tr><td>length</td><td>返回字符串的长度</td></tr>
+				<tr><td>prototype</td><td>允许您向对象添加属性和方法</td></tr>
+				<tr><th>方法</th><th>描述</th></tr>
+				<tr><td>charAt()</td><td>返回指定索引位置的字符</td></tr>
+				<tr><td>charCodeAt()</td><td>返回指定索引位置字符的 Unicode 值</td></tr>
+				<tr><td>concat()</td><td>连接两个或多个字符串，返回连接后的字符串</td></tr>	
+				<tr><td>fromCharCode()</td><td>将 Unicode 转换为字符串</td></tr>
+				<tr><td>indexOf()</td><td>返回字符串中检索指定字符第一次出现的位置</td></tr>
+				<tr><td>lastIndexOf()</td><td>返回字符串中检索指定字符最后一次出现的位置</td></tr>
+				<tr><td>localeCompare()</td><td>用本地特定的顺序来比较两个字符串</td></tr>
+				<tr><td>match()</td><td>找到一个或多个正则表达式的匹配</td></tr>
+				<tr><td>replace()</td><td>替换与正则表达式匹配的子串</td></tr>
+				<tr><td>search()</td><td>检索与正则表达式相匹配的值</td></tr>
+				<tr><td>slice()</td><td>提取字符串的片断，并在新的字符串中返回被提取的部分</td></tr>
+				<tr><td>split()</td><td>把字符串分割为子字符串数组</td></tr>
+				<tr><td>substr()</td><td>从起始索引号提取字符串中指定数目的字符</td></tr>
+				<tr><td>substring()</td><td>提取字符串中两个指定的索引号之间的字符</td></tr>
+				<tr><td>toLocaleLowerCase()</td><td>根据主机的语言环境把字符串转换为小写，只有几种语言（如土耳其语）具有地方特有的大小写映射</td></tr>
+				<tr><td>toLocaleUpperCase()</td><td>根据主机的语言环境把字符串转换为大写，只有几种语言（如土耳其语）具有地方特有的大小写映射</td></tr>
+				<tr><td>toLowerCase()</td><td>把字符串转换为小写</td></tr>
+				<tr><td>toString()</td><td>返回字符串对象值</td></tr>
+				<tr><td>toUpperCase()</td><td>把字符串转换为大写</td></tr>
+				<tr><td>trim()</td><td>移除字符串首尾空白</td></tr>
+				<tr><td>valueOf()</td><td>返回某个字符串对象的原始值</td></tr>
+			</table>
+			</div><hr/>
+		<div id="">
+			<h3>document.write()：直接写入html输出流</h3>
+			<p>document.write()：向HTML输出流中插入括号里传入的内容，常用来网页向文档中输出内容</p>
+			<p>&lt;script>document.write(Date());&lt;/script></p>
+			</div><hr/>
+		
+		<div id="">
+			<h3>document.getElementById()：查找元素</h3>
+			<p>配合innerHTML使用，这里是查找元素之后改变里面的内容</p>
+			<p>&lt;p id="demo">我的第一个段落&lt;/p><br/>&lt;script><br/>&nbsp; document.getElementById("demo").innerHTML = "段落已修改。";<br/>&nbsp; /*a=document.getElementById("demo")<br/>&nbsp; a.innerHTML = "段落已修改。"*/<br/>&lt;/script></p>
+			</div><hr/>
+		<div>
+			<h3>window.alert()：弹出警告框</h3>
+			<p></p>
+			<p>&lt;script>window.alert(5 + 6);&lt;/script></p>
+			</div><hr/>
+		<div>
+			<h3>innerHTML：写入内容</h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3>console.log()：写入到浏览器控制台</h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+			
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p></p>
+			</div><hr/>
+	</div>
+	
 </body>
 </html>
