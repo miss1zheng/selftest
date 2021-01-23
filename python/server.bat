@@ -6,7 +6,7 @@
 
 ::local
 ::call %CSDTK4INSTALLDIR%\..\..\..\Python37\python app.py
-call python server.py
+call python gui_client.py
 
 
 pause
