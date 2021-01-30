@@ -57,30 +57,44 @@
 			<br/>外部引用，保存在.js文件中，然后在html中使用&lt;script src="myScript.js">&lt;/script>获取</p>
 			<p>浏览器中JavaScript的调试：在chrome浏览器中按下F12或右击页面，“检查”开启“开发者工具”，然后进入Coonsole窗口调试界面</p>
 			<p>字面量：固定值。<br/>数字字面量的整数或小数或科学计数；如var=123e4;<br/>字符串字面量的单双引号括起来；如var value='hello "bob"';<br/>表达式字面量的加减乘除等；如var a=b+c;<br/>数组字面量的中括号[]括起来；如var arr=new Array();arr[0]="a";arr[1]="b";或var arr=new Array("a","b");或var arr=["a","b"];<br/>对象字面量的花括号{}括起来；如var obj={first:"a",last:"b"};value=obj.first;//value=obj["first"];<br/>函数字面量的function定义一个函数；如function my(a,b){return a+b;}</p>
-			<p>变量：用于存储数据值，使用关键字var定义变量（多个变量可使用逗号 , 分隔），使用等号为变量赋值（若未赋值则默认是undefined），变量必须以字母开头（也可用$和_符号开头，但不推荐），变量前面用过后面再重新声明则前面的值依旧在，对大小写敏感。如var x; x=6<br/>
+			<p>变量：用于存储数据值，使用关键字var定义变量（多个变量可使用逗号 , 分隔），使用等号为变量赋值（若未赋值则默认是undefined），变量必须以字母开头（也可用$和_符号开头，但不推荐），变量前面用过后面再重新声明则前面的值依旧在，对大小写敏感。如 x=6; var x;<br/>
 			变量通常是可变的，而字面量是一个恒定的值。<br/>声明变量类型：<br/>var a = new String;<br/>var b = new Number;<br/>var c = new Boolean;<br/>var d = new Array;<br/>var e = new Object;</p>
-			<p>操作符：<br/>算术运算符：计算值，如(1+2)*3<br/>赋值运算符：给变量赋值，如x=x+1<br/>位运算符：<br/>条件运算符：<br/>比较运算符：<br/>逻辑运算符：</p>
+			<p>变量提升：函数声明和变量声明总是会被解释器悄悄地被"提升"到方法体的最顶部。如变量可先使用后声明，但是只有声明的变量会提升，而初始化不会提升，也就是若是前面先使用后面再声明并初始化的话，输出的值可能不是初始化的值二十undefined，也就是声明提升了，初始化不会提升，所以变量是一个未定义的变量</p>
+			<p>操作符：<br/>算术运算符：计算值，如(1+2)*3<br/>赋值运算符：给变量赋值，如x=x+1<br/>位运算符：<br/>
+			条件运算符：1.if...else if...else...，如 if(x>10){x=10;}else if(x==10){x=11;}else{x=9;}；2.switch(){case x:...;break;case xx:...;break;case xxx:...;break;default:...}，如 switch(x){case 1:x=100;break;case 2:x=200;break;default:x=300;}<br/>比较运算符：<br/>逻辑运算符：</p>
 			<p>语句：使用分号 ; 隔开，可在一行上编写多条语句<br/>注释：使用双斜杠来单行注释；使用/**/进行多行注释<br/>空格：在JavaScript中多余的空格会被忽略，可用来提高代码可读性<br/>字母大小写：JavaScript对大小写敏感<br/>字符集：使用Unicode字符集<br/>折行：可使用反斜杠对文本字符串进行换行（注意：是文本字符串，即双引号内部的代码进行反斜杠换行）<br/>===：绝对相等，即数据类型与值必须相等</p>
 			<p>函数：语法为function yy(zz){x;xx;return xxx}，函数可以重复使用，JavaScript语句写在花括号{}内</p>
 			<p>数据类型：数字、字符串、数组、对象、布尔（true、false）、对空（Null，设置变量为null来清空变量）、未定义（Undefined）、函数、Symbol等，如<br/>var a=16; //Number 数字字面量赋值<br/>var b=a*10; //Number 表达式字面量赋值<br/>var c="hello"; // String 字符串字面量赋值<br/>var d=['hai',"hello",2]; //Array 数组字面量赋值<br/>var e={first:"a",last:"b"}; //Object 对象字面量赋值</p>
+			<p>条件语句：1.if...else if...else...；2.switch(){case:...;break;case:...;default:...;}<br/>if(x>2){<br/>&nbsp; x=3;<br/>}<br/>else if(x<0){<br/>&nbsp; x=1;<br/>}<br/>else{<br/>&nbsp; x=2;<br/>}<br/>switch(x){<br/>&nbsp; case 1:x=100;break;<br/>&nbsp; case 2:x=200;break;<br/>&nbsp; default:x=300;<br/>}</p>
+			<p>循环语句：1.for(...;...;...){...;}；2.for(x in y){...;}；3.while(){...;}；4.do{...;}while();<br/>
+			for(var i=0;i<10;i++){<br/>&nbsp; document.write(i+"&lt;br/&gt;");<br/>}<br/>for(x in y){<br/>&nbsp; print(y[x]);<br/>}//其中x为属性名，y为键值对（字典）<br/>while(i<10){<br/>&nbsp; i++;<br/>}<br/>do{<br/>&nbsp; i++;<br/>}while(i<10);</p>
+			<p>typeof：检测变量的数据类型，如x.innerHTML=typeof "job" + "&lt;br/&gt;" + typeof [1,2,3]</p>
+			<p>constructor：返回所有JavaScript变量的构造函数。typeof无法判断JavaScript array或JavaScript date对象，可用此数据判断，如new Date().constructor//返回函数Date() 或 function(){}.constructor//返回函数function</p>
+			<p>null：空对象引用，可设置为null来清空对象，如var person = null; //值为 null(空), 但类型为对象</p>
+			<p>undefined：没有设置值的变量（typeof一个没有值的变量返回为undefined），可设置为undefined来清空对象，如var person = undefined; //值为 undefined, 类型为 undefined</p>
+			<p>null和undefined的区别：值相等但类型不同</p>
+			<p>严格模式："use strict";，即在严格的条件下运行，如不能使用未声明的变量会直接报错，注意："use strict"指令值允许出现再脚本或函数的开头。</p>
+			<p>注意：1.加法连接时若一数字和一字符串连接则数字自动变成字符串；2.浮点型数据精确度很难确定，有偏差；3.字符串赋值时，字符串内部不能换行（需要使用反斜杠），但是在等于字符串时等于和字符串之间可以换行；4.JavaScript默认代码最后一行自动结束，可以不加分号作为语句结束符，但是其他位置则不可以；
+			5.可使用多行来结束语句，如声明的时候只有var而变量却在另一行是可以的，但是return时不可以换行，因为一行return后没有数据或分号时，return会自动加上分号结束，建议一般还是每个语句末尾加上分号；6.数组可以使用名字来索引，如var a=[]; a["name"]="bob";a["age"]=20;，但是不建议使用，因为一旦这样定义则无法再使用数组的方法和属性了，直接报错；
+			7.数组和字典最后不要添加逗号，因为在不同浏览器中可能得到不同结果；</p>
+			<p></p>
+			<p></p>
 			<p>关键字：用于标识要执行的操作</p>
 			<table border="1" cellspacing="0" style="text-align:center">
 				<caption>关键字</caption>
-				<tr><td>abstract</td><td>boolean</td><td title="跳出内部循环">break</td><td>byte</td></tr>
-				<tr><td>case</td><td title="在try语句块执行出错时执行此语句块">catch</td><td>char</td><td>class</td></tr>
-				<tr><td>const</td><td title="跳过本次循环，执行下一次循环">continue</td><td>debugger</td><td>default</td></tr>
-				<tr><td>delete</td><td>do</td><td>double</td><td>else</td></tr>
-				<tr><td>enum</td><td>export</td><td>extends</td><td>false</td></tr>
-				<tr><td>final</td><td>finally</td><td>float</td><td title="循环">for</td></tr>
-				<tr><td titile="定义函数">function</td><td>goto</td><td title="条件语句">if</td><td>implements</td></tr>
-				<tr><td>import</td><td>in</td><td>instanceof</td><td>int</td></tr>
-				<tr><td>interface</td><td>let</td><td>long</td><td>native</td></tr>
-				<tr><td>new</td><td>null</td><td>package</td><td>private</td></tr>
-				<tr><td>protected</td><td>public</td><td title="退出函数">return</td><td>short</td></tr>
-				<tr><td>static</td><td>super</td><td title="条件语句">switch</td><td>synchronized</td></tr>
-				<tr><td>this</td><td title="抛出错误">throw</td><td>throws</td><td>transient</td></tr>
-				<tr><td>true</td><td title="实现错误处理，和catch一起使用">try</td><td>typeof</td><td title="声明变量">var</td></tr>
-				<tr><td>void</td><td>volatile</td><td title="循环语句">while</td><td>with</td></tr>
+				<tr><td>abstract</td><td>arguments</td><td>boolean</td><td title="跳出内部循环和switch">break</td><td>byte</td></tr>
+				<tr><td>case</td><td title="在try语句块执行出错时执行此语句块">catch</td><td>char</td><td>class</td><td>const</td></tr>
+				<tr><td title="跳过本次循环，执行下一次循环">continue</td><td>debugger</td><td title="switch语句中匹配不存在的值的语句块">default</td><td>delete</td><td>do</td></tr>
+				<tr><td>double</td><td>else</td><td>enum</td><td>eval</td><td>export</td></tr>
+				<tr><td>extends</td><td>false</td><td>final</td><td>finally</td><td>float</td></tr>
+				<tr><td title="循环">for</td><td titile="定义函数">function</td><td>goto</td><td title="条件语句">if</td><td>implements</td></tr>
+				<tr><td>import</td><td>in</td><td>instanceof</td><td>int</td><td>interface</td></tr>
+				<tr><td>let</td><td>long</td><td>native</td><td>new</td><td>null</td></tr>
+				<tr><td>package</td><td>private</td><td>protected</td><td>public</td><td title="退出函数">return</td></tr>
+				<tr><td>short</td><td>static</td><td>super</td><td title="条件语句">switch</td><td>synchronized</td></tr>
+				<tr><td>this</td><td title="抛出错误">throw</td><td>throws</td><td>transient</td><td>true</td></tr>
+				<tr><td title="实现错误处理，和catch一起使用">try</td><td>typeof</td><td title="声明变量">var</td><td>void</td><td>volatile</td></tr>
+				<tr><td title="循环语句">while</td><td>with</td><td>yield</td><td></td><td></td></tr>
 			</table>
 			<table border="1" cellspacing="0" style="text-align:center">
 				<caption>运算符</caption>
@@ -100,19 +114,52 @@
 				<tr><td>*=</td><td>类似于a=a*x</td><td>a*=2</td></tr>
 				<tr><td>/=</td><td>类似于a=a/x</td><td>a/=2</td></tr>
 				<tr><td>%=</td><td>类似于a=a%x</td><td>a%=2</td></tr>
+				<tr><th>比较运算符</th></tr>
+				<tr><td>==</td><td>等于</td><td>x==8</td></tr>
+				<tr><td>===</td><td>绝对等于（值和类型均相等）</td><td>x==="5"</td></tr>
+				<tr><td>!=</td><td>不等于</td><td>x!=8</td></tr>
+				<tr><td>!==</td><td>不绝对等于（值和类型有一个不相等，或两个都不相等）</td><td>x!=="5"</td></tr>
+				<tr><td>&gt;</td><td>大于</td><td>x>8</td></tr>
+				<tr><td>&lt;</td><td>小于</td><td>x<8</td></tr>
+				<tr><td>&gt;=</td><td>大于或等于</td><td>x>=8</td></tr>
+				<tr><td>&lt;=</td><td>小于或等于</td><td>x<=8</td></tr>
+				<tr><th>逻辑运算符</th></tr>
+				<tr><td>&&</td><td>与</td><td>(x < 10 && y > 1)为 true</td></tr>
+				<tr><td>||</td><td>或</td><td>(x==5 || y==5)为 false</td></tr>
+				<tr><td>!</td><td>非</td><td>!(x==y)为 true</td></tr>
+				<tr><th>条件运算符</th></tr>
+				<tr><td>variablename=(condition)?value1:value2 </td><td>类似c语言中的三目运算符 x?xx:xxx </td><td>voteable=(age<18)?"年龄太小":"年龄已达到";</td></tr>
 				<tr><td></td><td></td><td></td></tr>
 				<tr><td></td><td></td><td></td></tr>
 				<tr><td></td><td></td><td></td></tr>
 				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
-				<tr><td></td><td></td><td></td></tr>
+				<tr><th>一元运算符</th></tr>
+				<tr><td>Operator + </td><td>可用于将变量转换为数字</td><td>var y = "John";var x = + y;//若y是数字型字符串则x是数字，否则输一个 NaN数字</td></tr>
+			</table>
+			<table border="1" cellspacing="0" style="text-align:center">
+				<caption>类型转换函数</caption>
+				<tr><th>方法</th><th>描述</th><th>示例</th></tr>
+				<tr><td>String()</td><td>将数据转换为字符串（数据可以为数字、字母、变量、表达式）</td><td>String(100 + 23)</td></tr>
+				<tr><td>toString()</td><td>将数据转换为字符串</td><td>(100 + 23).toString()</td></tr>
+				<tr><td>toExponential()</td><td>把对象的值转换为指数计数法</td><td>num.toExponential(6)//其中6是指定小数点位数</td></tr>
+				<tr><td>toFixed()</td><td>把数字转换为字符串，结果的小数点后有指定位数的数字</td><td>num.toFixed(1)//1为小数位数</td></tr>
+				<tr><td>toPrecision()</td><td>把数字格式化为指定的长度</td><td>num.toPrecision(2)//2为指数计数法的最小位数</td></tr>
+				<tr><td>Date()</td><td>将日期转换为字符串</td><td>Date()//返回当前时间</td></tr>
+				<tr><td>getDate()</td><td>从 Date 对象返回一个月中的某一天 (1 ~ 31)</td><td>getDate()</td></tr>
+				<tr><td>getDay()</td><td>从 Date 对象返回一周中的某一天 (0 ~ 6)</td><td></td></tr>
+				<tr><td>getFullYear()</td><td>从 Date 对象以四位数字返回年份</td><td></td></tr>
+				<tr><td>getHours()</td><td>返回 Date 对象的小时 (0 ~ 23)</td><td></td></tr>
+				<tr><td>getMilliseconds()</td><td>返回 Date 对象的毫秒(0 ~ 999)</td><td></td></tr>
+				<tr><td>getMinutes()</td><td>返回 Date 对象的分钟 (0 ~ 59)</td><td></td></tr>
+				<tr><td>getMonth()</td><td>从 Date 对象返回月份 (0 ~ 11)</td><td></td></tr>
+				<tr><td>getSeconds()</td><td>返回 Date 对象的秒数 (0 ~ 59)</td><td></td></tr>
+				<tr><td>getTime()</td><td>返回 1970 年 1 月 1 日至今的毫秒数</td><td></td></tr>
+				<tr><td>Number() </td><td>将字符串转换为数字</td><td>Number("99 88")</td></tr>
+				<tr><td>parseFloat()</td><td>解析一个字符串，并返回一个浮点数</td><td></td></tr>
+				<tr><td>parseInt()</td><td>解析一个字符串，并返回一个整数</td><td></td></tr>
 				<tr><td></td><td></td><td></td></tr>
 			</table>
+			
 			</div><hr/>
 		<div>
 			<h3>对象</h3>
@@ -171,7 +218,7 @@
 			<p>字符串转义字符：\'、\"、\\、\n、\r、\t、\b、\f等（对应于单双引号、反斜杠、换行、回车、制表符tab、退格符、换页符）</p>
 			<p>内置属性length计算字符串长度；typeof返回变量类型</p>
 			<p>字符串为对象的情况，var name=new String("bob");//不建议创建string对象</p>
-			<table>
+			<table border="1" cellspacing="0">
 				<caption>属性和方法</caption>
 				<tr><th>属性</th><th>描述</th></tr>
 				<tr><td>constructor</td><td>返回创建字符串属性的函数</td></tr>
@@ -201,12 +248,138 @@
 				<tr><td>valueOf()</td><td>返回某个字符串对象的原始值</td></tr>
 			</table>
 			</div><hr/>
+		<div>
+			<h3>正则表达式</h3>
+			<p>正则表达式，使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式。搜索模式可用于文本搜索和文本替换。</p>
+			<p>语法：/正则表达式主体/修饰符(可选)，如var name = /bob/i（ /bob/i为正则表达式，bob为主体，用于检索，i是一个修饰符，搜索不区分大小写）<br/>修饰符：i 不区分大小写；g 全局匹配（查找所有匹配而非在找到第一个匹配后停止）；m 执行多行匹配<br/>
+			正则表达式：1.[]搜索某个范围内字符（[abc]查找括号内任意字符），[0-9]（查找从0到9数字），(x|y)（查找任何以|分隔的选项）；2.元字符特殊含义，\d（查找数字）。\s（查找空白字符），\b（匹配单词边界），\uxxxx（查找以十六进制规定的Unicode字符）；3.量词，n+（匹配任意包含至少一个n的字符串），n*（匹配任意包含零一或多个n的字符串），n?（匹配任意包含零个或一个n的字符串）</p>
+			<p>方法：<br/>1.search()方法由于减少字符串中指定的子字符串，或检索与正则表达式匹配的子字符串，并返回子串的起始位置。如 var str = "Welcome To You!"; var n = str.search(/you/i);var m = str.search("you");<br/>2.replace()方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达匹配的子串。如 var str = "Welcome To You!"; var n = str.replace(/you/i,"me"); var m = str.replace("you","me");<br/>
+			3.test()方法检测一个字符串是否匹配某个模式，若字符串包含匹配文本返回true，否则false，如 var patt = /e/; patt.test("this is test funtion.");//两语句可合并成 /e/.test("this is test funtion.")<br/>4.exec()方法用于检索字符串中的正则表达式的匹配，如 /e/.exec("this is test funtion.")</p>
+			<p></p>
+			</div><hr/>
+		<div id="">
+			<h3>错误调试</h3>
+			<p>try：测试代码块错误；catch：处理错误；throw：创建自定义错误；finally：在try和catch语句后，无论是否触发异常都会执行，类似于python的异常处理</p>
+			<p>语法：try{...;//异常抛出}catch(e){...;异常捕获与处理}finally{...;//结束处理}</p>
+			<p>throw：语法 throw exception，创建或抛出异常，如果把 throw 与 try 和 catch 一起使用，那么您能够控制程序流，并生成自定义的错误消息。如：<br/>
+			try{<br/>&nbsp; if(x=="") throw "值为空";<br/>&nbsp; if(isNaN(x))throw "不是数字";<br/>}<br/>catch(e){<br/>&nbsp; message.innerHTML="错误：" + e;<br/>}</p>
+			<p>console.log()方法：可在调试窗口打印 JavaScript 值（浏览器启动调试工具一般按 F12 键，然后选中console）</p>
+			<p>debugger关键字：用于停止执行 JavaScript，并调用调试函数。这个关键字与在调试工具中设置断点的效果是一样的。</p>
+			<p></p>
+			</div><hr/>
+		<div id="">
+			<h3>表单验证</h3>
+			<p>判断是否有输入，没有则弹窗提示：<br/>
+			&lt;script&gt;<br/>
+			function validateForm() {<br/>
+				&nbsp; var x = document.forms["myForm"]["fname"].value;<br/>
+				&nbsp; if (x == null || x == "") {<br/>
+					&nbsp; &nbsp; alert("需要输入名字。");<br/>
+					&nbsp; &nbsp; return false;}}<br/>
+			&lt;/script&gt;<br/>
+			&lt;form name="myForm" action="demo_form.php" onsubmit="return validateForm()" method="post"&gt;<br/>
+			名字: &lt;input type="text" name="fname"&gt;<br/>
+			&lt;input type="submit" value="提交"&gt;<br/>
+			&lt;/form&gt;<br/>此为JavaScript实现，下面为单纯的html实现（fname值为空，required属性会阻止表单提交）：<br/>
+			&lt;form action="demo_form.php" method="post"&gt;<br/>
+			  &nbsp; &lt;input type="text" name="fname" required="required"&gt;<br/>
+			  &nbsp; &lt;input type="submit" value="提交"&gt;<br/>
+			&lt;/form&gt;</p>
+			<p>判断Email是否有效：<br/>
+			&lt;script&gt;<br/>
+			function validateForm(){<br/>
+				&nbsp; var x=document.forms["myForm"]["email"].value;<br/>
+				&nbsp; var atpos=x.indexOf("@");<br/>
+				&nbsp; var dotpos=x.lastIndexOf(".");<br/>
+				&nbsp; if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){<br/>
+					&nbsp; &nbsp; alert("不是一个有效的 e-mail 地址");<br/>
+					&nbsp; &nbsp; return false;}}<br/>
+			&lt;/script&gt;<br/>
+			&lt;form name="myForm" action="demo-form.php" onsubmit="return validateForm();" method="post"&gt;<br/>
+				&nbsp; Email: &lt;input type="text" name="email"&gt;<br/>
+				&nbsp; &lt;input type="submit" value="提交"&gt;<br/>
+			&lt;/form&gt;</p>
+			<p>约束验证：即表单提交时浏览器先验证一下，约束属性有disabled（输入元素不可用）。max（输入元素最大值），min（输入元素最小值），pattern（输入元素值模式），required（输入字段必须的），type（输入元素类型）；约束css伪类选择器有:disabled（选取属性为disabled属性的input元素），:invalid（选取无效的input元素），:optional（选择没有required属性的input元素），:required（选择有required属性的input元素），:valid（选取有效值的input元素）</p>
+			<p>约束DOM属性：<br/>checkValidity()：检测input输入数据是否合法，合法返回true，否则返回false<br/>setCustomValidity()：用于自定义错误提示信息方法，使用 setCustomValidity 设置了自定义提示后，validity.customError 就会变成true，则 checkValidity 总是会返回false。如果要重新判断需要取消自定义提示，方式如setCustomValidity('') 或 setCustomValidity(null) 或 setCustomValidity(undefined)<br/>
+			validity：布尔属性值，返回 input 输入值是否合法<br/>validationMessage：浏览器错误提示信息<br/>willValidate：指定 input 是否需要验证<br/>customError	设置为 true, 如果设置了自定义的 validity 信息。patternMismatch：设置为 true, 如果元素的值不匹配它的模式属性<br/>rangeOverflow：设置为 true, 如果元素的值大于设置的最大值<br/>
+			rangeUnderflow：设置为 true, 如果元素的值小于它的最小值<br/>stepMismatch：设置为 true, 如果元素的值不是按照规定的 step 属性设置<br/>tooLong	设置为：true, 如果元素的值超过了 maxLength 属性设置的长度<br/>typeMismatch：设置为 true, 如果元素的值不是预期相匹配的类型<br/>valueMissing：设置为 true，如果元素 (required 属性) 没有值<br/>valid：设置为 true，如果元素的值是合法的</p>
+			<p>checkValidity()方法验证数据是否合法：<br/>
+			&lt;script&gt;<br/>
+			function myFunction() {<br/>
+				&nbsp; var inpObj = document.getElementById("id1");<br/>
+				&nbsp; if (inpObj.checkValidity() == false) {//检测元素是否有输入约束条件并检测值是否符合约束条件<br/>
+					&nbsp; &nbsp; document.getElementById("demo").innerHTML = inpObj.validationMessage;<br/>
+				&nbsp; } else {<br/>
+					&nbsp; &nbsp; document.getElementById("demo").innerHTML = "输入正确";<br/>
+				&nbsp; }}<br/>
+			&lt;/script&gt;<br/>
+			&lt;input id="id1" type="number" min="100" max="300" required&gt;<br/>
+			&lt;button onclick="myFunction()">验证&lt;/button&gt;<br/>
+			&lt;p id="demo"&gt;&lt;/p&gt;</p>
+			<p>D验证DOM实现：<br/>
+			&lt;script><br/>
+			function myFunction() {<br/>
+				&nbsp; var txt = "";<br/>
+				&nbsp; var inpObj = document.getElementById("id1");<br/>
+				&nbsp; if(!isNumeric(inpObj.value)) {<br/>
+					&nbsp; &nbsp; txt = "你输入的不是数字";<br/>
+				&nbsp; } else if (inpObj.validity.rangeUnderflow) {<br/>
+					&nbsp; &nbsp; txt = "输入的值太小了";<br/>
+				&nbsp; } else {<br/>
+					&nbsp; &nbsp; txt = "输入正确";<br/>
+				&nbsp; }<br/>
+				&nbsp; document.getElementById("demo").innerHTML = txt;<br/>
+			}<br/>
+
+			// 判断输入是否为数字<br/>
+			function isNumeric(n) {<br/>
+				&nbsp; return !isNaN(parseFloat(n)) && isFinite(n);<br/>
+			}<br/>
+			&lt;/script><br/>
+			&lt;p>输入数字并点击验证按钮:&lt;/p><br/>
+			&lt;input id="id1" type="number" min="100" required><br/>
+			&lt;button onclick="myFunction()">验证&lt;/button><br/>
+			&lt;p id="demo">&lt;/p></p>
+			<p></p>
+			</div><hr/>
+		<div id="">
+			<h3>this、let、const</h3>
+			<p>this：不是固定不变的，它会随着执行环境的改变而改变。1.在方法中表示该方法所属对象；2.单独使用表示全局对象(在浏览器中，window就是该全局对象)；3.在函数中表示全局变量（"use strict"严格模式下标为未定义）；4.在事件中表示接收事件的元素；</p>
+			<p>this示例：<br/>1.方法<br/>
+			&lt;script><br/>
+			// 创建一个对象<br/>
+			var person = {<br/>
+			  &nbsp; firstName: "John",<br/>
+			  &nbsp; lastName : "Doe",<br/>
+			  &nbsp; id     : 5566,<br/>
+			  &nbsp; fullName : function() {<br/>
+				&nbsp; &nbsp; return this.firstName + " " + this.lastName;<br/>
+			  &nbsp; }<br/>
+			};<br/>
+			// 显示对象的数据<br/>
+			document.getElementById("demo").innerHTML = person.fullName();<br/>
+			&lt;/script><br/>
+			&lt;p id="demo">&lt;/p><br/>
+			2.单独使用/严格模式<br/>
+			&lt;script><br/>
+			"use strict";<br/>
+			var x = this;<br/>
+			document.getElementById("demo").innerHTML = x;<br/>
+			&lt;/script><br/>
+			&lt;p id="demo">&lt;/p><br/>
+			3.函数<br/>
+			4.事件<br/>
+			
+			</p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div><hr/>
 		<div id="">
 			<h3>document.write()：直接写入html输出流</h3>
 			<p>document.write()：向HTML输出流中插入括号里传入的内容，常用来网页向文档中输出内容</p>
 			<p>&lt;script>document.write(Date());&lt;/script></p>
 			</div><hr/>
-		
 		<div id="">
 			<h3>document.getElementById()：查找元素</h3>
 			<p>配合innerHTML使用，这里是查找元素之后改变里面的内容</p>

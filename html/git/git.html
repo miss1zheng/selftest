@@ -4,40 +4,77 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<title>GIT 版本管理</title>
 	<style>
-	li{line-height:2em;}
+	li,p{line-height:2em;}
+	
 	</style>
 </head>
 <body>
 	<ol>
-		<li>git init：创建本地仓库（在此目录下会创建隐藏项目.git目录）</li>
-		<li>git clone：将远程仓库项目检出到本地仓库。通常url最后一个 / 之后的项目名称，若想改名称则在该命令后加上要改的名称</li>
+		<li>git init：创建本地仓库（在此目录下会创建隐藏项目.git目录，用来跟踪管理版本库）</li>
+		<li>git clone xxx：将远程仓库项目检出到本地仓库。通常url最后一个 / 之后的项目名称，若想改名称则在该命令后加上要改的名称</li>
 		<li>git config --global user.name或user.email： 配置用户名和邮箱</li>
-		<li>git status：获取当前状态，如是否已加入到本地缓存。</li>
+		<li>git status：获取当前状态，如是否已加入到本地缓存，是否被修改。</li>
 		<li>git add xxx：将文件添加到缓存。如git add ./，即加入当前目录下全部已改内容</li>
 		<li>git commit -m "xxx"：将文件提交到仓库，-m后面输入的是本次提交的说明，如git commit -m "增加版本V1.1"</li>
 		<li>git diff：对比修改增减等不同的部分</li>
 		<li>git push origin xxx：提交到远程仓库（这里会跳出一个提示框要求输入用户名和密码，若远程无此分支则会创建一个新分支）</li>
 		<li>git pull origin xxx：检出远程仓库</li>
-		<li>git branch：查看分支（不带选项为本地分支，-r为远程分支，-a为全部分支）</li>
-		<li>git log：查看本地提交的log日志</li>
+		<li>git log：查看本地提交的log日志，可使用git log --pretty=oneline，这样日志就都在一行显示了；git log --graph可以查看分支合并图</li>
 		<li>git reset --hard xxx：返回到前面已经提交过的一版中</li>
-		<li>git reset --soft HEAD^：若不小心提交了错误的或想本地仓库撤销，此时不会影响已经改动的代码</li>
+		<li>git reset --soft HEAD^：若不小心提交了错误的或想本地仓库撤销，此时不会影响已经改动的代码，将暂存区的修改撤销重新放回工作区，其中HEAD为当前版本，HEAD^为上一个版本，HEAD^^为上上个版本，HEAD~100为100以上的版本</li>
+		<li>git reset HEAD xxx：将暂存区的xxx文件修改撤销重新放回工作区</li>
+		<li>git checkout -- xxx：将在工作区的修改全部撤销，如还未被发在暂存区的，撤销后回到和版本库一样的状态，拎一个是已添加到暂存区并修改了，撤销后就回到添加到暂存区后状态，即将文件回到最近异常commit或add时的状态</li>
 		<li>git checkout xxx：切换分支，使用选项 -b 即创建分支并切换到此分支上去</li>
+		<li>git switch xxx：切换分支，其中-c 创建分支并切换到此分支上去</li>
 		<li>git clean -d -fx：为删除一些没有git add的文件，若切换时切换不过去，可以使用这个命令</li>
 		<li>git show-branch -a --color=always：有若干短划线”-”分隔，几个分支就会有几个短划线。其中短划线分割两部分，上部分为层次缩进的分支列表，下半部分为commit列表。上部分*标识当前分支，！标识其他分支，不同分支颜色不同。下部分commit列表的*和+,*标识这列中当前分支由此commit，而+标识这列中的非当前分支由此commit。颜色用于区分分支</li>
 		<li>git show -a --color=always：若commit之后还想再看下提交前后之间的有哪些地方改变了，则可以使用此命令查看</li>
 		<li>git push origin --delete xxx：删除远程分支，需要输入用户名和密码。</li>
+		<li>git branch：查看分支（不带选项为本地分支，-r为远程分支，-a为全部分支），当前分支前会有一个 * 符号</li>
 		<li>git branch -d xxx：删除本地分支，此分支未被改动过。此时应该切换到其他分支或主分支上进行操作。若想强制删除则将 -d 改成 -D 即可。</li>
+		<li>git branch xxx：创建分支</li>
+		<li>git remote：查看远程库信息，-v显示详细信息</li>
+		<li>git rebase：把分叉的提交历史整合成一条执行，可使本地或远程分支的提交历史变成直线而没有分叉</li>
+		<li>git tag xxx：给当前分支打上标签，git tag可查看所有标签</li>
+		<li>git reflog：查看历史命令，这里会显示对应的id</li>
+		<li>git merge xxx：将xxx分支合并到当前分支上，合并是若有冲突（若产生冲突会告诉具体的冲突文件，冲突文件里 &lt;&lt;&lt;&lt;&lt;&lt;&lt; 与 ======= 与 &gt;&gt;&gt;&gt;&gt;&gt;&gt;）则可以手动解决冲突，再提交</li>
+		<li>git merge --no-ff -m "merge with no-ff" xxx：合并xxx到当前分支，可保存之前分支历史，能看出来曾经做过合并，其中-m是将commit信息写入</li>
+		<li>git stash：将当前工作现场保存起来，后续可恢复继续工作，也就是当前工作未完成，但是又突然需要做另一个工作，可用此命令保存当前工作。</li>
+		<li>git stash apply && git stash drop：恢复保存的工作现场并将stash内容删除，可以直接使用一个命令替代，即git stash pop</li>
+		<li>git stash apply xxx：恢复到指定的stash</li>
+		<li>git stash pop xxx：恢复的同时把stash内容也删除</li>
+		<li>git stash list：查看stash的保存</li>
+		<li>git cherry--pick xxx：复制特定的提交到当前分支</li>
+		<li>git log --pretty=oneline --abbrev-commit：</li>
+		<li>git tag xx xxx：给对应log打上标签，xxx对应log，xx为标签，可加上-a指定标签名，-m指定说明文字</li>
+		<li>git show xxx：查看xxx的详细信息（xxx为对应的tag标签）</li>
+		<li>git tag -d xxx：删除标签</li>
+		<li>git push origin xxx：推送对应的标签到远程，xxx为标签，git push origin --tags可一次性推送所有本地尚未推送到远程的本地标签</li>
+		<li>git push origin:trfs/tags/xxx：删除远程标签，前提是先删除本地标签</li>
 		<li>错误解决：
 			<ul>
 			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
-			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
-			</ul></li>
-		<li></li>
-		<li></li>
+			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，<br/>1.可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传<br/>
+			2.git branch --set-upstream-to=origin/xxx xxx：指定本地分支与远程分支的链接，再git pull拉取新内容，再在本地解决冲突文件，解决之后进行提交就可以成功了</li>
+			<li>error: RPC failed; curl 18 transfer closed with outstanding read data remaining<br/>克隆源码时出现的错误，主要原因是curl的postBuffer的默认值太小，需要重新配置大小，解决方式：1.git config --global http.postBuffer 524288000将其大小配置成500M（可使用git config --list查看大小）；2.尝试其他的，如ssh或git；3.可能是网速慢导致，修改下载速度：git config --global http.lowSpeedLimit 0，再git config --global http.lowSpeedTime 999999；4.浅层克隆：git clone --depth=1 http://xx.git，再git fetch unshallow</li>
+			</ul>
+		</li>
 		<li></li>
 	</ol>
 	<p>小技巧1：若本地可执行的git在远程中始终进入不了git版本管理时，这时可以打开git-bash.exe。然后在远程上找到本地需要使用到的目录，使用cd \\c:\x\xx\xxx（这里需要将反斜杠改成斜杆）。即可进入</p>
 	<p>小技巧2：若git-bash只能在指定的目录下运行git命令，则打开后先输入 export PATH=/mingw64/bin:$PATH （export用于临时修改环境变量）。之后就能正常使用git了。</p>
+	<p>分布式与集中式：集中式版本控制（如SVN）主要是版本库集中存放在中央服务器，每次用的时候，先重中央服务器下拉最新版本，在改完后发给服务器，最大的毛病是必须联网，局域网或许能快速上传和下拉，但是互联网的话，可能会上传下拉很慢。<br/>分布式版本控制是每个人电脑就是一个完整的版本库，这样就不需要联网，</p>
+	<p>GIT安装：<br/>1.linux下，先输入 git，查看是否有安装，若为 Ubuntu 则可以 sudo apt-get install git 就可以安装了，若为其他Linux则可以直接通过源码安装，下载解压之后依次输入 ./config，make，sudo make install<br/>
+	MAC OS下有两种方式，一个是安装homebrew，另一个是直接从AppStore安装Xcode，这里面集成了git，默认没有安装，需要运行Xcode选中菜单xcode->preferences，找到downloads，选中command line tools，点击install即可安装。<br/>
+	widows下直接从git官网下载，安装即可，安装后在开始菜单里有Git Bash，类似命令行功能窗口，这里就可以直接在上面运行了。</p>
+	<p>搭建git服务器：Linux服务器（如Ubuntu，Centos）<br/>1.安装git：sudo apt-get install git<br/>2.创建git用户，用于运行git服务：sudo adduser git<br/>3.创建证书登录：收集所有需要登录的用户公钥，即他们的id_rsa.pub文件，把公钥导入/home/git/.ssh/authorized_keys文件里，一行一个<br/>4.初始化git仓库（这里创建的是个裸仓库，没有工作区，纯粹为了共享）：sudo git init --bare sample.git；sudo chown -R git:git sample.git<br/>
+	5.经验shell登录：编辑/etc/passwd文件，修改git:x:1001:1001:,,,:/home/git:/bin/bash 改为 git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell 即可<br/>6.克隆远程仓库：git clone git@server:/srv/sample.git<br/>
+	管理公钥：可把每个人公用放置在/home/git/.ssh/authorized_keys文件里<br/>权限管理：可使用gitolite工具</p>
+	<p title="具体故事来源于“廖雪峰官网”中的git教程里面的“git的诞生”">&nbsp; &nbsp; 小故事：Linus在1991年创建了开源的Linux，但Linux的壮大是靠全世界热心的志愿者参与的，在2002年以前，世界各地的志愿者把源代码文件通过diff的方式发给Linus，然后由Linus本人通过手工方式合并代码！<br/>&nbsp; 
+	由于其他的免费版本控制管理软件都是集中式的版本控制系统不但速度慢，而且必须联网才能使用。有一些商用的版本控制系统，需要付费的，和Linux的开源精神不符。<br/>&nbsp; 
+	到了2002年，Linux系统已经发展了十年了，代码库之大让Linus很难继续通过手工方式管理了，社区的弟兄们也对这种方式表达了强烈不满，于是Linus选择了一个商业的版本控制系统BitKeeper，BitKeeper的东家BitMover公司出于人道主义精神，授权Linux社区免费使用这个版本控制系统。<br/>&nbsp; 
+	在2005年Linux社区牛人聚集。开发Samba的Andrew试图破解BitKeeper的协议（这么干的其实也不只他一个），被BitMover公司发现了，于是BitMover公司怒了，要收回Linux社区的免费使用权。<br/>&nbsp; 
+	于是，Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月之内，Linux系统的源码已经由Git管理了！</p>
+
 <body>
 </html>

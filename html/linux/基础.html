@@ -8,7 +8,7 @@
 	</style>
 </head>
 <body>
-	<p>声明：本实验在VMware Station Play 15虚拟机里安装Ubuntu16.04.6桌面64位版。<br/>Ubuntu下载：<a href="https://ftp.sjtu.edu.cn/ubuntu-cd/">https://ftp.sjtu.edu.cn/ubuntu-cd/</a></p>
+	<p>声明：本实验在VMware Station Play 15虚拟机里安装Ubuntu16.04.6桌面64位版。<br/>Ubuntu下载：<a href="https://ftp.sjtu.edu.cn/ubuntu-cd/">https://ftp.sjtu.edu.cn/ubuntu-cd/</a><br/>VMware Workstation Player下载：<a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html">https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html</a></p>
 	<p>终端的格式：username@hostname:dir$，即 用户名@主机名:当前目录用户权限，其中用户权限为#表示这是超级用户，$表示普通用户</p>
 	<p>技巧：<br/>一、终端与桌面的切换：桌面切换到终端方法1.直接在文件夹中搜索gnome-terminal；2.命令行输入按alt+F2进入命令行，输入gnome-terminal；3.ctrl+alt+T进入；4.主页第一个搜索图标输入ter搜索即可；5.将终端图标启动器放置在桌面。终端进入桌面快捷键alt+ctrl+F7<br/>
 	二、鼠标的切换：ctrl+alt+F1进入全面<br/>三、命令自动补全：Tab间命令自动补齐命令或文件<br/>四、查看历史：1.上下键查看；2.history显示本次登录后使用过的所有命令<br/>五、停止当前命令：ctrl+C</p>
@@ -18,8 +18,8 @@
 	<p>通配符：<br/>星号*：匹配任意长度字符串<br/>问号?：匹配一个长度字符<br/>方括号[...]：匹配其中指定的一个字符<br/>[-]：匹配指定的一个字符范围<br/>[^...]：处理其中指定字符均可匹配</p>
 	<p>管道：将一系列命令连起来，以“|”作为管道连接符。第一个输出作为第二个输入，以此类推。</p>
 	<p>重定向：输入输出重定向，改变shell命令或程序默认的标准输入输出目标，重新定向到新目标。<br/>&gt; file：将文件重定向文输出源，新建模式<br/>&gt;&gt; file：将文件重定向为输出源，追加模式<br/>&lt; file：将文件重定向为输入源<br/>&&gt; 将命令产生的错误信息输入到重定向的指定</p>
-	<p></p>
-	<p></p>
+	<p>更新源：Linux源位置在/etc/apt/sources.list，可使用命令<br/>sudo cp：cp /etc/apt/sources.list /etc/apt/sources.list_back //备份配置文件<br/>sudo gedit /etc/apt/sources.list //使用记事本打开源文件<br/>sudo apt-get update //更新源</p>
+	<p>windows终端控制Linux软件：sercurtCRT、xshell、MobaXterm</p>
 	<p></p>
 	<p></p>
 	<p></p>
@@ -56,6 +56,8 @@
 	<p>grep：查找字符串</p>
 	<p>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</p>
 	<p>ps：列出进程</p>
+	<p>ping：测试网络连通性</p>
+	<p>ipconfig/ifconfig：查看网卡信息</p>
 	<p></p>
 	<p></p>
 	<p></p>
@@ -63,9 +65,7 @@
 	<p></p>
 	<p></p>
 	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<p>apt-get install：安装软件</p>
 	<p></p>
 	<p></p>
 	<p></p>
