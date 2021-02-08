@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 
 ::server
 ::call \\tsclient\G\python-3.8.5-embed-amd64\python \\tsclient\G\study\learn\myproject\app.py
@@ -6,7 +6,7 @@
 
 ::local
 ::call %CSDTK4INSTALLDIR%\..\..\..\Python37\python app.py
-call python gui_client.py
+call python chuankou.py
 
 
 pause

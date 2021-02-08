@@ -19,7 +19,7 @@
 		<li>git diff：对比修改增减等不同的部分</li>
 		<li>git push origin xxx：提交到远程仓库（这里会跳出一个提示框要求输入用户名和密码，若远程无此分支则会创建一个新分支）</li>
 		<li>git pull origin xxx：检出远程仓库</li>
-		<li>git log：查看本地提交的log日志，可使用git log --pretty=oneline，这样日志就都在一行显示了；git log --graph可以查看分支合并图</li>
+		<li>git log：查看本地提交的log日志，可使用git log --pretty=oneline（也可以git log --oneline），这样日志就都在一行显示了；git log --graph可以查看分支合并图</li>
 		<li>git reset --hard xxx：返回到前面已经提交过的一版中</li>
 		<li>git reset --soft HEAD^：若不小心提交了错误的或想本地仓库撤销，此时不会影响已经改动的代码，将暂存区的修改撤销重新放回工作区，其中HEAD为当前版本，HEAD^为上一个版本，HEAD^^为上上个版本，HEAD~100为100以上的版本</li>
 		<li>git reset HEAD xxx：将暂存区的xxx文件修改撤销重新放回工作区</li>
@@ -56,9 +56,21 @@
 			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
 			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，<br/>1.可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传<br/>
 			2.git branch --set-upstream-to=origin/xxx xxx：指定本地分支与远程分支的链接，再git pull拉取新内容，再在本地解决冲突文件，解决之后进行提交就可以成功了</li>
-			<li>error: RPC failed; curl 18 transfer closed with outstanding read data remaining<br/>克隆源码时出现的错误，主要原因是curl的postBuffer的默认值太小，需要重新配置大小，解决方式：1.git config --global http.postBuffer 524288000将其大小配置成500M（可使用git config --list查看大小）；2.尝试其他的，如ssh或git；3.可能是网速慢导致，修改下载速度：git config --global http.lowSpeedLimit 0，再git config --global http.lowSpeedTime 999999；4.浅层克隆：git clone --depth=1 http://xx.git，再git fetch unshallow</li>
+			<li>error: RPC failed; curl 18 transfer closed with outstanding read data remaining 或<br/>error: RPC failed; HTTP 502 curl 22 The requested URL returned error: 502<br/>克隆源码时出现的错误，主要原因是curl的postBuffer的默认值太小，需要重新配置大小，解决方式：<br/>1.git config --global http.postBuffer 524288000将其大小配置成500M（可使用git config --list查看大小）；<br/>2.尝试其他的，如ssh或git；<br/>3.可能是网速慢导致，修改下载速度：git config --global http.lowSpeedLimit 0，再git config --global http.lowSpeedTime 999999；<br/>4.浅层克隆：git clone --depth=1 http://xx.git，再git fetch unshallow</li>
+			<li>fatal: unable to access 'https://github.com/xxx.git/': error setting certificate verify locations:<br/>这里克隆的时候需要鉴权，设置成不要鉴权即可，git config --system http.sslverify false，之后再git clone https://xx.git 即可检出成功 </li>
+			<li></li>
+			<li></li>
 			</ul>
 		</li>
+		<li>远程版本回退（比如不小心提交了错误的代码，需要回退到以前的版本）：<br/>
+		git log //查看要回退的log id<br/>git reset --hard xxxx //回退到要回退的id，xxxx就是对应的id<br/>git push origin xxx --force //将当前版本强制上传到xxx分支<br/>git pull origin xxx //下拉xxx分支最小代码<br/>git log //查看是否真的回退成功了</li>
+		<li>git 时出现 (xxx|REBASE 1/31)：本地提交与远程冲突导致<br/>git rebase --abort //本地内容会回到提交之间的状态,也就是回到以前提交但没有pull是的状态<br/>git reset --hard xxx //回到以前版本<br/>git pull origin xxx //获取最新版本</li>
+		<li>设置或取消代理：<br/># 设置ss<br/>git config --global http.proxy 'socks5://127.0.0.1:1080'<br/>git config --global https.proxy 'socks5://127.0.0.1:1080'<br/>
+		# 设置代理<br/>git config --global https.proxy http://127.0.0.1:1080<br/>git config --global https.proxy https://127.0.0.1:1080<br/># 取消代理<br/>git config --global --unset http.proxy<br/>git config --global --unset https.proxy</li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
 		<li></li>
 	</ol>
 	<p>小技巧1：若本地可执行的git在远程中始终进入不了git版本管理时，这时可以打开git-bash.exe。然后在远程上找到本地需要使用到的目录，使用cd \\c:\x\xx\xxx（这里需要将反斜杠改成斜杆）。即可进入</p>

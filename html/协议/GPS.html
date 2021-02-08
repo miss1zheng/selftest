@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>GPS</title>
+	<style>
+	li,p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div>
+		<h3>$GPRMC：运输定位数据格式</h3>
+		<p>例：$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*501）</p>
+		<p>字段 0：$GPRMC，语句 ID，表明该语句为 Recommended Minimum SpecificGPS/TRANSIT Data（RMC）推荐最小定位信息 </p>
+		<p>字段 1：UTC 时间，hhmmss.sss 格式, 时分秒.毫秒，0时区时间，若计算北京时间则为时+8</p>
+		<p>字段 2：状态，A=定位，V=未定位</p>
+		<p>字段 3：纬度 ddmm.mmmm，度分格式（前导位数不足则补 0），下面补充说明</p>
+		<p>字段 4：纬度 N（北纬）或 S（南纬）</p>
+		<p>字段 5：经度 dddmm.mmmm，度分格式（前导位数不足则补 0） ，下面会再补充说明</p>
+		<p>字段 6：经度 E（东经）或 W（西经）</p>
+		<p>字段 7：速度，节，Knots</p>
+		<p>字段 8：方位角，度</p>
+		<p>字段 9：UTC日期，DDMMYY格式，日月年</p>
+		<p>字段 10：磁偏角，（000 - 180）度（前导位数不足则补 0）</p>
+		<p>字段 11：磁偏角方向，E=东 W=西</p>
+		<p>字段 16：校验值，为 $ 后面的数据到 * 前面的异或校验和</p>
+		<p>经纬度查询：百度地图下方->百度地图开放平台下方->坐标拾取器上方->经度,纬度。即可查询到对应的gps定位位置。注意：这里的经纬度是需要转换的</p>
+		<p>经纬度的度分转换成度度计算方法：<br/>纬度 ddmm.mmmm -> dd.dddddd(小数部分保留6位)<br/>前面的dd保留，后面的mm.mmmm/60，保留6位小数<br/>如：3158.4608<br/>58.4608/60=0.974347，即结果为：31.974347<br/>经度 dddmm.mmmm ->ddd.dddddddd.dddddd(小数部分保留6位)<br/>前面的ddd保留，后面的mm.mmmm/60，保留6位小数<br/>
+		如：11848.3737<br/>48.3737/60=0.806228，即结果为118.8062282</p>
+		<p>计算经纬度值的转换为下面的代码：<br/>
+		#include <stdio.h><br/>
+		#include <string.h><br/>
+		#include <stdlib.h> <br/>
+		int ddmm2dd(const char *ddmm, char *dd){<br/>
+			&nbsp; if (NULL == ddmm || NULL == dd)<br/>
+				&nbsp; &nbsp; {return -1;}<br/>
+			&nbsp; int lenSrc = strlen(ddmm)+1;<br/>
+			&nbsp; int lenMm = 0;<br/>
+			&nbsp; int flag = 1;<br/>
+			&nbsp; memcpy(dd,ddmm,lenSrc);<br/>
+			&nbsp; char *pcMm;<br/>
+			&nbsp; double dMm;<br/>
+			&nbsp; int iMm; /* 把pcMm定位到小数点位置 */<br/>
+			&nbsp; pcMm = strstr(dd,".");<br/>
+			&nbsp; if (pcMm == NULL) /* 不含小数点的情况 */<br/>
+			&nbsp; {<br/>
+				&nbsp; &nbsp; pcMm = dd+strlen(dd)-2;<br/>
+				&nbsp; &nbsp; iMm = atoi(pcMm);dMm = iMm /60.0;}<br/>
+			&nbsp; else /* 含有小数点的情况 */<br/>
+			&nbsp; {<br/>
+				&nbsp; &nbsp; if (pcMm - dd > 2)/* 有度 */<br/>
+				&nbsp; &nbsp; {pcMm = pcMm - 2;}<br/>
+				&nbsp; &nbsp; else /* 没有度,只有分 */<br/>
+				&nbsp; &nbsp; {pcMm = dd;flag = 0;}<br/>
+				&nbsp; &nbsp; dMm = atof(pcMm);<br/>
+				&nbsp; &nbsp; dMm /= 60.0;}<br/>
+			&nbsp; sprintf(pcMm,"%lf",dMm);<br/>
+			&nbsp; if ( flag )<br/>
+			&nbsp; {strcpy(pcMm,pcMm+1);}<br/>
+			&nbsp; pcMm = strstr(dd,".");<br/>
+			&nbsp; lenMm = strlen(pcMm);<br/>
+			&nbsp; if ( lenMm > (6+2))<br/>
+			&nbsp; {memset(pcMm+6+2,0,lenMm-6-2);}<br/>
+			&nbsp; return 1;}<br/>
+		int main(){char ddmm[32];<br/>
+		char dd[32];<br/>
+		char *pcMm;/* 把pcMm定位到小数点位置 */<br/>
+		while(scanf("%s",ddmm))<br/>
+		{<br/>
+			&nbsp; pcMm = strstr(ddmm,".");<br/>
+			&nbsp; if((pcMm-ddmm)>5)<br/>
+				&nbsp; &nbsp; printf("intput error!pelease intput agin,thank you!\n");<br/>
+			&nbsp; else if( ddmm2dd(ddmm,dd) >=0 )<br/>
+				&nbsp; &nbsp; printf("%s \n",dd);} return 0;}<br/>
+		/*异或值计算*/<br/>
+		#define bcc_max 4*1024<br/>
+		VOID data_xor_del(UINT8 *data,UINT16 data_len){<br/>
+			&nbsp; UINT8 check = 0x00;UINT8 bcc_data[bcc_max];<br/>
+			&nbsp; &nbsp; UINT8 String[10];<br/>
+			int i = 0;<br/>
+			&nbsp; memset(bcc_data,0,bcc_max);<br/>
+			&nbsp; memcpy(bcc_data,data,data_len);<br/>
+			&nbsp; while(data_len){<br/>
+				&nbsp; &nbsp; check ^= bcc_data[i];<br/>
+				&nbsp; &nbsp; i++;<br/>
+				&nbsp; &nbsp; data_len--;}<br/>
+			&nbsp; sprintf(String,"%x",check);<br/>
+			&nbsp; printf("%x",String);<br/>
+		}
+	</div>
+<body>
+</html>

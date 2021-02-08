@@ -304,11 +304,24 @@ int sum_date(int year,int month,int day)
 	return sum_day;
 }
 
+#define LOG(x) printf("%s=%d\n",# x,x)
+#define log(x) log##x("log start...\n")
+#define loga(fmt,...) printf(fmt, __VA_ARGS__)
+#define logb(fmt,...) printf(fmt, ##__VA_ARGS__)
+
+
+
 int main()
 {
 	int toes=10;
-	printf("toes=%d,toes square=%d,toes twice=%d",toes,toes*toes,2*toes);
-  
+	printf("toes=%d,toes square=%d,toes twice=%d\n",toes,toes*toes,2*toes);
+    LOG(toes);
+	LOG(10);
+	log(b);
+	loga("toes=%d,toes square=%d,toes twice=%d\n",toes,toes*toes,2*toes);
+	logb("toes=%d,toes square=%d,toes twice=%d\n",toes,toes*toes,2*toes);
+	//loga("hello a.\n");//这里没有可变参数，所以报错，而下面的可以，因为去掉了逗号
+	logb("hello b.\n");
 	system("pause");
 	return 0;
 }
