@@ -660,19 +660,19 @@
 		<div>
 			<h3>sys/socket.h</h3>
 			<ol>
-			<li>int shutdown(int sockfd,int howto)：禁止在一个套接口上进行数据的接收与发送。之后再使用 close 关闭套接字。<br/>sockfd：套接字描述符<br/>howto：断开方式
+			<li>int socket(int af, int type, int protocol)：创建套接字。<br/>af：地址族（AF_INET；AF_INET6）<br/>type：数据传输方式或套接字类型（SOCK_STREAM：TCP连接；SOCK_DGRAM：UDP连接）<br/>protocol：传输协议（IPPROTO_TCP：TCP；IPPTOTO_UDP：UDP），一般设置为 0<br/>返回值：成功返回套接字描述符，失败返回 -1</li>
+			<li>int bind(int s,struct sockaddr *addr, int addrlen)：服务器绑定端口信息<br/>s：socket 描述符<br/>addr：<br/>addrlen：<br/>返回值：成功返回 0，失败返回 -1</li>
+			<li>int listen(int s， int backlog)：服务器端监听连接<br/>s：socket 描述符<br/>返回值：成功返回 0，失败返回 -1</li>
+			<li>int accept(int s, void *addr, int *addrlen)：服务器端连接请求<br/>s：socket 描述符<br/>addr：目标地址信息<br/>addrlen：目标地址长度<br/>返回值：成功返回已连接的 socket 描述符，失败返回 -1</li>
+			<li>int connect(int s, struct sockaddr *addr,int addrlen)：建立连接<br/>s：socket 描述符<br/>addr：目标地址信息<br/>addrlen：目标地址长度<br/>返回值：成功返回 0，失败返回 -1</li>
+			<li>int sendto (int s, const void *buf, int len, unsigned int flags, const struct sockaddr *to, int tolen)：UDP 发送数据<br/>s：socket 描述符<br/>buf：数据报缓存地址<br/>len：数据报长度<br/>flags：该参数一般为0<br/>to：struct sockaddr_in 类型，指明目标 ip 信息<br/>tolen：对方地址长度，一般为：sizeof(struct sockaddr_in)<br/>返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
+			<li>int recvfrom(int s, void *buf, int len, unsigned int flags, struct sockaddr *from, int *fromlen)：UDP 接收数据<br/>s：socket 描述符<br/>buf：数据报缓存地址<br/>len：数据报长度<br/>flags：该参数一般为0<br/>from：struct sockaddr_in 类型，指明目标 ip 信息<br/>fromlen：对方地址长度，一般为：sizeof(struct sockaddr_in)<br/>返回值：成功返回接收的字节数，失败返回 -1，错误原因在 errno 中</li>
+			<li>int send(int s, const void *buf, int len, int flags)：TCP 发送数据<br/>s：socket 描述符<br/>buf：发送数据的缓冲区<br/>len：数据长度<br/>flags：该参数一般为 0<br/>返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
+			<li>int recv(int s,void *buf,int len,unsigned int flags)：TCP 接收数据<br/>s：socket 描述符<br/>buf：接收数据的缓冲区<br/>len：数据长度<br/>flags：该参数一般为 0<br/>返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
+			<li>int shutdown(int s,int howto)：禁止在一个套接口上进行数据的接收与发送。之后再使用 close 关闭套接字。<br/>s：socket 描述符<br/>howto：断开方式
 				<ul><li>SHUT_RD：断开输入流。套接字无法接收数据（即使输入缓冲区收到数据也被抹去），无法调用输入相关函数</li>
 				<li>SHUT_WR：断开输出流。套接字无法发送数据，但如果输出缓冲区中还有未传输的数据，则将传递到目标主机</li>
 				<li>SHUT_RDWR：同时断开 I/O 流。相当于分两次调用 shutdown()，其中一次以 SHUT_RD 为参数，另一次以 SHUT_WR 为参数</li></ul></li>
-			<li>int socket(int af, int type, int protocol)：创建套接字。<br/>af：地址族（AF_INET；AF_INET6）<br/>type：数据传输方式或套接字类型（SOCK_STREAM：TCP连接；SOCK_DGRAM：UDP连接）<br/>protocol：传输协议（IPPROTO_TCP：TCP；IPPTOTO_UDP：UDP），一般设置为 0<br/>返回值：成功返回套接字描述符，失败返回 -1</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -907,7 +907,8 @@
 			<li>shell：脚本<br/>source xx.sh：配置当前终端的环境变量<br/>cout：打印到屏幕（和 c++ 中 cout 类似）<br/>echo `date +%Y:%m:%d,%H:%M:%S`：显示年月日时分秒，其中 ` 是反引号</li>
 			<li>bat：编译预处理文件</li>
 			<li>makefile：脚本文件，通过依赖关系编译生成可执行文件<br/>由于此处知识过多，详情请看<a href="./Makefile.html"> Makefile </a></li>
-			<li></li>
+			<li>TCPIP 网络连接：<br/><ul><li>.TCP 端口状态说明 ESTABLISHED、TIME_WAIT、CLOSE_WAIT、LISTENING、SYN_SENT 等<br/>&nbsp;LISTENING：监听状态，服务启动后的状态<br/>&nbsp;ESTABLISHED：两机器建立连接，这时两端可以进行通信了<br/>&nbsp;CLOSE_WAIT：对方主动关闭连接或网络异常导致连接中断，此状态下可调用 close()来正确关闭连接
+				<br/>&nbsp;TIME_WAIT：我方主动调用 close()关闭连接，收到对方确认后状态变为 TIME_WAIT<br/>&nbsp;SYN_SENT：请求连接，当访问另一端时先发个同步信号给端口，此时状态为 SYN_SENT，若连接成功则状态变为 ESTABLISHED<br/>具体状态如下：<br/><img src="./data/tcpip.png" alt="tcpip" height="400px" width="400px"/></li></ul></li>
 			<li></li>
 			<li></li>
 			</ol>
