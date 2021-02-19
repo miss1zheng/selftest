@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
+	<title>硬件</title>
+	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
+	<style>
+		a{text-decoration:none}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../home.html">首页</a>
+		<a href="../../study.html">学习</a>
+		<a href="../../../工具/tools.html">工具</a>
+		<a href="../../../阅读/read.html">阅读</a>
+		<a href="../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../c/c.html">c</a></li>
+			<li><a href="../c++/c++.html">c++</a></li>
+			<li><a href="../css/css.html">css</a></li>
+			<li><a href="../html/html.html">html</a></li>
+			<li><a href="../协议/http/http.html">http</a></li>
+			<li><a href="../java/java.html">java</a></li>
+			<li><a href="../javascript/javascript.html">javascript</a></li>
+			<li><a href="../python/python.html">python</a></li>
+			<li><a href="../sql/sql.html">Sql</a></li>
+			<li><a href="../php/php.html">php</a></li>
+			<li><a href="../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../cad/cad.html">CAD</a></li>
+			<li><a href="./硬件.html">硬件</a></li>
+			<li><a href="../语言/语言.html">语言</a></li>
+			<li><a href="../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+	<p>硬件设计开发软件：Altium Designer、PADS、Cadence等</p>
+	<p>如何测试一个输出引脚的高低电平：1.使用万用表测量；2.使用示波器测量，这里同时能测量出电平的波形；3.使用稳压电源测量，将此脚作为GND，另一端接电源，若此脚为高电平则有电流输出，否则没有电流。</p>
+	<p>Π型电路：<br/><img src="./data/Π电路.png" alt="Π型电路" width="400px"/></p>
+	<p>UART：通用异步收发传输器，rx读、tx写、GND地、VCC电源，参数有波特率、数据位、奇偶校验位、起始位、停止位</p>
+	<p>PIN：电源、时钟、控制、I/O（gpio、功能复用[如spi、i2c、uart等]）</p>
+	<p>ADC：模数转换器，取样、保持、量化、编码</p>
+	<p>CAN：控制局域网络</p>
+	<p>I2C：半双工、双向二线制同步串行总线，sda为双向数据线（收发），scl为双向时钟线（时钟控制），主从方式，可多主多从</p>
+	<p>PWM：脉冲宽度调制，模拟信号进行数字编码</p>
+	<p>RTC：实时时钟</p>
+	<p>SPI：sclk为串行时钟线，mosi为主输出从输入的数据线，miso为主输入从输出的数据线，cs为从设备选择线，串行外设接口，一主多从，全双工同步通信（如EEPROM、FLASH、AD转换器）</p>
+	<p>WLAN：wifi无线中间件</p>
+	<p>SENSOR：传感器</p>
+	<p>TOUCH：触摸芯片</p>
+	<p>485：半双工，以一个使能引脚控制数据的收发，以MAX485芯片为例<br/><img src="./data/max485.png" alt="max485"/></p>
+	<p>232：</p>
+	<p>方波实现：代码上是高低电平相间，然后每个电平转换加入延时，即可实现方波</p>
+	<p>电流：带电质点的定向运动形成电流，单位安培（A）</p>
+	<p>电压：电场中某两点间的电压（降）等于将单位正电荷从一端移至另一端电场力所做的功，单位伏特（V）。</p>
+	<p>电功率：单位时间内电场力所做的功，功率单位瓦特（W），能量单位焦耳（J）</p>
+	<p>电源：表示各种将其他形式的能量转换成电能的元件</p>
+	<p>电阻：理想电阻是只有阻值，和两端电压电流形成热功率。表示消耗电能的元件。<br/>电阻串联：各电阻顺序连接流过同一电流，总电压等于各串联电阻的电压之和，电压与电阻成正比。<br/>电阻并联：各电阻两端分别接在一起，两端为同一电压，总电流等于流过各并联电阻的电流之和，等效电导等于并联的各电导之和</p>
+	<p>电容：理想电容只有容值，没有串联电阻和引线电感。表示各种电容器产生电场，储存电能作用</p>
+	<p>电感：只有电感值，无内阻。表示各种电感线圈产生磁场，储存电能的作用</p>
+	<p>二极管：半导体材料制成的一种电子期间，具有单向导电特性。理想特性是正向偏置时压降较低，固定；反向偏置时截止，电阻无穷大，电流为0。实际导通压降受电流营销，反向有最大击穿电压。<br/>
+	分类：开关二极管、稳压二极管、发光二极管、肖特基二极管（金属半导体二极管）、TVS二极管（瞬态抑制二极管）</p>
+	<p>三极管（晶体管）：有PNP和NPN两种，集电极（c）、基极（b）、发射极（e）<br/><img src="data/三极管.png" alt="三极管" width="300px;"/><br/>截止区：简单讲就是三极管未导通；放大区：发射结正偏，集电结反偏；饱和区：发射结正偏，集电结正偏。<br/>三极管实现开关原理，当处于截止区时打开，三极管处于饱和区关闭</p>
+	<p>MOS管：金属氧化物半导体场效应管，是通过电压建立（或关闭）导电通道进行控制的半导体器件，与二极管和三极管比，是压控器件</p>
+	<p>防护器件：静电防护为ESD（静电防护管），脉冲群防护器件为共模电感、三端气体管等，浪涌防护器件为TVS（瞬态抑制二极管）、ZOV（压敏电阻）、GDT（气体管）</p>
+	<p>PCB：印制电路板，主要由绝缘基板、印制导线、焊盘组成。<br/>PCB层设置：信号层、内部电源/接地层、机械层（放置物理边界和尺寸标注等信息，起提示作用）、其他层（丝印层：PCB板top和bottom层表面绘制元器件的外观和轮廓和放置字符串等；其他工作层：禁止布线；钻孔导引层；钻孔图层；复合层）<br/>PCB元器件封装：实际元器件焊接到PCB的焊接位置和焊接形状（包括外形、尺寸、管脚间距等）</p>
+	<p>负载：将电能转换为其他形式能量或对信号进行处理</p>
+	<p>交变电流：</p>
+	<p>支路：电路中流过同一电流的每个分支。<br/>节点：支路的连接点称为节点。<br/>路径：两节点间的一条通路。路径由支路构成<br/>回路：由支路组成的闭合路径。<br/>网孔：对平面电路，每个网眼即为网孔。网孔是回路，但回路不一定是网孔</p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	</div>
+<body>
+</html>

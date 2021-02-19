@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>GIT 版本管理</title>
+	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../home.html">首页</a>
+		<a href="../../study.html">学习</a>
+		<a href="../../../工具/tools.html">工具</a>
+		<a href="../../../阅读/read.html">阅读</a>
+		<a href="../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../c/c.html">c</a></li>
+			<li><a href="../c++/c++.html">c++</a></li>
+			<li><a href="../css/css.html">css</a></li>
+			<li><a href="../html/html.html">html</a></li>
+			<li><a href="../协议/http/http.html">http</a></li>
+			<li><a href="../java/java.html">java</a></li>
+			<li><a href="../javascript/javascript.html">javascript</a></li>
+			<li><a href="../python/python.html">python</a></li>
+			<li><a href="../sql/sql.html">Sql</a></li>
+			<li><a href="../php/php.html">php</a></li>
+			<li><a href="../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../cad/cad.html">CAD</a></li>
+			<li><a href="../硬件/硬件.html">硬件</a></li>
+			<li><a href="../语言/语言.html">语言</a></li>
+			<li><a href="../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/><a href="#"></a><br/>
+	</div>
+	<div class="main_body">
+		<ol style="line-height: 2em;">
+		<li>git init：创建本地仓库（在此目录下会创建隐藏项目.git目录）</li>
+		<li>git clone：将远程仓库项目检出到本地仓库。通常url最后一个 / 之后的项目名称，若想改名称则在该命令后加上要改的名称</li>
+		<li>git config --global user.name或user.email： 配置用户名和邮箱</li>
+		<li>git status：获取当前状态，如是否已加入到本地缓存。</li>
+		<li>git add xxx：将文件添加到缓存。如git add ./，即加入当前目录下全部已改内容</li>
+		<li>git commit -m "xxx"：将文件提交到仓库，-m后面输入的是本次提交的说明，如git commit -m "增加版本V1.1"</li>
+		<li>git diff：对比修改增减等不同的部分</li>
+		<li>git push origin xxx：提交到远程仓库（这里会跳出一个提示框要求输入用户名和密码，若远程无此分支则会创建一个新分支）</li>
+		<li>git pull origin xxx：检出远程仓库</li>
+		<li>git branch：查看分支（不带选项为本地分支，-r为远程分支，-a为全部分支）</li>
+		<li>git log：查看本地提交的log日志</li>
+		<li>git reset --hard xxx：返回到前面已经提交过的一版中</li>
+		<li>git reset --soft HEAD^：若不小心提交了错误的或想本地仓库撤销，此时不会影响已经改动的代码</li>
+		<li>git checkout xxx：切换分支，使用选项 -b 即创建分支并切换到此分支上去</li>
+		<li>git clean -d -fx：为删除一些没有git add的文件，若切换时切换不过去，可以使用这个命令</li>
+		<li>git show-branch -a --color=always：有若干短划线”-”分隔，几个分支就会有几个短划线。其中短划线分割两部分，上部分为层次缩进的分支列表，下半部分为commit列表。上部分*标识当前分支，！标识其他分支，不同分支颜色不同。下部分commit列表的*和+,*标识这列中当前分支由此commit，而+标识这列中的非当前分支由此commit。颜色用于区分分支</li>
+		<li>git show -a --color=always：若commit之后还想再看下提交前后之间的有哪些地方改变了，则可以使用此命令查看</li>
+		<li>git push origin --delete xxx：删除远程分支，需要输入用户名和密码。</li>
+		<li>git branch -d xxx：删除本地分支，此分支未被改动过。此时应该切换到其他分支或主分支上进行操作。若想强制删除则将 -d 改成 -D 即可。</li>
+		<li>错误解决：
+			<ul>
+			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
+			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
+			</ul></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		</ol>
+		<p>小技巧1：若本地可执行的git在远程中始终进入不了git版本管理时，这时可以打开git-bash.exe。然后在远程上找到本地需要使用到的目录，使用cd \\c:\x\xx\xxx（这里需要将反斜杠改成斜杆）。即可进入</p>
+		<p>小技巧2：若git-bash只能在指定的目录下运行git命令，则打开后先输入 export PATH=/mingw64/bin:$PATH 。之后就能正常使用git了。</p>
+	</div>
+<body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=utf-8">
+	<title>socket实现</title>
+	<style>
+		p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<p style="color:red">公用函数</p>
+	<p><b>socket.socket(family[,type[,protocol]])</b>：创建套接字；<br>
+	&nbsp &nbsp family：AF_INET、AT_UNIX（一般为第一个）<br>
+	&nbsp &nbsp type：SOCK_STREAM、SOCK_DGRAW（第一个为TCP，第二个为UDP）<br>
+	&nbsp &nbsp protocol：（一般不填，默认为0）<br>
+	&nbsp &nbsp 返回值可作为下面函数引用</p>
+	<p><b>s.recv(bufsize[,flag])</b>：接收TCP数据，数据以字符串形式返回，s为socket创建时的返回值；<br>
+	&nbsp &nbsp bufsize：指定要接收的最大数据量。<br>
+	&nbsp &nbsp flag：提供有关消息的其他信息，通常可以忽略。<br>
+	&nbsp &nbsp 返回数据，以字符串形式返回。</p>
+	<p><b>s.send(string)</b>：发送TCP数据，将string中的数据发送到连接的套接字。<br>
+	&nbsp &nbsp string：要发送的数据<br>
+	&nbsp &nbsp 返回值是要发送的字节数量，该数量可能小于string的字节大小。</p>
+	<p><b>s.sendall(string)</b>：完整发送TCP数据，将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。
+	&nbsp &nbsp string：要发送的数据<br>
+	&nbsp &nbsp 成功返回None，失败则抛出异常。</p>
+	<p><b>s.recvfrom(bufsize)</b>：接收UDP数据，与recv()类似，<br>
+	&nbsp &nbsp bufsize：指定要接收的最大数据量。<br>
+	&nbsp &nbsp 返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。</p>
+	<p><b>s.sendto(data,addr)</b>：发送UDP数据，将数据发送到套接字。<br>
+	&nbsp &nbsp data：要发送的数据。<br>
+	&nbsp &nbsp address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。<br>
+	&nbsp &nbsp 返回值是要发送的字节数量。</p>
+	<p><b>s.close()</b>：关闭套接字</p>
+	<p><b>s.getpeername()</b>：返回连接套接字的远程地址。返回值通常是元组（ipaddr,port）。</p>
+	<p><b>s.getsockname()</b>：返回套接字自己的地址。通常是一个元组(ipaddr,port)</p>
+	<p><b>s.setsockopt(level,optname,value)</b>：设置给定套接字选项的值。</p>
+	<p><b>s.getsockopt(level,optname[.buflen])</b>：返回套接字选项的值。</p>
+	<p><b>s.settimeout(timeout)</b>：设置套接字操作的超时期，timeout是一个浮点数，单位是秒。值为None表示没有超时期。一般，超时期应该在刚创建套接字时设置，因为它们可能用于连接的操作（如connect()）</p>
+	<p><b>s.gettimeout()</b>：返回当前超时期的值，单位是秒，如果没有设置超时期，则返回None。</p>
+	<p><b>s.fileno()</b>：返回套接字的文件描述符。</p>
+	<p><b>s.setblocking(flag)</b>：如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。</p>
+	<p><b>s.makefile()</b>：创建一个与该套接字相关连的文件</p>
+	<p><b></b></p>
+	<p style="color:red">服务器端函数</p>
+	<p>由于同一时刻每个端口只能被一个进程占用，所以只能和一个客户端建立连接通道，程序可以同时监听到多个客户端而已。<br/>
+多个客户端同時连接时，会进入等待，等待正在连接的客户端释放端口。<br/>也就是即使accept可接受一个以上的客户端连接，但是服务器只能单个单个的通信，只有一个断开了，另一个才能连上</p>
+	<p><b>s.bind(address)</b>：绑定地址address到套接字在AF_INET下,以元组（host,port）的形式表示地址。<br>
+	&nbsp &nbsp address：一般写成("ip",port)</p>
+	<p><b>s.listen(backlog)</b>：开始TCP监听。<br>
+	&nbsp &nbsp backlog：指定在拒绝连接之前，操作系统可以挂起的最大连接数量。该值至少为1，大部分应用程序设为5就可以了。</p>
+	<p><b>s.accept()</b>：被动接受TCP客户端连接,(阻塞式)等待连接的到来。<br>
+	&nbsp &nbsp connection,address：此为返回值，其中第一个元素（connection）是新的socket对象，服务器通过它与客户通信；第二个元素（address）是客户的internet地址。</p>
+	<p><b></b></p>
+	<p style="color:red">客户端函数</p>
+	<p><b>s.connect()</b>：主动初始化TCP服务器连接，。一般address的格式为元组（hostname,port），如果连接出错，返回socket.error错误。</p>
+	<p><b>s.connect_ex()</b>：connect()函数的扩展版本,出错时返回出错码,而不是抛出异常</p>
+	<p><b></b></p>
+	<p>关于TCP的“三次握手和四次挥手”：<br>
+	1.三次握手：<br>
+	&nbsp &nbsp 客户端向服务器端发送连接（我要连接到你了）<br>
+	&nbsp &nbsp 服务器告诉客户端可以连接（你可以连接了）<br>
+	&nbsp &nbsp 服务器开始正式连接，之后就可以通信接收和发送数据了（开始发送和接收数据了）<br>
+	2.四次挥手：<br>
+	&nbsp &nbsp 客户端向服务器端发送断开请求（我要断开了）<br>
+	&nbsp &nbsp 服务器告诉客户端可以断开响应（那你断开吧）<br>
+	&nbsp &nbsp 服务器断开连接（我断开了）<br>
+	&nbsp &nbsp 客户端断开连接（我也断开了）<br>
+	&nbsp &nbsp <img src="./0/socket.png" alt="socket function">
+	</p>
+	<form>
+		<fieldset>
+			<legend>** <b>TCP 举例 </b>**</legend>
+			TCP 客户端和服务器端模拟聊天功能：<br>
+			<b style="font-family:微软雅黑">TCP SERVICE：</b><br>
+				import os<br>
+				import socket<br>
+				s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)<br>
+				port=10099<br>
+				#s.bind(("127.0.0.1",port))<br>
+				s.bind(('localhost',port))<br>
+				s.listen(5)<br>
+				while True:<br>
+					&nbsp print ("waiting for connection.....")<br>
+					&nbsp c,addr=s.accept()<br>
+					&nbsp print ("connect from:",addr)<br>
+					&nbsp while True:<br>
+						&nbsp &nbsp data=c.recv(1024)<br>
+						&nbsp &nbsp print ("你：",data.decode())<br>
+						&nbsp &nbsp str1=input("我：")<br>
+						&nbsp &nbsp if str1 == "拜拜":<br>
+							&nbsp &nbsp &nbsp s.close()<br>
+							&nbsp &nbsp &nbsp exit() <br>
+						&nbsp &nbsp c.send(str1.encode())  <br>   
+				s.close()<br>  
+				exit()<br><br>
+			<b style="font-family:微软雅黑">TCP CLIENT：</b><br>
+				import os<br>
+				import socket<br>
+				c=socket.socket()<br>
+				c.connect(('127.0.0.1',10099))<br>
+				while True:<br>
+					&nbsp data=input("我：")<br>
+					&nbsp c.send(data.encode())<br>
+					&nbsp if data == "拜拜":<br>
+						&nbsp &nbsp c.close()<br>
+						&nbsp &nbsp exit() <br>
+					&nbsp recv_data=c.recv(1024)<br>
+					&nbsp print ("你：",recv_data.decode())<br> 
+				c.close()<br>
+			<img src="./0/socket_tcp.png" alt="socket tcp">
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>** <b>UDP 举例 </b>**</legend>
+			UDP 客户端和服务器端模拟聊天功能：<br>
+			<b style="font-family:微软雅黑">UDP SERVICE：</b><br>
+			import socket<br>
+			s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)<br>
+			s.bind(('127.0.0.1',10099))<br>
+			print ("waiting client connect...")<br>
+			while True:<br>
+				&nbsp data,addr=s.recvfrom(1024)<br>
+				&nbsp print ('received from %s:%s' % (addr,data.decode()))<br>
+				&nbsp if data=='kill':<br>
+					&nbsp &nbsp s.close()<br>
+					&nbsp &nbsp exit()<br>
+				&nbsp else:<br>
+					&nbsp &nbsp str1=input("输入：")<br>
+					&nbsp &nbsp senddata=s.sendto(str1.encode(),addr)<br>
+			s.close()<br><br>
+			<b style="font-family:微软雅黑">UDP CLIENT：</b><br>
+			import socket<br>
+			while True:<br>
+				&nbsp senddata=input("输入：")<br>
+				&nbsp c= socket.socket(socket.AF_INET,socket.SOCK_DGRAM)<br>
+				&nbsp c.sendto(senddata.encode(), ('127.0.0.1',10099))<br>
+				&nbsp if senddata=='kill':<br>
+					&nbsp &nbsp c.close()<br>
+					&nbsp &nbsp exit()<br>
+				&nbsp data,addr = c.recvfrom(1024)<br>
+				&nbsp print (data.decode())<br>
+				&nbsp del senddata<br>
+			c.close()<br>
+			<img src="./0/socket_udp.png" alt="socket udp">
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>** <b>UDP 多人聊天室举例 </b>**</legend>
+			<b style="font-family:微软雅黑">UDP SERVICE：</b><br>
+			import socket<br>
+			import logging<br>
+			def main():<br>
+				&nbsp; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # 创建socket对象<br>
+				&nbsp; addr = ('127.0.0.1', 9999)<br>
+				&nbsp; s.bind(addr)  # 绑定地址和端口<br>
+				&nbsp; logging.info('UDP Server on %s:%s...', addr[0], addr[1])<br>
+				&nbsp; user = {}  # 存放字典{addr:name}<br>
+				&nbsp; while True:<br>
+					&nbsp; &nbsp; try:<br>
+						&nbsp; &nbsp; &nbsp; data, addr = s.recvfrom(1024)  # 等待接收客户端消息存放在2个变量data和addr里<br>
+						&nbsp; &nbsp; &nbsp; if not addr in user:  # 如果addr不在user字典里则执行以下代码<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; for address in user:  # 从user遍历数据出来address<br>
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.sendto(data + ' 进入聊天室...'.encode('utf-8'), address)  # 发送user字典的data和address到客户端<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; user[addr] = data.decode('utf-8')  # 接收的消息解码成utf-8并存在字典user里,键名定义为addr<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; continue  # 如果addr在user字典里，跳过本次循环<br>
+
+						&nbsp; &nbsp; &nbsp; if 'EXIT'.lower() in data.decode('utf-8'):#如果EXIT在发送的data里<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; name = user[addr]   #user字典addr键对应的值赋值给变量name<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; user.pop(addr)      #删除user里的addr<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; for address in user:    #从user取出address<br>
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.sendto((name + ' 离开了聊天室...').encode(), address)     #发送name和address到客户端<br>
+						&nbsp; &nbsp; &nbsp; else:<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; print('"%s" from %s:%s' %(data.decode('utf-8'), addr[0], addr[1]))<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; for address in user:    #从user遍历出address<br>
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if address != addr:  #address不等于addr时间执行下面的代码<br>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s.sendto(data, address)     #发送data和address到客户端<br>
+					&nbsp; &nbsp; except ConnectionResetError:<br>
+						&nbsp; &nbsp; &nbsp; logging.warning('Someone left unexcept.')<br>
+			if __name__ == '__main__':<br>
+				&nbsp; main()<br><br>
+				
+			<b style="font-family:微软雅黑">UDP CLIENT：</b><br>
+			import socket<br>
+			import threading<br>
+			def recv(sock, addr):<br>
+				&nbsp; '''<br>
+				&nbsp; 一个UDP连接在接收消息前必须要让系统知道所占端口<br>
+				&nbsp; 也就是需要send一次，否则win下会报错<br>
+				&nbsp; '''<br>
+				&nbsp; sock.sendto(name.encode('utf-8'), addr)<br>
+				&nbsp; while True:<br>
+					&nbsp; &nbsp; data = sock.recv(1024)<br>
+					&nbsp; &nbsp; print(data.decode('utf-8'))<br>
+			def send(sock, addr):<br>
+				&nbsp; '''<br>
+					&nbsp; 发送数据的方法<br>
+					&nbsp; 参数：<br>
+						&nbsp; &nbsp; sock：定义一个实例化socket对象<br>
+						&nbsp; &nbsp; server：传递的服务器IP和端口<br>
+				&nbsp; '''<br>
+				&nbsp; while True:<br>
+					&nbsp; &nbsp; string = input('')<br>
+					&nbsp; &nbsp; message = name + ' : ' + string<br>
+					&nbsp; &nbsp; data = message.encode('utf-8')<br>
+					&nbsp; &nbsp; sock.sendto(data, addr)<br>
+					&nbsp; &nbsp; if string.lower() == 'EXIT'.lower():<br>
+						&nbsp; &nbsp; &nbsp; break<br>
+			def main():<br>
+				&nbsp; '''<br>
+					&nbsp; 主函数执行方法，通过多线程来实现多个客户端之间的通信<br>
+				&nbsp; '''<br>
+				&nbsp; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>
+				&nbsp; server = ('127.0.0.1', 9999)<br>
+				&nbsp; tr = threading.Thread(target=recv, args=(s, server), daemon=True)<br>
+				&nbsp; ts = threading.Thread(target=send, args=(s, server))<br>
+				&nbsp; tr.start()<br>
+				&nbsp; ts.start()<br>
+				&nbsp; ts.join()<br>
+				&nbsp; s.close()<br>
+			if __name__ == '__main__':<br>
+				&nbsp; print("-----欢迎来到聊天室,退出聊天室请输入'EXIT(不分大小写)'-----")<br>
+				&nbsp; name = input('请输入你的名称:')<br>
+				&nbsp; print('-----------------%s------------------' % name)<br>
+				&nbsp; main()<br>
+			<img src="./0/udp_xiaomi.png" alt="udp_xiaomi">
+			<img src="./0/udp_xiaomi1.png" alt="udp_xiaomi1">
+			<img src="./0/udp_xiaomi2.png" alt="udp_xiaomi2">
+			<img src="./0/udp_xiaomi3.png" alt="udp_xiaomi3">
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>** <b>TCP+threading 举例 </b>**</legend>
+			<b style="font-family:微软雅黑">TCP SERVICE：</b><br>
+			from socket import *<br>
+			from time import *<br>
+			from threading import *<br>
+
+			data=b''<br>
+			socket_en=False<br>
+			def datarecv(c):<br>
+				&nbsp; global data,threadLock,socket_en<br>
+				&nbsp; threadLock.acquire()<br>
+				&nbsp; try:<br>
+					&nbsp; &nbsp; data=c.recv(1024)<br>
+				&nbsp; except Exception as e:<br>
+					&nbsp; &nbsp; pass<br>
+				&nbsp; threadLock.release()<br>
+				&nbsp; if not data:<br>
+					&nbsp; &nbsp; socket_en=False<br>
+				&nbsp; sleep(0.2)<br>
+			def datasend(c):<br>
+				&nbsp; global data,threadLock,socket_en<br>
+				&nbsp; threadLock.acquire()<br>
+				&nbsp; try:<br>
+					&nbsp; &nbsp; c.send(data)<br>
+				&nbsp; except Exception as e:<br>
+					&nbsp; &nbsp; socket_en=False<br>
+				&nbsp; threadLock.release()<br>
+				&nbsp; data=b''<br>
+				&nbsp; sleep(0.2)<br>
+			def socketopen():<br>
+				&nbsp; global socket_en<br>
+				&nbsp; s = socket(AF_INET,SOCK_STREAM,0)         # 创建 socket 对象<br>
+				&nbsp; host = gethostname() # 获取本地主机名<br>
+				&nbsp; port = 10000                # 设置端口<br>
+				&nbsp; s.bind((host, port))        # 绑定端口<br>
+				&nbsp; s.listen(1)                 # 等待客户端连接<br>
+				&nbsp; while True:<br>
+					&nbsp; &nbsp; c,addr = s.accept()     # 建立客户端连接<br>
+					&nbsp; &nbsp; print ('连接地址：', addr)<br>
+					&nbsp; &nbsp; socket_en=True<br>
+					&nbsp; &nbsp; while True:<br>
+						&nbsp; &nbsp; &nbsp; recvid=Thread(target = datarecv, args = (c,), name = 'recv')<br>
+						&nbsp; &nbsp; &nbsp; sendid=Thread(target = datasend, args = (c,), name = 'send')<br>
+						&nbsp; &nbsp; &nbsp; recvid.start()<br>
+						&nbsp; &nbsp; &nbsp; sendid.start()<br>
+						&nbsp; &nbsp; &nbsp; if socket_en==False:<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; print("客户端已断开")<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; c.close()<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; break<br>
+						&nbsp; &nbsp; &nbsp; sleep(0.3)<br>
+					&nbsp; &nbsp; sleep(0.3)<br>
+				
+			if __name__=="__main__":<br>
+				&nbsp; global threadLock<br>
+				&nbsp; threadLock = Lock()<br>
+				&nbsp; socketid=Thread(target = socketopen, args = (), name = 'socket')<br>
+				&nbsp; socketid.start()
+			<br><br>
+			<b style="font-family:微软雅黑">UDP CLIENT：</b><br>
+			from threading import *<br>
+			from socket import *<br>
+			from time import *<br>
+
+			all_data=b""<br>
+			def datasend():<br>
+				&nbsp; global c,all_data,threadLock,dns_ip<br>
+				&nbsp; try:<br>
+					&nbsp; &nbsp; threadLock.acquire()<br>
+					&nbsp; &nbsp; c.send(all_data)<br>
+				&nbsp; except Exception as e:<br>
+					&nbsp; &nbsp; print("---异常---：", e)<br>
+				&nbsp; finally:<br>
+					&nbsp; &nbsp; pass<br>
+				&nbsp; all_data=b""<br>
+				&nbsp; threadLock.release()<br>
+				&nbsp; sleep(0.3)<br>
+
+			def datarecv():<br>
+				&nbsp; global c,all_data,threadLock,dns_ip<br>
+				&nbsp; try:<br>
+					&nbsp; &nbsp; threadLock.acquire()<br>
+					&nbsp; &nbsp; all_data=c.recv(1024)<br>
+				&nbsp; except Exception as e:<br>
+					print("---异常---：", e)<br>
+				&nbsp; finally:<br>
+					&nbsp; &nbsp; pass<br>
+				&nbsp; threadLock.release()<br>
+				&nbsp; if not all_data:<br>
+					&nbsp; &nbsp; print ("对方已断开链接")<br>
+					&nbsp; &nbsp; while True:<br>
+						&nbsp; &nbsp; &nbsp; try:<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; c.close()<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; c=socket(AF_INET,SOCK_STREAM,0)<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; c.connect(dns_ip)<br>
+						&nbsp; &nbsp; &nbsp; except Exception as e:<br>
+							&nbsp; &nbsp; &nbsp; &nbsp; print("---异常---：", e)<br>
+						&nbsp; &nbsp; &nbsp; break<br>
+				&nbsp; sleep(0.3)<br>
+				
+			def socketopen():<br>
+				&nbsp; global c,threadLock,dns_ip<br>
+				&nbsp; c=socket(AF_INET,SOCK_STREAM,0)<br>
+				&nbsp; dns_ip=("127.0.0.1",10000)<br>
+				&nbsp; try:<br>
+					&nbsp; &nbsp; c.connect(dns_ip)<br>
+				&nbsp; except ConnectionRefusedError:<br>
+					&nbsp; &nbsp; print("服务器未打开")<br>
+				&nbsp; except Exception as e:<br>
+					&nbsp; &nbsp; print("---异常---：", e)<br>
+				&nbsp; while True:<br>
+					&nbsp; &nbsp; sendid=Thread(target = datasend, args = (), name = 'send')<br>
+					&nbsp; &nbsp; recvid=Thread(target = datarecv, args = (), name = 'recv')<br>
+
+					&nbsp; &nbsp; sendid.start()<br>
+					&nbsp; &nbsp; recvid.start()<br>
+					&nbsp; &nbsp; sleep(0.3)<br>
+				
+			if __name__=="__main__":<br>
+				&nbsp; global threadLock<br>
+				&nbsp; threadLock = Lock()<br>
+				&nbsp; socketid=Thread(target = socketopen, args = (), name = 'socket')<br>
+				&nbsp; socketid.start()<br>
+			<br/><p>注意：socket作为TCP服务器连接时，s.listen(flag)指定在拒绝连接之前，操作系统可以挂起的最大连接数量。<br/>也就是说，正在运行的客户端（可进行收发）只能是一个，只有当此客户端断开后，其他某一个客户端才能正常的和服务器通信</p>
+			<img src="./0/socket_udp.png" alt="socket udp">
+		</fieldset>
+	</form>
+	<p>socket文档说明：<a href="https://docs.python.org/3/library/socket.html" style="text-decoration:none">https://docs.python.org/3/library/socket.html</a></p>
+</body>
+</html>

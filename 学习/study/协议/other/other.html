@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>NTP</title>
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<style>
+		a{text-decoration:none}
+		p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body" style="padding-left: 20px;">
+		<a href="../../../home.html">首页</a>
+		<a href="../../study.html">学习</a>
+		<a href="../../../工具/tools.html">工具</a>
+		<a href="../../../阅读/read.html">阅读</a>
+		<a href="../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href="../../python/python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href="#NTP">NTP</a><br/><a href="#GPS">GPS</a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		</div>
+	<div class="main_body">
+	<div id="NTP">
+		<h3>简介</h3>
+		<p>基于UDP协议的应用层NTP协议</p>
+		<p>整体的ntp数据报文段（单位：bit）如下：<br/>
+		0 &nbsp; 2&nbsp; &nbsp;5 &nbsp; &nbsp;8 &nbsp; &nbsp; 16 &nbsp; &nbsp;24 &nbsp; &nbsp; &nbsp;32<br/>
+		|----|----|------|---------|------|-----------|<br/>
+		| LI | VN | Mode | Stratum | Poll | Precision |<br/>
+		|---------------------------------------------|<br/>
+		| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Root_Delay &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Root_Dispersion &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|<br/>
+		|---------------------------------------------|<br/>
+		| &nbsp; &nbsp; &nbsp; &nbsp; Reference_Identifier &nbsp; &nbsp; &nbsp; &nbsp;|<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp; &nbsp; Reference_Timestamp(64) &nbsp; &nbsp; &nbsp; |<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp; &nbsp; Originate_Timestamp(64) &nbsp; &nbsp; &nbsp; |<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp; &nbsp; Receive_Timestamp(64) &nbsp; &nbsp; &nbsp; &nbsp;|<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp; &nbsp; Transmit_Timestamp(64)&nbsp; &nbsp; &nbsp; &nbsp;|<br/>
+		|---------------------------------------------|<br/>
+		|&nbsp; &nbsp; &nbsp;Authentication(optional)(64) &nbsp; &nbsp; &nbsp;|<br/>
+		|---------------------------------------------|</p>
+		<p>LI：2bit长度，闰秒指示符，用于警示在当天的最后一分钟里插入或删除的闰秒数<br/>0：无预告；<br/>1：最近一分钟有61秒；<br/>2：最近一分钟有59秒；<br/>3：警告状态，时钟未同步</p>
+		<p>VN：3bit长度，ntp的版本</p>
+		<p>Mode：3bit长度，模式<br/>0：未定义<br/>1：主动对等体模式<br/>2：被动对等体模式<br/>3：客户端模式<br/>4：服务器端模式<br/>5：广播或组播模式<br/>6：ntp控制报文消息<br/>7：预留给内部使用</p>
+		<p>Stratum：8bit长度，系统时钟层数,1为时钟准确度最高，然后依次递减，16的时钟处于未同步状态，不能作为参考时钟</p>
+		<p>Poll：8bit长度，轮询时间，两个ntp报文之间的时间间隔，以最接近2的n次幂表示，如值为6表示2的6次方=64</p>
+		<p>Precision：8bit长度，系统时钟精度</p>
+
+		<p>Root_Delay：32bit长度，本地到主参考时钟源的总往返时间，以秒为单位</p>
+		<p>Root_Dispersion：32bit长度，系统时钟相对于主参考时钟的最大误差，以秒为单位</p>
+		<p>Reference_Identifier：32bit长度，参考时钟源的标识</p>
+		<p>Reference_Timestamp：64bit长度，系统时钟最后一次被设定或更新的时间戳</p>
+		<p>Originage_Timestamp：64bit长度，ntp请求报文离开发送端时发送端的本地时间</p>
+		<p>Receive_Timestamp：64bit长度，ntp请求报文到达接收端时接收端的本地时间</p>
+		<p>Transmit_Timestamp：64bit长度，应答报文离开接收端时接收端的本地时间戳</p>
+		<p>Authentication：64bit长度，认证信息</p>
+	<hr/>
+		<h3>客户端</h3>
+		<p>T1：客户端发送请求报文的本地时间<br/>T2：服务器接收请求报文的本地时间<br/>T3：服务器发送应答报文的本地时间<br/>T4：客户端收到应答报文的本地时间<br/>往返时延d和本地时钟偏移t：<br/>d = (T4-T1)-(T3-T2)<br/>t=((T2-T1)+(T3-T4))/2<br/>最终总时间为time=T1+t+d（这里获取到的时间是总秒数）</p>
+		<form>
+			<fieldset>
+			<legend>** 客户端请求报文 **</legend>
+			#include &lt;time.h><br/>
+			#include &lt;sys/socket.h><br/>
+			#define NTPFRAC(x)     (4294 * (x) + ((1981 * (x)) >> 11))<br/>
+			#define JAN_1970 0x83aa7e80<br/>
+			#define LI 0<br/>
+			#define VN 3<br/>
+			#define MDE 3<br/>
+			#define STRATUM 0<br/>
+			#define POLL 4<br/>
+			#define PREC -6<br/>
+			#define NTP_PCK_LEN 50<br/>
+			long system_time;<br/>
+			int construct_packet(char *packet){<br/>
+				&nbsp; long tmp_wrd;<br/>
+				&nbsp; memset(packet, 0, NTP_PCK_LEN);<br/>
+				&nbsp; tmp_wrd = htonl((LI << 30)|(VN << 27)|(MDE << 24)|(STRATUM <<16)|(POLL << 8)|(PREC & 0xff));<br/>
+				&nbsp; memcpy(packet, &tmp_wrd, sizeof(tmp_wrd));/*设置Root Delay、Root Dispersion和Reference Indentifier */<br/>
+				&nbsp; tmp_wrd = htonl(1<< 16);memcpy(&packet[4], &tmp_wrd, sizeof(tmp_wrd));<br/>
+				&nbsp; memcpy(&packet[8], &tmp_wrd, sizeof(tmp_wrd));/*设置Timestamp部分*/<br/>
+				&nbsp; sec=time(NULL)<br/>
+				&nbsp; system_time = sec - JAN_1970;/*设置Transmit Timestamp coarse*/<br/>
+				&nbsp; tmp_wrd = htonl(JAN_1970 + (long)(system_time));<br/>
+				&nbsp; memcpy(&packet[40], &tmp_wrd, sizeof(tmp_wrd));/*设置Transmit Timestamp fine*/<br/>
+				&nbsp; tmp_wrd = htonl((long)NTPFRAC(system_time));<br/>
+				&nbsp; memcpy(&packet[44], &tmp_wrd, sizeof(tmp_wrd));
+			}
+			</fieldset>
+		</form>
+		<form>
+			<fieldset>
+			<legend>** 客户端解析报文 **</legend>
+			long system_time;<br/>
+			struct ntp_packet{<br/>
+				&nbsp; char leap_ver_mode;<br/>
+				&nbsp; char startum;<br/>
+				&nbsp; char  poll;<br/>
+				&nbsp; char precision;<br/>
+				&nbsp; char root_delay;<br/>
+				&nbsp; int root_dispersion;<br/>
+				&nbsp; int reference_identifier;<br/>
+				&nbsp; reference_t reference_timestamp;<br/>
+				&nbsp; reference_t originage_timestamp;<br/>
+				&nbsp; reference_t receive_timestamp;<br/>
+				&nbsp; reference_t transmit_timestamp;<br/>
+			};<br/>
+			typedef struct reference{<br/>
+				&nbsp; int coarse;<br/>
+				&nbsp; int fine;<br/>
+				&nbsp; int coarse;<br/>
+			}reference_t;<br/>
+			void recv_data_del(char *data,int datalen)<br/>
+			{<br/>
+				&nbsp; struct ntp_packet pack;<br/>
+				&nbsp; fd_set pending_data;<br/>
+				&nbsp; struct timeval block_time;<br/>
+				&nbsp; char String[48];<br/>
+				&nbsp; int str_len;<br/>
+				&nbsp; long delay_time,diff_time,all_time;<br/>
+				&nbsp; char tmRet;<br/>
+				&nbsp; if (datalen < NTP_PCK_LEN)<br/>
+					&nbsp; &nbsp; printf("ntp data recv data is error");/* 设置接收NTP包的数据结构 */<br/>
+				&nbsp; pack.leap_ver_mode = ntohl(data[0]);<br/>
+				&nbsp; pack.startum = ntohl(data[1]);<br/>
+				&nbsp; pack.poll = ntohl(data[2]);<br/>
+				&nbsp; pack.precision = ntohl(data[3]);<br/>
+				&nbsp; pack.root_delay = ntohl(*(int*)&(data[4]));<br/>
+				&nbsp; pack.root_dispersion = ntohl(*(int*)&(data[8]));<br/>
+				&nbsp; pack.reference_identifier = ntohl(*(int*)&(data[12]));<br/>
+				&nbsp; pack.reference_timestamp.coarse = ntohl(*(int*)&(data[16]));<br/>
+				&nbsp; pack.reference_timestamp.fine = ntohl(*(int*)&(data[20]));<br/>
+				&nbsp; pack.originage_timestamp.coarse = ntohl(*(int*)&(data[24]));//客户端发送请求报文的本地时间戳<br/>
+				&nbsp; pack.originage_timestamp.fine = ntohl(*(int*)&(data[28]));<br/>
+				&nbsp; pack.receive_timestamp.coarse = ntohl(*(int*)&(data[32]));//服务端接收到请求报文的本地时间戳<br/>
+				&nbsp; pack.receive_timestamp.fine = ntohl(*(int*)&(data[36]));<br/>
+				&nbsp; pack.transmit_timestamp.coarse = ntohl(*(int*)&(data[40]));//服务器发送应答报文的本地时间戳<br/>
+				&nbsp; pack.transmit_timestamp.fine = ntohl(*(int*)&(data[44]));<br/>
+				&nbsp; sec=time(NULL)<br/>
+				&nbsp; delay_time  = (sec - JAN_1970  - system_time)-(pack.transmit_timestamp.coarse - pack.receive_timestamp.coarse );//往返时间<br/>
+				&nbsp; diff_time = ((pack.receive_timestamp.coarse - system_time)+(pack.transmit_timestamp.coarse - (sec - JAN_1970)))/2;//系统时间与服务器时间差<br/>
+				&nbsp; all_time = system_time + delay_time + diff_time; //总时间(秒数)<br/>
+			}
+			</fieldset>
+		</form>
+		<form>
+			<fieldset>
+			<legend>** UDP收发 **</legend>
+			void socket_conn(void)<br/>
+			{<br/>
+				&nbsp; int recult=-1;<br/>
+				&nbsp; struct sockaddr_in dest_addr;/*目标地址信息*/<br/>
+				&nbsp; dest_addr.sin_family=AF_INET;<br/>
+				&nbsp; dest_addr.sin_port=htons(123);<br/>
+				&nbsp; dest_addr.sin_addr.s_addr=inet_addr("ntp1.aliyun.com");<br/>
+				&nbsp; bzero(&(dest_addr.sin_zero),8);<br/>
+				&nbsp; int s=socket(AF_INET,SOCK_DGRAM,0);<br/>
+				&nbsp; recult=connect(s, (struct sockaddr*)&dest_addr, sizeof(struct sockaddr));<br/>
+				&nbsp; if(recult == -1)<br/>
+					&nbsp; &nbsp; printf("socket connect failed:%d",errno);<br/>
+				&nbsp; else<br/>
+				&nbsp; {<br/>
+					&nbsp; &nbsp; char packet[NTP_PCK_LEN+1];<br/>
+					&nbsp; &nbsp; char data[NTP_PCK_LEN+1];<br/>
+					&nbsp; &nbsp; int len = 0;<br/>
+					&nbsp; &nbsp; construct_packet(packet);<br/>
+					&nbsp; &nbsp; sendto(s, packet, strlen(packet), 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));<br/>
+					&nbsp; &nbsp; recvfrom(s, data, len, 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr))<br/>
+					&nbsp; &nbsp; recv_data_del(data, len);<br/>
+				&nbsp; }<br/>
+			}
+			</fieldset>
+		</form>
+	</div>
+	<div id="GPS">
+		<h3>$GPRMC：运输定位数据格式</h3>
+		<p>例：$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*501）</p>
+		<p>字段 0：$GPRMC，语句 ID，表明该语句为 Recommended Minimum SpecificGPS/TRANSIT Data（RMC）推荐最小定位信息 </p>
+		<p>字段 1：UTC 时间，hhmmss.sss 格式, 时分秒.毫秒，0时区时间，若计算北京时间则为时+8</p>
+		<p>字段 2：状态，A=定位，V=未定位</p>
+		<p>字段 3：纬度 ddmm.mmmm，度分格式（前导位数不足则补 0），下面补充说明</p>
+		<p>字段 4：纬度 N（北纬）或 S（南纬）</p>
+		<p>字段 5：经度 dddmm.mmmm，度分格式（前导位数不足则补 0） ，下面会再补充说明</p>
+		<p>字段 6：经度 E（东经）或 W（西经）</p>
+		<p>字段 7：速度，节，Knots</p>
+		<p>字段 8：方位角，度</p>
+		<p>字段 9：UTC日期，DDMMYY格式，日月年</p>
+		<p>字段 10：磁偏角，（000 - 180）度（前导位数不足则补 0）</p>
+		<p>字段 11：磁偏角方向，E=东 W=西</p>
+		<p>字段 16：校验值，为 $ 后面的数据到 * 前面的异或校验和</p>
+		<p>经纬度查询：百度地图下方->百度地图开放平台下方->坐标拾取器上方->经度,纬度。即可查询到对应的gps定位位置。注意：这里的经纬度是需要转换的</p>
+		<p>经纬度的度分转换成度度计算方法：<br/>纬度 ddmm.mmmm -> dd.dddddd(小数部分保留6位)<br/>前面的dd保留，后面的mm.mmmm/60，保留6位小数<br/>如：3158.4608<br/>58.4608/60=0.974347，即结果为：31.974347<br/>经度 dddmm.mmmm ->ddd.dddddddd.dddddd(小数部分保留6位)<br/>前面的ddd保留，后面的mm.mmmm/60，保留6位小数<br/>
+		如：11848.3737<br/>48.3737/60=0.806228，即结果为118.8062282</p>
+		<p>计算经纬度值的转换为下面的代码：<br/>
+		#include <stdio.h><br/>
+		#include <string.h><br/>
+		#include <stdlib.h> <br/>
+		int ddmm2dd(const char *ddmm, char *dd){<br/>
+			&nbsp; if (NULL == ddmm || NULL == dd)<br/>
+				&nbsp; &nbsp; {return -1;}<br/>
+			&nbsp; int lenSrc = strlen(ddmm)+1;<br/>
+			&nbsp; int lenMm = 0;<br/>
+			&nbsp; int flag = 1;<br/>
+			&nbsp; memcpy(dd,ddmm,lenSrc);<br/>
+			&nbsp; char *pcMm;<br/>
+			&nbsp; double dMm;<br/>
+			&nbsp; int iMm; /* 把pcMm定位到小数点位置 */<br/>
+			&nbsp; pcMm = strstr(dd,".");<br/>
+			&nbsp; if (pcMm == NULL) /* 不含小数点的情况 */<br/>
+			&nbsp; {<br/>
+				&nbsp; &nbsp; pcMm = dd+strlen(dd)-2;<br/>
+				&nbsp; &nbsp; iMm = atoi(pcMm);dMm = iMm /60.0;}<br/>
+			&nbsp; else /* 含有小数点的情况 */<br/>
+			&nbsp; {<br/>
+				&nbsp; &nbsp; if (pcMm - dd > 2)/* 有度 */<br/>
+				&nbsp; &nbsp; {pcMm = pcMm - 2;}<br/>
+				&nbsp; &nbsp; else /* 没有度,只有分 */<br/>
+				&nbsp; &nbsp; {pcMm = dd;flag = 0;}<br/>
+				&nbsp; &nbsp; dMm = atof(pcMm);<br/>
+				&nbsp; &nbsp; dMm /= 60.0;}<br/>
+			&nbsp; sprintf(pcMm,"%lf",dMm);<br/>
+			&nbsp; if ( flag )<br/>
+			&nbsp; {strcpy(pcMm,pcMm+1);}<br/>
+			&nbsp; pcMm = strstr(dd,".");<br/>
+			&nbsp; lenMm = strlen(pcMm);<br/>
+			&nbsp; if ( lenMm > (6+2))<br/>
+			&nbsp; {memset(pcMm+6+2,0,lenMm-6-2);}<br/>
+			&nbsp; return 1;}<br/>
+		int main(){char ddmm[32];<br/>
+		char dd[32];<br/>
+		char *pcMm;/* 把pcMm定位到小数点位置 */<br/>
+		while(scanf("%s",ddmm))<br/>
+		{<br/>
+			&nbsp; pcMm = strstr(ddmm,".");<br/>
+			&nbsp; if((pcMm-ddmm)>5)<br/>
+				&nbsp; &nbsp; printf("intput error!pelease intput agin,thank you!\n");<br/>
+			&nbsp; else if( ddmm2dd(ddmm,dd) >=0 )<br/>
+				&nbsp; &nbsp; printf("%s \n",dd);} return 0;}<br/>
+		/*异或值计算*/<br/>
+		#define bcc_max 4*1024<br/>
+		VOID data_xor_del(UINT8 *data,UINT16 data_len){<br/>
+			&nbsp; UINT8 check = 0x00;UINT8 bcc_data[bcc_max];<br/>
+			&nbsp; &nbsp; UINT8 String[10];<br/>
+			int i = 0;<br/>
+			&nbsp; memset(bcc_data,0,bcc_max);<br/>
+			&nbsp; memcpy(bcc_data,data,data_len);<br/>
+			&nbsp; while(data_len){<br/>
+				&nbsp; &nbsp; check ^= bcc_data[i];<br/>
+				&nbsp; &nbsp; i++;<br/>
+				&nbsp; &nbsp; data_len--;}<br/>
+			&nbsp; sprintf(String,"%x",check);<br/>
+			&nbsp; printf("%x",String);<br/>
+		}
+	</div></div>
+<body>
+</html>
