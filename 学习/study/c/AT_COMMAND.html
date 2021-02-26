@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>AT指令集合</title>
+	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		.main_body li{line-height:25px;}
+		a{text-decoration:none;}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../home.html">首页</a>
+		<a href="../../study.html">学习</a>
+		<a href="../../../工具/tools.html">工具</a>
+		<a href="../../../阅读/read.html">阅读</a>
+		<a href="../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="./c.html">c</a></li>
+			<li><a href="../c++/c++.html">c++</a></li>
+			<li><a href="../css/css.html">css</a></li>
+			<li><a href="../html/html.html">html</a></li>
+			<li><a href="../协议/http/http.html">http</a></li>
+			<li><a href="../java/java.html">java</a></li>
+			<li><a href="../javascript/javascript.html">javascript</a></li>
+			<li><a href="../python/python.html">python</a></li>
+			<li><a href="../sql/sql.html">Sql</a></li>
+			<li><a href="../php/php.html">php</a></li>
+			<li><a href="../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../cad/cad.html">CAD</a></li>
+			<li><a href="../硬件/硬件.html">硬件</a></li>
+			<li><a href="../语言/语言.html">语言</a></li>
+			<li><a href="../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+		<ol>
+		<li>EC200 为例</li>
+		<li></li>
+		<li>英文缩写意义：<br/>MT：Mobile Terminated，移动终端，比如一个上网模块（上网卡）。在短消息中表示下行到用户，即接收短消息<br/>MO：Mobile Original，在短消息中表示上行到 SP，即发送消息<br/>TE：Terminal Equipment，终端设备<br/>ME：Mobile Equipment，移动设备，包括 MT 和 TE<br/>MS：Mobile Station，移动台，包括 ME 和 SIM<br/>TA：Terminal Adapter，终端适配器<br/>DCE：Data Communications Equipment，数据通信设备，如232接口的母头（孔头）<br/>DTE：Data Terminal Equipment，数据终端设备，如232公头（针头）</li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li>AT+CSMS：短消息服务类型<br/>AT+CSMS=?&nbsp;+CSMS: (0,1)<br/>AT+CSMS?&nbsp;+CSMS: 0,1,1,1<br/>AT+CSMS=&lt;service&gt;&nbsp;+CSMS: 1,1,1<br/>
+			&lt;service&gt;<br/>&nbsp; 0：<br/>&nbsp; 1：<br/>&lt;mt&gt; 移动终端接收短消息<br/>&lt;mo&gt; 移动端发送短消息<br/>&lt;bm&gt; 广播类型消息/li>
+		<li>AT+CMGF：短消息格式<br/>AT+CMGF=?&nbsp;+CMGF: (0,1)<br/>AT+CMGF?&nbsp;+CMGF: 0<br/>AT+CMGF=&lt;mode&gt;<br/>&lt;mode&gt;<br/>&nbsp;0：PDU 模式（可发送中文）<br/>&nbsp;1：text 模式（ascii 数据）</li>
+		<li>AT+CSCA：短消息服务中心地址<br/>AT+CSCA?&nbsp;+CSCA: "+8613010314500",145<br/>AT+CSCA=&lt;sca&gt;[,&lt;tosca&gt;]<br/>&lt;sca&gt; 服务中心地址<br/>&lt;tosca&gt; 服务中心地址类型</li>
+		<li>AT+CPMS：优选短消息存储位置<br/>AT+CPMS=?&nbsp;+CPMS: ("SM","ME"),("SM","ME"),("SM","ME")<br/>AT+CPMS?&nbsp;+CPMS: "ME",12,180,"ME",12,180,"ME",12,180<br/>AT+CPMS=&lt;mem1&gt;[,&lt;mem2&gt;[,&lt;mem3&gt;]]&nbsp;+CPMS: 24,50,12,180,12,180<br/>
+			&lt;memx&gt; 短消息读取删除消息的存储器<br/>&nbsp;"ME"：存储在手机中<br/>&nbsp;"SM"：存储在 SIM 卡中<br/>&lt;usedx&gt; 当前存储消息数<br/>&lt;totalx&gt; 总存储消息数</li>
+		<li>AT+CMGD：删除短消息<br/>AT+CMGD=?&nbsp;+CMGD: (1,2,3,4,5,6,7,8,9,10,11,12),(0-4)<br/>AT+CMGD=&lt;index&gt;[,&lt;delflag&gt;]（其中 index 是已存在的短消息索引）<br/>&lt;index&gt; 当前已存在的消息索引<br/>&lt;delflag&gt;<br/>&nbsp;0：从指定的 index 中删除<br/>&nbsp;1：从 &lt;mem1&gt; 中删除全部已读短消息<br/>
+			&nbsp;2：删除全部已读和已发送的短消息<br/>&nbsp;3：删除全部已读、未发送和已发送的短消息<br/>&nbsp;4：删除全部短消息</li>
+		<li>AT+CMGL：短消息列表<br/>AT+CMGF=1<br/>AT+CMGL="ALL"<br/>+CMGL: 0,"STO SENT","17521599002",,<br/>123456789<br/>......<br/>+CMGL: 11,"REC READ","+8617521599002",,"21/02/26,10:18:54+32"<br/>123456789<br/><br/>AT+CMGF=0<br/>AT+CMGL=4<br/>+CMGL: 0,3,,21<br/>0891683110304105F021000B817125519900F200000931D98C56B3DD7039<br/>......<br/>+CMGL: 11,1,,28<br/>0891683110304105F0240D91687125519900F20000122062018145230931D98C56B3DD7039<br/>
+			&lt;stat&gt;<br/>&nbsp;text模式（+CMGF=1）<br/>&nbsp;&nbsp;"REC UNREAD"：未读短消息<br/>&nbsp;&nbsp;"REC READ"：已读短消息<br/>&nbsp;&nbsp;"STO UNSENT"：未发送短消息<br/>&nbsp;&nbsp;"STO SENT"：已发送短消息<br/>&nbsp;&nbsp;"ALL"：全部短消息<br/>&nbsp;PDU 模式（+CMGF=0）<br/>&nbsp;&nbsp;0：未读短消息<br/>&nbsp;&nbsp;1：已读短消息<br/>&nbsp;&nbsp;2：未发送短消息<br/>&nbsp;&nbsp;3：已发送短消息<br/>&nbsp;&nbsp;4：全部短消息<br/>
+			&lt;index&gt; 当前存储消息索引<br/>&lt;da&gt; 目标地址<br/>&lt;oa&gt; 原地址<br/>&lt;alpha&gt; 字母数字字符串，可使用 +CSCS 设置字符集<br/>&lt;scts&gt; 服务中心时间戳<br/>&lt;toda&gt; 接收地址类型<br/>&lt;tooa&gt; 源地址类型<br/>&lt;length&gt; 短消息长度<br/>&lt;data&gt; 短消息内容<br/>&lt;pdu&gt; hex 格式</li>
+		<li>AT+CMGR：读取短消息<br/>AT+CMGR=&lt;index&gt;<br/>+CMGR: "REC READ","+8617521599002",,"21/02/26,09:31:59+32"<br/>123456789<br/>
+			&lt;index&gt; 短消息索引<br/>&lt;stat&gt;<br/>&nbsp;text模式（+CMGF=1）<br/>&nbsp;&nbsp;"REC UNREAD"：未读短消息<br/>&nbsp;&nbsp;"REC READ"：已读短消息<br/>&nbsp;&nbsp;"STO UNSENT"：未发送短消息<br/>&nbsp;&nbsp;"STO SENT"：已发送短消息<br/>&nbsp;&nbsp;"ALL"：全部短消息<br/>&nbsp;PDU 模式（+CMGF=0）<br/>&nbsp;&nbsp;0：未读短消息<br/>&nbsp;&nbsp;1：已读短消息<br/>&nbsp;&nbsp;2：未发送短消息<br/>&nbsp;&nbsp;3：已发送短消息<br/>&nbsp;&nbsp;4：全部短消息<br/>
+			&lt;alpha&gt; 字母数字字符串，可使用 +CSCS 设置字符集<br/>&lt;da&gt; 目标地址<br/>&lt;oa&gt; 原地址<br/>&lt;scts&gt; 服务中心时间戳<br/>&lt;fo&gt;<br/>&lt;pid&gt; 协议标识<br/>&lt;dcs&gt; 编码方式<br/>&lt;vp&gt; 有效期<br/>&lt;mn&gt; 消息数<br/>&lt;mr&gt; 消息参考<br/>&lt;ra&gt; 接收地址<br/>&lt;tora&gt; 接收地址类型，默认参考 toda<br/>&lt;toda&gt; 接收地址类型<br/>&lt;tooa&gt; 源地址类型<br/>&lt;sca&gt; 服务中心地址<br/>&lt;tosca&gt; 服务中心地址类型<br/>
+			&lt;length&gt; 短消息长度<br/>&lt;data&gt; 短消息内容<br/>&lt;pdu&gt; hex 格式<br/>&lt;prt&gt; 优先级<br/>&nbsp;0：正常<br/>&nbsp;1：互动<br/>&nbsp;2：紧急<br/>&nbsp;3：非常紧急<br/>&lt;fmt&gt; 格式<br/>&nbsp;0：GSM<br/>&nbsp;1：ASCII<br/>&nbsp;6：UNICODE<br/>&lt;prv&gt; 私有<br/>&nbsp;0：正常<br/>&nbsp;1：限制<br/>&nbsp;2：冲突<br/>&nbsp;3：私密<br/>&lt;lang&gt; 语言<br/>&nbsp;0：未说明<br/>&nbsp;1：英语<br/>&nbsp;2：法语<br/>&nbsp;3：西班牙语<br/>&nbsp;4：日语<br/>&nbsp;5：韩语<br/>&nbsp;6：中文<br/>&nbsp;7：希伯来语<br/>
+			&lt;type&gt;<br/>&nbsp;0：正常<br/>&nbsp;1：CPT<br/>&nbsp;2：电话留言<br/>&nbsp;3：SMS上报</li>
+		<li>AT+CMGS：发送短消息<br/>AT+CMGS="137xxxxxxxx"（text 模式）<br/>> 123456（按 ctrl+z 进行数据发送，ascii 为 0x1A）<br/>+CMGS: 15<br/>
+			&lt;da&gt; 目标地址<br/>&gt;toda&gt; 接收地址类型<br/>&lt;length&gt; 消息长度<br/>&lt;mr&gt; 消息参考</li>
+		<li>AT+CMMS：发送更多短消息<br/>&lt;n&gt;<br/>&nbsp;0：不使能<br/>&nbsp;1<br/>&nbsp;2</li>
+		<li>AT+CMGW：写消息到内存<br/>AT+CMGW="17521599002"（写入内存）<br/>> 123456789（按 ctrl+z 发送，ascii 为 0x1a）<br/>+CMGW: 0（内存中的索引）<br/>AT+CMMS=0（发送数据）</li>
+		<li>AT+CMSS：从内存中发送消息<br/>例子如上+CMGW</li>
+		<li>AT+CNMA：确认新消息<br/>AT+CNMI=2,2,0,0（参2必须设置成 2）<br/>AT+CSMS=1&nbsp;+CSMS: 1,1,1<br/>AT+CMGF=1<br/>AT+CSCS="GSM"<br/>AT+CMGS="17521599002"（卡号为当前模块内的卡）<br/>> 123456<br/>+CMGS: 14<br/>+CMT: "+8617521599002",,"21/02/26,09:14:10+32"(必须先接收到一个短消息+CNMA才有效)<br/>123456<br/>AT+CNMA<br/></li>
+		<li>AT+CNMI：短消息事件上报<br/>AT+CNMI[=&lt;mode&gt;[,&lt;mt&gt;[,&lt;bm&gt;[,&lt;ds&gt;[,&lt;bfr&gt;]]]]]<br/>&lt;mode&gt;<br/>&nbsp;0：在TA中缓冲未经请求的结果代码。如果TA结果代码缓冲区已满，则可在其他地方缓冲显示，或丢弃最旧的显示，并用新接收到的指示替换。<br/>&nbsp;1：当TA-TE链路被保留时（例如在线数据模式下），丢弃指示并拒绝新接收到的未经请求的结果代码。否则直接转发给TE。<br/>&nbsp;2：当TA-TE链路被保留时（例如在线数据模式），在TA中缓冲未经请求的结果代码，并在保留后将其刷新到TE。否则直接转发给TE。<br/>
+			&lt;mt&gt;<br/>&nbsp;0：没有SMS传送指示路由到TE。<br/>&nbsp;1：如果SMS DELIVER存储在ME/TA中，则使用未经请求的结果代码：+CMTI:&lt;mem&gt;,&lt;index&gt;。<br/>&nbsp;2：SMS传送（除了2类消息和消息等待指示组（存储消息）中的消息）使用未经请求的结果代码：+CMT:[&lt;alpha>],&lt;length>&lt;CR>&lt;LF>&lt;pdu> 或 +CMT:&lt;oa>,[&lt;alpha>],&lt;scts>[,&lt;ooa>,&lt;fo>,&lt;pid>,&lt;dcs>,&lt;sca>,&lt;tosca>,&lt;length>]<CR><LF><data><br/>&nbsp;3：第3类SMS传送使用&lt;mt>=2中定义的未经请求的结果代码直接路由到TE。其他数据编码方案的消息将导致&lt;mt>=1中定义的指示。<br/>
+			&lt;bm&gt;<br/>&nbsp;0：没有CBM指示发送至TE。<br/>&nbsp;2：新的CBM使用未经请求的结果代码直接路由到TE：CBM:&lt;length>&lt;CR>&lt;LF>&lt;pdu>（pdu模式启用）或+CBM:&lt;sn>,&lt;mid>,&lt;dcs>,&lt;page>,&lt;pages>&lt;CR>&lt;LF>&lt;data><br/>
+			&lt;ds&gt;<br/>&nbsp;0：没有SMS状态报告路由到TE。<br/>&nbsp;1：SMS状态报告通过未经请求的结果代码：+CD:&lt;length>&lt;CR>&lt;LF>&lt;pdu> 或 +CD:&lt;fo>,&lt;mr>,[&lt;ra>],[&lt;tora>],&lt;scts>,&lt;dt>,&lt;st><br/>&nbsp;2：如果SMS STATUS-REPORT存储在ME/TA中，则使用未经请求的结果代码：+CDSI:&lt;mem>,&lt;index>。<br/>
+			&lt;bfr&gt;<br/>&nbsp;0：当<mode>1时，此命令中定义的未请求结果代码缓冲区被刷新到TE。输入1...3（在冲洗代码之前应给出OK响应）。<br/>&nbsp;1：当<mode>1时，清除此命令中定义的未经请求的结果代码缓冲区。输入1...3。</li>
+		<li>AT+CSDH：text 模式下显示短消息参数</li>
+		<li>AT+CSMP：text 模式下设置短消息参数<br/>AT+CSMP=&lt;fo>[,&lt;vp>[,&lt;pid>[,&lt;dcs>]]]<br/>&lt;fo&gt;<br/>&lt;vp&gt; 有效期<br/>&lt;pid&gt; 协议标识<br/>&lt;dcs&gt; 编码方式</li>
+		<li>AT+CSCB：广播消息类型</li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		</ol>
+	</div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>文件IO</title>
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../home.html">首页</a>
+		<a href="../../study.html">学习</a>
+		<a href="../../../工具/tools.html">工具</a>
+		<a href="../../../阅读/read.html">阅读</a>
+		<a href="../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../c/c.html">c</a></li>
+			<li><a href="../c++/c++.html">c++</a></li>
+			<li><a href="../css/css.html">css</a></li>
+			<li><a href="../html/html.html">html</a></li>
+			<li><a href="../协议/http/http.html">http</a></li>
+			<li><a href="../java/java.html">java</a></li>
+			<li><a href="../javascript/javascript.html">javascript</a></li>
+			<li><a href="./python.html">python</a></li>
+			<li><a href="../sql/sql.html">Sql</a></li>
+			<li><a href="../php/php.html">php</a></li>
+			<li><a href="../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../cad/cad.html">CAD</a></li>
+			<li><a href="../硬件/硬件.html">硬件</a></li>
+			<li><a href="../语言/语言.html">语言</a></li>
+			<li><a href="../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+	<h3>常规</h3>
+		<p>io模块的类图<br/>
+		IOBase<br/>
+		-RawIOBase，无缓存的字节流<br/>
+		-+FileIO，操作系统文件流<br/>
+		-BufferedIOBase，缓存的字节流<br/>
+		-+BytesIO<br/>
+		-+BufferedReader<br/>
+		-+BufferedWriter<br/>
+		-+BufferedRandom<br/>
+		-+BufferedRWPair<br/>
+		-TextIOBase，编码相关的文本流<br/>
+		-+StringIO，文本的内存流<br/>
+		-+TextIOWrapper</p>
+	<h3 id="iostream">标准输入输出</h3>
+		<p>标准输出 print：将输入打印到屏幕</p>
+		<p>标准输入 raw_input/input：读取键盘输入<br/>raw_input([prompt]) 函数从标准输入读取一个行，并返回一个字符串（去掉结尾的换行符）<br/>input 和上面类似，但是 input 可以接收一个 Python 表达式作为输入，并将运算结果返回（这个只在高版本支持）</p>
+	<h3 id="open">打开文件</h3>
+		<p>open 语法：file object = open(file_name [, access_mode][, buffering])<br/>file_name：文件名和路径<br/>access_mode：打开方式，读、写、追加等<br/>buffering：缓冲区<br/>&nbsp; =0 表示无缓冲直接写入硬盘（默认）<br/>&nbsp; =1 表示有缓存，先写入缓冲区，只有使用flush或close才会将数据更新到硬盘<br/>&nbsp; >1 表示寄存的缓冲区大小<br/>&nbsp; &lt;0 表示寄存器缓冲区大小为系统默认<br/>返回值：返回一个 file 对象，这个值作为以后文件操作，如 file.closed（判断文件是否关闭）</p>
+		<table border="1" cellspacing="0">
+			<caption>访问模式</caption>
+			<tr><th>模式</th><th>描述</th><tr>
+			<tr><td>t</td><td>文本模式 (默认)</td><tr>
+			<tr><td>x</td><td>写模式，新建一个文件，如果该文件已存在则会报错</td><tr>
+			<tr><td>b</td><td>二进制模式，一般用于非文本文件如图片等</td><tr>
+			<tr><td>+</td><td>打开一个文件进行更新(可读可写)</td><tr>
+			<tr><td>U</td><td>通用换行模式（不推荐）</td><tr>
+			<tr><td>r</td><td>以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式</td><tr>
+			<tr><td>rb</td><td>以二进制格式打开一个文件用于只读</td><tr>
+			<tr><td>r+</td><td>打开一个文件用于读写</td><tr>
+			<tr><td>rb+</td><td>以二进制格式打开一个文件用于读写</td><tr>
+			<tr><td>w</td><td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件</td><tr>
+			<tr><td>wb</td><td>以二进制格式打开一个文件只用于写入，</td><tr>
+			<tr><td>w+</td><td>打开一个文件用于读写</td><tr>
+			<tr><td>wb+</td><td>以二进制格式打开一个文件用于读写</td><tr>
+			<tr><td>a</td><td>打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入</td><tr>
+			<tr><td>ab</td><td>以二进制格式打开一个文件用于追加</td><tr>
+			<tr><td>a+</td><td>打开一个文件用于读写</td><tr>
+			<tr><td>ab+</td><td>以二进制格式打开一个文件用于追加</td><tr>
+		</table><br/>
+		<table border="1" cellspacing="0">
+			<caption>file 对象属性</caption>
+			<tr><th>属性</th><th>描述</th><tr>
+			<tr><td>file.closed</td><td>判断文件是否关闭，返回 true 已关闭，false 未关闭</td><tr>
+			<tr><td>file.mode</td><td>文件访问模式</td><tr>
+			<tr><td>file.name</td><td>文件名称</td><tr>
+			<tr><td>file.softspace</td><td>如果用print输出后，必须跟一个空格符，则返回false。否则返回true</td><tr>
+			<tr><td>file.encoding</td><td>文件编码</td><tr>
+			<tr><td>file.newlines</td><td>文件用到的换行模式，一个元组形式</td><tr>
+		</table>
+		<p></p>
+	<h3 id="close">关闭文件</h3>
+		<p>close 语法：fileObject.close()</p>
+		<p></p>
+		<p></p>
+	<h3 id="write">写文件</h3>
+		<p>write 语法：fileObject.write(string)</p>
+		<p>现将数据写入内存中，系统空闲时写入，调用close()完整写入文件</p>
+		<p></p>
+	<h3 id="writelines">将序列写入文件</h3>
+		<p>writelines 语法：fileObject.writelines([list_str])<br/>str：要写入文件的字符串序列</p>
+		<p>把seq的内容全部写到文件中。这个函数也只是忠实地写入，不会在每行后面加上任何东西</p>
+		<form>
+			<fieldset>
+			<legend> write 举例 </legend>
+			list_w=[ \<br/>
+			'print(\' ****&nbsp;**** \')\n',<br/>
+			'print(\'************\')\n',<br/>
+			'print(\'&nbsp;********&nbsp;\')\n',<br/>
+			'print(\'&nbsp;&nbsp;***&nbsp; &nbsp;\')\n',<br/>
+			'print(\'&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;\')\n']<br/>
+			with open('./heart.py','w') as f:<br/>
+				&nbsp; f.write("print(\'weclome to you.\\n\')\n")<br/>
+				&nbsp; f.writelines(list_w)<br/>
+				&nbsp; f.write("print(\'\\nwelcome again\')")
+			</fieldset>
+		</form>
+	<h3 id="read">读取文件</h3>
+		<p>read 语法：fileObject.read([count])<br/>count：读取的字节长度<br/>返回值：返回读取的文本<br/>len(f.read())可获取到读取的文本长度</p>
+		<p></p>
+		<p></p>
+	<h3 id="readline">以行读取文件</h3>
+		<p>readline 语法：fileObject.readline([count])<br/>count：读取的字节长度<br/>返回值：返回读取的一行文本<br/>len(f.read())可获取到读取的文本长度</p>
+		<p></p>
+		<p></p>
+	<h3 id="readlines">读取文件到序列中</h3>
+		<p>readlines 语法：fileObject.readlines([count])<br/>count：读取的总字节长度<br/>返回值：返回读取的每一行文本，是列表形式<br/>注意：读取的行数由字符长度决定，如果字符长度读取了N行后，还有指定长度的字符没有读取，则直接读取下一行进来<br/>len(f.read())可获取到读取的文本长度</p>
+		<form>
+			<fieldset>
+			<legend> read 举例 </legend>
+			try:<br/>
+				&nbsp; f=open('./heart.py','r+')<br/>
+			except Exception as e:<br/>
+				&nbsp; print ('error --->',e)<br/>
+			finally:<br/>
+				&nbsp; if f.closed:<br/>
+					&nbsp; &nbsp; print('file is closed.')<br/>
+				&nbsp; else:<br/>
+					&nbsp; &nbsp; print("frist:",f.readline())<br/>
+					&nbsp; &nbsp; list_r=f.readlines()<br/>
+					&nbsp; &nbsp; for content in list_r:<br/>
+						&nbsp; &nbsp; &nbsp; print(content.strip())
+			</fieldset>
+		</form>
+		<p></p>
+	<h3 id="tell">文件当前位置</h3>
+		<p>tell 语法：fileObject.tell()</p>
+		<p>返回当前从文件开始到此位置的字节数</p>
+		<p></p>
+	<h3 id="seek">改变文件当前位置</h3>
+		<p>seek 语法：fileObject.seek(offset [,from])<br/>offset：要移动的字节数<br/>from：指定开始移动字节的参考位置，为 0 则表示文件开头作为参考位置，为 1 表示当前位置作为参考位置，为 2 表示文件末尾作为参考位置</p>
+		<p>若参数设置成(0,0)则是重新从头开始，配合 read 时会从头开始读取</p>
+		<p></p>
+	<h3 id="rename">文件重命名</h3>
+		<p>注意：这里需要导入 os 模块来处理</p>
+		<p>rename 语法：os.rename(old_name, new_name)<br/>old_name：</p>
+	<h3 id="next">返回下一行</h3>
+		<p>next 语法：fileObject.next()<br/>返回值：返回下一行，并将文件操作标记位移到下一行</p>
+	<h3 id="flush">将数据写入文件（硬盘）</h3>
+		<p>flush 语法：fileObject.flush()</p>
+		<p>不断将数据立即写入文件中</p>
+	<h3 id="truncate">字符串截取</h3>
+		<p>truncate 语法：fileObject.truncate(length)<br/>length：截取的长度<br/>返回值：截取的字节长度</p>
+		<p>如果指定了可选参数 size，则表示截断文件为 size 个字符。 如果没有指定 size，则从当前位置起截断；截断之后 size 后面的所有字符被删除。</p>
+	<h3 id="getvalue">读取整个缓冲区的内容，类似 read，但位置指针不移动</h3>
+		<p>getvalue 语法：fileObject.getvalue()<br/>返回值：返回字符串，即缓冲区的内容<br/>仅适用于 IO 模块中，如 StringIO 模块内使用</p>
+	<h3 id="with">使用 with 配合 IO 操作</h3>
+		<p>with open('/path/to/file', 'r') as f:<br/>&nbsp; print f.read()<br/>注意：该种方式可以自动调用close()方法，避免出错</p>
+		<form>
+			<fieldset>
+			<legend> with...as 举例 </legend>
+			list_w=[ \<br/>
+			'print(\' ****&nbsp;**** \')\n',<br/>
+			'print(\'************\')\n',<br/>
+			'print(\'&nbsp;********&nbsp;\')\n',<br/>
+			'print(\'&nbsp;&nbsp;***&nbsp; &nbsp;\')\n',<br/>
+			'print(\'&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;\')\n']<br/>
+			with open('./heart.py','w') as f:<br/>
+				&nbsp; f.write("print(\'weclome to you.\\n\')\n")<br/>
+				&nbsp; f.writelines(list_w)<br/>
+				&nbsp; f.write("print(\'\\nwelcome again\')")<br/>
+			</fieldset>
+		</form>
+	<h3 id="">异常处理</h3>
+		<p>配合 try使用<br/>try:<br/>&nbsp; ...<br/>except Exception as e:<br/>&nbsp; ...<br/>finally:<br/>&nbsp; ...<br/></p>
+		<form>
+			<fieldset>
+			<legend>异常处理 举例</legend>
+			try:<br/>
+				&nbsp; f=open('./heart.py','r+') #读取形式打开<br/>
+			except Exception as e:<br/>
+				&nbsp; print ('error --->',e)#打开失败的异常显示<br/>
+			finally:<br/>
+				&nbsp; if f.closed:#文件已关闭<br/>
+					&nbsp; &nbsp; print('file is closed.')<br/>
+				&nbsp; else:<br/>
+					&nbsp; &nbsp; print("frist:",f.readline())#读取一行<br/>
+					&nbsp; &nbsp; print(f.tell())#当前的指针位置<br/>
+					&nbsp; &nbsp; print(f.seek(0,0))#从文件开头重新读取<br/>
+					&nbsp; &nbsp; f.truncate(129)#截取129字节的数据，后面的数据将丢弃<br/>
+					&nbsp; &nbsp; list_r=f.readlines()#以列表形式返回读取的数据<br/>
+					&nbsp; &nbsp; print(f.tell())<br/>
+					&nbsp; &nbsp; i=4<br/>
+					&nbsp; &nbsp; for content in list_r:<br/>
+						&nbsp; &nbsp; &nbsp; print(content.strip())#去除列表里成员最后的自带的'\n'<br/>
+					&nbsp; &nbsp; f.close()<br/>
+			print('file end...')
+			</fieldset>
+		</form>
+	<h3 id=""></h3>
+		<p></p>
+	<h3 id="string">StringIO 模块</h3>
+		<p>使用 from io import StringIO 导入 StringIO 模块</p>
+		<p>StringIO 经常被用来作字符串的缓存</p>
+		<p>StringIO 语法：file object = StringIO()<br/>返回值：返回一个 file 对象</p>
+		<form>
+			<fieldset>
+			<legend>StringIO 举例</legend>
+			f=StringIO()<br/>
+			f.write('hello,world.\n')<br/>
+			f.write('thanks.')<br/>
+			print(f.read()) #由于write之后的指针指向的是字符串末尾了，所以使用read之后是读取不到数据的<br/>
+			content=f.getvalue() #无论怎样都会直接从头开始读取<br/>
+			print(content)<br/>
+			f.seek(0,0)<br/>
+			print()<br/>
+			print(f.read())
+			</fieldset>
+		</form>
+	<h3 id="bytes">BytesIO 模块</h3>
+		<p>使用 from io import BytesIO 导入 BytesIO 模块</p>
+		<p>StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO</p>
+		<form>
+			<fieldset>
+			<legend>BytesIO 举例</legend>
+			from io import BytesIO<br/>
+			f=BytesIO(b'start...\nthis one line\nthis two line\n')<br/>
+			f.read() #此时指针已经改变了<br/>
+			print("-->",f.getvalue()) #获取全部内容，指针不会变动<br/>
+			f.seek(0,2) #指针移到字符末尾<br/>
+			f.write(b'this three line\n')<br/>
+			print("-->",f.getvalue())<br/>
+			f.writelines([b'this four line\n'])<br/>
+			print("-->",f.getvalue())<br/>
+			f.write(b'end...')<br/>
+			print("-->",f.getvalue())<br/>
+			f.seek(0,0) #指针移到字符开头<br/>
+			print("=================")<br/>
+			data=f.readline()<br/>
+			while data!=b'':<br/>
+				&nbsp; print(data)<br/>
+				&nbsp; data=f.readline()<br/>
+			</fieldset>
+		</form>
+	
+	
+	<p>小知识：可配合 OS 模块和 shutil 模块一起对文件和目录进行操作</p>
+	
+	</div>
+</body>
+</html>
