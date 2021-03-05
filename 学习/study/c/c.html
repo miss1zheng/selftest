@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
 	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
 	<style>
-		.main_body li{line-height:25px;}
+		.main_body li,p{line-height:25px;}
 		a{text-decoration:none;}
 	</style>
 </head>
@@ -38,20 +38,64 @@
 		</ul>
 	</div>
 	<div class="table_body">
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
-		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href="#jianjie">简介</a><br><a href="#">语法</a><br><a href="#">标识符</a><br><a href="#">数据类型</a><br><a href="#">关键字</a><br><a href="#">变量</a><br><a href="#">常量</a><br><a href="#">数组</a><br>
+		<a href="#">指针</a><br><a href="#">条件</a><br><a href="#">循环</a><br><a href="#">枚举</a><br><a href="#">结构体</a><br>
+		<a href="#">共用体</a><br><a href="#">函数</a><br><a href="#">宏定义</a><br><a href="#">运算符</a><br><a href="#">头文件</a><br>
+		<a href="#">编译预处理</a><br><a href="#">类型转换</a><br><a href="#">进制计算</a><br><a href="#">可变参数</a><br><a href="#">作用域</a><br>
+		<a href="#">递归</a><br><a href="#">错误处理</a><br><a href="#">链表</a><br><a href="#">队列</a><br><a href="#">堆栈</a><br>
+		<a href="#">排序实现</a><br><a href="#">typedef</a><br><a href="#">static</a><br><a href="#">define</a><br>
+		<a href="#"></a><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
+		<a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br><br><a href="#"></a><br>
 	</div>
 	<div class="main_body">
-		<a href="../../c/文档/c primer plus(第6版 中文).pdf">详情链接：c primer plus(第6版 中文).pdf</a>
+		<a href="../../c/文档/c primer plus(第6版 中文).pdf">详情链接：c primer plus(第 6 版 中文).pdf</a>
 		<div>
-			<h3>简介</h3>
-			<p>目标代码文件、可执行文件和库：用编译器将源文件编译成中间目标文件（如obj文件），然后再使用链接器（将目标文件和库文件以及系统的标准启动文件合并成一个可执行文件）将中间目标文件链接生成最终的可执行文件（如exe文件），如：my.c源文件通过gcc -c my.c编译生成a.o中间文件，然后再通过gcc -o my a.o（也可以直接gcc -o my my.c直接生成可执行文件）</p>
-			<p>IDE集成开发环境：Microsoft Visual Studio Express和Pelles C，以及苹果的Xcode</p>
-			<p>语法错误：再编译程序时编译器会发现并报告错误信息，如缺少分号、关键字作为变量名；<br/>语义错误：意思上错误</p>
+			<h3 id="jianjie">简介</h3>
+			<p>目标代码文件、可执行文件和库：用编译器将源文件编译成中间目标文件（如 obj 文件），然后再使用链接器（将目标文件和库文件以及系统的标准启动文件合并成一个可执行文件）将中间目标文件链接生成最终的可执行文件（如 exe 文件），如：my.c 源文件通过 gcc -c my.c 编译生成 a.o 中间文件，然后再通过gcc -o my a.o（也可以直接 gcc -o my my.c 直接生成可执行文件）</p>
+			<p>IDE集成开发环境：Microsoft Visual Studio Express、VC6.0 和 Pelles C，苹果的 Xcode</p>
+			<p>编辑器和编译器：<br/>编辑器如 source insight、notepad++ 和 Linux 下的 vim/vi 等，用于将代码写入文件或查看代码<br/>编译器如 cygwim（window 下的类 unix 编译器）、GCC 等，用于将 c 代码编译成最终可执行文件<p>
+			<p><p>
+		</div><hr/>
+		<div>
+			<h3>语法</h3>
+			<p>语法错误：在编译程序时编译器会发现并报告错误信息，显示 warning 或 error 等，如缺少分号、关键字作为变量名等；<br/>语义错误：意思上错误</p>
+			<p>分号：一条语句的结束是以分号作为标志，若语句什么都不做则直接分号即可<p>
+			<p>注释：1.单行注释双斜杠“//”；2.多行注释“/*”和“*/”，然后这两个中间的都是注释掉了的信息<p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3>标识符</h3>
+			<p>用来标识变量、函数，或任何其他用户自定义项目的名称。<p>
+			<p>标识符：以字母（A-Z 或 a-z）、数字（0-9）、下划线（_）定义，其中数字不能作为开头，区分大小写（小写 a 和大写 A 是不一样的）<p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>关键字</h3>
+			<p>关键字不能作为常量名、变量名或其他标识符名称<p>
+			<p><p>
+			<p><p>
 			<table border="1" cellspacing="0">
 				<caption>关键字</caption>
 				<tr><td title="声明自动变量">auto</td><td title="跳出当前循环">break</td><td title="开关语句分支">case</td><td title="声明字符型变量或函数返回值类型">char</td></tr>
@@ -65,7 +109,13 @@
 				<tr><td title="C99">_Bool</td><td title="C99">_Complex</td><td title="C99">_Imaginary</td><td title="C99">inline</td></tr>
 				<tr><td title="C99">restrict</td><td title="C11">_Alignas</td><td title="C11">_Alignof</td><td title="C11">_Atomic</td></tr>
 				<tr><td title="C11">_Generic</td><td title="C11">_Noreturn</td><td title="C11">_Static_assert</td><td title="C11">_Thread_local</td></tr>
-			</table><br/>
+			</table>
+			</div><hr/>
+		<div>
+			<h3>数据类型</h3>
+			<p>数据类型指的是用于声明不同类型的变量或函数的一个广泛的系统。<br/>变量的类型决定了变量存储占用的空间，以及如何解释存储的位模式。<p>
+			<p>数据类型基本分类：基本类型、枚举类型、<p>
+			<p><p>
 			<table border="1" cellspacing="0">
 				<caption>数据类型</caption>
 				<tr><th>类型</th><th>存储大小(字节)</th><th>值范围</th></tr>
@@ -81,7 +131,11 @@
 				<tr><td>float</td><td>4</td><td>1.2E-38~3.4E+38</td></tr>
 				<tr><td>double</td><td>8</td><td>2.3E-308~1.7E+308</td></tr>
 				<tr><td>long double</td><td>16</td><td>3.4E-4932~1.1E+4932</td></tr>
-			</table><br/>
+			</table>
+			</div><hr/>
+		<div>
+			<h3>运算符</h3>
+			<p><p>
 			<table border="1" cellspacing="0">
 				<caption>运算符优先级</caption>
 				<tr><th>优先级</th><th>运算符</th><th>名称或含义</th><th>使用形式</th><th>结合方向</th><th>说明</th></tr>	
@@ -132,7 +186,310 @@
 				<tr><td>|=</td><td>按位或后赋值</td><td>变量|=表达式</td><td></td></tr>
 				<tr><td>15</td><td>,</td><td>逗号运算符</td><td>表达式,表达式,…</td><td>左到右</td><td>从左向右顺序运算</td></tr>
 			</table>
-		</div><hr/>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3>函数</h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** 主函数 **</legend>
+				int main(int argc, char **argv)<br/>
+				{<br/>
+					&nbsp; ;<br/>
+					&nbsp; return;<br/>
+				}
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			</div><hr/>
 		<div>
 			<h3></h3>
 			<p><p>
@@ -379,6 +736,23 @@
 			<li></li>
 			</ol>
 			</div><hr/>
+		<div>
+			<h3>warning解决</h3>
+			<ol><li>warning: this 'else' clause does not guard... [-Wmisleading-indentation]...else<br/>解决方法：else 后面没有括号，加个括号增加严谨性<br/>原因：tab 键和空格键不严谨，或混用导致的</li>
+			<li> warning: excess elements in array initializer<br/>解决方式：这种多半是因为数组的元素没有赋值的大，比如数组定义 5 个元素，但是赋值的时候多了一个，变成了 6 个就会有这样的警告发出</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			</ol>
+			</div><hr/>
+		
 	</div>
 </body>
 </html>

@@ -89,8 +89,8 @@
 		<table border="1" cellspacing="0" >
 			<tr><th colspan="2">请求方式</th></tr>
 			<tr><th>方法</th><th>说明</th></tr>
-			<tr><td>GET</td><td></td></tr>
-			<tr><td>POST</td><td></td></tr>
+			<tr><td>GET</td><td>获取资源</td></tr>
+			<tr><td>POST</td><td>上传资源</td></tr>
 			<tr><td>HEAD</td><td></td></tr>
 			<tr><td>PUT</td><td></td></tr>
 			<tr><td>DELETE</td><td></td></tr>
@@ -118,9 +118,9 @@
 		<p>Uri 的语法部分：<br/>
 		&lt;scheme>://&lt;user>:&lt;password>@&lt;host>:&lt;port>/&lt;path>;&lt;params>?&lt;query>#&lt;fragment><br/>
 		&lt;scheme>：协议，如 http、https（可理解为加密的 http）、ftp 等。<br/>
-		<user>:&lt;password>：用户名和密码，如在 ftp 中的访问资源需要先输入才能看到资源。<br/>
-		<host>:<port>：主机与端口，一般 http 使用 80 端口，https 使用 443 端口、ftp 使用 21 端口。<br/>
-		<path>：请求数据所在的具体位置路径。<br/>
+		&lt;user>:&lt;password>：用户名和密码，如在 ftp 中的访问资源需要先输入才能看到资源。<br/>
+		&lt;host>:&lt;port>：主机与端口，一般 http 使用 80 端口，https 使用 443 端口、ftp 使用 21 端口。<br/>
+		&lt;path>：请求数据所在的具体位置路径。<br/>
 		params：参数，多个参数使用分号“;”隔开。如ftp://file.qiandu.com/pub/guid.pdf;type=d（其中的 type=d 就是 params）。<br/>
 		query：通过 get 方式请求的参数，有使用名/值对出现的，名值之间使用符号=分割，而&作为连接符分割不同参数，如有人淘宝店的链接：https://item.taobao.com/item.htm?id=549454714925。<br/>
 		fragment：当请求的页面比较长时，我们通常会将其分为好几段，这时可以定位到具体的位置，如透传云。</p>
