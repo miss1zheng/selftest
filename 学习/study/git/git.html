@@ -68,11 +68,22 @@
 		<li>git stash drop：删除暂存区</li>
 		<li>git tag xxx：给当前 log 打上 tag 标签，如发布版本可打上 tag 标签，这样 git 上就能看出哪个 log 是发布版本</li>
 		<li>git tag xxx logid：给 log 为 logid 的位置打上 tag 为 xxx 的标签</li>
+		<li>git reflog：查看本地记录</li>
+		<li>git stash：代码暂存</li>
+		<li>git stash list：列出所有暂存</li>
+		<li>git stash apply：恢复暂存的内容</li>
+		<li>git stash drop：删除暂存区</li>
+		<li></li>
 		<li>错误解决：
 			<ul>
 			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
 			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
+			<li>错误 xxx|REBASE 1/234：原因，在本分支上进行代码 add 和 commit 之后，使用了 git push --rebase origin xxx，push 后有冲突，再使用 git pull --rebase origin master 拉错了分支，导致此问题出现。解决方式：</li>
 			</ul></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
 		<li></li>
 		<li></li>
 		<li></li>
