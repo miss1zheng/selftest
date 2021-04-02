@@ -86,7 +86,7 @@
 			XHTML 1.0 Transitional：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><br/>XHTML 1.0 Frameset：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"><br/>XHTML 1.1：&lt!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"></p></div><hr/>
 		<div id="html">
 			<h3>html： HTML 页面的根元素</h3><p>限定了文档的开始点和结束点</p>
-			<p>属性：<br/>lang：支持的语言，如lang="en"，英语，中文为”zh"。</p></div><hr/>
+			<p>属性：<br/>lang：支持的语言，如lang="en"，英语，中文为"zh"。</p></div><hr/>
 		<div id="head">
 			<h3>head：包含了文档的元（meta）数据</h3><p>用于定义文档的头部，它是所有头部元素的容器。&lthead> 中的元素可以引用脚本、指示浏览器在哪里找到样式表、提供元信息等等。文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。</p>
 			<p>可包含title、style、base、link、meta、script等元素</p></div><hr/>
@@ -279,7 +279,11 @@
 			<b style="color:red">结果：</b>
 			<p style="color:gray;text-decoration:overline;font-family:楷体;font-size:20px;">样式</p></p></div><hr/>
 		<div id="link">
-			<h3>link：文档与外部资源之间的关系</h3><p>通常用于链接到样式表，href 指定连接样式的地址</p><p><b style="color:red">例如：</b><br/>
+			<h3>link：文档与外部资源之间的关系</h3><p>通常用于链接到样式表，href 指定连接样式的地址</p>
+			<p>rel：规定当前文档与被链接文档之间的关系，如 rel="stylesheet" 表示被链接的文档是一个样式表<br/>&nbsp; 具体支持的属性值：<br/>&nbsp; alternate：文档的替代版本（比如打印页或翻译或镜像）<br/>
+			<br/>href：链接位置
+			<br/>type：</p>
+			<p><b style="color:red">例如：</b><br/>
 			&ltlink rel="stylesheet" type="text/css" href="xx/my.css"> &lt!--链接到外部样式--> &lt;!--此元素用于 head 元素内--></p></div><hr/>
 		<div id="script">
 			<h3>script：客户端的脚本文件</h3><p>详情实现可看javascript文档。</p>

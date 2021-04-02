@@ -5,32 +5,35 @@
 	<title>界面 GUI</title>
 	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
 	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		
+	</style>
 </head>
 <body>
 	<div class="menu_body">
-		<a href="../../../home.html">首页</a>
-		<a href="../../study.html">学习</a>
-		<a href="../../../工具/tools.html">工具</a>
-		<a href="../../../阅读/read.html">阅读</a>
-		<a href="../../../娱乐/play.html">娱乐</a>
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
 	</div>
 	<div class="left_body">
 		<ul>
-			<li><a href="../c/c.html">c</a></li>
-			<li><a href="../c++/c++.html">c++</a></li>
-			<li><a href="../css/css.html">css</a></li>
-			<li><a href="../html/html.html">html</a></li>
-			<li><a href="../协议/http/http.html">http</a></li>
-			<li><a href="../java/java.html">java</a></li>
-			<li><a href="../javascript/javascript.html">javascript</a></li>
-			<li><a href="./python.html">python</a></li>
-			<li><a href="../sql/sql.html">Sql</a></li>
-			<li><a href="../php/php.html">php</a></li>
-			<li><a href="../photoshop/photoshop.html">PS</a></li>
-			<li><a href="../cad/cad.html">CAD</a></li>
-			<li><a href="../硬件/硬件.html">硬件</a></li>
-			<li><a href="../语言/语言.html">语言</a></li>
-			<li><a href="../系统/系统.html">系统</a></li>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../../协议/http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href="../python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
 		</ul>
 	</div>
 	<div class="table_body">
@@ -81,35 +84,37 @@
 	<form>
 		<fieldset>
 			<legend>** <b>主窗口 举例 </b>**</legend>
-			from tkinter import * #导入库<br>
+			from tkinter import * #导入库<br><br>
 			win=Tk() #创建窗口win<br>
-			win.title() #窗口名称，如win.title('python')<br>
-			win["background"] = "blue" #设置背景色<br>
+			win.title("GUI") #窗口名称<br>
+			win["background"] = "blue" #设置背景色<br><br>
 			win.attributes("-alpha", 0.6) #透明度的值是：0~1 可以是小数点，0：全透明；1：全不透明<br>
 			win.attributes("-toolwindow", True) #工具样式：True 只有退出按钮，也没有图标； False 正常的窗体样式<br>
 			win.attributes("-fullscreen", True) #全屏模式：True 全屏；False 正常显示<br>
-			win.attributes("-topmost", True) #窗体置顶：True 所有窗口中处于最顶层；False 正常显示
-			win.overrideredirect(True) #脱离工具栏：True 没有工具栏按钮；False 正常显示
-			#获取窗体大小
-			win_height = win.winfo_height()
-			win_width = win.winfo_width()
-			#获取窗体位置
-			win_x = win.winfo_x()
-			win_y = win.winfo_y()
+			win.attributes("-topmost", True) #窗体置顶：True 所有窗口中处于最顶层；False 正常显示<br>
+			win.overrideredirect(False) #脱离工具栏：True 没有工具栏按钮，这样就无法看到退出，缩小，名称和图标了；False 正常显示<br><br>
+			#获取窗体大小<br>
+			win_height = win.winfo_height()<br>
+			win_width = win.winfo_width()<br><br>
+			#获取窗体位置<br>
+			win_x = win.winfo_x()<br>
+			win_y = win.winfo_y()<br><br>
 			image_file = PhotoImage(file='./kong.png') # 图片位置<br>
 			win.tk.call('wm', 'iconphoto', win._w, image_file) #和上面一起构成了应用图标，还可以直接使用win.iconbitmap("aa.ico")来实现此功能<br>
-			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br>
+			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br><br>
 			win.geometry('100x100') #窗口大小，若设置为geometry('100x100+50+50')，则加后面带的时x和y轴坐标<br>
-			"""将应用打开时放置在屏幕中央，并设置长宽<br>
-			def center_window(r,w, h):<br>
-			ws = r.winfo_screenwidth()<br>
-			hs = r.winfo_screenheight()<br>
-			x = (ws/2) - (w/2)<br>
-			y = (hs/2) - (h/2)<br>
-			r.geometry("%dx%d+%d+%d" % (w, h, x, y))<br>
-			center_window(win,500,500)<br>
 			"""<br>
-			win.mainloop() #主窗口循环显示，就是让win不断的刷新<br>
+			#将应用打开时放置在屏幕中央，并设置长宽<br>
+			def center_window(r,w, h):<br>
+			&nbsp; #获取屏幕大小<br>
+			&nbsp; ws = r.winfo_screenwidth()<br>
+			&nbsp; hs = r.winfo_screenheight()<br>
+			&nbsp; x = (ws/2) - (w/2)<br>
+			&nbsp; y = (hs/2) - (h/2)<br>
+			&nbsp; r.geometry("%dx%d+%d+%d" % (w, h, x, y))<br>
+			center_window(win,500,500)<br>
+			"""<br><br>
+			win.mainloop() #主窗口循环显示，就是让win不断的刷新<br><br>
 			<img src="./0/0.png" alt="main">
 		</fieldset>
 	</form>
@@ -2962,7 +2967,49 @@
 	</p>
 
 </div>
-<hr>
+<hr/>
+<div>
+	<h3>其他</h3>
+	<p>class tkinter.Tk(screenName=None, baseName=None, className='Tk', useTk=1)：创建 Tk 顶级控件，通常是应用程序的主窗口，如 win=tkinter.Tk()</p>
+	<p>tkinter.Tcl(screenName=None, baseName=None, className='Tk', useTk=0)：它创建的对象与 Tk 类创建的对象非常相似，只是它不初始化 Tk 子系统。 在不想创建或无法创建（如没有 X Server 的 Unix/Linux 系统）额外的顶层窗口的环境中驱动 Tcl 解释器时，这一点非常有用。</p>
+	<p>class tkinter.colorchooser.Chooser(master=None, **options)：作为原生颜色选择对话框的接口。</p>
+	<p>tkinter.colorchooser.askcolor(color=None, **options)：创建一个颜色选择对话框。 调用此方法将显示相应窗口，等待用户进行选择，并将选择的颜色 (或 None) 返回给调用者。</p>
+	<p>class tkinter.font.Font(root=None, font=None, name=None, exists=False, **options)：Font 类表示命名字体。Font 实例具有唯一的名称，可以通过其族、大小和样式配置进行指定。命名字体是 Tk 将字体创建和标识为单个对象的方法，而不是通过每次出现时的属性来指定字体。<br/>
+		font:字体指示符元组 (family, size, options)<br/>
+		name:唯一的字体名<br/>
+		exists:指向现有命名字体（如果有）<br/>
+		其他关键字选项（如果指定了 font，则忽略）：<br/>
+		family:字体系列，例如 Courier，Times<br/>
+		size:字体大小<br/>
+		&nbsp; 如果 size 为正数，则解释为以磅为单位的大小。<br/>
+		&nbsp; 如果 size 是负数，则将其绝对值<br/>
+		解释为以像素为单位的大小。<br/>
+		weight：字体强调 (NORMAL, BOLD)（普通，加粗）<br/>
+		slant：ROMAN, ITALIC（正体，斜体）<br/>
+		underline：字体下划线（0 - 无下划线，1 - 有下划线）<br/>
+		overstrike：字体删除线（0 - 无删除线，1 - 有删除线）</p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+</div>
+<hr/>
 <div id="ttk">
 	<p>ttk：使用时需导入连个库import tkinter和from tkinter import ttk</p>
 	<p>ttk和tkinter相同点：tkinter有的，ttk也有；tkinter没有的，ttk也有，办法和属性功能还是相同的，此时，若二者都有的组件，ttk将会覆盖Tkinter；ttk有而Tkinter没有的，将采用ttk的特性。。<br>区别：tkinter 中的fg,bg 在ttk中并不被支持，ttk是通过style这个对象来实现的。</p>

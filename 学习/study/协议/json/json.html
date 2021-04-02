@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<title>JSON</title>
+	<style>
+		a{text-decoration:none}
+		p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body" style="padding-left: 20px;">
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="./http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href="../../python/python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href="#jianjie">简介</a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		</div>
+	<div class="main_body">
+		<h3 id="jianjie">简介</h3>
+		<p>JSON（JavaScript Object Notation）：JavaScript 对象表示法，是一种轻量级的数据格式，一种流行的数据交换格式，使用名称-值对表示数据。一个对象使用花括号括起来，里面使用键值对表示数据格式，多个键值对使用逗号分隔。保存 json 文件时直接使用扩展后缀名 .json 即可</p>
+		<p>名称-值对：指拥有名称和对应的值的属性或特性，以冒号分隔名称和值，名称在左值在右，其中名称必须使用双引号，而值是字符串时必须使用双引号，其他数据类型（布尔、数组、对象、整型等）不需要加双引号</p>
+		<p>符号：<br/>花括号：左边表示开始读取对象，右边表示结束读取对象，若没有结束括号则对象不会被解析成对象<br/>方括号：左边开始读取数组，右边结束读取数组<br/>冒号：名称和值的分隔符<br/>逗号：分隔多个键值对的符号，若最后结束的时候加了一个逗号，则会被认为“一个新部分的开始”</p>
+		<p>json 的媒体类型：application/json<br/>字面量：字面意思和表达的意思完全一致，如一个具体的数值<br/>变量：可修改的一类值，如使用 x 标识符来表示</p>
+		
+		<hr/><h3 id="type">数据类型</h3>
+		<p>正常情况下，在声明变量时，需要说明数据类型，如 int value=5、string value="five"、Person value=new Person("five")，声明数组时也要声明容器中保存的数据类型是什么，比如都是字符串，都是整型等</p>
+		<p>数字：整型、浮点型、定点型，可以是正整数、负整数、小数或指数</p>
+		<p>字符串或字符："a"，"apple"，若字符串里包含双引号，则使用反斜杠来进行转义，若内部需要使用到反斜杠则需要再加一个反斜杠来进行转义，以下是其他转义字符：<br/>
+		\/：正斜线<br/>\b：退格符<br/>\f：换页符<br/>\t：制表符<br/>\n：换行符<br/>\r：回车符<br/>\u：十六进制</p>
+		<p>布尔类型：真（true）或假（false）</p>
+		<p>数组：是一个值的集合或列表，使用方括号括起来，多值之间使用逗号分隔，可包含任何支持的数据类型，如字符串、数字、布尔、对象，甚至数组的数组（及多维数组）等，如<br/>{<br/>&nbsp;"number":[<br/>&nbsp;&nbsp;"one",<br/>&nbsp;&nbsp;"two",<br/>&nbsp;&nbsp;"three",<br/>&nbsp;&nbsp;"four"<br/>&nbsp;]<br/>}</p>
+		<p>null：空，表示一无所有、不存在等意思。比如不知道什么颜色，可使用 "color":null 来表示<br/>注意：null 必须小写</p>
+		<p>枚举数据类型：属于复合数据类型（由原始数据类型融合而成，也就是，任何复杂的数据类型都可以解析成原始数据类型），如 ["one","two","three","four"]</p>
+		<p>对象数据类型：属于复合数据类型，用花括号括起来，由键值对构成，多个键值之间使用逗号分隔，如 {"one":1,"two":2,"three":3,"four":4} 或嵌套对象<br/>
+		{<br/>&nbsp;"one":{<br/>&nbsp;&nbsp;"two":2,<br/>&nbsp;&nbsp;"three":{<br/>&nbsp;&nbsp;&nbsp;"four:4,<br/>&nbsp;&nbsp;&nbsp;"five":5<br/>&nbsp;&nbsp;}<br/>&nbsp;}<br/>}<br/>注意：json 本身就是对象</p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<table border="1" cellspacing="0" >
+			<tr><th colspan="2">请求方式</th></tr>
+			<tr><th>方法</th><th>说明</th></tr>
+			<tr><td>GET</td><td>获取资源</td></tr>
+			<tr><td>POST</td><td>上传资源</td></tr>
+			<tr><td>HEAD</td><td></td></tr>
+			<tr><td>PUT</td><td></td></tr>
+			<tr><td>DELETE</td><td></td></tr>
+			<tr><td>CONNECT</td><td></td></tr>
+			<tr><td>OPTIONS</td><td></td></tr>
+			<tr><td>TRACE</td><td></td></tr>
+			<tr><td>PATCH</td><td></td></tr>
+			<tr><td></td><td></td></tr>
+		</table>
+		
+		
+	</div>
+	
+</body>
+</html>

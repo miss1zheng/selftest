@@ -6,7 +6,8 @@
 	<title>C++</title>
 	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
 	<style>
-		a{text-decoration:none}
+		.main_body a{text-decoration:none}
+		.main_body p{line-height:25px;}
 	</style>
 </head>
 <body>
@@ -46,13 +47,59 @@
 	</div>
 	<div class="main_body">
 		<div>
-			<h3></h3>
+			<h3>简介</h3>
+			<p>C++ 是 C 的扩展，向下兼容 C，也就是，C 编写的程序可完全直接在 C++ 上运行<br/>C++ 是面向对象的程序语言，面向对象的三要素为封装、继承、多态<br/>
+			封装：将数据和处理数据的方法封装在一起成为一个类，类的实体是对象，对象一旦定义就可看出一个完全封装的实体，使用类，使类的成员外部不可见，但是可以提供接口供外部设置或读取<br/>
+			继承：一个始位保留了另一种始位的全部特征并具有自身独有的特征。子类从父类（基类）中继承内部成员与成员函数，新类型从现有类型中派生出来的称为派生类<br/>
+			多态：多种事物继承同一事物时，同一种操作在它们之间表现不同的行为<p>
+			<p>基本字符：字母（大小写 a-z ）、数字（0-9）、特殊符号（+ - * / = , . _ : ; ? \ " ' ~ | ! # % & ( ) [ ] { } ^ < > 空格）</p>
+			<p>标识符：字母、数字、下划线组成，其中数字不能作为开头，不能和关键字同名，区分大小写，有一定长度（一般有效长度 32 字节，超出将被截断）</p>
+			<p>常量：整个程序运行过程中不可变的值，符号常量和文字常量，如 PI 3.14157 这里 PI 符号常量（标识符），3.14157 文字常量（值）<p>
+			<p>变量：整个程序运行过程中会被改动，未初始化的变量是全局变量则默认为 0，局部变量则是随机的值<p>
 			<p><p>
-			<form>
-				<fieldset>
-				<legend>** **</legend>
-				</fieldset>
-			</form>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>关键字</h3>
+			<table border="1">
+				<tr><td>auto</td><td>bool</td><td>break</td><td>case</td><td>catch</td><td>char</td><td>class</td></tr>
+				<tr><td>const</td><td>const_cast</td><td>continue</td><td>default</td><td>delete</td><td>do</td><td>double</td><td></td></tr>
+				<tr><td>dynamic_cast</td><td>else</td><td>enum</td><td>explicit</td><td>extern</td><td>false</td><td>float</td></tr>
+				<tr><td>for</td><td>friend</td><td>goto</td><td>if</td><td>inline</td><td>int</td><td>long</td></tr>
+				<tr><td>mutable</td><td>namespace</td><td>new</td><td>operator</td><td>private</td><td>protected</td><td>public</td></tr>
+				<tr><td>register</td><td>reinterpret_cast</td><td>return</td><td>short</td><td>signed</td><td>sizeof</td><td>static</td></tr>
+				<tr><td>static_cast</td><td>struct</td><td>switch</td><td>template</td><td>this</td><td>throw</td><td>true</td></tr>
+				<tr><td>try</td><td>typedef</td><td>typeid</td><td>typename</td><td>union</td><td>unsigned</td><td>using</td></tr>
+				<tr><td>virtual</td><td>void</td><td>volatile</td><td>while</td><td></td><td></td><td></td></tr>
+			</table>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>数据类型</h3>
+			<p>整型：int、short int（int 可省略）、long int（int 可省略）、signed（可省略）、unsign、char（字符也可作为整型）<br/>
+				整型形式：十进制（0-9）、八进制（0-7,0 开头）、十六进制（0-9、A-F，0x 开头）、长整型可用后缀 L/l，无符号可用 U/u<br/>
+				整型最值：在 climits.h 头文件中一系列宏定义表示，如 SHRT_MIN/MAX 短整型最大小值、INT_MIN/MAX 整型最大小值、LONG_MIN/MAX 长整型最大小值、USHRT_MAX 无符号短整型最大值、UINT_MAX 无符号整型最大值、ULONG_MAX 无符号长整型<p>
+			<p>浮点型：float（单精度）、double（双精度）、long double（扩展精度）<br/>
+				一般形式：12.5、-12.5<br/>指数形式：12.5E+3（12.5 * 10的三次方）、.123e-1（0.123 * 10的负一次方）、12.e-3（12.0 * 10的负三次方）<br/>
+				注意：浮点文字量之间不能出现空格<br/>
+				默认 double，若需要为 float 则需加后缀 F/f，long double 需加后缀 L/l<p>
+			<p>字符型：一个字符使用单引号括起来<br/>
+				转义字符：\n（换行符）、\t（水平制表符）<p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
 			</div><hr/>
 		<div>
 			<h3></h3>
@@ -70,7 +117,72 @@
 			<h3></h3>
 			<p><p>
 			</div><hr/>
-
+		<div>
+			<h3></h3>
+			<p>cin&gt;&gt;isample&gt;&gt;oct&gt;&gt;osample&gt;&gt;hex&gt;&gt;hsample;输入十进制、八进制、十六进制形式<p>
+			<p>cout&lt;&lt;isample&lt;&lt;';'&lt;&lt;oct&lt;&lt;osample&lt;&lt;hex&lt;&lt;hsample&lt;&lt;endl;输出十进制、八进制、十六进制形式<p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
 	</div>
 </body>
 </html>

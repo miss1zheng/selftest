@@ -5,32 +5,35 @@
 	<title>python</title>
 	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
 	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		.main_body li,p{line-height:25px;}
+	</style>
 </head>
 <body>
 	<div class="menu_body">
-		<a href="../../../home.html">首页</a>
-		<a href="../../study.html">学习</a>
-		<a href="../../../工具/tools.html">工具</a>
-		<a href="../../../阅读/read.html">阅读</a>
-		<a href="../../../娱乐/play.html">娱乐</a>
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
 	</div>
 	<div class="left_body">
 		<ul>
-			<li><a href="../c/c.html">c</a></li>
-			<li><a href="../c++/c++.html">c++</a></li>
-			<li><a href="../css/css.html">css</a></li>
-			<li><a href="../html/html.html">html</a></li>
-			<li><a href="../协议/http/http.html">http</a></li>
-			<li><a href="../java/java.html">java</a></li>
-			<li><a href="../javascript/javascript.html">javascript</a></li>
-			<li><a href="./python.html">python</a></li>
-			<li><a href="../sql/sql.html">Sql</a></li>
-			<li><a href="../php/php.html">php</a></li>
-			<li><a href="../photoshop/photoshop.html">PS</a></li>
-			<li><a href="../cad/cad.html">CAD</a></li>
-			<li><a href="../硬件/硬件.html">硬件</a></li>
-			<li><a href="../语言/语言.html">语言</a></li>
-			<li><a href="../系统/系统.html">系统</a></li>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../../协议/http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href="../python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
 		</ul>
 	</div>
 	<div class="table_body">
@@ -65,7 +68,37 @@
 	<p>封装：即在类中的参数，在外部是不可见的，要想获取或设置需要类设置一个外部接口</p>
 	<p>继承：子类继承了父类/基类中的功能</p>
 	<p>多态：子类继承父类的同时，若想子类和父类同函数前提下，子类的函数会覆盖父类，这时子类和父类的这个同函数使用时是不同功能实现的</p>
-
+	
+	<hr/><h3>作用域</h3>
+	<p>局部变量：函数内声明定义，与函数外相同名称的其他变量没有任何关系</p>
+	<p>全局变量 global：当函数内部和外部使用相同的变量时，在函数内部对全局变量进行操作时就可在函数内部对变量进行 global 声明<br/>
+		注意：在子函数里使用全局变量赋值，然后在父函数里进行其他操作时，子函数里需要对这个全局变量进行 global 声明，如下例子：<br/>
+	<form>
+		<fieldset>
+		<legend>** global的使用 **</legend>
+		value1 = 0<br/>
+		value = 0<br/>
+		strr=""<br/>
+		def start2():<br/>
+			&nbsp; global strr<br/>
+			&nbsp; strr="222"<br/>
+			&nbsp; print("start2")<br/>
+		def start1():<br/>
+			&nbsp; #global value #此处可声明也可不声明，貌似没影响<br/>
+			&nbsp; value1 = 1<br/>
+			&nbsp; print("start1")<br/>
+			&nbsp; if value == 1:<br/>
+				&nbsp; &nbsp; print("value is 1")<br/>
+			&nbsp; start2()<br/>
+			&nbsp; print("strr is ",strr) #若start2函数内没有对strr变量进行全局声明，则返回的是空值<br/>
+		if __name__=="__main__":<br/>
+			&nbsp; #global value #不需要进行 global 声明，否则发生异常报错<br/>
+			&nbsp; value = 1<br/>
+			&nbsp; start1()
+		</fieldset>
+	</form>
+		<p>
+	
 	<hr/><h3>错误集</h3>
 	<ul>
 	<li>TypeError: datarecv() argument after * must be an iterable, not socket<br/>
@@ -75,7 +108,9 @@
 	解决方式：主要是因为变量既可以是全局也可以是局部，没有让解释器清楚变量是全局变量还是局部变量，此时可以在局部变量函数内部加个global xxx对变量进行声明即可。</li>
 	<li>OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。<br/>
 	源码：c.send(data)<br/>解决方式：因为socket已关闭，但这里还要将数据发送出去，加上一个try:xxx except Exception as e:xx finally:xxxx即可</li>
-	
+	<li>SyntaxError: name 'file_name' is assigned to before global declaration<br/>
+	原因：定义一个全局变量，在函数内部使用时加了 global 声明了这是个全局变量<br/>
+	解决方式：不在内部使用 global 进行声明即可，即函数内去除 global 的声明</li>
 	</ul>
 	</div>
 </body>

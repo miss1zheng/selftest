@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>python之os 模块</title>
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		.main_body li{line-height:25px;}
+		.main_body p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../../协议/http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href=".././python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+	<h3>简介</h3>
+	<p>asyncio：异步 I/O，</p>
+	<h3>事件循环</h3>
+	<ul>
+	<p>获取事件循环</p>
+	<li>asyncio.get_running_loop()：返回当前 OS 线程中正在运行的事件循环，若没有正在运行的事件循环将抛出异常，此函数只能由协程或回调来调用</li>
+	<li>asyncio.get_event_loop()：获取当前事件循环，如果当前 OS 线程没有设置当前事件循环，该 OS 线程为主线程</li>
+	<li>asyncio.set_event_loop(loop)：将 loop 设置为当前 OS 线程的当前事件循环</li>
+	<li>asyncio.new_event_loop()：创建一个新的事件循环</li>
+	<p>运行和停止循环</p>
+	<li>loop.run_until_complete(future)：运行直到 future 被完成，如果参数是 coroutine object ，将被隐式调度为 asyncio.Task 来运行。返回 Future 的结果 或者引发相关异常。</li>
+	<li>loop.run_forever()：运行事件循环直到 stop() 被调用。</li>
+	<li>loop.stop()：停止事件循环</li>
+	<li>loop.is_running()：如果事件循环当前正在运行返回 True。</li>
+	<li>loop.is_closed()：返回 True 表示事件循环已被关闭</li>
+	<li>loop.close()：关闭事件循环，当这个函数被调用的时候，循环必须处于非运行状态。pending状态的回调将被丢弃。</li>
+	<li>loop.shutdown_asyncgens()：</li>
+	<li>loop.shutdown_default_executor()：</li>
+	<p>安排回调</p>
+	<li>loop.call_soon(callback, *args, context=None)：</li>
+	<li>loop.call_soon_threadsafe(callback, *args, context=None)：</li>
+	<p>调度延迟回调</p>
+	<li>loop.call_later(delay, callback, *args, context=None)：</li>
+	<li>loop.call_at(when, callback, *args, context=None)：</li>
+	<li>loop.time()：根据时间循环内部的单调时钟，返回当前时间为一个 float 值。</li>
+	<p>创建 Future 和 Task</p>
+	<li>loop.create_future()：创建一个附加到事件循环中的 asyncio.Future 对象。</li>
+	<li>loop.create_task(coro, *, name=None)：安排一个 协程 的执行。返回一个 Task 对象。</li>
+	<li>loop.set_task_factory(factory)：设置一个任务工厂，它将由 loop.create_task() 来使用。</li>
+	<li>loop.get_task_factory()：返回一个任务工厂，或者如果是使用默认值则返回 None。</li>
+	<p>打开网络连接</p>
+	<li>loop.create_connection(protocol_factory, host=None, port=None, *, ssl=None, family=0, proto=0, flags=0, sock=None, local_addr=None, server_hostname=None, ssl_handshake_timeout=None, happy_eyeballs_delay=None, interleave=None)：打开一个流式传输连接，连接到由 host 和 port 指定的地址。<br/>
+		套接字族可以是 AF_INET 或 AF_INET6<br/>
+		套接字类型将为 SOCK_STREAM<br/>
+		protocol_factory 必须为一个返回 asyncio 协议 实现的可调用对象<br/>
+		这个方法会尝试在后台创建连接。当创建成功，返回 (transport, protocol) 组合</li>
+	<li>loop.create_datagram_endpoint(protocol_factory, local_addr=None, remote_addr=None, *, family=0, proto=0, flags=0, reuse_address=None, reuse_port=None, allow_broadcast=None, sock=None)：创建一个数据报连接。<br/>
+		套接字族可以是 AF_INET, AF_INET6 或 AF_UNIX<br/>
+		socket类型将是 SOCK_DGRAM<br/>
+		protocol_factory 必须为一个返回 协议 实现的可调用对象<br/>
+		成功时返回一个 (transport, protocol) 元组。</li>
+	<li>loop.create_unix_connection(protocol_factory, path=None, *, ssl=None, sock=None, server_hostname=None, ssl_handshake_timeout=None)：创建Unix 连接<br/>
+		套接字族将为 AF_UNIX；套接字类型将为 SOCK_STREAM<br/>
+		path 是所要求的 Unix 域套接字的名字，除非指定了 sock 形参。 抽象的 Unix 套接字, str, bytes 和 Path 路径都是受支持的<br/>
+		成功时返回一个 (transport, protocol) 元组</li>
+	<p>创建网络服务</p>
+	<li>loop.create_server(protocol_factory, host=None, port=None, *, family=socket.AF_UNSPEC, flags=socket.AI_PASSIVE, sock=None, backlog=100, ssl=None, reuse_address=None, reuse_port=None, ssl_handshake_timeout=None, start_serving=True)：创建TCP服务监听 host 地址的 port 端口。<br/>
+		返回一个 Server 对象。</li>
+	<li>loop.create_unix_server(protocol_factory, path=None, *, sock=None, backlog=100, ssl=None, ssl_handshake_timeout=None, start_serving=True)：与 loop.create_server() 类似但是专用于 AF_UNIX 套接字族。<br/>
+		path 是必要的 Unix 域套接字名称，除非提供了 sock 参数。 抽象的 Unix 套接字, str, bytes 和 Path 路径都是受支持的。</li>
+	<li>loop.connect_accepted_socket(protocol_factory, sock, *, ssl=None, ssl_handshake_timeout=None)：将已被接受的连接包装成一个传输/协议对。<br/>
+		返回一个 (transport, protocol) 对。</li>
+	<p>传输文件</p>
+	<li>loop.sendfile(transport, file, offset=0, count=None, *, fallback=True)：将 file 通过 transport 发送。<br/>
+		file 必须是个二进制模式打开的常规文件对象<br/>
+		offset 指明从何处开始读取文件<br/>
+		返回所发送的字节总数</li>
+	<p>TLS 升级</p>
+	<li>loop.start_tls(transport, protocol, sslcontext, *, server_side=False, server_hostname=None, ssl_handshake_timeout=None)：将现有基于传输的连接升级到 TLS。<br/>
+		返回一个新的传输实例，其中 protocol 必须在 await 之后立即开始使用。 传给 start_tls 方法的 transport 实例应永远不会被再次使用。</li>
+	<p>监控文件描述符</p>
+	<li>loop.add_reader(fd, callback, *args)：开始监视 fd 文件描述符以获取读取的可用性，一旦 fd 可用于读取，使用指定的参数调用 callback 。</li>
+	<li>loop.remove_reader(fd)：停止对文件描述符 fd 读取可用性的监视。</li>
+	<li>loop.add_writer(fd, callback, *args)：开始监视 fd 文件描述符的写入可用性，一旦 fd 可用于写入，使用指定的参数调用 callback 。使用 functools.partial() 传递关键字参数 给 callback。</li>
+	<li>loop.remove_writer(fd)：停止对文件描述符 fd 的写入可用性监视。</li>
+	<p>直接使用 socket 对象</p>
+	<li>loop.sock_recv(sock, nbytes)：从 sock 接收至多 nbytes。 socket.recv() 的异步版本。<br/>
+		sock 必须是个非阻塞socket<br/>
+		返回接收到的数据</li>
+	<li>loop.sock_recv_into(sock, buf)：从 sock 接收数据放入 buf 缓冲区。 模仿了阻塞型的 socket.recv_into() 方法。
+		返回写入缓冲区的字节数<br/>
+		sock 必须是个非阻塞socket</li>
+	<li>loop.sock_sendall(sock, data)：将 data 发送到 sock 套接字。 socket.sendall() 的异步版本。<br/>
+		此方法会持续发送数据到套接字直至 data 中的所有数据发送完毕或是有错误发生。 当成功时会返回 None。 当发生错误时，会引发一个异常。 此外，没有办法能确定有多少数据或是否有数据被连接的接收方成功处理<br/>
+		sock 必须是个非阻塞socket。</li>
+	<li>loop.sock_connect(sock, address)：将 sock 连接到位于 address 的远程套接字。socket.connect() 的异步版本。<br/>
+		sock 必须是个非阻塞socket</li>
+	<li>loop.sock_accept(sock)：接受一个连接。 模仿了阻塞型的 socket.accept() 方法。<br/>
+		此 scoket 必须绑定到一个地址上并且监听连接。返回值是一个 (conn, address) 对，其中 conn 是一个 新*的套接字对象，用于在此连接上收发数据，*address 是连接的另一端的套接字所绑定的地址<br/>
+		sock 必须是个非阻塞socket</li>
+	<li>loop.sock_sendfile(sock, file, offset=0, count=None, *, fallback=True)：在可能的情况下使用高性能的 os.sendfile 发送文件。socket.sendfile() 的异步版本。<br/>
+		sock 必须为非阻塞型的 socket.SOCK_STREAM socket<br/>
+		file 必须是个用二进制方式打开的常规文件对象<br/>
+		offset 指明从何处开始读取文件<br/>
+		返回所发送的字节总数。</li>
+	<p>DNS</p>
+	<li>loop.getaddrinfo(host, port, *, family=0, type=0, proto=0, flags=0)：异步版的 socket.getaddrinfo() 。</li>
+	<li>loop.getnameinfo(sockaddr, flags=0)：异步版的 socket.getnameinfo() 。</li>
+	<p>使用管道</p>
+	<li>loop.connect_read_pipe(protocol_factory, pipe)：在事件循环中注册 pipe 的读取端。<br/>
+		protocol_factory 必须为一个返回 asyncio 协议 实现的可调用对象<br/>
+		pipe 是个 类似文件型对象<br/>
+		返回一对 (transport, protocol)，其中 transport 支持 ReadTransport 接口而 protocol 是由 protocol_factory 所实例化的对象<br/>
+		使用 SelectorEventLoop 事件循环， pipe 被设置为非阻塞模式。</li>
+	<li>loop.connect_write_pipe(protocol_factory, pipe)：在事件循环中注册 pipe 的写入端。<br/>
+		protocol_factory 必须为一个返回 asyncio 协议 实现的可调用对象<br/>
+		pipe 是个 类似文件型对象<br/>
+		返回一对 (transport, protocol)，其中 transport 支持 WriteTransport 接口而 protocol 是由 protocol_factory 所实例化的对象<br/>
+		使用 SelectorEventLoop 事件循环， pipe 被设置为非阻塞模式。</li>
+	<p>Unix 信号：仅限于 unix 系统</p>
+	<li>loop.add_signal_handler(signum, callback, *args)：设置 callback 作为 signum 信号的处理程序。</li>
+	<li>loop.remove_signal_handler(sig)：移除 sig 信号的处理程序。<br/>
+		如果信号处理程序被移除则返回 True，否则如果给定信号未设置处理程序则返回 False。</li>
+	<p>在线程或者进程池中执行代码</p>
+	<li>loop.run_in_executor(executor, func, *args)：安排在指定的执行器中调用 func 。</li>
+	<li>loop.set_default_executor(executor)：将 executor 设为 run_in_executor() 所使用的默认执行器。</li>
+	<p>错误处理 API</p>
+	<li>loop.set_exception_handler(handler)：将 handler 设置为新的事件循环异常处理器。<br/>
+		如果 handler 为 None，将设置默认的异常处理程序。</li>
+	<li>loop.get_exception_handler()：返回当前的异常处理器，如果没有设置异常处理器，则返回 None 。</li>
+	<li>loop.default_exception_handler(context)：默认的异常处理器。<br/>
+		此方法会在发生异常且未设置异常处理程序时被调用。 此方法也可以由想要具有不同于默认处理程序的行为的自定义异常处理程序来调用。</li>
+	<li>loop.call_exception_handler(context)：调用当前事件循环异常处理器。</li>
+	<p>开启调试模式</p>
+	<li>loop.get_debug()：获取事件循环调试模式状态（bool）。<br/>
+		如果环境变量 PYTHONASYNCIODEBUG 是一个非空字符串，就返回 True ，否则就返回 False 。</li>
+	<li>loop.set_debug(enabled: bool)：设置事件循环的调试模式。</li>
+	<p>运行子进程</p>
+	<li>loop.subprocess_exec(protocol_factory, *args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs)：用 args 指定的一个或者多个字符串型参数创建一个子进程。<br/>
+		args 必须是个由下列形式的字符串组成的列表：str 或由文件系统编码格式编码的 bytes<br/>
+		第一个字符串指定可执行程序，其余的字符串指定其参数。 </li>
+	<li>loop.subprocess_shell(protocol_factory, cmd, *, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs)：基于 cmd 创建一个子进程</li>
+	<h3>Futures</h3>
+	<p>Future 函数</p>
+	<li>asyncio.isfuture(obj)：如果 obj 为下面任意对象，返回 True：一个 asyncio.Future 类的实例，一个 asyncio.Task 类的实例，带有 _asyncio_future_blocking 属性的类似 Future 的对象。</li>
+	<li>asyncio.ensure_future(obj, *, loop=None)：</li>
+	<li>asyncio.wrap_future(future, *, loop=None)：将一个 concurrent.futures.Future 对象封装到 asyncio.Future 对象中。</li>
+	<p>Future 对象</p>
+	<li>class asyncio.Future(*, loop=None)：一个 Future 代表一个异步运算的最终结果。线程不安全。</li>
+	<h3>传输和协议</h3>
+	<p>传输层级</p>
+	<li>class asyncio.BaseTransport：所有传输的基类。包含所有异步IO传输共用的方法。</li>
+	<li>class asyncio.WriteTransport(BaseTransport)：只写链接的基础传输。</li>
+	<li>class asyncio.ReadTransport(BaseTransport)：只读链接的基础传输。</li>
+	<li>class asyncio.Transport(WriteTransport, ReadTransport)：接口代表一个双向传输，如TCP链接。</li>
+	<li>class asyncio.DatagramTransport(BaseTransport)：数据报(UDP)传输链接。</li>
+	<li>class asyncio.SubprocessTransport(BaseTransport)：表示父进程和子进程之间连接的抽象。</li>
+	<p>基础传输</p>
+	<li>BaseTransport.close()：关闭传输。如果传输具有发送数据缓冲区，将会异步发送已缓存的数据。</li>
+	<li>BaseTransport.is_closing()：返回 True ，如果传输正在关闭或已经关闭。</li>
+	<li>BaseTransport.get_extra_info(name, default=None)：返回 传输或它使用的相关资源信息。<br/>
+		name：表示要获取传输特定信息的字符串<br/>
+		default：在信息不可用或传输不支持第三方事件循环实现或当前平台查询时返回的值。</li>
+	<li>BaseTransport.set_protocol(protocol)：设置一个新协议。只有两种协议都写明支持切换才能完成切换协议。</li>
+	<li>BaseTransport.get_protocol()：返回当前协议。</li>
+	<p>只读传输</p>
+	<li>ReadTransport.is_reading()：如果传输接收到新数据时返回 True 。</li>
+	<li>ReadTransport.pause_reading()：暂停传输的接收端。protocol.data_received() 方法将不会收到数据，除非 resume_reading()  被调用。</li>
+	<li>ReadTransport.resume_reading()：恢复接收端。如果有数据可读取时，协议方法 protocol.data_received() 将再次被调用。</li>
+	<p>只写传输</p>
+	<li>WriteTransport.abort()：立即关闭传输，不会等待已提交的操作处理完毕。已缓存的数据将会丢失。不会接收更多数据。 最终 None 将作为协议的 protocol.connection_lost() 方法的参数被调用。</li>
+	<li>WriteTransport.can_write_eof()：如果传输支持 write_eof() 返回 True 否则返回 False 。</li>
+	<li>WriteTransport.get_write_buffer_size()：返回传输使用输出缓冲区的当前大小。</li>
+	<li>WriteTransport.get_write_buffer_limits()：获取写入流控制 high 和 low 高低标记位。返回元组 (low, high) ， low 和 high 为正字节数。</li></li>
+	<li>WriteTransport.set_write_buffer_limits(high=None, low=None)：设置写入流控制 high 和 low 高低标记位。</li>
+	<li>WriteTransport.write(data)：将一些 data 字节串写入传输。此方法不会阻塞；它会缓冲数据并安排其被异步地发出。</li>
+	<li>WriteTransport.writelines(list_of_data)：将数据字节串的列表（或任意可迭代对象）写入传输。 这在功能上等价于在可迭代对象产生的每个元素上调用 write()，但其实现可能更为高效。</li>
+	<li>WriteTransport.write_eof()：在刷新所有已缓冲数据之后关闭传输的写入端。 数据仍可以被接收。如果传输（例如 SSL）不支持半关闭的连接，此方法会引发 NotImplementedError。</li>
+	<p>数据报传输</p>
+	<li>DatagramTransport.sendto(data, addr=None)：将 data 字节串发送到 addr (基于传输的目标地址) 所给定的远端对等方。 如果 addr 为 None，则将数据发送到传输创建时给定的目标地址。此方法不会阻塞；它会缓冲数据并安排其被异步地发出。</li>
+	<li>DatagramTransport.abort()：立即关闭传输，不会等待已提交的操作执行完毕。 已缓存的数据将会丢失。 不会接收更多的数据。 协议的 protocol.connection_lost() 方法最终将附带 None 作为参数被调用。</li>
+	<p>子进程传输</p>
+	<li>SubprocessTransport.get_pid()：将子进程的进程 ID 以整数形式返回。</li>
+	<li>SubprocessTransport.get_pipe_transport(fd)：返回对应于整数文件描述符 fd 的通信管道的传输<br/>
+		返回值：0 标准输入可读流式传输；1 标准输入可写流式传输；2 标准错误可写流式传输</li>
+	<li>SubprocessTransport.get_returncode()：返回整数形式的进程返回码，或者如果还未返回则为 None</li>
+	<li>SubprocessTransport.kill()：杀死子进程。</li>
+	<li>SubprocessTransport.send_signal(signal)：发送 signal 编号到子进程，与 subprocess.Popen.send_signal() 一样。</li>
+	<li>SubprocessTransport.terminate()：停止子进程。</li>
+	<li>SubprocessTransport.close()：通过调用 kill() 方法来杀死子进程。如果子进程尚未返回，并关闭 stdin, stdout 和 stderr 管道的传输。</li>
+	<p>基础协议</p>
+	<li>class asyncio.BaseProtocol：带有所有协议的共享方法的基础协议。</li>
+	<li>class asyncio.Protocol(BaseProtocol)：用于实现流式协议（TCP, Unix 套接字等等）的基类。</li>
+	<li>class asyncio.BufferedProtocol(BaseProtocol)：用于实现可对接收缓冲区进行手动控制的流式协议的基类。</li>
+	<li>class asyncio.DatagramProtocol(BaseProtocol)：用于实现数据报（UDP）协议的基类。</li>
+	<li>class asyncio.SubprocessProtocol(BaseProtocol)：用于实现与子进程通信（单向管道）的协议的基类。</li>
+	<p>连接回调</p>
+	<li>BaseProtocol.connection_made(transport)：连接建立时被调用。<br/>
+		transport 参数是代表连接的传输。 此协议负责将引用保存至对应的传输。</li>
+	<li>BaseProtocol.connection_lost(exc)：连接丢失或关闭时将被调用。</li>
+	<p>流程控制回调</p>
+	<li>BaseProtocol.pause_writing()：当传输的缓冲区升至高水位以上时将被调用。</li>
+	<li>BaseProtocol.resume_writing()：当传输的缓冲区降到低水位以下时将被调用。</li>
+	<p>流式协议</p>
+	<li>Protocol.data_received(data)：当收到数据时被调用。 data 为包含入站数据的非空字节串对象。<br/>
+		数据是否会被缓冲、分块或重组取决于具体传输。 通常，你不应依赖于特定的语义而应使你的解析具有通用性和灵活性。 但是，数据总是要以正确的顺序被接收。<br/>
+		此方法在连接打开期间可以被调用任意次数。<br/>
+		但是，protocol.eof_received() 最多只会被调用一次。 一旦 eof_received() 被调用，data_received() 就不会再被调用。</li>
+	<li>Protocol.eof_received()：当发出信号的另一端不再继续发送数据时（例如通过调用 transport.write_eof()，如果另一端也使用 asyncio 的话）被调用。<br/>
+		此方法可能返回假值 (包括 None)，在此情况下传输将会自行关闭。 相反地，如果此方法返回真值，将以所用的协议来确定是否要关闭传输。 由于默认实现是返回 None，因此它会隐式地关闭连接。<br/>
+		某些传输，包括 SSL 在内，并不支持半关闭的连接，在此情况下从该方法返回真值将导致连接被关闭。</li>
+	<p>缓冲流协议</p>
+	<li>BufferedProtocol.get_buffer(sizehint)：调用后会分配新的接收缓冲区。<br/>
+		sizehint 是推荐的返回缓冲区最小尺寸。 <br/>
+		返回小于或大于 sizehint 推荐尺寸的缓冲区也是可接受的。 当设为 -1 时，缓冲区尺寸可以是任意的。 返回尺寸为零的缓冲区则是错误的。<br/>
+		必须返回一个实现了 缓冲区协议 的对象。</li>
+	<li>BufferedProtocol.buffer_updated(nbytes):用接收的数据更新缓冲区时被调用。<br/>
+		nbytes 是被写入到缓冲区的字节总数。</li>
+	<li>BufferedProtocol.eof_received()：请查看 protocol.eof_received() 方法的文档。在连接期间 get_buffer() 可以被调用任意次数。 但是，protocol.eof_received() 最多只能被调用一次，如果被调用，则在此之后 get_buffer() 和 buffer_updated() 不能再被调用。</li>
+	<p>数据报协议</p>
+	<li>DatagramProtocol.datagram_received(data, addr)：当接收到数据报时被调用。 data 是包含传入数据的字节串对象。 addr 是发送数据的对等端地址；实际的格式取决于具体传输。</li>
+	<li>DatagramProtocol.error_received(exc)：当前一个发送或接收操作引发 OSError 时被调用。 exc 是 OSError 的实例。<br/>
+		此方法会在当传输（例如UDP）检测到无法将数据报传给接收方等极少数情况下被调用。 而在大多数情况下，无法送达的数据报将被静默地丢弃。</li>
+	<p>子进程协议</p>
+	<li>SubprocessProtocol.pipe_data_received(fd, data)：当子进程向其 stdout 或 stderr 管道写入数据时被调用。<br/>
+		fd 是以整数表示的管道文件描述符。<br/>
+		data 是包含已接收数据的非空字节串对象。</li>
+	<li>SubprocessProtocol.pipe_connection_lost(fd, exc)：与子进程通信的其中一个管道关闭时被调用。<br/>
+		fd 以整数表示的已关闭文件描述符。</li>
+	<li>SubprocessProtocol.process_exited()：子进程退出时被调用。</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	<hr/><h3>具体举例</h3>
+	<form>
+		<fieldset>
+		<legend>** TCP Server **</legend>
+		# 注意：在 python3.7+ 以上版本上运行<br/>
+		import asyncio<br/><br/>
+		class EchoServerProtocol(asyncio.Protocol):<br/>
+			&nbsp; def connection_made(self, transport):<br/>
+				&nbsp; &nbsp; peername = transport.get_extra_info('peername')<br/>
+				&nbsp; &nbsp; print('Connection from {}'.format(peername))<br/>
+				&nbsp; &nbsp; self.transport = transport<br/><br/>
+			&nbsp; def data_received(self, data):<br/>
+				&nbsp; &nbsp; message = data.decode()<br/>
+				&nbsp; &nbsp; print('Data received: {!r}'.format(message))<br/>
+				&nbsp; &nbsp; print('Send: {!r}'.format(message))<br/>
+				&nbsp; &nbsp; self.transport.write(data)<br/>
+				&nbsp; &nbsp; print('Close the client socket')<br/>
+				&nbsp; &nbsp; self.transport.close()<br/><br/>
+		async def main():<br/>
+			&nbsp; # 底层 APIs 时获取对事件循环的引用<br/>
+			&nbsp; loop = asyncio.get_running_loop()<br/><br/>
+			&nbsp; server = await loop.create_server(<br/>
+				&nbsp; &nbsp; lambda: EchoServerProtocol(),<br/>
+				&nbsp; &nbsp; '127.0.0.1', 8888)<br/><br/>
+			&nbsp; async with server:<br/>
+				&nbsp; &nbsp; await server.serve_forever()<br/>
+		asyncio.run(main())
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>** TCP Client **</legend>
+		import asyncio<br/><br/>
+		class EchoClientProtocol(asyncio.Protocol):<br/>
+			&nbsp; def __init__(self, message, on_con_lost):<br/>
+				&nbsp; &nbsp; self.message = message<br/>
+				&nbsp; &nbsp; self.on_con_lost = on_con_lost<br/>
+			&nbsp; def connection_made(self, transport):<br/>
+				&nbsp; &nbsp; transport.write(self.message.encode())<br/>
+				&nbsp; &nbsp; print('Data sent: {!r}'.format(self.message))<br/><br/>
+			&nbsp; def data_received(self, data):<br/>
+				&nbsp; &nbsp; print('Data received: {!r}'.format(data.decode()))<br/><br/>
+			&nbsp; def connection_lost(self, exc):<br/>
+				&nbsp; &nbsp; print('The server closed the connection')<br/>
+				&nbsp; &nbsp; self.on_con_lost.set_result(True)<br/><br/>
+		async def main():<br/>
+			&nbsp; loop = asyncio.get_running_loop()<br/>
+			&nbsp; on_con_lost = loop.create_future()<br/>
+			&nbsp; message = 'Hello World!'<br/>
+			&nbsp; transport, protocol = await loop.create_connection(<br/>
+				&nbsp; &nbsp; lambda: EchoClientProtocol(message, on_con_lost),<br/>
+				&nbsp; &nbsp; '127.0.0.1', 8888)<br/>
+			&nbsp; try:<br/>
+				&nbsp; &nbsp; await on_con_lost<br/>
+			&nbsp; finally:<br/>
+				&nbsp; &nbsp; transport.close()<br/><br/>
+		asyncio.run(main())
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>** UDP server **</legend>
+		import asyncio<br/><br/>
+		class EchoServerProtocol:<br/>
+			&nbsp; def connection_made(self, transport):<br/>
+				&nbsp; &nbsp; self.transport = transport<br/><br/>
+			&nbsp; def datagram_received(self, data, addr):<br/>
+				&nbsp; &nbsp; message = data.decode()<br/>
+				&nbsp; &nbsp; print('Received %r from %s' % (message, addr))<br/>
+				&nbsp; &nbsp; print('Send %r to %s' % (message, addr))<br/>
+				&nbsp; &nbsp; self.transport.sendto(data, addr)<br/><br/>
+		async def main():<br/>
+			&nbsp; print("Starting UDP server")<br/>
+			&nbsp; loop = asyncio.get_running_loop()<br/>
+			&nbsp; transport, protocol = await loop.create_datagram_endpoint(<br/>
+				&nbsp; &nbsp; lambda: EchoServerProtocol(),<br/>
+				&nbsp; &nbsp; local_addr=('127.0.0.1', 8888))<br/>
+			&nbsp; try:<br/>
+				&nbsp; &nbsp; await asyncio.sleep(3600)  # Serve for 1 hour.<br/>
+			&nbsp; finally:<br/>
+				&nbsp; &nbsp; transport.close()<br/><br/>
+		asyncio.run(main())
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>** UDP Client **</legend>
+		import asyncio<br/><br/>
+		class EchoClientProtocol:<br/>
+			&nbsp; def __init__(self, message, on_con_lost):<br/>
+				&nbsp; &nbsp; self.message = message<br/>
+				&nbsp; &nbsp; self.on_con_lost = on_con_lost<br/>
+				&nbsp; &nbsp; self.transport = None<br/><br/>
+			&nbsp; def connection_made(self, transport):<br/>
+				&nbsp; &nbsp; self.transport = transport<br/>
+				&nbsp; &nbsp; print('Send:', self.message)<br/>
+				&nbsp; &nbsp; self.transport.sendto(self.message.encode())<br/><br/>
+			&nbsp; def datagram_received(self, data, addr):<br/>
+				&nbsp; &nbsp; print("Received:", data.decode())<br/>
+				&nbsp; &nbsp; print("Close the socket")<br/>
+				&nbsp; &nbsp; self.transport.close()<br/><br/>
+			&nbsp; def error_received(self, exc):<br/>
+				&nbsp; &nbsp; print('Error received:', exc)<br/><br/>
+			&nbsp; def connection_lost(self, exc):<br/>
+				&nbsp; &nbsp; print("Connection closed")<br/>
+				&nbsp; &nbsp; self.on_con_lost.set_result(True)<br/><br/>
+		async def main():<br/>
+			&nbsp; loop = asyncio.get_running_loop()<br/>
+			&nbsp; on_con_lost = loop.create_future()<br/>
+			&nbsp; message = "Hello World!"<br/>
+			&nbsp; transport, protocol = await loop.create_datagram_endpoint(<br/>
+				&nbsp; &nbsp; lambda: EchoClientProtocol(message, on_con_lost),<br/>
+				&nbsp; &nbsp; remote_addr=('127.0.0.1', 8888))<br/>
+			&nbsp; try:<br/>
+				&nbsp; &nbsp; await on_con_lost<br/>
+			&nbsp; finally:<br/>
+				&nbsp; &nbsp; transport.close()<br/><br/>
+		asyncio.run(main())
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	<hr/><h3>错误集</h3>
+	<ul>
+	<li>AttributeError: module 'asyncio' has no attribute 'run'：<br/>原因：1.文件下有asyncio.py；2.版本过低，必须在37+以上版本才可以</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+		
+		</fieldset>
+	</form>
+	</li>
+	</ul>
+	
+	<a href="../python.html">python 首页</a>
+	<p><a href="https://docs.python.org/zh-cn/3/library/asyncio.html">asyncio 模块参考文档：https://docs.python.org/zh-cn/3/library/asyncio.html</a></p><br/>
+	</div>
+</body>
+</html>

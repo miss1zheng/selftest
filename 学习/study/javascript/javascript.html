@@ -94,7 +94,7 @@
 			<p>typeof：检测变量的数据类型，如x.innerHTML=typeof "job" + "&lt;br/&gt;" + typeof [1,2,3]</p>
 			<p>constructor：返回所有JavaScript变量的构造函数。typeof无法判断JavaScript array或JavaScript date对象，可用此数据判断，如new Date().constructor//返回函数Date() 或 function(){}.constructor//返回函数function</p>
 			<p>null：空对象引用，可设置为null来清空对象，如var person = null; //值为 null(空), 但类型为对象</p>
-			<p>undefined：没有设置值的变量（typeof一个没有值的变量返回为undefined），可设置为undefined来清空对象，如var person = undefined; //值为 undefined, 类型为 undefined</p>
+			<p>undefined：没有设置值的变量（typeof一个没有值的变量返回为undefined），可设置为undefined来清空对象，如var person = undefined; //值为 undefined, 类型为 undefined，undefined 是在尝试获取一些不存在的对象或变量时返回的结果</p>
 			<p>null和undefined的区别：值相等但类型不同</p>
 			<p>严格模式："use strict";，即在严格的条件下运行，如不能使用未声明的变量会直接报错，注意："use strict"指令值允许出现再脚本或函数的开头。</p>
 			<p>注意：1.加法连接时若一数字和一字符串连接则数字自动变成字符串；2.浮点型数据精确度很难确定，有偏差；3.字符串赋值时，字符串内部不能换行（需要使用反斜杠），但是在等于字符串时等于和字符串之间可以换行；4.JavaScript默认代码最后一行自动结束，可以不加分号作为语句结束符，但是其他位置则不可以；

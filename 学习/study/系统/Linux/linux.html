@@ -73,41 +73,48 @@
 	<p></p>
 	<p></p>
 	<p></p>
-	<p></p>
-	<p></p>
-	<p>shutdown -h now：现在就关机</p>
-	<p>sync：用于数据同步，在关闭linux系统时使用。若直接写入，系统突然断电时数据会丢失，而此指令将存于buffer的数据强制写入硬盘。</p>
-	<p>man：接口帮助文档，[]为可选，<>为必选，ctrl+f向下翻页，ctrl+b向上翻页，q退出，/查找...为可变参数，详情http://www.360doc.com/content/17/0505/17/2149364_651360389.shtml</p>
-	<p>su：切换用户</p>
-	<p>exit：退出当前用户</p>
-	<p>sudo：暂时以管理员权限执行</p>
-	<p>cd：切换目录</p>
-	<p>ls：查看当前文件夹内容，-a显示隐藏文件（即以.开头文件），-l显示具体信息</p>
-	<p>pwd：显示当前文件夹绝对路径</p>
-	<p>cat：显示文件内容</p>
-	<p>mkdir：创建目录</p>
-	<p>rmdir：删除目录</p>
-	<p>touch：创建普通文件</p>
-	<p>rm：删除文件或目录，-r删除目录，-f不询问</p>
-	<p>cp：复制</p>
-	<p>mv：移动</p>
-	<p>chmod：修改文件或目录权限</p>
-	<p>tar：压缩解压。tar.gz解压为tar -zxvf xxx.tar.gz，gz解压为gzip -d xxx.gz。<br/>若报错tar: Error is not recoverable: exiting now：1.减去选项-z即可，即-vxf；2.若还是不行则使用unzip命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</p>
-	<p>find：查找文件</p>
-	<p>grep：查找字符串</p>
-	<p>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</p>
-	<p>ps：列出进程</p>
-	<p>ping：测试网络连通性</p>
-	<p>ipconfig/ifconfig：查看网卡信息</p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p>apt-get install：安装软件</p>
-	<p></p>
+	<h3>以下为命令行具体使用方式</h3>
+	<ul>
+	<li>shutdown -h now：现在就关机</li>
+	<li>sync：用于数据同步，在关闭linux系统时使用。若直接写入，系统突然断电时数据会丢失，而此指令将存于buffer的数据强制写入硬盘。</li>
+	<li>man：接口帮助文档<br/>[]为可选，<>为必选，ctrl+f向下翻页，ctrl+b向上翻页，q退出，/查找...为可变参数，详情http://www.360doc.com/content/17/0505/17/2149364_651360389.shtml</li>
+	<li>su：切换用户</li>
+	<li>exit：退出当前用户</li>
+	<li>sudo：暂时以管理员权限执行</li>
+	<li>cd：切换目录<br/>cd ~：转到 /home/user 用户目录下<br/>cd /：转到根目录下<br/>cd /xxx：绝对路径，转到 xxx 目录下<br/>cd xxx：相对路径，转到当前目录下的 xxx 目录</li>
+	<li>ls：查看当前文件夹内容，-a显示隐藏文件（即以.开头文件），-l显示具体信息</li>
+	<li>pwd：显示当前文件夹绝对路径</li>
+	<li>cat：显示文件内容</li>
+	<li>mkdir：创建目录</li>
+	<li>rmdir：删除目录</li>
+	<li>touch：创建普通文件</li>
+	<li>rm：删除文件或目录，-r删除目录，-f不询问</li>
+	<li>cp：复制</li>
+	<li>mv：移动</li>
+	<li>chmod：修改文件或目录权限</li>
+	<li>tar：压缩解压。tar.gz解压为tar -zxvf xxx.tar.gz，gz解压为gzip -d xxx.gz。<br/>若报错tar: Error is not recoverable: exiting now：1.减去选项-z即可，即-vxf；2.若还是不行则使用unzip命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
+	<li>find：查找文件</li>
+	<li>grep：查找字符串</li>
+	<li>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</li>
+	<li>ps：列出进程</li>
+	<li>ping：测试网络连通性</li>
+	<li>ipconfig/ifconfig：查看网卡信息</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li>apt-get install：安装软件</li>
+	</ul>
 	<p></p>
 	<p></p>
 	<p></p>

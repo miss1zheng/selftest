@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>python之os 模块</title>
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		.main_body li{line-height:25px;}
+		.main_body p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../../协议/http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href=".././python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+	<h3></h3>
+	<p></p>
+	<ul>
+	<li>os.access(path, mode)：判断文件或目录是否有权限访问<br/>
+		path 取值：<br/>
+		&nbsp; X:\\xx\xxx.y<br/>&nbsp; X:\\xx\\<br/>
+		mode 取值：<br/>
+		&nbsp; os.F_OK: 作为 access()的 mode 参数，测试 path 是否存在<br/>
+		&nbsp; os.R_OK: 包含在 access()的 mode 参数中，测试 path 是否可读<br/>
+		&nbsp; os.W_OK 包含在 access()的 mode 参数中，测试 path 是否可写<br/>
+		&nbsp; os.X_OK 包含在 access()的 mode 参数中，测试 path 是否可执行<br/>
+		返回值：有权限返回 True，否则返回 False</li>
+	<li>os.altsep：可替代的路径分隔符，在 Windows 中为‘/’</li>
+	<li>os.chdir(path)：修改当前程序操作的路径<br/>path：只能是目录，不能包含文件名，否则抛出错误<br/>返回值：True 表示修改成功<br/>
+		如：<br/>&nbsp; os.chdir("C:\\")<br/>&nbsp; print(os.getcwd()) #这时打印的是 C:\\ 这个临时修改的路径</li>
+	<li>os.chflags(path,flags)：设置路径的标记为数字标记。多个标记可以使用 OR 来组合起来（注意：只支持在 Unix 下使用）<br/>flag 取值（需要导入 stat 模块）：<br/>
+		&nbsp; stat.UF_NODUMP: 非转储文件<br/>
+		&nbsp; stat.UF_IMMUTABLE: 文件是只读的<br/>
+		&nbsp; stat.UF_APPEND: 文件只能追加内容<br/>
+		&nbsp; stat.UF_NOUNLINK: 文件不可删除<br/>
+		&nbsp; stat.UF_OPAQUE: 目录不透明，需要通过联合堆栈查看<br/>
+		&nbsp; stat.SF_ARCHIVED: 可存档文件(超级用户可设)<br/>
+		&nbsp; stat.SF_IMMUTABLE: 文件是只读的(超级用户可设)<br/>
+		&nbsp; stat.SF_APPEND: 文件只能追加内容(超级用户可设)<br/>
+		&nbsp; stat.SF_NOUNLINK: 文件不可删除(超级用户可设)<br/>
+		&nbsp; stat.SF_SNAPSHOT: 快照文件(超级用户可设)</li>
+	<li>os.chmod(path,mode)：修改文件或目录权限<br/>mode 取值（需要导入 stat 模块）<br/>
+		&nbsp; stat.S_IXOTH: 其他用户有执行权00001<br/>
+		&nbsp; stat.S_IWOTH: 其他用户有写权限00002<br/>
+		&nbsp; stat.S_IROTH: 其他用户有读权限00004<br/>
+		&nbsp; stat.S_IRWXO: 其他用户有全部权限(权限掩码)00007<br/>
+		&nbsp; stat.S_IXGRP: 组用户有执行权限00010<br/>
+		&nbsp; stat.S_IWGRP: 组用户有写权限00020<br/>
+		&nbsp; stat.S_IRGRP: 组用户有读权限00040<br/>
+		&nbsp; stat.S_IRWXG: 组用户有全部权限(权限掩码)00070<br/>
+		&nbsp; stat.S_IXUSR: 拥有者具有执行权限00100<br/>
+		&nbsp; stat.S_IWUSR: 拥有者具有写权限00200<br/>
+		&nbsp; stat.S_IRUSR: 拥有者具有读权限00400<br/>
+		&nbsp; stat.S_IRWXU: 拥有者有全部权限(权限掩码)00700<br/>
+		&nbsp; stat.S_ISVTX: 目录里文件目录只有拥有者才可删除更改01000<br/>
+		&nbsp; stat.S_ISGID: 执行此文件其进程有效组为文件所在组02000<br/>
+		&nbsp; stat.S_ISUID: 执行此文件其进程有效用户为文件所有者04000<br/>
+		&nbsp; stat.S_IREAD: windows下设为只读<br/>
+		&nbsp; stat.S_IWRITE: windows下取消只读</li>
+	<li>os.chroot()：更改当前进程的根目录为指定的目录，使用该函数需要管理员权限</li>
+	<li>os.close(fd)：关闭指定的文件描述符 fd<br/>fd：文件描述符</li>
+	<li>os.closerange(fd_low,fd_high)：关闭所有文件描述符 fd，从 fd_low (包含，最小文件描述符) 到 fd_high (不包含，最大文件描述符), 错误会忽略</li>
+	<li>os.cpu_count()：获得当前系统的 CPU 数量</li>
+	<li>os.curdir：返回当前目录‘.’</li>
+	<li>os.devnull：在不同的系统上 null 设备的路径，在 Windows 下为‘nul’，在 linux 下为‘/dev/null’</li>
+	<li>os.defpath)：当使用 exec 函数族的时候，如果没有指定 PATH 环境变量，则默认会查找 os.defpath 中的值作为子进程 PATH 的值</li>
+	<li>os.dup(fd)：复制文件描述符 fd，返回复制之后的文件描述符</li>
+	<li>os.dup2(fd,fd2)：将一个文件描述符 fd 复制到另一个 fd2</li>
+	<li>os.environ['环境变量名称']='环境变量值'：设置环境变量<br/>os.environ['环境变量名称']：获取环境变量</li>
+	<li>os.exit()：终止当前进程</li>
+	<li>os.fchdir(fd)：通过文件描述符改变当前工作目录<br/>
+		os.chdir("/var/www/html" ) #到目录 "/var/www/html"<br/>
+		print ("now is %s" % os.getcwd()) #输出当前目录<br/>
+		fd = os.open( "/tmp", os.O_RDONLY ) #打开新目录 "/tmp"<br/>
+		os.fchdir(fd) # 使用 os.fchdir() 方法修改到新目录<br/>
+		print ("now is %s" % os.getcwd()) # 输出当前目录<br/>
+		os.close( fd ) # 关闭打开的目录</li>
+	<li>os.fdopen(fd[,mode[,bufsize]])：通过文件描述符 fd 创建一个文件对象，并返回这个文件对象</li>
+	<li>os.fstat(fd)：返回文件描述符fd的状态，类似 stat()，返回内容如下：<br/>
+		st_dev: 设备信息<br/>
+		st_ino: 文件的 i-node 值<br/>
+		st_mode: 文件信息的掩码，包含了文件的权限信息，文件的类型信息（是普通文件还是管道文件，或者是其他的文件类型）<br/>
+		st_nlink: 硬连接数<br/>
+		st_uid: 用户ID<br/>
+		st_gid: 用户组 ID<br/>
+		st_rdev: 设备 ID (如果指定文件)<br/>
+		st_size: 文件大小，以byte为单位<br/>
+		st_blksize: 系统 I/O 块大小<br/>
+		st_blocks: 文件的是由多少个 512 byte 的块构成的<br/>
+		st_atime: 文件最近的访问时间<br/>
+		st_mtime: 文件最近的修改时间<br/>
+		st_ctime: 文件状态信息的修改时间（不是文件内容的修改时间）</li>
+	<li>os.fsync(fd)：强制将文件描述符为fd的文件写入硬盘</li>
+	<li>os.ftruncate(fd,length)：裁剪文件描述符fd对应的文件, 它最大不能超过文件大小</li>
+	<li>os.getcwd()：返回程序的当前路径</li>
+	<li>os.getcwdu()：返回一个当前工作目录的Unicode对象</li>
+	<li>os.getlogin()：获得当前系统登录用户名称</li>
+	<li>os.getpid()：返回当前进程的 PID</li>
+	<li>os.getenv(key,default=None)：读取环境变量，key 可设置成 "home"、"path"，default 可忽略<br/>os.putenv 用于设置环境变量<br/>
+		environ 和 getenv 的区别：<br/>
+		print("getenv:",os.getenv("home"))<br/>
+		os.putenv("home","D:\CSDTK\cygwin\home\wang")<br/>
+		print("getenv",os.getenv("home"))<br/>
+		print("上面不会改变环境变量值，下面才能实现临时环境变量，不会改变系统环境变量")<br/>
+		print("environ:",os.environ['home'])<br/>
+		os.environ["home"]="D:\CSDTK\cygwin\home\wang"<br/>
+		print("environ:",os.environ['home'])</li>
+	<li>os.isatty(device)：判断如果文件描述符fd是打开的，同时与tty(-like)设备相连，则返回true, 否则False'])</li>
+	<li>os.linesep：当前平台使用的行终止符，window 使用'\r\n'，Linux 使用'\n'，Mac 使用'\r'<br/>os.linesep.encode() #win 下返回的就是 b'\r\n'</li>
+	<li>os.link(src, dst)：创建硬链接，名为参数 dst，指向参数 src。该方法对于创建一个已存在文件的拷贝是非常有用的</li>
+	<li>os.listdir(path)：返回指定目录下的所有文件和目录名<br/>path：只能是目录，包含文件名抛出错误<br/>返回值：以列表形式返回</li>
+	<li>os.lseek()：设置文件描述符 fd 当前位置为 pos（相对于给定参数 how 在文件中的位置）, how（文件内参考位置）方式修改<br/>
+		how 值有：SEEK_SET/0（从文件开始计算 pos）、SEEK_CUR/1（从当前位置计算）、SEEK_END/2（从文件尾部开始）</li>
+	<li>os.lstat(path)：类似 stat() 返回文件的信息,但是没有符号链接（软链接）。在某些平台上，这是 fstat 的别名，例如 Windows</li>
+	<li>os.major()：从原始的设备号中提取设备 major 号码（使用 stat 中的 st_dev 或者 st_rdev field）<br/>
+		device：原始设备号中提取设备 major 号码（使用 stat 中的 st_dev 或者 st_rdev field）<br/>
+		info = os.lstat("/var/www/html/foo.txt") # 获取元组<br/>
+		# 获取 major 和 minor 设备号<br/>
+		major_dnum = os.major(info.st_dev)<br/>
+		minor_dnum = os.minor(info.st_dev)<br/>
+		print "Major 设备号 :", major_dnum<br/>
+		print "Minor 设备号 :", minor_dnum</li>
+	<li>os.makedev(major,minor)：以 major 和 minor 设备号组成一个原始设备号，返回设备号</li>
+	<li>os.makedirs(path[,mode[,exist_ok=False]])：创建文件夹目录. 创建多级目录<br/>
+		path：递归目录，若没有则创建，若已有则根据第三个参数判断<br/>mode：访问权限，默认 0o777（0o 表示八进制）<br/>
+		exist_ok：若为False，文件已存在时抛出异常，若为True，文件已存在则内部已有的其他名称的文件或目录仍然不会被改动</li>
+	<li>os.minor(device)：从原始的设备号中提取设备 minor 号码 (使用 stat 中的 st_dev 或者 st_rdev field )</li>
+	<li>os.mkdir(path[,mode])：创建文件夹<br/>path：一级级创建，上级目录必须存在，若上级目录不存在则抛出错误，若目录已存在也会报错<br/>mode：默认 0o777（0o 表示八进制）</li>
+	<li>os.mkfifo(path[,mode])：创建命名管道，mode 为数字，默认为 0666 (八进制)</li>
+	<li>os.mknod(filename[,mode=0600,device])：创建一个名为filename文件系统节点（文件，设备特别文件或者命名pipe）</li>
+	<li>os.name：当前使用的平台，window 是 'nt'，linux/unix 是 'posix'</li>
+	<li>os.open(file,flags[,mode])：打开一个文件<br/>file：要打开的文件<br/>
+		flags 取值：<br/>
+		&nbsp; os.O_RDONLY：以只读的方式打开<br/>
+		&nbsp; os.O_WRONLY：以只写的方式打开<br/>
+		&nbsp; os.O_RDWR：以读写的方式打开<br/>
+		&nbsp; os.O_NONBLOCK：打开时不阻塞<br/>
+		&nbsp; os.O_APPEND：以追加的方式打开<br/>
+		&nbsp; os.O_CREAT：创建并打开一个新文件<br/>
+		&nbsp; os.O_TRUNC：打开一个文件并截断它的长度为零（必须有写权限）<br/>
+		&nbsp; os.O_EXCL：如果指定的文件存在，返回错误<br/>
+		&nbsp; os.O_SHLOCK：自动获取共享锁<br/>
+		&nbsp; os.O_EXLOCK：自动获取独立锁<br/>
+		&nbsp; os.O_DIRECT：消除或减少缓存效果<br/>
+		&nbsp; os.O_FSYNC：同步写入<br/>
+		&nbsp; os.O_NOFOLLOW：不追踪软链接<br/>
+		mode：默认 0o777<br/>
+		返回值：返回文件描述符，用于后面的文件读、写、关闭等操作</li>
+	<li>os.openpty()：打开一个新的伪终端对。返回 pty 和 tty的文件描述符</li>
+	<li>os.pardir：获取当前目录的父目录字符串名 '..'</li>
+	<li>os.pathsep：PATH 环境变量中的分隔符，在 linux 系统中为‘:’，在 Windows 中为‘;’</li>
+	<li>os.path.abspath(path)：返回当前系统的绝对路径，其他盘符需要使用绝对路径，否则返回的也是当前路径<br/>
+		os.path.abspath("xxx.yy")</li>
+	<li>os.path.basename(path)：返回文件名称，没有文件名称，返回空<br/>
+		注意：路径中以最后的斜杆或反斜杆为准<br/>os.path.basename("x:\\xx\\xxx.y") # xxx.y<br/>os.path.basename("x:\\xx\\") # 空<br/>os.path.basename("x:\\xx") # xx</li>
+	<li>os.path.commonprefix(list)：返回 list（多个路径）中，所有 path 共有的最长的路径</li>
+	<li>os.path.dirname(path)：返回目录名称，仅有文件名称，返回空<br/>
+		注意：路径中以最后的斜杆或反斜杆为准<br/>os.path.dirname("xxx.yy") # 空<br/>os.path.basename("x:\\xx\\xxx.y") # x:\\xx<br/>os.path.basename("x:\\xx\\") # x:\\xx<br/>os.path.basename("x:\\xx") # x:\"</li>
+	<li>os.path.exists(path)：判断文件或目录是否存在<br/>path：文件或目录，绝对路径或相对路径都可以<br/>返回值：返回 True 或 False<br/>os.path.exists("x:\\xx\\xxx.y") # True<br/>os.path.exists("x:\\xx\\cc.y") # False，没有此文件<br/>os.path.exists("x:\\xx") # True<br/>os.path.exists("xxx.y") # True</li>
+	<li>os.path.lexists()：路径存在则返回 True,路径损坏也返回 True</li>
+	<li>os.path.expanduser(path)：把 path 中包含的 "~" 和 "~user" 转换成用户目录</li>
+	<li>os.path.expandvars(path)：根据环境变量的值替换 path 中包含的 "$name" 和 "${name}"</li>
+	<li>os.path.getatime(path)：目录或文件上一次访问时间，此时间为总时间<br/>path：文件或目录，绝对路径或相对路径都可以<br/>os.path.getatime("x:\\xx\\")</li>
+	<li>os.path.getctime(path)：目录或文件创建时间，总时间<br/>path：文件或目录，绝对路径或相对路径都可以<br/>os.path.getctime("x:\\xx\\")</li>
+	<li>os.path.getmtime(path)：目录或文件最近一次修改时间，总时间<br/>path：文件或目录，绝对路径或相对路径都可以<br/>os.path.getmtime("x:\\xx\\")</li>
+	<li>os.path.getsize(path)：文件大小，单位字节（注意：目录也可返回大小，只不过大小并不是这个目录的大小，具体大小未知）<br/>path：文件或目录，绝对路径或相对路径都可以</li>
+	<li>os.path.isabs(path)：判断是否是绝对路径<br/>os.path.isabs("x:\\xx\\")<br/>os.path.isabs("./") #这个返回False</li>
+	<li>os.path.isdir(path)：判断目录是否已存在<br/>path：只能是目录，文件的话返回 False<br/>返回值：若只有文件或目录+文件返回的也是 False</li>
+	<li>os.path.isfile(path)：判断文件是否已存在，若只有目录返回的也是 False</li>
+	<li>os.path.islink(path)：判断路径是否为链接</li>
+	<li>os.path.ismount(path)：判断路径是否为挂载点</li>
+	<li>os.path.join(path,*paths)：连接 path 和 *paths<br/>os.path.join("x:\\","xx\xxx.yy"")</li>
+	<li>os.path.normcase(path)：转换 path 的大小写和斜杠</li>
+	<li>os.path.normpath(path)：统一化 path 表达形式，使用“\”分隔路径，斜杆也有效，访问其他盘符依然有效<br/>
+		os.path.normpath("x:\\xx\xxx.yy")<br/>os.path.normpath("x:\\xx/xxx.yy")<br/>os.path.normpath("xxx.yy")</li>
+	<li>os.path.realpath(path)：返回 path 的真实路径</li>
+	<li>os.path.relpath(path[,start])：返回当前程序与文件之间的相对路径，仅在当前盘符下有效，其他盘符会报错</li>
+	<li>os.path.samefile(path1,path2)：判断目录或文件是否相同</li>
+	<li>os.path.sameopenfile(fp1,fp2)：判断 fp1 和 fp2 是否指向同一文件</li>
+	<li>os.path.samestat(stat1,stat2)：判断 stat tuple stat1 和 stat2 是否指向同一个文件</li>
+	<li>os.path.split(path)：返回目录和文件分开的元组<br/>path：以最后的斜杆或反斜杠为准<br/>返回值：路径的目录名和文件名的元组，如('x:\\xx', 'xxx.yy')</li>
+	<li>os.path.splitdrive(path)：返回驱动磁盘和文件路径的元组<br/>path：以最后的斜杆或反斜杠为准，必须是绝对路径，否则磁盘部分将为空<br/>返回值：如('x:', '\\xx\xxx.yy')</li>
+	<li>os.path.splitext(path)：分离扩展名，返回路径文件和扩展名的元组<br/>path：文件则有扩展名，若没有或为目录则扩展部分为空<br/>返回值：如('x:\\xx\xxx,'.yy')</li>
+	<li>os.path.splitunc(path)：把路径分割为加载点与文件</li>
+	<li>os.path.walk(path,visit,arg)：遍历 path，进入每个目录都调用 visit 函数，visit 函数必须有 3 个参数(arg, dirname, names)，dirname 表示当前目录的目录名，names 代表当前目录下的所有文件名，args 则为 walk 的第三个参数</li>
+	<li>os.path.supports_unicode_filenames：设置是否支持 unicode 路径名</li>
+	<li>os.pipe()：创建一个管道, 返回一对文件描述符(r, w) 分别为读和写</li>
+	<li>os.popen(command[,mode[,bufsize]])：从一个命令打开一个管道</li>
+	<li>os.putenv('环境变量名称', '环境变量值')：设置环境变量，getenv() 为获取环境变量</li>
+	<li>os.read(fd,n)：从文件描述符 fd 中读取最多 n 个字节，返回包含读取字节的字符串，文件描述符 fd 对应文件已达到结尾, 返回一个空字符串</li>
+	<li>os.remove(path)：删除路径为 path 的文件。如果 path 是一个文件夹，将抛出 OSError; 查看下面的 rmdir() 删除一个 directory</li>
+	<li>os.removedirs(path)：删除多级目录, 要求必须是空的，若一个目录有多个空目录则只会删除到这个目录为止，若都是只有一个空目录则整个都删除<br/>
+	<form>
+		<fieldset>
+		<legend>** 对目录或文件的加减实现 **</legend>	
+		import os<br/>
+		os.makedirs("file1/file2/file3", mode=0o777, exist_ok=True) #创建多级文件夹<br/>
+		os.mkdir("file1/file",mode=0o735) # 创建文件夹<br/>
+		os.rename("file1/file","file1/file0") #重命名目录<br/>
+		#这里是为删除目录下的文件创建的一个空文件<br/>
+		fd=os.open("file1/file2/file.txt",os.O_CREAT|os.O_APPEND,mode=0o777)<br/>
+		os.close(fd)<br/>
+		os.rmdir("file1/file0") #删除空目录<br/>
+		os.remove("file1/file2/file.txt") #删除file.txt文件<br/>
+		os.removedirs("file1/file2/file3") #删除整个目录<br/>
+		<br/>整体如下：<br/>
+		file1 -> makedirs 创建多级目录 -> removedirs 删除多级目录<br/>
+			&nbsp; file -> mkdir 创建目录 -> rename 重命名为 file0 -> rmdir 删除 file 空目录<br/>
+			&nbsp; file2<br/>
+				&nbsp; &nbsp; file.txt -> open 创建后，remove 删除<br/>
+				&nbsp; &nbsp; file3<br/>
+		</li>
+	<li>os.rename(src,dst)：重命名文件或目录，注意，若目录或文件已存在则会报错</li>
+	<li>os.renames(old,new)：递归重命名目录或文件。类似rename()</li>
+	<li>os.rmdir(path)：只能删除空目录</li>
+	<li>os.sep：当前平台的文件路径分隔符，window 下是 '\'，linux 下是 '/'</li>
+	<li>os.stat(path)：获取文件属性<br/>返回值如下：<br/>
+		&nbsp; st_mode: inode 保护模式<br/>
+		&nbsp; st_ino: inode 节点号<br/>
+		&nbsp; st_dev: inode 驻留的设备<br/>
+		&nbsp; st_nlink: inode 的链接数<br/>
+		&nbsp; st_uid: 所有者的用户 ID<br/>
+		&nbsp; st_gid: 所有者的组 ID<br/>
+		&nbsp; st_size: 普通文件以字节为单位的大小<br/>
+		&nbsp; st_atime: 上次访问的时间<br/>
+		&nbsp; st_mtime: 最后一次修改的时间<br/>
+		&nbsp; st_ctime: 由操作系统报告的"ctime"</li>
+	<li>os.stat_float_times([newvalue])：决定 stat_result 是否以 float 对象显示时间戳</li>
+	<li>os.statvfs(path)：返回包含文件描述符fd的文件的文件系统的信息</li>
+	<li>os.symlink(src, dst)：创建一个软链接</li>
+	<li>os.system(path)：执行程序或命令，其中程序如 .exe 或 .png 等，不能是 .txt 会报错<br/>
+		os.system(cmd)：如 os.system("ping -4 127.0.0.1")</li>
+	<li>os.tcgetpgrp(fd)：返回与终端fd（一个由os.open()返回的打开的文件描述符）关联的进程组</li>
+	<li>os.tempnam(path,prefix)：返回唯一的路径名用于创建临时文件，prefix 是临时文件前缀</li>
+	<li>os.tmpfile()：返回一个打开的模式为（w+b）的临时文件对象，这文件对象没有文件夹入口，没有文件描述符，将会自动删除</li>
+	<li>os.tmpnam()：为创建一个临时文件返回一个唯一的路径</li>
+	<li>os.ttyname(fd)：返回一个字符串，它表示与文件描述符 fd 关联的终端设备。如果 fd 没有与终端设备关联，则引发一个异常。</li>
+	<li>os.unlink(path)：删除文件,如果文件是一个目录则返回一个错误</li>
+	<li>os.urandom(n))：获得 n 个字节长度的随机字符串，通常用于加解密运算</li>
+	<li>os.utime(path, times)：设置指定路径文件最后的修改和访问时间</li>
+	<li>os.walk(path[,onerror=None[,followlinks=False]])：文件遍历，内部有三部分，第一部分为文件路径，第二部分为此目录下的子目录，第三部分为此目录下的文件，都是以列表形式返回，可使用 for 来获取<br/>
+		for pathname,subpathname,filename in os.walk("x:\\xx\\"):<br/>&nbsp; print(pathname)<br/>&nbsp; print(subpathname)<br/>&nbsp; print(filename)</li>
+	<li>os.write(fd,str)：写入字符串到文件描述符 fd 中. 返回实际写入的字符串长度
+	<form>
+		<fieldset>
+		<legend>** 输入文件名然后查找整个系统，输出对应的位置 **</legend>
+		import os<br/><br/>
+		file_name=[]<br/>
+		file_exit=False<br/>
+		drivelist=["C:\\","D:\\","E:\\","F:\\","G:\\","H:\\"]<br/><br/>
+		def found(strvalue):<br/>
+			&nbsp; global file_exit<br/>
+			&nbsp; if os.path.exists(strvalue) == False:<br/>
+				&nbsp; &nbsp; print("there be not %s" % strvalue)<br/>
+				&nbsp; &nbsp; return<br/>
+			&nbsp; c=os.chdir(strvalue)<br/>
+			&nbsp; for pathlist,subpathlist,filelist in os.walk(os.getcwd()):<br/>
+				&nbsp; &nbsp; for filename in filelist:<br/>
+					&nbsp; &nbsp; &nbsp; if filename == file_name:<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; print("%s\\%s" % (pathlist,filename))<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; file_exit = True<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; break<br/><br/>
+		if __name__=="__main__":<br/>
+			&nbsp; file_name=input("input your file name,pelease!\r\n>>>")<br/>
+			&nbsp; for i in drivelist:<br/>
+				&nbsp; &nbsp; found(i)<br/>
+			&nbsp; print("file_exit1 is ",file_exit)<br/>
+			&nbsp; if file_exit == True:<br/>
+				&nbsp; &nbsp; fileopen=input("you need open file?Y/N\r\n>>>")<br/>
+				&nbsp; &nbsp; if fileopen == "Y":<br/>
+					&nbsp; &nbsp; &nbsp; all_name = input("pelease you input all file and path\r\n>>>")<br/>
+					&nbsp; &nbsp; &nbsp; if os.path.isfile(all_name) == True:<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; filesize = os.path.getsize(all_name)<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; fd = os.open(all_name,os.O_RDONLY)<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; data = os.read(fd,filesize)<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; print(data) #直接打印可能输出不太好看，可使用 data.decode("utf-8")<br/>
+						&nbsp; &nbsp; &nbsp; &nbsp; os.close(fd)
+		</fieldset>
+	</form>
+	</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	<hr/><h3>错误集</h3>
+	<ul>
+	<li>ValueError: path is on mount 'F:', start on mount 'G:'<br/>
+	原因：在 G 盘的 py 文件里使用 os.path.relpath("F:\xxx\xx.zip") 试图访问 F 盘的文件导致此异常错误出现<br/>
+	解决方式：将 F 盘的此文件拷贝一份到 G 盘位置即可</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	
+	<a href="../python.html">python 首页</a>
+	<p><a href="https://docs.python.org/zh-cn/3/library/os.html">os 模块参考文档：https://docs.python.org/zh-cn/3/library/os.html</a></p><br/>
+	</div>
+</body>
+</html>

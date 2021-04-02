@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>python之os 模块</title>
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<style>
+		.main_body li{line-height:25px;}
+		.main_body p{line-height:25px;}
+	</style>
+</head>
+<body>
+	<div class="menu_body">
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
+	</div>
+	<div class="left_body">
+		<ul>
+			<li><a href="../../c/c.html">c</a></li>
+			<li><a href="../../c++/c++.html">c++</a></li>
+			<li><a href="../../css/css.html">css</a></li>
+			<li><a href="../../html/html.html">html</a></li>
+			<li><a href="../../协议/http/http.html">http</a></li>
+			<li><a href="../../java/java.html">java</a></li>
+			<li><a href="../../javascript/javascript.html">javascript</a></li>
+			<li><a href=".././python.html">python</a></li>
+			<li><a href="../../sql/sql.html">Sql</a></li>
+			<li><a href="../../php/php.html">php</a></li>
+			<li><a href="../../photoshop/photoshop.html">PS</a></li>
+			<li><a href="../../cad/cad.html">CAD</a></li>
+			<li><a href="../../硬件/硬件.html">硬件</a></li>
+			<li><a href="../../语言/语言.html">语言</a></li>
+			<li><a href="../../系统/系统.html">系统</a></li>
+		</ul>
+	</div>
+	<div class="table_body">
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+		<a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br><a href=""></a><br>
+	</div>
+	<div class="main_body">
+	<h3></h3>
+	<p></p>
+	<ul>
+	<li>binhex.binhex(input, output)：将带有文件名 输入 的二进制文件转换为 binhex 文件 输出，如 binhex.binhex("./aa.ico","./aa.txt")</li>
+	<li>inhex.hexbin(input, output)：解码 binhex 文件输入。如 binhex.hexbin("./aa.txt","aaa.ico")</li>
+	<li>binascii.a2b_uu(string)：将单行 uu 编码数据转换成二进制数据并返回。uu 编码每行的数据通常包含45 个（二进制）字节，最后一行除外。每行数据后面可能跟有空格。<br/>举例：<br/>
+		&nbsp; binascii.a2b_uu('12345678987654321065535') #字符串必须是数值不能是字母<br/>&nbsp; binascii.a2b_uu('\x31') #只能是单个，从\x00-\x7f<br/>&nbsp; binascii.a2b_uu("Z") #a-z 或 A-Z<br/>&nbsp; binascii.a2b_uu("c+-*/") #c-z 和 +-*/
+		<br/>&nbsp; binascii.a2b_uu("ABCDEFG+-*/HIJKLMNOPQRSTUVWXYZ") # A-Z 和 +-*/</li>
+	<li>binascii.b2a_uu(data, *, backtick=False)：将二进制数据转换为 ASCII 编码字符，返回值是转换后的行数据，包括换行符。 <br/>
+	&nbsp; data：长度最多为45。<br/>&nbsp; backtick：如果 backtick 为ture，则零由'`'表示而不是空格表示。</li>
+	<li>binascii.a2b_base64(string)：将 base64 数据块转换成二进制并以二进制数据形式返回。一次可以传递多行数据。</li>
+	<li>binascii.b2a_base64(data, *, newline=True)：将二进制数据转换为一行用 base64 编码的ASCII字符串。返回值是转换后的行数据，如果 newline 为true，则返回值包括换行符。</li>
+	<li>binascii.a2b_qp(data, header=False)：将一个引号可打印的数据块转换成二进制数据并返回。一次可以转换多行。如果可选参数 header 存在且为true，则数据中的下划线将被解码成空格。</li>
+	<li>binascii.b2a_qp(data, quotetabs=False, istext=True, header=False)：将二进制数据转换为一行或多行带引号可打印编码的ASCII字符串。返回值是转换后的行数据。如果可选参数 quotetabs 存在且为真值，则对所有制表符和空格进行编码。如果可选参数 istext 存在且为真值，则不对新行进行编码，但将对尾随空格进行编码。如果可选参数 header 存在且为true，则空格将被编码为下划线 RFC 1522。如果可选参数 header 存在且为假值，则也会对换行符进行编码;不进行换行转换编码可能会破坏二进制数据流。</li>
+	<li>binascii.a2b_hqx(string)：将 binhex4 格式的 ASCII 数据不进行 RLE 解压缩直接转换为二进制数据。该字符串应包含完整数量的二进制字节，或者（在binhex4 数据最后部分）剩余位为零。</li>
+	<li>binascii.rledecode_hqx(data)：根据 binhex4 标准对数据执行 RLE 解压缩。该算法在一个字节的数据后使用 0x90 作为重复指示符，然后计数。计数 0 指定字节值 0x90 。该例程返回解压缩的数据，输入数据以孤立的重复指示符结束的情况下，将引发 Incomplete 异常。</li>
+	<li>binascii.rlecode_hqx(data)：在 data 上执行 binhex4 游程编码压缩并返回结果。</li>
+	<li>binascii.b2a_hqx(data)：执行 hexbin4 类型二进制到 ASCII 码的转换并返回结果字符串。输入数据应经过 RLE 编码，且数据长度可被3整除（除了最后一个片段）。</li>
+	<li>binascii.crc_hqx(data, value)：以 value 作为初始 CRC 计算 data 的16位 CRC 值，返回其结果。这里使用 CRC-CCITT 生成多项式 x16 + x12 + x5 + 1 ，通常表示为0x1021。</li>
+	<li>binascii.crc32(data[, value])：计算 CRC-32 ，从 value 的初始 CRC 开始计算 data 的32位校验和。默认初始 CRC 为零。该算法与 ZIP 文件校验和一致。</li>
+	<li>binascii.b2a_hex(data[, sep[, bytes_per_sep=1]]) / binascii.hexlify(data[, sep[, bytes_per_sep=1]])：返回二进制数据 data 的十六进制表示形式。 data 的每个字节都被转换为相应的2位十六进制表示形式。因此返回的字节对象的长度是 data 的两倍。<br/>
+		bytes.hex() 方法也可以方便地实现相似的功能（但仅返回文本字符串）<br/>
+		如果指定了 sep，它必须为单字符 str 或 bytes 对象。 它将被插入每个 bytes_per_sep 输入字节之后。 分隔符位置默认从输出的右端开始计数，如果你希望从左端开始计数，请提供一个负的 bytes_per_sep 值。<br/>
+		如：binascii.b2a_hex(b'worker') #先把worker转换成二进制数据然后再用十六进制表示</li>
+	<li>binascii.a2b_hex(hexstr) / binascii.unhexlify(hexstr)：返回由十六进制字符串 hexstr 表示的二进制数据。此函数功能与 b2a_hex() 相反。 hexstr 必须包含偶数个十六进制数字（可以是大写或小写），否则会引发 Error 异常。<br/>
+		bytes.fromhex() 类方法也实现相似的功能（仅接受文本字符串参数，不限制其中的空白字符）。<br/>
+		如：binascii.a2b_hex(b'776f726b6572') #将十六进制先转换成二进制再转换成b字节，b'worker'</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li>
+	<form>
+		<fieldset>
+		<legend>**  **</legend>
+
+		</fieldset>
+	</form>
+	</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li>hex(i)：十进制转换成十六进制，如 hex(10)) # 0xa</li>
+	<li>i.j.hex()：浮点型转换成十六进制，如：1.23.hex() # 0x1.3ae147ae147aep+0</li>
+	<li>bin(i)：十进制转换成二进制，如：bin(9) #0b1001</li>
+	<li>oct(300)：十进制转换成八进制，如：oct(300) #0o454</li>
+	<li>int(x[,base])：转换字符串或数值为整，如：<br/>
+		int(300)) #默认十进制，300<br/>
+		int('300',10) #十进制，300<br/>
+		int('1001',2) #二进制，9<br/>
+		int('300',8) #八进制，192<br/>
+		int('300',16) #十六进制，768</li>
+	<li>chr(i)：整型转换成 ascii（取值 0-255），如 chr(97) # a</li>
+	<li>ord(i):ascii 转换成整型，如 ord('a') #97<br/>结合使用：<br/>
+		#下面两个功能类似<br/>
+		hex(ord('a')) #0x61<br/>
+		binascii.hexlify(b'a') #b'61'</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	<hr/><h3>错误集</h3>
+	<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	
+	<a href="../python.html">python 首页</a>
+	<p><a href="https://docs.python.org/zh-cn/3/library/"> 模块参考文档：https://docs.python.org/zh-cn/3/library/os.html</a></p><br/>
+	</div>
+</body>
+</html>
