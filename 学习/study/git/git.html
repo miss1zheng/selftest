@@ -81,8 +81,8 @@
 			<li>The requested URL returned error: 502</li>
 			<li>创建新版本库：<br/>touch README.md<br/>git init<br/>git add README.md<br/>git commit -m "first commit"<br/>git remote add origin ssh://ip:port/xxx/xx.git<br/>git push -u origin master</li>
 			<li>error: Cannot delete branch 'master' checked out at 'x://xx//xxx'<br/>原因：在当前分支删除当前分支时的错误<br/>解决方式：想删除 master 需要跳转到其他分支，然后再使用 branch -D master 删除 master 分支<br/>若只有当前一个分支，只需删除文件夹内所有的文件，包括 .git 文件，再使用 git init、git clone 重新拉取远程主分支 master 即可</li>
-			<li></li>
-			<li></li>
+			<li>fatal: unable to access 'https://github.com/xx.git/': OpenSSL SSL_read: Connection was reset, errno 10054<br/>原因：git push origin xx 后出现<br/>解决方式：在隐藏文件 .git 下的 config 文件 里把 url = https:// 改成 http（去除 s 即可）</li>
+			<li>fatal: unable to access 'http://github.com/miss1zheng/selftest.git/': Failed to connect to github.com port 443: Timed out：<br/>原因：git push origin xx 时出现<br/>解决方式：输入命令 git remote set-url origin http://github.com/xx.git/ 远程地址之后，再 git push origin xx 即可成功上传</li>
 			<li></li>
 			<li></li></ul></li>
 		<li></li>
