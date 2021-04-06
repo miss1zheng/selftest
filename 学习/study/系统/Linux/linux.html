@@ -40,18 +40,50 @@
 	<a href="#z-"></a><br/><a href="#-mode"></a><br/>
 		</div>
 	<div class="main_body">
-	<p>声明：本实验在VMware Station Play 15虚拟机里安装Ubuntu16.04.6桌面64位版。<br/>Ubuntu下载：<a href="https://ftp.sjtu.edu.cn/ubuntu-cd/">https://ftp.sjtu.edu.cn/ubuntu-cd/</a><br/>VMware Workstation Player下载：<a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html">https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html</a></p>
+	<p>声明：本实验在 VMware Station Play 15 虚拟机里安装 Ubuntu16.04.6 桌面 64 位版。<br/>Ubuntu 下载：<a href="https://ftp.sjtu.edu.cn/ubuntu-cd/">https://ftp.sjtu.edu.cn/ubuntu-cd/</a><br/>VMware Workstation Player 下载：<a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html">https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html</a></p>
 	<p>终端的格式：username@hostname:dir$，即 用户名@主机名:当前目录用户权限，其中用户权限为#表示这是超级用户，$表示普通用户</p>
-	<p>技巧：<br/>一、终端与桌面的切换：桌面切换到终端方法1.直接在文件夹中搜索gnome-terminal；2.命令行输入按alt+F2进入命令行，输入gnome-terminal；3.ctrl+alt+T进入；4.主页第一个搜索图标输入ter搜索即可；5.将终端图标启动器放置在桌面。终端进入桌面快捷键alt+ctrl+F7<br/>
-	二、鼠标的切换：ctrl+alt+F1进入全面<br/>三、命令自动补全：Tab键命令自动补齐命令或文件<br/>四、查看历史：1.上下键查看；2.history显示本次登录后使用过的所有命令<br/>五、停止当前命令：ctrl+C</p>
-	<p>文件目录操作：/为根目录；~为家目录；.为当前目录；..为上一层目录；-为上一次操作的目录</p>
-	<p>文件类型：-为普通文件；d为目录；c为字符设备；b为块设备；s为socket；l为软链接</p>
-	<p>操作权限：r为可读；w为可写；x为可执行；其中可用数值表示，421其中4为读2为写1为执行，+-=为增加减少设置权限</p>
+	<p>技巧：<br/>一、终端与桌面的切换：桌面切换到终端方法1.直接在文件夹中搜索gnome-terminal；2.命令行输入按alt+F2进入命令行，输入gnome-terminal；3.ctrl+alt+T进入；4.主页第一个搜索图标输入 ter 搜索即可；5.将终端图标启动器放置在桌面。终端进入桌面快捷键 alt+ctrl+F7<br/>
+	二、鼠标的切换：ctrl+alt+F1 进入全面<br/>三、命令自动补全：Tab 键命令自动补齐命令或文件<br/>四、查看历史：1.上下键查看；2.history显示本次登录后使用过的所有命令<br/>五、停止当前命令：ctrl+C</p>
+	<p>文件目录操作：/ 为根目录；~ 为家目录；. 为当前目录；.. 为上一层目录；- 为上一次操作的目录</p>
+	<p>文件类型：- 为普通文件；d 为目录；c 为字符设备；b 为块设备；s 为socket；l 为软链接</p>
+	<p>操作权限：r 为可读；w 为可写；x 为可执行；其中可用数值表示，421 其中 4 为读 2 为写 1 为执行，+-= 为增加减少设置权限</p>
 	<p>通配符：<br/>星号*：匹配任意长度字符串<br/>问号?：匹配一个长度字符<br/>方括号[...]：匹配其中指定的一个字符<br/>[-]：匹配指定的一个字符范围<br/>[^...]：处理其中指定字符均可匹配</p>
-	<p>管道：将一系列命令连起来，以“|”作为管道连接符。第一个输出作为第二个输入，以此类推。</p>
-	<p>重定向：输入输出重定向，改变shell命令或程序默认的标准输入输出目标，重新定向到新目标。<br/>&gt; file：将文件重定向文输出源，新建模式<br/>&gt;&gt; file：将文件重定向为输出源，追加模式<br/>&lt; file：将文件重定向为输入源<br/>&gt; 将命令产生的错误信息输入到重定向的指定</p>
-	<p>更新源：Linux源位置在/etc/apt/sources.list，可使用命令<br/>sudo cp：cp /etc/apt/sources.list /etc/apt/sources.list_back //备份配置文件<br/>sudo gedit /etc/apt/sources.list //使用记事本打开源文件<br/>sudo apt-get update //更新源</p>
-	<p>windows终端控制Linux软件：sercurtCRT、xshell、MobaXterm</p>
+	<p>管道：将一系列命令连起来，以“|”作为管道连接符。第一个输出作为第二个输入，以此类推。<br/>
+		如：ls /usr/include/ | grep std，管道过滤，即将当前目录下的 ls 获取到的数据通过管道到 | 右边，然后右边使用 grep std 获取 ls 之后中有 std 字符的文件显示出来，比如 stdio.h unistd.h1等形式。</p>
+	<p>重定向：输入输出重定向，改变 shell 命令或程序默认的标准输入输出目标，重新定向到新目标。<br/>&gt; file：将文件重定向文输出源，新建模式<br/>&gt;&gt; file：将文件重定向为输出源，追加模式<br/>&lt; file：将文件重定向为输入源<br/>&gt; 将命令产生的错误信息输入到重定向的指定<br/>
+		如 ls &gt; test.txt 将 ls 命令输出的结果输入到 test.c 文件，若此文件已存在则会将原来的数据也覆盖，可使用 &gt;&gt;追加到后面，这样就不会覆盖了。</p>
+	<p>更新源：Linux 源位置在 /etc/apt/sources.list，可使用命令<br/>sudo cp：cp /etc/apt/sources.list /etc/apt/sources.list_back //备份配置文件<br/>sudo gedit /etc/apt/sources.list //使用记事本打开源文件<br/>sudo apt-get update //更新源</p>
+	<p>windows 终端控制 Linux 软件：sercurtCRT、xshell、MobaXterm</p>
+	<p>软硬链接的区别：<br/>
+		硬链接：1.给某个文件拷贝一份这两个文件独立占用内存；2.改变一个文件会影响另一个文件；3.删除某个硬链接文件不会影响另一个文件。<br/>
+		软链接：1.类似于 window 下的快捷方式，软链接依赖于源文件存在；如果源文件已删除则软链接也将不可用。</p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
 	<p></p>
 	<p></p>
 	<p>IO编程：1.标准IO；2.文件IO<br/>标准IO：1.接口fopenfread/fwrite/fclose；2.ANSI C标准（可移植性好）；3.缓冲；<br/>&nbsp; 缓存：1.目的是尽量减少使用read/write的调用；
@@ -73,37 +105,60 @@
 	<p></p>
 	<p></p>
 	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
 	<h3>以下为命令行具体使用方式</h3>
 	<ul>
 	<li>shutdown -h now：现在就关机</li>
 	<li>sync：用于数据同步，在关闭linux系统时使用。若直接写入，系统突然断电时数据会丢失，而此指令将存于buffer的数据强制写入硬盘。</li>
-	<li>man：接口帮助文档<br/>[]为可选，<>为必选，ctrl+f向下翻页，ctrl+b向上翻页，q退出，/查找...为可变参数，详情http://www.360doc.com/content/17/0505/17/2149364_651360389.shtml</li>
+	<li>man：接口帮助文档<br/>[] 为可选，&lt;&gt; 为必选，ctrl+f 向下翻页，ctrl+b 向上翻页，q 退出，/ 查找，... 为可变参数。如 man ls</li>
 	<li>su：切换用户</li>
 	<li>exit：退出当前用户</li>
 	<li>sudo：暂时以管理员权限执行</li>
 	<li>cd：切换目录<br/>cd ~：转到 /home/user 用户目录下<br/>cd /：转到根目录下<br/>cd /xxx：绝对路径，转到 xxx 目录下<br/>cd xxx：相对路径，转到当前目录下的 xxx 目录</li>
-	<li>ls：查看当前文件夹内容，-a显示隐藏文件（即以.开头文件），-l显示具体信息</li>
+	<li>ls：查看当前文件夹内容，-a 显示隐藏文件（即以.开头文件），-l 显示具体信息，windows 下是 dir。</li>
 	<li>pwd：显示当前文件夹绝对路径</li>
-	<li>cat：显示文件内容</li>
-	<li>mkdir：创建目录</li>
-	<li>rmdir：删除目录</li>
-	<li>touch：创建普通文件</li>
-	<li>rm：删除文件或目录，-r删除目录，-f不询问</li>
+	<li>cat：显示文件内容，可同时显示多个文件，如 cat 1.txt 2.txt</li>
+	<li>more：分屏显示文件内容</li>
+	<li>mkdir：创建目录，-p 选项可进行递归创建</li>
+	<li>rmdir：删除空目录，目录里面不能有其他目录或文件。递归删除可用 rm 命令</li>
+	<li>touch：创建普通文件，若已经有此文件则会更改文件的创建时间，如 touch *.c 是将当前目录下的文件的创建时间都改成当前时间，若是想创建 *.c 则直接使用 touch \*.c</li>
+	<li>rm：删除文件或目录，-r 删除目录，-f 不询问</li>
 	<li>cp：复制</li>
 	<li>mv：移动</li>
 	<li>chmod：修改文件或目录权限</li>
 	<li>tar：压缩解压。tar.gz解压为tar -zxvf xxx.tar.gz，gz解压为gzip -d xxx.gz。<br/>若报错tar: Error is not recoverable: exiting now：1.减去选项-z即可，即-vxf；2.若还是不行则使用unzip命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
 	<li>find：查找文件</li>
-	<li>grep：查找字符串</li>
+	<li>grep：查找字符串，grep make 1.txt，在 1.txt 文件里查找 make 字符，i 选项忽略大小写，-n 显示行号，-v 取反（凡是没有 make 字符的都显示出来）<br/>
+		可配合通配符一起使用，如 grep "1 2 3" 1.txt，这里查询的是字符“1 2 3”，若不加双引号或单引号则只会查找 1 这一个字符。</li>
 	<li>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</li>
 	<li>ps：列出进程</li>
 	<li>ping：测试网络连通性</li>
 	<li>ipconfig/ifconfig：查看网卡信息</li>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>--help 选项查看对应命令的相关使用方式，如 ls --help，</li>
+	<li>history：显示前面已经敲过的命令</li>
+	<li>clear：清屏（windows 下的是 cls）</li>
+	<li>ln：创建链接， 不加参数表示创建硬链接，-s 表示创建软链接，如 ln test.txt 1.txt 把原文件 test.txt 创建一个硬链接 1.rxr，而 ln -s test.txt 2.txt，即创建 test.txt文件的软链接。硬链接相当于两个文件，改一个另一个也会改，并且硬链接只能是文件不能是目录，而软链接不占内存，源文件没有了则软链接也会打不开。</li>
 	<li></li>
 	<li></li>
 	<li></li>
