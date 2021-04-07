@@ -57,8 +57,7 @@
 	<p>软硬链接的区别：<br/>
 		硬链接：1.给某个文件拷贝一份这两个文件独立占用内存；2.改变一个文件会影响另一个文件；3.删除某个硬链接文件不会影响另一个文件。<br/>
 		软链接：1.类似于 window 下的快捷方式，软链接依赖于源文件存在；如果源文件已删除则软链接也将不可用。</p>
-	<p></p>
-	<p></p>
+	<p>/etc/group：如 edu:x:1001:1000:edu,,,:/home/edu;/bin/bash：用户名：edu，用户id：1001，用户组：1000</p>
 	<p></p>
 	<p></p>
 	<p></p>
@@ -133,7 +132,7 @@
 	<li>sync：用于数据同步，在关闭linux系统时使用。若直接写入，系统突然断电时数据会丢失，而此指令将存于buffer的数据强制写入硬盘。</li>
 	<li>man：接口帮助文档<br/>[] 为可选，&lt;&gt; 为必选，ctrl+f 向下翻页，ctrl+b 向上翻页，q 退出，/ 查找，... 为可变参数。如 man ls</li>
 	<li>su：切换用户</li>
-	<li>exit：退出当前用户</li>
+	<li>exit：退出当前用户，切换到上一用户，若为图形界面则退出当前终端，若是ssh远程登陆则退出登录账户，若是切换后的登陆用户则返回上一个登录账号</li>
 	<li>sudo：暂时以管理员权限执行</li>
 	<li>cd：切换目录<br/>cd ~：转到 /home/user 用户目录下<br/>cd /：转到根目录下<br/>cd /xxx：绝对路径，转到 xxx 目录下<br/>cd xxx：相对路径，转到当前目录下的 xxx 目录</li>
 	<li>ls：查看当前文件夹内容，-a 显示隐藏文件（即以.开头文件），-l 显示具体信息，windows 下是 dir。</li>
@@ -144,12 +143,14 @@
 	<li>rmdir：删除空目录，目录里面不能有其他目录或文件。递归删除可用 rm 命令</li>
 	<li>touch：创建普通文件，若已经有此文件则会更改文件的创建时间，如 touch *.c 是将当前目录下的文件的创建时间都改成当前时间，若是想创建 *.c 则直接使用 touch \*.c</li>
 	<li>rm：删除文件或目录，-r 删除目录，-f 不询问</li>
-	<li>cp：复制</li>
-	<li>mv：移动</li>
+	<li>cp：复制，-r 拷贝目录，-i 有提示，-s 没提示，-v 有进度</li>
+	<li>mv：移动，-v 有进度，-i 有提示，-s 没提示</li>
 	<li>chmod：修改文件或目录权限</li>
-	<li>tar：压缩解压。tar.gz解压为tar -zxvf xxx.tar.gz，gz解压为gzip -d xxx.gz。<br/>若报错tar: Error is not recoverable: exiting now：1.减去选项-z即可，即-vxf；2.若还是不行则使用unzip命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
-	<li>find：查找文件</li>
-	<li>grep：查找字符串，grep make 1.txt，在 1.txt 文件里查找 make 字符，i 选项忽略大小写，-n 显示行号，-v 取反（凡是没有 make 字符的都显示出来）<br/>
+	<li>tar：只负责打包盒解包，不进行压缩，压缩解压。-c 创建压缩包，-v 进度，-f 文件，-x 解压<br/>
+		打包 tar -cvf xx.tar，解包 tar -xvf xx.tar（默认解压到当前路径），注意解包时若需要加路径则需要选项 -C 。<br/>
+		tar.gz 解压为 tar -zxvf xxx.tar.gz，gz 解压为 gzip -d xxx.gz。<br/>若报错 tar: Error is not recoverable: exiting now：1.减去选项 -z 即可，即 -vxf；2.若还是不行则使用 unzip 命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
+	<li>find：查找文件，在硬盘或磁盘查找某个文件，-size 查找大于或小于某个值的文件，如 find -size +1M 大于一兆的文件</li>
+	<li>grep：在文件内查找字符串，grep make 1.txt，在 1.txt 文件里查找 make 字符，i 选项忽略大小写，-n 显示行号，-v 取反（凡是没有 make 字符的都显示出来）<br/>
 		可配合通配符一起使用，如 grep "1 2 3" 1.txt，这里查询的是字符“1 2 3”，若不加双引号或单引号则只会查找 1 这一个字符。</li>
 	<li>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</li>
 	<li>ps：列出进程</li>
@@ -159,6 +160,30 @@
 	<li>history：显示前面已经敲过的命令</li>
 	<li>clear：清屏（windows 下的是 cls）</li>
 	<li>ln：创建链接， 不加参数表示创建硬链接，-s 表示创建软链接，如 ln test.txt 1.txt 把原文件 test.txt 创建一个硬链接 1.rxr，而 ln -s test.txt 2.txt，即创建 test.txt文件的软链接。硬链接相当于两个文件，改一个另一个也会改，并且硬链接只能是文件不能是目录，而软链接不占内存，源文件没有了则软链接也会打不开。</li>
+	<li>file：查看文件类型，如二进制文件或文本文件</li>
+	<li>du：查看内存实际大小，比 ls -lh 只是查看目录大小，而不是目录全部内容</li>
+	<li>while：查看命令的位置</li>
+	<li>whoami：查看当前用户</li>
+	<li>who：查看当前用户，比 whoami 更详细</li>
+	<li>w：查看当前用户，比 who 更详细</li>
+	<li>groupadd：增加用户组</li>
+	<li>groupdel：删除用户组</li>
+	<li>uermode：修改用户所在组，如 usermode -g xx xxx，将 xx 用户加入到 xxx 组</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
 	<li></li>
 	<li></li>
 	<li></li>
