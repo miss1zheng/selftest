@@ -240,13 +240,23 @@
 	<p></p>
 	<li>小知识（或报错）：
 		<ol>
-		<li>VMware workstation player下的VMware Tools呈现灰色：<br/>在虚拟机中点到对应的系统上，然后找到“虚拟机设置”，在这里面的“硬件”选项里面的“CD/DVD”、"CD/DVD 2"、软盘这三个都设置成自动检测（即选中 使用物理驱动->自动检测），设置完后点击确定，之后再启动系统，这是会就不会呈现灰色，可以点击Vmware Tools了</li>
-		<li>VMware虚拟机的linux实现和window主机做目录映射实现：<br/>1.打开共享功能：在虚拟机中点到对应的系统上，然后找到“虚拟机设置”，在这里面的“选项”里面的“共享文件夹”，选中总是启动，添加共享目录，点击确定。<br/>
-		2.安装Vmware增加工具（可共享以及复制粘贴）：在虚拟机上安装“Vmware Tools”，安装完成后，系统内的左侧多了Vmware Tools，点进去，将文件夹下的VMwareTools-10.1.6-5214329.tar.gz压缩工具包，拷贝到Documents目录下，再使用命令行终端解压tar -zxvf VMwareTools-10.1.6-5214329.tar.gz，解压完后进入vmware-tools-distrib目录，运行vmware-install.pl，一路yes和回车（遇到有YES的地方选yes，其他没有的直接回车，即默认值就可）。<br/>
-		3.需要进行挂载：安装完成后共享是需要挂载才能看到的，而挂载之前需要安装一个插件sudo apt-get install open-vm-tools-desktop fuse，之后再输入sudo vmhgfs-fuse .host:/ /mnt/hgfs/挂载命令，之后重启，然后再cd到根目录下的mnt/hgfs/就可以看到设置的共享目录里的内容了</li>
-		<li>安装过程中出现Reading package lists...Done Building dependency tree...：<br/>这种需要更新下APT库，在命令行先输入sudo rm /var/lib/apt/lists/* -vf，然后输入sudo apt-get update，之后再输入sudo apt-get upgrade即可，之后就可以正常使用sudo apt-get install xxx了。</li>
-		<li>cp: omitting directory './xxx/'：<br/>因为xxx目录下还有目录，所以不能直接使用cp命令进行拷贝，-r选项能实现目录里面还有目录的拷贝，所以是cp -r ./xxx/ /mnt/xx/</li>
-		<li></li>
+		<li>VMware workstation player 下的 VMware Tools 呈现灰色：<br/>在虚拟机中点到对应的系统上，然后找到“虚拟机设置”，在这里面的“硬件”选项里面的“CD/DVD”、"CD/DVD 2"、软盘这三个都设置成自动检测（即选中 使用物理驱动->自动检测），设置完后点击确定，之后再启动系统，这是会就不会呈现灰色，可以点击Vmware Tools了</li>
+		<li>VMware 虚拟机的 linux 实现和 window 主机做目录映射实现：<br/>
+		<br/>VMware 共享实现：<br/>
+		&nbsp; 1.打开共享功能：在虚拟机中点到对应的系统上，然后找到“虚拟机设置”->“选项”->“共享文件夹”，选中总是启动，添加共享目录，点击确定。<br/>
+		&nbsp; 2.安装 Vmware 增加工具（可共享以及复制粘贴）：在虚拟机上安装“Vmware Tools”，安装完成后，系统内的左侧多了 Vmware Tools，点进去，将文件夹下的 VMwareTools-10.1.6-5214329.tar.gz 压缩工具包，拷贝到 Documents 目录下，再使用命令行终端解压 tar -zxvf VMwareTools-10.1.6-5214329.tar.gz，解压完后进入 vmware-tools-distrib 目录，运行 vmware-install.pl，一路 yes 和回车（遇到有 YES 的地方选 yes，其他没有的直接回车，即默认值就可）。<br/>
+		&nbsp; 3.需要进行挂载：安装完成后共享是需要挂载才能看到的，而挂载之前需要安装一个插件 sudo apt-get install open-vm-tools-desktop fuse，之后再输入 sudo vmhgfs-fuse .host:/ /mnt/hgfs/ 挂载命令，之后重启，然后再 cd 到根目录下的 mnt/hgfs/ 就可以看到设置的共享目录里的内容了<br/>
+		<br/>Virtualbox 共享实现：<br/>
+		&nbsp; 1.先配置整个 virtulbox 的设置：打开对应的系统，“控制”->“设置”->“常规”->“高级”，在这里设置虚拟机和主机的双向拷贝实现<br/>
+		&nbsp; 2.在上面同一位置：“共享文件夹”，右边有个 + 符号，点击设置，设置里面的主机共享路径，共享名称，然后自动挂载勾上，挂载点是虚拟机种的系统挂载位置（可设置为 /mnt/share），勾上固定分配，最后确定，这时共享这里就会有刚刚配置的参数了<br/>
+		&nbsp; 3.安装增强工具：虚拟机中的系统，然后“设备”->“安装增强功能”，点击“运行”，输入超级用户密码进行授权，然后开始下载了，知道出现“press return to close this window”按回车，这时就安装成功了。若出现“未能挂载 xxx”<br/>
+		&nbsp; 4.重启后，到挂载位置就可以看到共享的目录了。可能需要管理员权限，后面可以按情况更改权限。</li>
+		<li>安装过程中出现 Reading package lists...Done Building dependency tree...：<br/>原因：这种需要更新下 APT 库<br/>
+			解决方式：在命令行先输入 sudo rm /var/lib/apt/lists/* -vf，然后输入 sudo apt-get update，之后再输入 sudo apt-get upgrade 即可，之后就可以正常使用 sudo apt-get install xxx 了。</li>
+		<li>cp: omitting directory './xxx/'：<br/>原因：因为 xxx 目录下还有目录，所以不能直接使用 cp 命令进行拷贝<br/>
+			解决方式：-r 选项能实现目录里面还有目录的拷贝，所以是 cp -r ./xxx/ /mnt/xx/</li>
+		<li>sudo: cd:找不到命令：<br/>原因：因为 sudo 仅仅对应用程序起作用，而 cd是命令，所以报错。<br/>
+			解决方式：sudo i，然后再进行 cd 命令，即临时提升到管理员权限</li>
 		<li></li>
 		<li></li>
 		<li></li>
