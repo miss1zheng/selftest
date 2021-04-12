@@ -144,15 +144,21 @@
 	<li>touch：创建普通文件，若已经有此文件则会更改文件的创建时间，如 touch *.c 是将当前目录下的文件的创建时间都改成当前时间，若是想创建 *.c 则直接使用 touch \*.c</li>
 	<li>rm：删除文件或目录，-r 删除目录，-f 不询问</li>
 	<li>cp：复制，-r 拷贝目录，-i 有提示，-s 没提示，-v 有进度</li>
-	<li>mv：移动，-v 有进度，-i 有提示，-s 没提示</li>
+	<li>mv：移动，-v 有进度，-i 有提示，-s 没提示，同时可作为文件重命名功能</li>
 	<li>chmod：修改文件或目录权限</li>
 	<li>tar：只负责打包盒解包，不进行压缩，压缩解压。-c 创建压缩包，-v 进度，-f 文件，-x 解压<br/>
 		打包 tar -cvf xx.tar，解包 tar -xvf xx.tar（默认解压到当前路径），注意解包时若需要加路径则需要选项 -C 。<br/>
 		tar.gz 解压为 tar -zxvf xxx.tar.gz，gz 解压为 gzip -d xxx.gz。<br/>若报错 tar: Error is not recoverable: exiting now：1.减去选项 -z 即可，即 -vxf；2.若还是不行则使用 unzip 命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
+	<li>zip：压缩为 zip -r xxx.zip xx 将 xx 目录压缩为 xxx.zip，解压为 unzip xxx.zip -d xx 将 xxx.zip 解压为 xx</li>
 	<li>find：查找文件，在硬盘或磁盘查找某个文件，-size 查找大于或小于某个值的文件，如 find -size +1M 大于一兆的文件</li>
 	<li>grep：在文件内查找字符串，grep make 1.txt，在 1.txt 文件里查找 make 字符，i 选项忽略大小写，-n 显示行号，-v 取反（凡是没有 make 字符的都显示出来）<br/>
 		可配合通配符一起使用，如 grep "1 2 3" 1.txt，这里查询的是字符“1 2 3”，若不加双引号或单引号则只会查找 1 这一个字符。</li>
-	<li>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）</li>
+	<li>vi：命令模式，编辑模式（按i进入，按esc退出），底行模式（命令模式下按shift+:）<br/>
+		编辑模式下的操作：<br/>
+		&nbsp; 自己使用的情况下，按 i 进入之后输入一行然后按 enter 换行，箭头有两种模式，一种是按 i 后再按 上下左右箭头实际上是输出的字符，而不是光标移动。但是 按了 delete 之后再按上下左右箭头这时才会是正常的光标移动，其次，在按 i 后输入字符之后再按 delete 会对字符进行删除操作。<br/>
+		&nbsp; 删除方式：1.按 ctrl+v 然后将光标定位到需要删除的列，点击 delete 进行删除即可删除。若想删除到行尾，按 end 键可实现。2.<br/>
+		命令模式下的操作：<br/>
+		&nbsp; :q! 是将文件直接退出不保存</li>
 	<li>ps：列出进程</li>
 	<li>ping：测试网络连通性</li>
 	<li>ipconfig/ifconfig：查看网卡信息</li>
@@ -192,10 +198,26 @@
 	<li></li>
 	<li></li>
 	<li></li>
-	<li></li>
+	<li>make menuconfig：进入内核界面配置</li>
 	<li>apt-get install：安装软件</li>
 	</ul>
-	<p></p>
+	<p>menuconfig 内核选项解析：<br/>
+		patch physical to virtual translations at runtime<br/>
+		&nbsp; 在内核映像启动以及内核模块加载时根据内核本身在内存中的地址，修正物理地址/虚拟地址相互转换函数。只针对非XIP方式运行的内核。<br/>
+		general setup<br/>
+		&nbsp; cross-compiler tool prefix：在内核配置阶段直接指定编译工具链的前缀，配置完成后可以直接调用make；这个选项只针对本内核生效。<br/>
+		&nbsp; compile also drivers which will not load：在其他平台编译以便测试驱动程序编译流程，通常不需要<br/>
+		&nbsp; local version - append to kernel release：附加额外的字符串到内核版本信息后面，以及localversion*文件内容后面<br/>
+		&nbsp; automatically append version information to the version string：查找git标记的版本号信息，附加到localversion*文件内容后面，以及CONFIG_LOCALVERSION设置值的后面。<br/>
+		&nbsp; kernel compression mode：配置内核映像启动自解压算法，支持GZIP等<br/>
+		&nbsp; default hostname：配置内核运行系统的主机名字，用户空间可使用sethostname覆盖。<br/>
+		&nbsp; support for paging of anonymous memory(swap)：是否使用SWAP虚拟内存管理<br/>
+		&nbsp; system v ipc：IPC是进程间通信的简称，由一套库函数和系统调用组成，用来实现进程间的同步和数据交换。<br/>
+		&nbsp; posix message queues：消息队列的POSIX版本是IPC的一部分，每一个消息都有对应的优先级，决定了它被进程接收的连续性。POSIX版本的消息队列提供了文件系统访问接口mqueue，可以在需要访问的时候加载。<br/>
+		&nbsp; open by fhandle syscalls：用户空间程序可以将文件名映射为文件句柄，并在之后使用文件句柄访问文件，即使文件名变更也不影响访问。<br/>
+		&nbsp; auditing support：使能内核审计框架，该框架可被其他内核子系统使用，比如selinux；主要和权限管理相关。<br/>
+		&nbsp; irq subsystem：中断子系统，必选的，当然也没有不选的可能
+		</p>
 	<p></p>
 	<p></p>
 	<p></p>
@@ -256,9 +278,9 @@
 		<li>cp: omitting directory './xxx/'：<br/>原因：因为 xxx 目录下还有目录，所以不能直接使用 cp 命令进行拷贝<br/>
 			解决方式：-r 选项能实现目录里面还有目录的拷贝，所以是 cp -r ./xxx/ /mnt/xx/</li>
 		<li>sudo: cd:找不到命令：<br/>原因：因为 sudo 仅仅对应用程序起作用，而 cd是命令，所以报错。<br/>
-			解决方式：sudo i，然后再进行 cd 命令，即临时提升到管理员权限</li>
-		<li></li>
-		<li></li>
+			解决方式：sudo i，然后再进行 cd 命令，即临时提升到管理员权限<br/>&nbsp; 或 sudo su 使得环境用 root 用户环境<br/>&nbsp; 或 sudo -s 环境用当前用户本身的环境</li>
+		<li>Unable to find the ncurses libraries or the required header files：<br/>原因：在 linux 中想执行 make menuconfig 时出现<br/>需要下载 ncurses-devel，若 apt-get install ncurses-devel 失败则下载 apt-get install libncurses5-dev。下载完成后再 make menuconfig 就能成功了</li>
+		<li>E: 无法定位软件包 ncurses<br/>原因：安装 apt-get install ncurses-devel 时出现，是因为系统失败不了 ncurses<br/>解决方式：安装 apt-get install libncurses5-dev</li>
 		<li></li>
 		</ol></li>
 	<p></p>
