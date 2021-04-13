@@ -649,6 +649,7 @@
 				<tr><td>setTimeout()</td><td>在指定的毫秒数后调用函数或计算表达式</td></tr>
 				<tr><td>stop()</td><td>停止页面载入</td></tr>
 			</table>
+			<p>window.xxx 就相当于定义了一个全局变量<br/>window.dataLayer = window.dataLayer || []; 一般用于标准初始化，以保证数据经过系列处理后有规范的格式（方便以后数据处理）。即 dataLayer 变量定义过就使用原来的，否则就赋值为[]空数组，防止后续的 window.dataLayer.push 出错</p>
 			</div><hr/>
 		<div>
 			<h3>弹窗</h3>

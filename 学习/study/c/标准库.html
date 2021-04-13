@@ -70,8 +70,8 @@
 			<li>FILE *fopen(char *filename, char *mode)：打开文件<br/>filename：文件名，包括文件路径，两个反斜杠中第一个反斜杠为转义字符。<br/>mode：打开方式。<br/>
 			<ul><li>r：只读，并且文件必须已存在；</li><li>b：二进制文件</li><li>t：文本文件</li><li>w：只写，若打开的文件不存在则以指定的文件名创建该文件，若文件已存在则将该文件删除重新创建新文件</li><li>a：追加，若文件不存在则尝试创建该文件</li><li>+：读写</li></ul>
 			返回值：成功返回为FILE 类型的结构体变量的地址（获取文件信息，包括文件名、文件状态、当前读写位置等信息），若返回为NULL，则表示打开失败</li>
-			<li>void setbuf(FILE *stream, char *buffer)：主要用于打开和关闭缓冲机制。<br/>stream：标识一个打开的流<br/>buffer：分配给用户的缓存，为 NULL 表示关闭缓存</li>
-			<li>char *fgets(char *str, int n, FILE *stream)：从指定的流中读取数据，每次读取一行，读取的数据放入 str 中。<br/>str：指向数组的指针，数组存储读取的字符串<br/>n：读取的最大字符数，包括最后的控制阀，若未到此值遇到换行符或已到达文件末尾则会停止<br/>stream：指向 FILE 对象的指针</li>
+			<li>void setbuf(FILE *fp, char *buffer)：主要用于打开和关闭缓冲机制。<br/>fp：标识一个打开的流<br/>buffer：分配给用户的缓存，为 NULL 表示关闭缓存</li>
+			<li>char *fgets(char *str, int n, FILE *fp)：从指定的流中读取数据，每次读取一行，读取的数据放入 str 中。<br/>str：指向数组的指针，数组存储读取的字符串<br/>n：读取的最大字符数，包括最后的控制阀，若未到此值遇到换行符或已到达文件末尾则会停止<br/>fp：指向 FILE 对象的指针</li>
 			<li>int fclose( FILE *fp )：关闭一个流并刷新所有缓冲区。可以把缓冲区内最后剩余的数据输出到内核缓冲区，并释放文件指针和有关的缓冲区。<br/>fp：指向 FILE 对象的指针<br/>返回值：成功返回 0，失败返回 EOF（-1）</li>
 			<li></li>
 			<li></li>
@@ -143,6 +143,20 @@
 			<li>int clock_gettime(clockid_t clk_id,struct timespec *tp)：可以根据需要，获取不同要求的精确时间（可以达到纳秒）。lock_gettime比gettimeofday更加精确<br/>
 			clk_id：<ul><li>CLOCK_MONOTONIC：从系统启动到这一刻起开始即使，不受系统时间被用户改变影响</li><li>CLOCK_REALTIME：系统时钟时间，随系统实时时间改变而改变，从1970/1/1,0:0:0开始计时，中间时刻若系统时间被用户改成其他则对应时间相应改变</li><li>CLOCK_PROCESS_CPUTIME_ID：本进程到当前代码系统CPU花费的时间</li><li>CLOCK_THREAD_CPUTIME_ID：本线程到当前代码系统CPU花费的时间</li></ul></li>
 			<li><li>int nanosleep(const struct timespec *req, struct timespec *rem)：暂停某个进程直到指定的时间后恢复。<br/>req：要暂停的时间，req->tv_sec 是以秒为单位，而 req->tv_nsec 以毫微秒为单位<br/>rem：剩余微秒时间<br/>成功返回 0，失败返回 -1，剩余微秒数纪录在 rem 中</li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>

@@ -266,12 +266,25 @@
 		<div id="meta">
 			<h3>meta：描述了一些基本的元数据</h3>
 			<p>元数据也不显示在页面上，但会被浏览器解析。通常用于指定网页的描述，关键词，文件的最后修改时间，作者，字符集和其他元数据。&ltmeta>一般放置于&lthead>区域</p>
-			<p><b style="color:red">例如：</b><br/>
+			<p><b style="color:red">具体如下：</b><br/>
 			&lt;meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript"> &lt;!--为搜索引擎定义关键词--><br/>
 			&lt;meta name="description" content="免费 Web & 编程 教程"> &lt!;--为网页定义描述内容--><br/>
 			&lt;meta name="author" content="Runoob"> &lt;!--定义网页作者--><br/>
+			&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"> &lt;!--用于移动端显示网页，其中width和height控制可视区域大小，initial-scale初始缩放比例（页面第一次加载时缩放比例，maximum-scale（minimum-scale）允许缩放最大或最小比例），user-scalable用户是否可以手动缩放--><br/>
 			&lt;meta http-equiv="refresh" content="30"> &lt;!--每30秒钟刷新当前页面--><br/>
-			&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"> &lt;!--针对移动网页优化过的页面的 viewport meta 标签，其中width和height控制可视区域大小，initial-scale初始缩放比例（页面第一次加载时缩放比例，maximum-scale（minimum-scale）允许缩放最大或最小比例），user-scalable用户是否可以手动缩放--></p></div><hr/>
+			&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> &lt;!--设置网页字符集，说明网页制作使用的文字和语言--><br/>
+			&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> &lt;!--告知浏览器以何种版本渲染当前页面--><br/>
+			&lt;meta http-equiv="Pragma" content="no-cache" /> &lt;!--禁止浏览器从本地计算机的缓存中访问页面内容，一旦离开网页就无法从Cache中再调出--><br/>
+			&lt;meta http-equiv="Refresh" contect="n;url=http://xxx"> &lt;!--定时让网页在指定的时间 n 内，跳转到页面http://xxx--><br/>
+			&lt;meta http-equiv="Expires" contect="Mon,12 May 2001 00:20:00 GMT"> &lt;!--用于设定网页的到期时间，一旦过期则必须到服务器上重新调用。需要注意的是必须使用GMT时间格式；--><br/>
+			&lt;meta http-equiv="Cache-Control" content="no-siteapp" /> &lt;!--避免百度打开网页时可能会对其进行转码（比如贴广告等）--><br/>
+			&lt;meta property="og:image" content="http://xx.com/img/xxx.png"&gt; &lt;!-- property="og:xx"，xx 为 image则加载标题上的图片，xx 为 title 即标题，为 url 是网页的浏览地址 --&gt;</p>
+			&lt;!-- --><br/>
+			&lt;!-- --><br/>
+			&lt;!-- --><br/>
+			&lt;!-- --><br/>
+			
+			</div><hr/>
 		<div id="style">
 			<h3>style：HTML文档的样式文件</h3><p>可直接添加样式来渲染 HTML 文档，既可以作为元素放在head中全局设置样式，也可以作为属性局部设置样式。可以使用link元素链接到一个外部样式表，即链接CSS渲染过的外部样式。可使用的属性也可直接在CSS中找到对应的说明。</p>
 			<p><b style="color:red">例如：</b><br/>
