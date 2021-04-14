@@ -99,8 +99,10 @@
 			#获取窗体位置<br>
 			win_x = win.winfo_x()<br>
 			win_y = win.winfo_y()<br><br>
-			image_file = PhotoImage(file='./kong.png') # 图片位置<br>
-			win.tk.call('wm', 'iconphoto', win._w, image_file) #和上面一起构成了应用图标，还可以直接使用win.iconbitmap("aa.ico")来实现此功能<br>
+			#标题边上的图标<br>
+			win.tk.call("wm","iconphoto",win._w,tkinter.PhotoImage(file="./aa.png")) #不支持 ico 图标，并且这些参数都不能改变，只需改变 file 后的图标位置即可<br>
+			#win.iconphoto(False,tkinter.PhotoImage(file="./aa.bmp"))#False 表示该腿部仅适用于当前特定窗口，若创建了其他子窗口则不适用了，设置 True 则表示应用于所有；PhotoImage 是图标位置，可用 png 和 jpg 和 gif（静态的）和 bmp 等，不能是 ico<br>
+			#win.iconbitmap("./aa.ico") #只能是 ico 位图<br>
 			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br><br>
 			win.geometry('100x100') #窗口大小，若设置为geometry('100x100+50+50')，则加后面带的时x和y轴坐标<br>
 			"""<br>
