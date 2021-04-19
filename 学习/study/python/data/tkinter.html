@@ -87,7 +87,8 @@
 			from tkinter import * #导入库<br><br>
 			win=Tk() #创建窗口win<br>
 			win.title("GUI") #窗口名称<br>
-			win["background"] = "blue" #设置背景色<br><br>
+			#win["background"] = "white" #设置背景色<br>
+			win["background"]="#fff" <br><br>
 			win.attributes("-alpha", 0.6) #透明度的值是：0~1 可以是小数点，0：全透明；1：全不透明<br>
 			win.attributes("-toolwindow", True) #工具样式：True 只有退出按钮，也没有图标； False 正常的窗体样式<br>
 			win.attributes("-fullscreen", True) #全屏模式：True 全屏；False 正常显示<br>
@@ -99,12 +100,16 @@
 			#获取窗体位置<br>
 			win_x = win.winfo_x()<br>
 			win_y = win.winfo_y()<br><br>
+			#获取屏幕大小<br>
+			ws = win.winfo_screenwidth()<br>
+			hs = win.winfo_screenheight()<br><br>
 			#标题边上的图标<br>
 			win.tk.call("wm","iconphoto",win._w,tkinter.PhotoImage(file="./aa.png")) #不支持 ico 图标，并且这些参数都不能改变，只需改变 file 后的图标位置即可<br>
 			#win.iconphoto(False,tkinter.PhotoImage(file="./aa.bmp"))#False 表示该腿部仅适用于当前特定窗口，若创建了其他子窗口则不适用了，设置 True 则表示应用于所有；PhotoImage 是图标位置，可用 png 和 jpg 和 gif（静态的）和 bmp 等，不能是 ico<br>
-			#win.iconbitmap("./aa.ico") #只能是 ico 位图<br>
-			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br><br>
-			win.geometry('100x100') #窗口大小，若设置为geometry('100x100+50+50')，则加后面带的时x和y轴坐标<br>
+			#win.iconbitmap("./aa.ico") #只能是 ico 位图<br><br>
+			
+			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br>
+			win.geometry('100x100') #窗口大小，若设置为 geometry('100x100+50+50')，则加后面带的时x和y轴坐标<br>
 			"""<br>
 			#将应用打开时放置在屏幕中央，并设置长宽<br>
 			def center_window(r,w, h):<br>
