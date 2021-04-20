@@ -131,9 +131,9 @@
 	<li>shutdown -h now：现在就关机</li>
 	<li>sync：用于数据同步，在关闭linux系统时使用。若直接写入，系统突然断电时数据会丢失，而此指令将存于buffer的数据强制写入硬盘。</li>
 	<li>man：接口帮助文档<br/>[] 为可选，&lt;&gt; 为必选，ctrl+f 向下翻页，ctrl+b 向上翻页，q 退出，/ 查找，... 为可变参数。如 man ls</li>
-	<li>su：切换用户</li>
+	<li>su：切换用户，sudo su 是切换到 root 用户</li>
 	<li>exit：退出当前用户，切换到上一用户，若为图形界面则退出当前终端，若是ssh远程登陆则退出登录账户，若是切换后的登陆用户则返回上一个登录账号</li>
-	<li>sudo：暂时以管理员权限执行</li>
+	<li>sudo：暂时以管理员权限执行，sudo last 是显示前面已经登录过的用户</li>
 	<li>cd：切换目录<br/>cd ~：转到 /home/user 用户目录下<br/>cd /：转到根目录下<br/>cd /xxx：绝对路径，转到 xxx 目录下<br/>cd xxx：相对路径，转到当前目录下的 xxx 目录</li>
 	<li>ls：查看当前文件夹内容，-a 显示隐藏文件（即以.开头文件），-l 显示具体信息，windows 下是 dir。</li>
 	<li>pwd：显示当前文件夹绝对路径</li>
@@ -145,7 +145,7 @@
 	<li>rm：删除文件或目录，-r 删除目录，-f 不询问</li>
 	<li>cp：复制，-r 拷贝目录，-i 有提示，-s 没提示，-v 有进度</li>
 	<li>mv：移动，-v 有进度，-i 有提示，-s 没提示，同时可作为文件重命名功能</li>
-	<li>chmod：修改文件或目录权限</li>
+	<li>chmod：修改文件或目录权限，u 所有者， g 所属组，o 其他人，a 前面三者都是。rwx 为读写可执行权限，对应的数字为 421。- 是删除对应权限，而 + 是增加对应权限。</li>
 	<li>tar：只负责打包盒解包，不进行压缩，压缩解压。-c 创建压缩包，-v 进度，-f 文件，-x 解压<br/>
 		打包 tar -cvf xx.tar，解包 tar -xvf xx.tar（默认解压到当前路径），注意解包时若需要加路径则需要选项 -C 。<br/>
 		tar.gz 解压为 tar -zxvf xxx.tar.gz，gz 解压为 gzip -d xxx.gz。<br/>若报错 tar: Error is not recoverable: exiting now：1.减去选项 -z 即可，即 -vxf；2.若还是不行则使用 unzip 命令（需要嵌入插件，可用yum云下载，yum install -y unzip zip）；3.可能是因为在共享文件夹下解压的，换其他位置试试</li>
@@ -158,8 +158,9 @@
 		&nbsp; 自己使用的情况下，按 i 进入之后输入一行然后按 enter 换行，箭头有两种模式，一种是按 i 后再按 上下左右箭头实际上是输出的字符，而不是光标移动。但是 按了 delete 之后再按上下左右箭头这时才会是正常的光标移动，其次，在按 i 后输入字符之后再按 delete 会对字符进行删除操作。<br/>
 		&nbsp; 删除方式：1.按 ctrl+v 然后将光标定位到需要删除的列，点击 delete 进行删除即可删除。若想删除到行尾，按 end 键可实现。2.<br/>
 		命令模式下的操作：<br/>
-		&nbsp; :q! 是将文件直接退出不保存</li>
-	<li>ps：列出进程</li>
+		&nbsp; :q! 是将文件直接退出不保存<br/>
+		&nbsp; :wq 是将文件退出保存。</li>
+	<li>ps：列出进程，查看进程信息，-u 显示详细信息；-a 显示所有进程。</li>
 	<li>ping：测试网络连通性，如 ping -c 4 127.0.0.1，即 ping 4 次停止再 ping</li>
 	<li>ipconfig/ifconfig：查看网卡信息</li>
 	<li>--help 选项查看对应命令的相关使用方式，如 ls --help，</li>
@@ -172,10 +173,64 @@
 	<li>whoami：查看当前用户</li>
 	<li>who：查看当前用户，比 whoami 更详细</li>
 	<li>w：查看当前用户，比 who 更详细</li>
-	<li>groupadd：增加用户组</li>
+	<li>groupadd：增加用户组，可在 /etc/group里面看到</li>
 	<li>groupdel：删除用户组</li>
-	<li>uermode：修改用户所在组，如 usermode -g xx xxx，将 xx 用户加入到 xxx 组</li>
+	<li>usermode：修改用户所在组，如 usermode -g xx xxx，将 xxx 用户加入到 xx 组</li>
 	<li>cp：拷贝，cp [-adfiprl] src dst，-a 复制目录（作用等于dpR组合），-d 复制时保留链接，-f 覆盖已有目标文件不给提示，-i 覆盖目标文件给提示，-p 复制文件同时保持修改时间和访问权限不变，-r 若给出的源文件时目录文件则将复制该目录下所有子目录和文件，-l 不复制文件，只生成链接文件</li>
+	<li>useradd：增加用户，-d 同时增加目录</li>
+	<li>userdel：删除用户，-r 目录自动删除</li>
+	<li>chown：修改文件所有者。</li>
+	<li>chgrp：修改文件所属组。</li>
+	<li>cal：查看日历，-y 显示整年日历</li>
+	<li>date：查看当前日期</li>
+	<li>kill：结束进程，可使用 ps -aux 查看对应进程的进程号，-9 强制结束进程</li>
+	<li>top：动态显示进程</li>
+	<li>&：后台运行，如 ./hello & 运行时，使用 ctrl+c 表面上退出来了，但是使用  top 或 ps 都能看到进程里有 当前程序。</li>
+	<li>jobs：查看后台运行程序</li>
+	<li>fg：打开后台程序</li>
+	<li>reboot：重启</li>
+	<li>shutdown -r now：重启，有提示；shutdown -h now：关机；shutdown -h +10：十分钟后自动关机</li>
+	<li>init 0：关机；init 6：重启</li>
+	<li>du：检测目录所占磁盘空间</li>
+	<li>df：查看磁盘/硬盘空间大小</li>
+	<li>gedit：编辑器，类似于 window 下的文本编辑器</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
 	<li></li>
 	<li></li>
 	<li></li>
@@ -200,6 +255,9 @@
 	<li></li>
 	<li>make menuconfig：进入内核界面配置</li>
 	<li>apt-get install：安装软件</li>
+	<li>apt-get update：获取最新的软件包的列表</li>
+	<li>apt-get remove：删除软件</li>
+	<li>rpm：安装，-ivh，自动安装</li>
 	</ul>
 	<p>menuconfig 内核选项解析：<br/>
 		patch physical to virtual translations at runtime<br/>
