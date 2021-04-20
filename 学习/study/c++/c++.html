@@ -360,10 +360,21 @@
 					&nbsp; 类名(形参表);//构造函数<br/>
 					&nbsp; 类名(类名 &对象名);//拷贝构造函数<br/>
 				};<br/>
+				类名::类名(形参表){<br/>
+					函数体; //构造函数实现<br/>
+				}<br/>
 				类名::类名(类名 &对象名){<br/>
-					&nbsp; 函数体;<br/>
+					&nbsp; 函数体; //拷贝构造函数实现<br/>
 				}<br/>
 				拷贝构造函数：对象成员在构造时动态分配内存空间<p>
+			<p>析构函数：类对象在使用完后要进行析构，在对象生存期间占用资源（如动态申请内存空间），那在析构的时候就需要释放资源，否则可能造成资源泄露。<br/>
+				析构在对象生存期结束对象即将消亡时会自动被调用，析构函数时类的一个公有函数成员，析构函数不接受任何参数<br/>
+				类不写析构则编译器会自动生成默认的析构函数，若类中声明了析构函数则编译器就不再自动生成。<br/>
+				语法：~类名(){析构实现;}<p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
 			<p><p>
 			</div><hr/>
 		<div>
@@ -396,6 +407,133 @@
 			<p>对象属性的抽象：属性的抽象是指分析同类对象所具有的共同属性，找出需要解决的问题密切相关的属性，用类的数据成员来描述。<p>
 			<p>对象功能与行为的抽象：功能与行为抽象指的是分析同类对象所具有的共同功能/行为，找出与需要解决的问题密切相关的功能和行为，用面向对象的程序语言进行抽象的描述。表现为函数成员<p>
 			<p>类与对象：类是对一类问题的共同属性和行为的抽象，而对象是需要定义类类型的实例<p>
+			<p>对象数组：<br/>
+				初始化语法1：<br/>
+				&nbsp; 类名 对象名[num]={{value,value1,value2,value3},{value4,value5,value6,value7},...,{value8,value9,value10,value11}};<br/>
+				初始化语法2：<br/>
+				&nbsp; 类名 对象名[num]={<br/>
+					&nbsp; &nbsp; 类名(value,value1,value2,value3),<br/>
+					&nbsp; &nbsp; 类名(value4,value5,value6,value7),<br/>
+					&nbsp; &nbsp; ...,<br/>
+					&nbsp; &nbsp; {value8,value9,value10,value11}};<br/>
+				语法 2 不能和拷贝构造函数共存，如有了 Student::Student(Student &cp) 则语法 2 就会直接报错，编译无法通过。<p>
+			<p>对象指针：通过指针访问对象，如管理的对象群体元素个数直到运行时才能确定，这时需要在运行时确定数组大小，这样就需要用动态内存分配的方式构造数组。<br/>
+				<p>
+			<p>以对象作为函数参数：若形参时对象，则实参也是同类型对象，或公有派生类的对象，在执行函数调用时进行形实结合，自动调用拷贝构造函数，用实参对象初始化形参<p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>this 指针</h3>
+			<p>类的每个非静态成员函数都有一个指向当前对象的指针，这个特殊指针就是 this 指针。在类的非静态成员函数中访问数据成员时，隐含以“this->数据成员名”的形式访问的。<p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>结构体</h3>
+			<p>使用关键字 struct 定义，它的所有成员变量和成员函数都默认 public 类型。<p>
+			<p>语法：<br/>
+			struct 结构名{<br/>
+				&nbsp; 数据类型 成员名;<br/>
+				&nbsp; ...<br/>
+				&nbsp; 数据类型 成员名;<br/>
+			};<p>
+			<p><p>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** <b>Student 示例</b>**</legend>#include <iostream><br/>
+				using namespace std;<br/>
+				struct student{<br/>
+					&nbsp; int num;<br/>
+					&nbsp; string name;<br/>
+					&nbsp; char gender;<br/>
+					&nbsp; //student(){num=0;name="china";gender='H';}//和对象数组冲突了<br/>
+					&nbsp; void setstudent(int _num,string _name,char _gender){<br/>
+						&nbsp; &nbsp; num=_num;<br/>
+						&nbsp; &nbsp; name=_name;<br/>
+						&nbsp; &nbsp; gender=_gender;<br/>
+					&nbsp; }<br/>
+					&nbsp; void printall();<br/>
+				};<br/>
+				void student::printall(){<br/>
+					&nbsp; cout<&lt;this->num<&lt;this->name<&lt;this->gender<&lt;endl;<br/>
+				}<br/>
+				int main()<br/>
+				{<br/>
+					&nbsp; student stu;<br/>
+					&nbsp; stu.setstudent(1,"en",'M');<br/>
+					&nbsp; cout<&lt;stu.name<&lt;stu.num<&lt;stu.gender<&lt;endl;<br/>
+					&nbsp; student stu1[3]={{1,"ch",'H'},{2,"en",'M'},{3,"jp",'L'}};<br/>
+					&nbsp; cout<&lt;stu1[0].name<&lt;stu1[0].num<&lt;stu1[0].gender<&lt;endl;<br/>
+					&nbsp; cout<&lt;stu1[1].name<&lt;stu1[1].num<&lt;stu1[1].gender<&lt;endl;<br/>
+					&nbsp; cout<&lt;stu1[2].name<&lt;stu1[2].num<&lt;stu1[2].gender<&lt;endl;<br/>
+					&nbsp; stu1[0].printall();<br/>
+					&nbsp; stu1[1].printall();<br/>
+					&nbsp; stu1[2].printall();<br/>
+					&nbsp; return 0;<br/>
+				}</fieldset>
+			</form>
+			
+			</div><hr/>
+		<div>
+			<h3>联合体</h3>
+			<p>通过关键字 union 定义，它的所有成员变量和成员函数都默认 public 类型。<br/>
+				占用空间时其中单个变量占用的最大空间，即联合体中所有成员在内存中首地址一样，不同成员共有相同内存。<p>
+			<p>语法：<br/>
+			union 联合名{<br/>
+				&nbsp; 数据类型 成员名;//数据类型不能是 string 字符串，char * 却可以<br/>
+				&nbsp; ...<br/>
+				&nbsp; 数据类型 成员名;<br/>
+			};<p>
+			<p>联合体类型变量说明语法：联合名 联合变量名;。联合体类型变量的引用形式：联合变量名.成员名<p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>友元</h3>
+			<p>允许一个函数或类访问另一个类的私有成员，这时需要声明友元。如<p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
 			<p><p>
 			<p><p>
 			<p><p>
@@ -439,9 +577,114 @@
 		<div>
 			<h3></h3>
 			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
 			</div><hr/>
 		<div>
 			<h3></h3>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3></h3>
+			<p><p>
+			</div><hr/>
+		<div>
+			<h3>实例</h3>
+			<form>
+			<fieldset>
+				<legend>** <b>Student 示例</b>**</legend>
+#include <iostream><br>
+using namespace std; //命名空间<br>
+class Student{<br>
+private:<br>
+	&nbsp; string name;//对象属性<br>
+	&nbsp; unsigned long index;<br>
+	&nbsp; int score;<br>
+	&nbsp; char *gender;<br>
+public:<br>
+	&nbsp; Student(){//构造函数，类声明时若为初始化则使用此默认值作为缺省值<br>
+		&nbsp; &nbsp; name="Bob";//实则时 this->name = xx，下面的也是<br>
+		&nbsp; &nbsp; index=1;<br>
+		&nbsp; &nbsp; score=90;<br>
+		&nbsp; &nbsp; gender="female";<br>
+	&nbsp; }<br>
+	&nbsp; Student(string newname,unsigned long newindex,int newscore,char *newgender):<br>
+		&nbsp; &nbsp; name(newname),index(newindex),score(newscore),gender(newgender){}//构造函数，定义类的时候就初始化<br>
+	&nbsp; Student(char *newname,unsigned long newindex,int newscore,char *newgender){//构造函数，使用 c 语言中的 char * 来表示字符串<br>
+		&nbsp; &nbsp; name=newname;<br>
+		&nbsp; &nbsp; index=newindex;<br>
+		&nbsp; &nbsp; score=newscore;<br>
+		&nbsp; &nbsp; gender=newgender;}<br>
+	&nbsp; Student(char *newgender);//构造函数<br>
+	&nbsp; Student(Student &cp);//拷贝构造函数<br>
+	&nbsp; ~Student(){//析构函数<br>
+		&nbsp; &nbsp; if(gender != NULL)<br>
+			&nbsp; &nbsp; &nbsp; delete []gender;<br>
+		&nbsp; &nbsp; if(!name.empty())<br>
+			&nbsp; &nbsp; &nbsp; name.erase();}<br>
+	&nbsp; string getname(){return name;}//对象行为或功能<br>
+	&nbsp; unsigned long getindex(){return index;}<br>
+	&nbsp; int getscore(){return score;}<br>
+	&nbsp; char *getgender(){return gender;}<br>
+	&nbsp; void setname(string newname){name = newname;}<br>
+	&nbsp; void setindex(unsigned long newid){index = newid;}<br>
+	&nbsp; void setscore(int newscore){score = newscore;}<br>
+	&nbsp; void setgender(char *newgender){gender=newgender;}<br>
+};<br>
+Student::Student(char *newgender){//构造函数进行拷贝<br>
+	&nbsp; int n=strlen(newgender);<br>
+	&nbsp; gender=new char[n+1];<br>
+	&nbsp; strcpy(gender,newgender);<br>
+}<br>
+Student::Student(Student &cp){//拷贝构造函数进行拷贝<br>
+	&nbsp; int n=strlen(cp.getgender());<br>
+	&nbsp; gender=new char[n+1];<br>
+	&nbsp; strcpy(gender,cp.getgender());<br>
+	&nbsp; name=cp.getname();<br>
+	&nbsp; index=cp.getindex();<br>
+	&nbsp; score=cp.getscore();<br>
+}<br>
+int main()<br>
+{<br>
+	&nbsp; Student stu("Lisa",2,80,"female");<br>
+	&nbsp; cout<<"name is "<&lt;stu.getname()<<"\nindex is "<&lt;stu.getindex()<<"\ncredit is "<&lt;stu.getscore()<&lt;endl;<br>
+	&nbsp; Student stu1[3]={//对象数组<br>
+		&nbsp; &nbsp; {"Bob",1,90,"male"},<br>
+		&nbsp; &nbsp; {"Lisa",2,80,"female"},<br>
+		&nbsp; &nbsp; {"Tom",3,76,"male"}<br>
+		&nbsp; &nbsp; };<br>
+	&nbsp; /*Student stu1[3]={//不能和拷贝构造函数共存，所以只能用前面一个初始化对象数组<br>
+		&nbsp; &nbsp; Student("Bob",1,90,"male"),<br>
+		&nbsp; &nbsp; Student("Lisa",2,80,"female"),<br>
+		&nbsp; &nbsp; Student("Tom",3,76,"male")};*/<br>
+	&nbsp; cout<<"name is "<&lt;stu1[0].getname()<<"\nindex is "<&lt;stu1[0].getindex()<<"\ncredit is "<&lt;stu1[0].getscore()<&lt;endl;<br>
+	&nbsp; cout<<"name is "<&lt;stu1[1].getname()<<"\nindex is "<&lt;stu1[1].getindex()<<"\ncredit is "<&lt;stu1[1].getscore()<&lt;endl;<br>
+	&nbsp; cout<<"name is "<&lt;stu1[2].getname()<<"\nindex is "<&lt;stu1[2].getindex()<<"\ncredit is "<&lt;stu1[2].getscore()<&lt;endl;<br>
+	&nbsp; int size;<br>
+	&nbsp; Student *list;//对象指针<br>
+	&nbsp; string _name;<br>
+	&nbsp; unsigned long _index;<br>
+	&nbsp; int _score;<br>
+	
+	&nbsp; cout<<"please you input number:";<br>
+	&nbsp; cin>>size;<br>
+	&nbsp; list=new Student[size];<br>
+	&nbsp; for(int i=0; i < size; i++){<br>
+		&nbsp; &nbsp; cout<<"input your name: ";<br>
+		&nbsp; &nbsp; cin>>_name;<br>
+		&nbsp; &nbsp; cout<<"input your index: ";<br>
+		&nbsp; &nbsp; cin>>_index;<br>
+		&nbsp; &nbsp; cout<<"input your score: ";<br>
+		&nbsp; &nbsp; cin>>_score;}<br>
+	&nbsp; cout<<"--------end---------"<&lt;endl;<br>
+	&nbsp; system("pause");<br>
+	&nbsp; return 0;
+				</fieldset>
+			</form>
 			<p><p>
 			</div><hr/>
 		<div>

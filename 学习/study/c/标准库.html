@@ -142,10 +142,56 @@
 			<ol>
 			<li>int clock_gettime(clockid_t clk_id,struct timespec *tp)：可以根据需要，获取不同要求的精确时间（可以达到纳秒）。lock_gettime比gettimeofday更加精确<br/>
 			clk_id：<ul><li>CLOCK_MONOTONIC：从系统启动到这一刻起开始即使，不受系统时间被用户改变影响</li><li>CLOCK_REALTIME：系统时钟时间，随系统实时时间改变而改变，从1970/1/1,0:0:0开始计时，中间时刻若系统时间被用户改成其他则对应时间相应改变</li><li>CLOCK_PROCESS_CPUTIME_ID：本进程到当前代码系统CPU花费的时间</li><li>CLOCK_THREAD_CPUTIME_ID：本线程到当前代码系统CPU花费的时间</li></ul></li>
-			<li><li>int nanosleep(const struct timespec *req, struct timespec *rem)：暂停某个进程直到指定的时间后恢复。<br/>req：要暂停的时间，req->tv_sec 是以秒为单位，而 req->tv_nsec 以毫微秒为单位<br/>rem：剩余微秒时间<br/>成功返回 0，失败返回 -1，剩余微秒数纪录在 rem 中</li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>int nanosleep(const struct timespec *req, struct timespec *rem)：暂停某个进程直到指定的时间后恢复。<br/>req：要暂停的时间，req->tv_sec 是以秒为单位，而 req->tv_nsec 以毫微秒为单位<br/>rem：剩余微秒时间<br/>成功返回 0，失败返回 -1，剩余微秒数纪录在 rem 中</li>
+			<li>time_t time(time_t *seconds)：返回自纪元（1970/1/1,00:00:00 UTC）起经过的时间，以秒为单位<br/>
+				返回值：若 seconds 不为空，则返回值也存储在变量 seconds 中。</li>
+			<li>struct tm *localtime(const time_t *timer)：使用 timer 的值来填充 tm 结构。timer 的值被分解为 tm 结构，并用本地时区表示。<br/>
+				timer：指向表示日历时间的 time_t 值的指针。<br/>
+				返回值：tm 结构指针，具体的 tm 结构体如下：<br/>
+				struct tm {<br/>
+					&nbsp; int tm_sec; //秒，范围从 0 到 59<br/>
+					&nbsp; int tm_min; //分，范围从 0 到 59<br/>
+					&nbsp; int tm_hour; //小时，范围从 0 到 23<br/>
+					&nbsp; int tm_mday; //一月中的第几天，范围从 1 到 31<br/>
+					&nbsp; int tm_mon; //月份，范围从 0 到 11<br/>
+					&nbsp; int tm_year; //自 1900 起的年数<br/>
+					&nbsp; int tm_wday; //一周中的第几天，范围从 0 到 6<br/>
+					&nbsp; int tm_yday; //一年中的第几天，范围从 0 到 365<br/>
+					&nbsp; int tm_isdst; //夏令时<br/>
+				};</li>
+			<li>size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)：格式化结构体 timeptr 表示的时间，并将值存储在 str 中。<br/>
+				str：指向目标数组的指针<br/>
+				maxsize：被复制到 str 最大字节数<br/>
+				format：格式化字符串，包含了要被写入到字符串，具体格式化如下：<br/>
+				<table border="1">
+					<tr><th>格式化字符</th><th>描述</th><th>示例</th></tr>
+					<tr><td>%a</td><td>缩写的星期</td><td>Sun</td></tr>
+					<tr><td>%A</td><td>完整的星期</td><td>Sunday</td></tr>
+					<tr><td>%b</td><td>缩写的月份</td><td>Mar</td></tr>
+					<tr><td>%B</td><td>完整的月份</td><td>March</td></tr>
+					<tr><td>%c</td><td>日期和时间表示法</td><td>Sun Aug 19 09:41:23 2021</td></tr>
+					<tr><td>%C</td><td>年份的前 2 个数</td><td>21</td></tr>
+					<tr><td>%d</td><td>一月中的第几天（01-31）</td><td>20</td></tr>
+					<tr><td>%D</td><td>月/天/年</td><td>05/02/21</td></tr>
+					<tr><td>%F</td><td>年-月-日</td><td>21-02-05</td></tr>
+					<tr><td>%H</td><td>24小时个数的小时（00-23）</td><td>20</td></tr>
+					<tr><td>%l</td><td>12小时个数的小时（01-12）</td><td>10</td></tr>
+					<tr><td>%j</td><td>一年中的第几天（001-366）</td><td>100</td></tr>
+					<tr><td>%m</td><td>十进制的月份（01-12）</td><td>10</td></tr>
+					<tr><td>%M</td><td>分钟（00-59）</td><td>20</td></tr>
+					<tr><td>%p</td><td>AM 或 PM 名称</td><td>PM</td></tr>
+					<tr><td>%S</td><td>秒针（00-59）</td><td>20</td></tr>
+					<tr><td>%U</td><td>一年中的第几周，以第一星期日作为第一周的第一天（00-53）</td><td>20</td></tr>
+					<tr><td>%w</td><td>十进制的星期（0-6）</td><td>1</td></tr>
+					<tr><td>%W</td><td>一年中的第几周，以第一星期一作为第一周的第一天（00-53）</td><td>20</td></tr>
+					<tr><td>%x</td><td>日期表示法</td><td>21/02/05</td></tr>
+					<tr><td>%X</td><td>时间表示法</td><td>08:49:32</td></tr>
+					<tr><td>%y</td><td>年份（00-99）</td><td>21</td></tr>
+					<tr><td>%Y</td><td>年份</td><td>2021</td></tr>
+					<tr><td>%Z</td><td>时区名称或缩写</td><td>CDT</td></tr>
+					<tr><td>%</td><td></td><td></td></tr>
+				</table>
+				timeptr：指向 tm 结构的指针</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -245,16 +291,50 @@
 		<div>
 			<h3>string.h</h3>
 			<ol>
-			<li>char *strstr(const char *haystack, const char *needle)：在参 1 中查找第一次出现参 2 的位置，不包含终止符‘\0’<br/>haystack：要被检索的字符串<br/>needle：在第一个参数内搜索的字符<br/>返回值：成功返回参 2 第一次在参 1 中出现的位置，失败返回 null</li>
-			<li>void *memset(void *s, int ch, size_t n)：将某一块内存中的内容全部设置为指定的值， 这个函数通常为新申请的内存做初始化工作。<br/>s：指向要填充的内存块<br/>ch：填充设置的值<br/>n：填充的字符数<br/>返回值：成功返回指向存储区s的指针</li>
-			<li>void *memcpy(void *dest, const void *src, size_t n)：从源内存地址的起始位置开始拷贝若干个字节到目标内存地址中<br/>dest：指向用于存储复制内容的目标数组，类型强制转换为 void* 指针<br/>src：指向要复制的数据源，类型强制转换为 void* 指针<br/>n：要被复制的字节数<br/>返回值：指向目标存储区的指针</li>
-			<li>size_t strlen(const char *str)：计算字符串长度，直到碰到第一个字符串结束符'\0'为止<br/>str：要计算的字符串<br/>返回值：返回字符串长度，不包括结束符 NULL（‘\0’）</li>
-			<li>int memcmp(const void *s1, const void *s2, size_t n)：把存储区 s1 和存储区 s2 的前 n 个字节进行比较（按字节比较 ascii 值）。<br/>s1：指向内存块的指针<br/>s2：指向内存块的指针<br/>n：要被比较的字节数<br/>返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
-			<li>int strcmp(const char *s1, const char *s2)：比较两个字符串并根据比较结果返回整数。直到出现不同的字符或遇'\0'为止。<br/>s1：指向字符串的指针<br/>s2：指向字符串的指针<br/>返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
-			<li>void bzero(void *s, int n)：置字节字符串前n个字节为零且包括‘\0’。<br/>s：要置零的数据的起始地址<br/>n：要置零的数据字节个数</li>
-			<li>int strncmp(const char *s1, const char *s2, size_t n)：比较 s1 和 s2 的前 n 个字节<br/>s1：要比较的字符串<br/>s2：要比较的字符串<br/>返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
+			<li>char *strstr(const char *haystack, const char *needle)：在参 1 中查找第一次出现参 2 的位置，不包含终止符‘\0’<br/>
+				haystack：要被检索的字符串<br/>
+				needle：在第一个参数内搜索的字符<br/>
+				返回值：成功返回参 2 第一次在参 1 中出现的位置，失败返回 null</li>
+			<li>void *memset(void *s, int ch, size_t n)：将某一块内存中的内容全部设置为指定的值， 这个函数通常为新申请的内存做初始化工作。<br/>
+				s：指向要填充的内存块<br/>
+				ch：填充设置的值<br/>
+				n：填充的字符数<br/>
+				返回值：成功返回指向存储区s的指针</li>
+			<li>void *memcpy(void *dest, const void *src, size_t n)：从源内存地址的起始位置开始拷贝若干个字节到目标内存地址中<br/>
+				dest：指向用于存储复制内容的目标数组，类型强制转换为 void* 指针<br/>
+				src：指向要复制的数据源，类型强制转换为 void* 指针<br/>
+				n：要被复制的字节数<br/>
+				返回值：指向目标存储区的指针</li>
+			<li>size_t strlen(const char *str)：计算字符串长度，直到碰到第一个字符串结束符'\0'为止<br/>
+				str：要计算的字符串<br/>
+				返回值：返回字符串长度，不包括结束符 NULL（‘\0’）</li>
+			<li>int memcmp(const void *s1, const void *s2, size_t n)：把存储区 s1 和存储区 s2 的前 n 个字节进行比较（按字节比较 ascii 值）。<br/>
+				s1：指向内存块的指针<br/>
+				s2：指向内存块的指针<br/>
+				n：要被比较的字节数<br/>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
+			<li>int strcmp(const char *s1, const char *s2)：比较两个字符串并根据比较结果返回整数。直到出现不同的字符或遇'\0'为止。<br/>
+				s1：指向字符串的指针<br/>
+				s2：指向字符串的指针<br/>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
+			<li>void bzero(void *s, int n)：置字节字符串前n个字节为零且包括‘\0’。<br/>
+				s：要置零的数据的起始地址<br/>
+				n：要置零的数据字节个数</li>
+			<li>int strncmp(const char *s1, const char *s2, size_t n)：比较 s1 和 s2 的前 n 个字节<br/>
+				s1：要比较的字符串<br/>
+				s2：要比较的字符串<br/>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
 			<li>char *strerror(int errnum)：通过标准错误的标号，获得错误的描述字符串 ，将单纯的错误标号转为字符串描述。<br/>errnum：最新的错误标号<br/>返回值：指向错误信息的指针</li>
-			<li>char *strcpy(char* dest, const char *src)：将src数据拷贝到dest里面<br/>src：要复制的数据<br/>dest：存储复制内容的数据</li>
+			<li>char *strcpy(char* dest, const char *src)：将src数据拷贝到dest里面<br/>
+				src：要复制的数据<br/>
+				dest：存储复制内容的数据</li>
+			<li>char *strcat(char *dest, const char *src)：把 src 指向的字符串追加到 dest 指向的字符串结尾。<br/>
+				dest：指向目标数组<br/>
+				src：指向要追加的字符串<br/>
+				返回值：返回一个指向最终目标字符串 dest 的指针</li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -265,13 +345,29 @@
 		<div>
 			<h3>stdlib.h</h3>
 			<ol>
-			<li>int system(const char *command)：把参数指定的命令名称或程序名称传给要被命令处理器（window下的dos，linux下的shell）执行的主机环境，并在命令完成后返回<br/>command：命令名<br/>返回值：成功返回 0，失败返回 -1</li>
-			<li>int atoi(const char *str)：把字符串转换成整型数（会跳过前面空白符）<br/>str：要转换成整数的字符串<br/>返回值：成功返回转换后的整数，失败或空字符返回 0</li>
-			<li>void exit(int status)：立即终止进程<br/>status：返回给父进程的状态值<br/>exit(0)正常退出；exit(x)异常退出（x 不为 0）</li>
-			<li>void *malloc(size_t size)：分配动态内存空间<br/>size：内存块大小，以字节为单位<br/>返回值：成功返回一个指针，指向已分配大小的内存，失败返回 NULL</li>
-			<li>void free(void *ptr)：释放调用 calloc、malloc 或 realloc 分配的内存空间<br/>ptr：指针指向一个要释放的内存块</li>
-			<li>void *calloc(size_t nitems, size_t size)：动态分配内存空间<br/>nitems：要被分配的元素个数<br/>size：元素大小，一般可用 sizeof(元素的变量类型，如 int) 获取<br/>返回值：成功返回一个指针，指向已分配大小的内存，失败返回 NULL</li>
-			<li>void *realloc(void *ptr, size_t size)：重新调整调用 malloc 或 calloc 分配的 ptr 所指向的内存块大小<br/>ptr：指针指向一个要重新分配内存的内存块，该内存块之前是通过调用 malloc、calloc 或 realloc 进行分配内存的。如果为空指针，则会分配一个新的内存块，且函数返回一个指向它的指针<br/>size：内存块新的大小，以字节为单位<br/>返回值：成功返回一个指针，指向重新分配大小的内存，失败返回 NULL</li>
+			<li>int system(const char *command)：把参数指定的命令名称或程序名称传给要被命令处理器（window下的dos，linux下的shell）执行的主机环境，并在命令完成后返回<br/>
+				command：命令名<br/>
+				返回值：成功返回 0，失败返回 -1<br/>
+				比如 system("pause") 在 window 下是暂停 cmd 命令界面</li>
+			<li>int atoi(const char *str)：把字符串转换成整型数（会跳过前面空白符）<br/>
+				str：要转换成整数的字符串<br/>
+				返回值：成功返回转换后的整数，失败或空字符返回 0</li>
+			<li>void exit(int status)：立即终止进程<br/>
+				status：返回给父进程的状态值<br/>
+				exit(0)正常退出；exit(x)异常退出（x 不为 0）</li>
+			<li>void *malloc(size_t size)：分配动态内存空间<br/>
+				size：内存块大小，以字节为单位<br/>
+				返回值：成功返回一个指针，指向已分配大小的内存，失败返回 NULL</li>
+			<li>void free(void *ptr)：释放调用 calloc、malloc 或 realloc 分配的内存空间<br/>
+				ptr：指针指向一个要释放的内存块</li>
+			<li>void *calloc(size_t nitems, size_t size)：动态分配内存空间<br/>
+				nitems：要被分配的元素个数<br/>
+				size：元素大小，一般可用 sizeof(元素的变量类型，如 int) 获取<br/>
+				返回值：成功返回一个指针，指向已分配大小的内存，失败返回 NULL</li>
+			<li>void *realloc(void *ptr, size_t size)：重新调整调用 malloc 或 calloc 分配的 ptr 所指向的内存块大小<br/>
+				ptr：指针指向一个要重新分配内存的内存块，该内存块之前是通过调用 malloc、calloc 或 realloc 进行分配内存的。如果为空指针，则会分配一个新的内存块，且函数返回一个指向它的指针<br/>
+				size：内存块新的大小，以字节为单位<br/>
+				返回值：成功返回一个指针，指向重新分配大小的内存，失败返回 NULL</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -312,13 +408,29 @@
 			<h3>pthread.h</h3>
 			<ol>
 			<li>int pthread_create(pthread_t *restrict tidp,const pthread_attr_t *restrict_attr,void*（*start_rtn)(void*),void *restrict arg)：创建线程。<br/>
-			tidp：指向线程标识符的指针<br/>restrict_attr：设置线程属性<br/>void*（*start_rtn)(void*)：线程运行函数的起始地址<br/>arg：运行函数的参数<br/>返回值：成功为 0，失败设置 errorno 值</li>
-			<li>int pthread_mutex_destroy(pthread_mutex_t *mutex)：销毁互斥锁<br/>mutex：指向要销毁的互斥锁的指针<br/>成功返回 0，失败返回错误码</li>
-			<li>int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr)：初始化互斥锁<br/>mutex：指向要初始化的互斥锁的指针<br/>attr：指向属性对象的指针，为 NULL 则使用默认的属性<br/>成功返回 0，失败返回错误码</li>
-			<li>int pthread_cond_destroy(pthread_cond_t *cond)：销毁条件变量<br/>cond：指向pthread_cond_t结构的指针<br/>返回值：函数成功返回0；否则错误</li>
-			<li>int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr)：初始化条件变量（动态创建）<br/>返回值：函数成功返回0；否则错误</li>
-			<li>int pthread_mutex_lock(pthread_mutex_t *mutex)：互斥锁上锁<br/>mutex：互斥对象<br/>返回值：成功返回 0，失败返回非 0 值</li>
-			<li>int pthread_mutex_unlock(pthread_mutex_t *mutex)：互斥锁解锁<br/>mutex：互斥对象<br/>返回值：成功返回 0，失败返回非 0 值</li>
+				tidp：指向线程标识符的指针<br/>
+				restrict_attr：设置线程属性<br/>
+				void*（*start_rtn)(void*)：线程运行函数的起始地址<br/>
+				arg：运行函数的参数<br/>
+				返回值：成功为 0，失败设置 errorno 值</li>
+			<li>int pthread_mutex_destroy(pthread_mutex_t *mutex)：销毁互斥锁<br/>
+				mutex：指向要销毁的互斥锁的指针<br/>
+				成功返回 0，失败返回错误码</li>
+			<li>int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr)：初始化互斥锁<br/>
+				mutex：指向要初始化的互斥锁的指针<br/>
+				attr：指向属性对象的指针，为 NULL 则使用默认的属性<br/>
+				成功返回 0，失败返回错误码</li>
+			<li>int pthread_cond_destroy(pthread_cond_t *cond)：销毁条件变量<br/>
+				cond：指向pthread_cond_t结构的指针<br/>
+				返回值：函数成功返回0；否则错误</li>
+			<li>int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr)：初始化条件变量（动态创建）<br/>
+				返回值：函数成功返回0；否则错误</li>
+			<li>int pthread_mutex_lock(pthread_mutex_t *mutex)：互斥锁上锁<br/>
+				mutex：互斥对象<br/>
+				返回值：成功返回 0，失败返回非 0 值</li>
+			<li>int pthread_mutex_unlock(pthread_mutex_t *mutex)：互斥锁解锁<br/>
+				mutex：互斥对象<br/>
+				返回值：成功返回 0，失败返回非 0 值</li>
 			<li></li>
 			<li></li>
 			<li></li>
