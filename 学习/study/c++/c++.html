@@ -340,7 +340,7 @@
 				}<p>
 			<p>函数重载：两个以上的函数，具有相同的函数名，但形参个数或类型不同，编译器根据实参和形参的类型即个数进行最佳匹配，自动确定调用哪个函数，这就是函数重载<br/>
 				举例：<br/>
-				#include <iostream><br/>
+				#include &lt;iostream><br/>
 				using namespace std;<br/>
 				int add(int x,int y){return x+y;}<br/>
 				int add(int a,int b,int c){return a+b+c;}<br/>
@@ -353,18 +353,27 @@
 					&nbsp; printf("add a+b=%d,a+b+c=%d,e+f=%d,e+f+g=%d",add(a,b),add(a,b,c),add(e,f),add(e,f,g));<br/>
 					&nbsp; return 0;<br/>
 				}<p>
+			<p>成员函数：类里面的成员函数。<p>
 			<p>构造函数：在对象被创建时利用特定的值初始化对象，也是类的一个成员函数，但是函数名和类名相同并且没有返回值，构造函数在对象被创建时被自动调用。若没写构造函数则编译器自动生成一个缺省形式的构造函数，即没有参数，也不做任何事情的构造函数。若类中声明了构造函数则编译器不会生成任何构造函数<br/>
 				语法：<br/>
 				class 类名{<br/>
 				public:<br/>
+					&nbsp; 类型名 函数名(形参表);//成员函数<br/>
 					&nbsp; 类名(形参表);//构造函数<br/>
 					&nbsp; 类名(类名 &对象名);//拷贝构造函数<br/>
+					&nbsp; friend 类型名 函数名(形参表); //友元函数<br/>
 				};<br/>
+				类型名 类名::函数名(形参表){<br/>
+					&nbsp; 函数体; //成员函数实现<br/>
+				}<br/>
 				类名::类名(形参表){<br/>
 					函数体; //构造函数实现<br/>
 				}<br/>
 				类名::类名(类名 &对象名){<br/>
 					&nbsp; 函数体; //拷贝构造函数实现<br/>
+				}<br/>
+				类型名 函数名(形参表){<br/>
+					&nbsp; 函数体; //友元函数实现<br/>
 				}<br/>
 				拷贝构造函数：对象成员在构造时动态分配内存空间<p>
 			<p>析构函数：类对象在使用完后要进行析构，在对象生存期间占用资源（如动态申请内存空间），那在析构的时候就需要释放资源，否则可能造成资源泄露。<br/>
@@ -442,7 +451,8 @@
 			<p><p>
 			<form>
 				<fieldset>
-				<legend>** <b>Student 示例</b>**</legend>#include <iostream><br/>
+				<legend>** <b>Student 示例</b> **</legend>
+				#include &lt;iostream><br/>
 				using namespace std;<br/>
 				struct student{<br/>
 					&nbsp; int num;<br/>
@@ -492,14 +502,76 @@
 			</div><hr/>
 		<div>
 			<h3>友元</h3>
-			<p>允许一个函数或类访问另一个类的私有成员，这时需要声明友元。如<p>
+			<p>友元函数：允许一个函数或类访问另一个类的私有成员，这时需要声明友元。如在重载运算符为非成员函数是通常将运算符函数声明为友元；在类中有另一个类的对象作为成员时有时需要声明组合类为部件类的友元来方便对成员对象进行操作。<p>
+			<p>友元函数声明以关键字 friend 开始，只能出现在类的定义中，因为友元不是授权类的成员，因此不受其所在类的声明区域的影响。<p>
+			<p>友元函数语法：<br/>
+				1.全局函数声明为友元：friend 函数类型 函数名(参数表);<br/>
+				2.其他类的成员函数声明为友元：friend 函数类型 其他类名::成员函数名(参数表); 这里不能是私有成员函数<p>
+			<p>友元类：类似友元函数，指数此时声明的是一个类，被声明为友元的类可访问声明友元类的所有私有数据成员<p>
 			<p><p>
 			<p><p>
 			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** <b>student 友元函数示例</b> **</legend>
+				#include &lt;iostream><br/>
+				using namespace std;<br/>
+				class student{<br/>
+				private:<br/>
+					&nbsp; int num;<br/>
+					&nbsp; string name;<br/>
+					&nbsp; int score;<br/>
+				public:<br/>
+					&nbsp; student(){num=1;name="Bob";score=99;}<br/>
+					&nbsp; ~student(){}<br/>
+					&nbsp; friend void printall(student value);<br/>
+				};<br/>
+				void printall(student value){<br/>
+					&nbsp; cout<&lt;value.num<&lt;value.name<&lt;value.score<&lt;endl;<br/>
+				}<br/>
+				int main(){<br/>
+					&nbsp; student stu;<br/>
+					&nbsp; printall(stu);<br/>
+					&nbsp; return 0;<br/>
+				}</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b>友元类示例</b> **</legend>
+				#include &lt;iostream><br/>
+				using namespace std;<br/>
+				class b;//声明<br/>
+				class a{<br/>
+				private:<br/>
+					&nbsp; double x;<br/>
+				public:<br/>
+					&nbsp; friend class b;<br/>
+					&nbsp; a(double _x):x(_x){}<br/>
+					&nbsp; ~a(){}<br/>
+				};<br/>
+				class b{<br/>
+				public:<br/>
+					&nbsp; b(){}<br/>
+					&nbsp; ~b(){}<br/>
+					&nbsp; void print(const a y){cout&lt;&lt;y.x&lt;&lt;endl;}<br/>
+				};<br/>
+				int main()<br/>
+				{<br/>
+					&nbsp; a tempa(10.1);<br/>
+					&nbsp; b tempb;<br/>
+					&nbsp; tempb.print(tempa);<br/>
+					&nbsp; return 0;<br/>
+				}
+				</fieldset>
+			</form>
 			</div><hr/>
 		<div>
-			<h3></h3>
-			<p><p>
+			<h3>运算符重载函数</h3>
+			<p>运算符重载就是对已有的运算符赋予多重含义，使之能够作用于自定义的新数据类型。<p>
 			<p><p>
 			<p><p>
 			<p><p>
@@ -597,7 +669,7 @@
 			<form>
 			<fieldset>
 				<legend>** <b>Student 示例</b>**</legend>
-#include <iostream><br>
+#include &lt;iostream><br>
 using namespace std; //命名空间<br>
 class Student{<br>
 private:<br>

@@ -276,8 +276,18 @@
 			<li>unsigned sleep(unsigned seconds)：执行挂起指定的秒数，单位秒。成功返回 0，失败返回剩余秒数。sleep()是在库函数中实现的，它是通过alarm()来设定报警时间。</li>
 			<li>void usleep(int micro_seconds)：进程挂起指定的时间，单位微秒（1000000us=1s，1000us=1ms）。成功返回 0，失败返回剩余秒数。</li>
 			<li>int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)：允许进程指示内核等待多个事件中的任何一个发生，并只在有一个或多个事件发生或经历一段指定时间后才唤醒。<br/>
-			nfds：指定待测描述符 +1 个数<br/>readfds：select 监视的可读文件描述符集合，即是否可以从这些文件中读取数据了，如果这个集合中有一个文件可读，select就会返回一个大于0的值<br/>writefds：select 监视的可写文件描述符集合<br/>exceptfds：监视的异常文件描述符集合<br/>timeout：select 超时时间，为 NULL 无限等待，仅在有描述符就绪或信号中断才返回（就绪条件：1.接收缓冲区 >= 接收缓冲区低水位标记的大小；2.接收到 FIN 的 TCP 连接；3.监听套接字并已完成的连接数不为0；4.套接字上有个错误待处理）；tv_sec=0 并且 tv_usec=0 不等待（轮询）检测描述符后立即返回<br/>返回值：当超时或其中一个/多个文件描述符发生变化时，此函数将返回，成功返回准备就绪的描述符个数，执行出错返回 -1，超时返回 0 并将时间结构体清空<br/>
-			fd_set 类型的相关宏：<br/>&nbsp; FD_ZERO(fd_set *fdset)：清空 fdset 与所有文件描述符的联系<br/>&nbsp; FD_SET(int fd, fd_set *fdset)：建立文件描述符 fd 与 fdset 的联系<br/>&nbsp; FD_CLR(int fd, fd_set *fdset)：清除文件描述符 fd 与 fdset 的联系<br/>&nbsp; FD_ISSET(int fd, fd_set *fdset)：检查 fdset 联系的文件描述符 fd 是否被置位<br/>原理如下：<br/><img src="./data/socket原理.jpg" alt="socket基本原理"/>
+				nfds：指定待测描述符 +1 个数<br/>
+				readfds：select 监视的可读文件描述符集合，即是否可以从这些文件中读取数据了，如果这个集合中有一个文件可读，select 就会返回一个大于 0 的值<br/>
+				writefds：select 监视的可写文件描述符集合<br/>
+				exceptfds：监视的异常文件描述符集合<br/>
+				timeout：select 超时时间，为 NULL 无限等待，仅在有描述符就绪或信号中断才返回（就绪条件：1.接收缓冲区 >= 接收缓冲区低水位标记的大小；2.接收到 FIN 的 TCP 连接；3.监听套接字并已完成的连接数不为0；4.套接字上有个错误待处理）；tv_sec=0 并且 tv_usec=0 不等待（轮询）检测描述符后立即返回<br/>
+				返回值：当超时或其中一个/多个文件描述符发生变化时，此函数将返回，成功返回准备就绪的描述符个数，执行出错返回 -1，超时返回 0 并将时间结构体清空<br/>
+				fd_set 类型的相关宏：<br/>
+				&nbsp; FD_ZERO(fd_set *fdset)：清空 fdset 与所有文件描述符的联系<br/>
+				&nbsp; FD_SET(int fd, fd_set *fdset)：建立文件描述符 fd 与 fdset 的联系<br/>
+				&nbsp; FD_CLR(int fd, fd_set *fdset)：清除文件描述符 fd 与 fdset 的联系<br/>
+				&nbsp; FD_ISSET(int fd, fd_set *fdset)：检查 fdset 联系的文件描述符 fd 是否被置位，返回 0 表示失败，非 0 表示成功<br/>
+				原理如下：<br/><img src="./data/socket原理.jpg" alt="socket基本原理"/>
 			</li>
 			<li></li>
 			<li></li>
@@ -317,7 +327,7 @@
 				s1：指向字符串的指针<br/>
 				s2：指向字符串的指针<br/>
 				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
-			<li>void bzero(void *s, int n)：置字节字符串前n个字节为零且包括‘\0’。<br/>
+			<li>void bzero(void *s, int n)：置字节字符串前 n 个字节为零且包括‘\0’。<br/>
 				s：要置零的数据的起始地址<br/>
 				n：要置零的数据字节个数</li>
 			<li>int strncmp(const char *s1, const char *s2, size_t n)：比较 s1 和 s2 的前 n 个字节<br/>
@@ -325,7 +335,7 @@
 				s2：要比较的字符串<br/>
 				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
 			<li>char *strerror(int errnum)：通过标准错误的标号，获得错误的描述字符串 ，将单纯的错误标号转为字符串描述。<br/>errnum：最新的错误标号<br/>返回值：指向错误信息的指针</li>
-			<li>char *strcpy(char* dest, const char *src)：将src数据拷贝到dest里面<br/>
+			<li>char *strcpy(char* dest, const char *src)：将 src 数据拷贝到 dest 里面<br/>
 				src：要复制的数据<br/>
 				dest：存储复制内容的数据</li>
 			<li>char *strcat(char *dest, const char *src)：把 src 指向的字符串追加到 dest 指向的字符串结尾。<br/>
@@ -348,7 +358,8 @@
 			<li>int system(const char *command)：把参数指定的命令名称或程序名称传给要被命令处理器（window下的dos，linux下的shell）执行的主机环境，并在命令完成后返回<br/>
 				command：命令名<br/>
 				返回值：成功返回 0，失败返回 -1<br/>
-				比如 system("pause") 在 window 下是暂停 cmd 命令界面</li>
+				比如 system("pause") 在 window 下是暂停 cmd 命令界面<br/>
+				system("")</li>
 			<li>int atoi(const char *str)：把字符串转换成整型数（会跳过前面空白符）<br/>
 				str：要转换成整数的字符串<br/>
 				返回值：成功返回转换后的整数，失败或空字符返回 0</li>
@@ -381,13 +392,42 @@
 		<div>
 			<h3>sys/ioctl.h</h3>
 			<ol>
-			<li>int ioctl(int fd, ind cmd, …)：对设备的I/O通道进行管理的函数，驱动层函数。<br/>fd：文件描述符（由 socket 或 open 创建）<br/>cmd：用户程序对设备的控制命令<br/>...（省略号）：可变参数，一般最多一个，依赖 cmd 指定长度及类型<br/>返回值：成功返回 0，失败返回 -1 并设置 errorno<br/>
-			cmd 格式：<br/><sub>----------------------------------------</sub><br/>| dir &nbsp;| size &nbsp;| type&nbsp;|&nbsp;nr &nbsp;|<br/>----------------------------------<br/>| 2 bit | 14 bit | 8 bit | 8 bit |<br/><sup>----------------------------------------</sup><br/>
-			&nbsp; dir：命令访问模式，_IOC_NONE（无数据）、_IOC_READ（读数据）、_IOC_WRITE（写数据）、_IOC_READ | _IOC_WRITE（读写数据）<br/>&nbsp; size：指定可变参数的数据类型和长度，通常忽略该参数<br/>&nbsp; type：设备类型，魔幻数，可以为任意 char 字符<br/>&nbsp; nr：命令编号/序号，取值范围 0-255<br/>
-			如下 linux 内核已定义 cmd，可直接传入 size、type、size 即可：<br/>&nbsp; _IO(type,nr) //没有参数的命令<br/>&nbsp; _IOR(type,nr,size) //该命令是从驱动读取数据<br/>&nbsp; _IOW(type,nr,size) //该命令是从驱动写入数据<br/>&nbsp; _IOWR(type,nr,size) //双向数据传输<br/>
-			如下从命令中提取 cmd、type、size、nr：<br/>&nbsp; _IOC_DIR(cmd) //从命令中提取方向<br/>&nbsp; _IOC_TYPE(cmd) //从命令中提取幻数<br/>&nbsp; _IOC_NR(cmd) //从命令中提取序数<br/>&nbsp; _IOC_SIZE(cmd) //从命令中提取数据大小<br/>&nbsp; SIOCGIFADDR：获取 PA 地址<br/>
-			可变参数：1.整数，如改变偏移量；2.指针，必须先检验指针的安全性（检验方式：1.需要使用的时候再检验；2.一开始就检验）<br/>
-			作用：设备在运行的时候可能要求数据的写入是连续的，如果这个时候仍然用WRITE函数去写指令的话，就有可能导致数据的不连续，比如声卡放音乐卡顿，电影播放不流畅等等的情况，为了解决这种情况，就有了IOCTL函数，此函数专门向驱动层发送或者接收指令。</li>
+			<li>int ioctl(int fd, ind cmd, …)：对设备的I/O通道进行管理的函数，驱动层函数。<br/>
+				fd：文件描述符（由 socket 或 open 创建）<br/>
+				cmd：用户程序对设备的控制命令<br/>
+				...（省略号）：可变参数，一般最多一个，依赖 cmd 指定长度及类型<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 errorno<br/>
+				cmd 格式：<br/><sub>----------------------------------------</sub><br/>
+				| dir &nbsp;| size &nbsp;| type&nbsp;|&nbsp;nr &nbsp;|<br/>
+				----------------------------------<br/>
+				| 2 bit | 14 bit | 8 bit | 8 bit |<br/><sup>----------------------------------------</sup><br/>
+				&nbsp; dir：命令访问模式，_IOC_NONE（无数据）、_IOC_READ（读数据）、_IOC_WRITE（写数据）、_IOC_READ | _IOC_WRITE（读写数据）<br/>
+				&nbsp; size：指定可变参数的数据类型和长度，通常忽略该参数<br/>
+				&nbsp; type：设备类型，魔幻数，可以为任意 char 字符<br/>
+				&nbsp; nr：命令编号/序号，取值范围 0-255<br/>
+				如下 linux 内核已定义 cmd，可直接传入 size、type、size 即可：<br/>
+				&nbsp; _IO(type,nr) //没有参数的命令<br/>
+				&nbsp; _IOR(type,nr,size) //该命令是从驱动读取数据<br/>
+				&nbsp; _IOW(type,nr,size) //该命令是从驱动写入数据<br/>
+				&nbsp; _IOWR(type,nr,size) //双向数据传输<br/>
+				如下从命令中提取 cmd、type、size、nr：<br/>
+				&nbsp; _IOC_DIR(cmd) //从命令中提取方向<br/>
+				&nbsp; _IOC_TYPE(cmd) //从命令中提取幻数<br/>
+				&nbsp; _IOC_NR(cmd) //从命令中提取序数<br/>
+				&nbsp; _IOC_SIZE(cmd) //从命令中提取数据大小<br/>
+				&nbsp; SIOCGIFADDR：获取 PA 地址<br/>
+				可变参数：1.整数，如改变偏移量；2.指针，必须先检验指针的安全性（检验方式：1.需要使用的时候再检验；2.一开始就检验）<br/>
+				作用：设备在运行的时候可能要求数据的写入是连续的，如果这个时候仍然用WRITE函数去写指令的话，就有可能导致数据的不连续，比如声卡放音乐卡顿，电影播放不流畅等等的情况，为了解决这种情况，就有了IOCTL函数，此函数专门向驱动层发送或者接收指令。
+				<form>
+				<fieldset>
+					<legend>** <b>获取 IP</b> **</legend>
+					struct ifreq ifr;<br/>
+					const char *eth_inf = "wan1";<br/>
+					strncpy(ifr.ifr_name, eth_inf, IFNAMSIZ);<br/>
+					ioctl(sockfd, SIOCGIFADDR, &ifr); //获取 IP 地址
+					</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -536,11 +576,32 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>sys/msg.h</h3>
 			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>int msgget(key_t, key, int msgflg)：创建新的或打开已存在的消息队列，其消息数量受系统限制。<br/>
+				key：消息队列对象的关键字，与已有的消息队列对象的关键字进行比较判断是否已创建，即新的或已有的队列 id<br/>
+				msgflg：消息队列访问权限<br/>
+				&nbsp; IPC_CREAT：创建新的消息队列，若已存在则打开<br/>
+				&nbsp; IPC_EXCL：与 IPC_CREAT 一起使用表示消息队列不存在则创建，若要创建的消息队列已存在则返回错误<br/>
+				&nbsp; IPC_NOWAIT：读写消息队列要求无法满足时，不阻塞<br/>
+				返回值：失败返回 -1，成功返回 key 命名的消息队列标识符<br/>
+				失败的 error 值：EACCESS（拒绝进入）、EEXIST（队列已存在不能创建）、EIDRM（队列已标记为删除）、ENOENT（队列不存在）、ENOMEM（没有足够内存创建队列）、ENOSPC（超过最大队列限制）</li>
+			<li>int msgrcv (int msqid, void *msgp, size_t msgsz,long msgtype, int flag)：从消息队列获取消息<br/>
+				msqid：消息队列标识符，msgget 函数的返回值<br/>
+				msgp：接收消息的缓存区<br/>
+				msgsz：接收消息的大小<br/>
+				msgtype：期望接收的消息类型<br/>
+				&nbsp; 0：获取队列中的第一个消息（最早的消息）<br/>
+				&nbsp; &gt;0：获取具有相同消息类型的第一个消息（类型为 msgtype 的第一个消息）<br/>
+				&nbsp; &lt;0：获取类型小于等于 msgtype 的绝对值的第一个消息<br/>
+				flag：控制当队列中没有相应类型的消息可接收时将发生的事件<br/>
+				返回值：成功返回接收缓存区的字节数，失败返回 -1</li>
+			<li>int msgsnd(int msqid, const void *msgp, size_t msgsz, int flag)：将消息添加到消息队列中<br/>
+				msqid：消息队列标识符，msgget 函数的返回值<br/>
+				msgp：接收消息的缓存区<br/>
+				msgsz：接收消息的大小<br/>
+				flag：控制当队列中没有相应类型的消息可接收时将发生的事件<br/>
+				返回值：成功返回 0，失败返回 -1</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -556,12 +617,96 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>termios.h</h3>
 			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>int tcgetattr(int fd, struct termios *termios_p)：获取终端参数（如虚拟终端、串口、显示器、键盘等）<br/>
+				fd：文件描述符，如 open 返回的 fd 值。<br/>
+				termios_p：获取的参数保存在此结构体中，结构体如下：<br/>
+				struct termios<br/>
+				{<br/>
+					&nbsp; unsigned short c_iflag; /* 输入模式标志 */<br/>
+					&nbsp; unsigned short c_oflag; /* 输出模式标志 */<br/>
+					&nbsp; unsigned short c_cflag; /* 控制模式标志，包括波特率、校验位等*/<br/>
+					&nbsp; unsigned short c_lflag; /* 本地模式标志 */<br/>
+					&nbsp; unsigned char c_line; /* 线路规程 */<br/>
+					&nbsp; unsigned char c_cc[NCC]; /* 控制特性 */<br/>
+					&nbsp; speed_t c_ispeed; /* 输入速度 */<br/>
+					&nbsp; speed_t c_ospeed; /* 输出速度 */<br/>
+				};<br/>
+				其中 c_iflag 输入模式标志，控制终端输入模式，值如下：<br/>
+				&nbsp; IGNBRK：忽略 BREAK 键输入<br/>
+				&nbsp; BRKINT：如果设置了 IGNBRK，BREAK 键输入将被忽略<br/>
+				&nbsp; IGNPAR：忽略奇偶校验错误<br/>
+				&nbsp; PARMRK：标识奇偶校验错误<br/>
+				&nbsp; INPCK：奇偶校验使能<br/>
+				&nbsp; ISTRIP：去除字符的第 8 个比特<br/>
+				&nbsp; INLCR：将输入的 NL（换行）转换成 CR（回车）<br/>
+				&nbsp; IGNCR：忽略输入的回车<br/>
+				&nbsp; ICRNL：将输入的回车转化成换行（如果 IGNCR 未设置的情况下）<br/>
+				&nbsp; IUCLC：将输入的大写字符转换成小写字符（非 POSIX）<br/>
+				&nbsp; IXON：允许输出时对 XON/XOFF 流进行控制<br/>
+				&nbsp; IXANY：输入任何字符将重启停止的输出<br/>
+				&nbsp; IXOFF：允许输入时对 XON/XOFF 流进行控制<br/>
+				&nbsp; IMAXBEL：当输入队列满的时候开始响铃<br/>
+				c_oflag 输出模式标志，控制终端输出模式，值如下：<br/>
+				&nbsp; OPOST：处理后输出<br/>
+				&nbsp; OLCUC：将输入的小写字符转换成大写字符（非 POSIX）<br/>
+				&nbsp; ONLCR：将输入的 LF（换行）转换成 CR（回车）<br/>
+				&nbsp; OCRNL：将输入的 CR（回车）转换成 LF（换行）<br/>
+				&nbsp; ONOCR：第一行不输出回车符<br/>
+				&nbsp; ONLRET：不输出回车符<br/>
+				&nbsp; OFILL：发送填充字符以延迟终端输出<br/>
+				&nbsp; OFDEL：以 ASCII 码的 DEL 作为填充字符，如果未设置该参数，填充字符为 NUL<br/>
+				&nbsp; NLDLY：换行输出延时，可以取 NL0（不延迟）或 NL1（延迟0.1s）<br/>
+				&nbsp; CRDLY：回车延迟，取值范围为：CR0、CR1、CR2和 CR3<br/>
+				&nbsp; TABDLY：水平制表符输出延迟，取值范围为：TAB0、TAB1、TAB2 和 TAB3<br/>
+				&nbsp; BSDLY：空格输出延迟，可以取 BS0 或 BS1<br/>
+				&nbsp; VTDLY：垂直制表符输出延迟，可以取 VT0 或 VT1<br/>
+				&nbsp; FFDLY：换页延迟，可以取 FF0 或 FF1<br/>
+				c_cflag：控制模式标志，指定终端硬件控制信息，值如下：<br/>
+				&nbsp; CBAUD：波特率（4+1位）（非 POSIX），如 B9600 是 9600 波特率；B115200 是 115200波特率<br/>
+				&nbsp; CBAUDEX：附加波特率（1位）（非 POSIX）<br/>
+				&nbsp; CSIZE：字符长度，如 CS5 是 5 个数据位；CS8 是 8 个数据位<br/>
+				&nbsp; CSTOPB：设置 2 个停止位，不设则是 1 个停止位<br/>
+				&nbsp; CREAD：接收使能<br/>
+				&nbsp; PARENB：奇偶校验使能<br/>
+				&nbsp; PARODD：对输入使用奇偶校验，对输出使用偶校验<br/>
+				&nbsp; HUPCL：关闭设备时挂起<br/>
+				&nbsp; CLOCAL：忽略调制解调器线路状态，本地连接<br/>
+				&nbsp; CRTSCTS：使用 RTS/CTS 流控制，硬件流控<br/>
+				c_lflag：本地模式标志，控制终端编辑功能，值如下：<br/>
+				&nbsp; ISIG：当输入INTR、QUIT、SUSP或DSUSP时，产生相应的信号<br/>
+				&nbsp; ICANON：使用标准输入模式<br/>
+				&nbsp; XCASE：在 ICANON 和 XCASE 同时设置的情况下，终端只使用大写。<br/>
+				&nbsp; ECHO：显示输入字符<br/>
+				&nbsp; ECHOE：如果 ICANON 同时设置，ERASE 将删除输入的字符<br/>
+				&nbsp; ECHOK：如果 ICANON 同时设置，KILL 将删除当前行<br/>
+				&nbsp; ECHONL：如果 ICANON 同时设置，即使 ECHO 没有设置依然显示换行符<br/>
+				&nbsp; ECHOPRT：如果 ECHO 和 ICANON 同时设置，将删除打印出的字符（非 POSIX）<br/>
+				&nbsp; TOSTOP：向后台输出发送 SIGTTOU 信号<br/>
+				c_cc[NCCS]：控制字符，用于保存终端驱动程序中的特殊字符，如输入结束符等。值如下：<br/>
+				&nbsp; VINTR：Interrupt 字符，中断控制字符（ctrl+c）<br/>
+				&nbsp; VEOL：附加的 End-of-file 字符，附加行结束符（CR）<br/>
+				&nbsp; VQUIT：Quit 字符，退出操作符（ctrl+z）<br/>
+				&nbsp; VTIME：非规范模式读取时的超时时间<br/>
+				&nbsp; VERASE：Erase 字符，删除操作符（Backspace 键）<br/>
+				&nbsp; VSTOP：Stop 字符<br/>
+				&nbsp; VKILL：Kill 字符，删除行符<br/>
+				&nbsp; VSTART：Start 字符<br/>
+				&nbsp; VEOF：End-of-file 字符，文件结尾符<br/>
+				&nbsp; VSUSP：Suspend 字符<br/>
+				&nbsp; VMIN：非规范模式读取时的最小字符数<br/>
+				返回值：成功返回 0，失败返回非 0 并设置 errno 错误标识</li>
+			<li>void cfmakeraw (struct termios *termios-p)：将中断设置为原始模式，该模式下所有的输入数据以字节为单位被处理<br/>
+				termios-p：可以先用 tcgetattr 获取参数，然后使用 tcgetattr 里面的 termios-p</li>
+			<li>int cfsetospeed(struct termios *termptr, speed_t speed)：配合 cfsetispeed 函数实现设置波特率<br/>
+				termptr：指向 termios 结构的指针<br/>
+				speed：输出的波特率<br/>
+				返回值：成功返回 0，失败返回 -1</li>
+			<li>int cfsetispeed(struct termios *termptr, speed_t speed)：配合 cfsetospeed 函数实现设置波特率<br/>
+				termptr：指向 termios 结构的指针<br/>
+				speed：输出的波特率<br/>
+				返回值：成功返回 0，失败返回 -1</li>
 			<li></li>
 			<li></li>
 			<li></li>

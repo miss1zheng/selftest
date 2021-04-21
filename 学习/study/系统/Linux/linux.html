@@ -276,10 +276,16 @@
 		&nbsp; auditing support：使能内核审计框架，该框架可被其他内核子系统使用，比如selinux；主要和权限管理相关。<br/>
 		&nbsp; irq subsystem：中断子系统，必选的，当然也没有不选的可能
 		</p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<p>/sys/class/gpio/：读取设置 GPIO<br/>
+		/sys/class/gpio/export：通知系统需要导出控制的GPIO引脚编号<br/>
+		/sys/class/gpio/unexport：通知系统取消导出<br/>
+		/sys/class/gpio/gpiochipX：保存系统中 GPIO 寄存器的信息，包括每个寄存器控制引脚的起始编号 base，寄存器名称，引脚总数 导出一个引脚的操作步骤<br/>
+		/sys/class/gpio/gpiox/direction：引脚输出还是输入<br/>
+		/sys/class/gpio/gpiox/value：设置高电平或低电平<br/>
+		可在内核配置界面看到 Device Drivers->GPIO Support ->/sys/class/gpio/...(sysfs interface)，内核界面进入方式：cd /usr/src/linux-xxx（一般这里是内核解压后的目录，里面有 kernel），然后直接使用 make menuconfig 即可出现图形界面</p>
+	<p>/etc_rw/TZ：读取设置时区</p>
+	<p>/etc/passwd：用户密码</p>
+	<p>/etc/</p>
 	<p></p>
 	<p></p>
 	<p></p>
