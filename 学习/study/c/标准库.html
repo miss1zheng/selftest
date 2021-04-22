@@ -73,7 +73,8 @@
 			<li>void setbuf(FILE *fp, char *buffer)：主要用于打开和关闭缓冲机制。<br/>fp：标识一个打开的流<br/>buffer：分配给用户的缓存，为 NULL 表示关闭缓存</li>
 			<li>char *fgets(char *str, int n, FILE *fp)：从指定的流中读取数据，每次读取一行，读取的数据放入 str 中。<br/>str：指向数组的指针，数组存储读取的字符串<br/>n：读取的最大字符数，包括最后的控制阀，若未到此值遇到换行符或已到达文件末尾则会停止<br/>fp：指向 FILE 对象的指针</li>
 			<li>int fclose( FILE *fp )：关闭一个流并刷新所有缓冲区。可以把缓冲区内最后剩余的数据输出到内核缓冲区，并释放文件指针和有关的缓冲区。<br/>fp：指向 FILE 对象的指针<br/>返回值：成功返回 0，失败返回 EOF（-1）</li>
-			<li></li>
+			<li>void perror(const char *str)：将上一个函数发生错误原因输出到标准设备，str 会先打印出来，然后再加上冒号和空格，最后加上错误原因（依据 errno 输出错误原因）<br/>
+				str：自定义消息，输出再错误消息之前</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -242,14 +243,32 @@
 		<div>
 			<h3>fcntl.h</h3>
 			<ol>
-			<li>int open(const char*pathname,int flags)/int open(const char*pathname,int flags,mode_t mode)：打开文件<br/>pathname：要打开或创建的目标文件<br/>
-				flags：打开文件时，可以传入多个参数选项，用下面的一个或者多个常量进行“或”运算，构成falgs<ul><li>O_RDONLY：只读打开</li><li>O_WRONLY：只写打开</li><li>O_RDWR：读，写打开</li></ul>
-				上面三个常量，必须指定一个且只能指定一个<ul><li>O_CREAT：若文件不存在，则创建它，需要使用mode选项。来指明新文件的访问权限</li><li>O_APPEND：追加写，如果文件已经有内容，这次打开文件所写的数据附加到文件的末尾而不覆盖原来的内容</li><li>O_NOCTTY：如果路径名指向终端设备，不要把这个设备用作控制终端</li>
-				<li>O_NONBLOCK：如果路径名指向 FIFO/块文件/字符文件，则把文件的打开和后继 I/O设置为非阻塞模式</li><li>O_NDELAY：对于串口的打开操作，必须使用O_NOCTTY参数，它表示打开的是一个终端设备，程序不会成为该端口的控制终端。如果不使用此标志，任务的一个输入(比如键盘终止信号等)都会影响进程</li><li>O_TRUNC：如果文件存在，并且以只写/读写方式打开，则清空文件全部内容</li><li>O_EXCL：如果要创建的文件已存在，则返回 -1，并且修改 errno 的值</li>
-				<li>O_DSYNC：等待物理 I/O 结束后再 write。在不影响读取新写入的数据的前提下，不等待文件属性更新</li><li>O_RSYNC：读(read)等待所有写入同一区域的写操作完成后再进行</li><li>O_SYNC：等待物理 I/O 结束后再 write，包括更新文件属性的 I/O</li></ul>
-				返回值：成功返回新打开的文件描述符，失败返回 -1<br/>如目标文件存在，使用两个参数的open，如果目标文件不存在，需要open创建，则第三个参数表示创建文件的默认权限<br/>
-				打开的文件描述符一定要记得关闭，否则资源会被大量的占用，导致内存不够<br/>fopen 和 open 区别：以可写的方式fopen一个文件时，如果文件不存在则会自动创建，而open一个文件时必须明确O_CREAT才会创建文件，否则文件不存在就出错返回</li>
-			<li>int fcntl(int fd,int cmd)/int fcntl(int fd,int cmd,long arg)/int fcntl(int fd,int cmd,struct flock *lock)：根据文件描述词来操作文件的特性<br/>fd：文件描述符<br/>cmd：命令参数<ul><li>F_DUPFD：复制一个现有的描述符，返回新的文件描述符</li><li>F_GETFD/F_SETFD：获得／设置文件描述符标记，返回相应标志</li><li>F_GETFL/F_SETFL：获得／设置文件状态标记，设置给 arg 描述状态标志，arg 的值有 O_RDONLY , O_WRONLY , O_RDWR , O_APPEND , O_NONBLOCK , O_SYNC 和 O_ASYNC。如 fcntl(fd,F_SETFL,0) 为设置阻塞。返回一个正的进程 ID 或负的进程组 ID</li><li>F_GETOWN/F_SETOWN：获得／设置异步I/O所有权</li><li>F_GETLK/F_SETLK/F_SETLKW：获得／设置记录锁</li></ul><br/>
+			<li>int open(const char*pathname,int flags)/int open(const char*pathname, int flags, mode_t mode)：打开文件<br/>
+				pathname：要打开或创建的目标文件，比如 /dev/ttyS0（即 COM1）<br/>
+				flags：打开文件时，可以传入多个参数选项，用下面的一个或者多个常量进行“或”运算，构成 falgs
+				<ul>
+					<li>O_RDONLY：只读打开</li>
+					<li>O_WRONLY：只写打开</li>
+					<li>O_RDWR：读，写打开</li>
+				</ul>
+				上面三个常量，必须指定一个且只能指定一个
+				<ul>
+				<li>O_CREAT：若文件不存在，则创建它，需要使用 mode 选项。来指明新文件的访问权限</li>
+				<li>O_APPEND：追加写，如果文件已经有内容，这次打开文件所写的数据附加到文件的末尾而不覆盖原来的内容</li>
+				<li>O_NOCTTY：如果路径名指向终端设备，不要把这个设备用作控制终端</li>
+				<li>O_NONBLOCK：如果路径名指向 FIFO/块文件/字符文件，则把文件的打开和后继 I/O 设置为非阻塞模式</li>
+				<li>O_NDELAY：对于串口的打开操作，必须使用 O_NOCTTY 参数，它表示打开的是一个终端设备，程序不会成为该端口的控制终端。如果不使用此标志，任务的一个输入(比如键盘终止信号等)都会影响进程</li>
+				<li>O_TRUNC：如果文件存在，并且以只写/读写方式打开，则清空文件全部内容</li>
+				<li>O_EXCL：如果要创建的文件已存在，则返回 -1，并且修改 errno 的值</li>
+				<li>O_DSYNC：等待物理 I/O 结束后再 write。在不影响读取新写入的数据的前提下，不等待文件属性更新</li>
+				<li>O_RSYNC：读(read)等待所有写入同一区域的写操作完成后再进行</li>
+				<li>O_SYNC：等待物理 I/O 结束后再 write，包括更新文件属性的 I/O</li>
+				</ul>
+				返回值：成功返回新打开的文件描述符，失败返回 -1<br/>
+				如目标文件存在，使用两个参数的 open，如果目标文件不存在，需要 open 创建，则第三个参数表示创建文件的默认权限<br/>
+				打开的文件描述符一定要记得关闭，否则资源会被大量的占用，导致内存不够<br/>
+				fopen 和 open 区别：以可写的方式 fopen 一个文件时，如果文件不存在则会自动创建，而 open 一个文件时必须明确O_CREAT才会创建文件，否则文件不存在就出错返回</li>
+			<li>int fcntl(int fd, int cmd)/int fcntl(int fd, int cmd, long arg)/int fcntl(int fd, int cmd, struct flock *lock)：根据文件描述词来操作文件的特性<br/>fd：文件描述符<br/>cmd：命令参数<ul><li>F_DUPFD：复制一个现有的描述符，返回新的文件描述符</li><li>F_GETFD/F_SETFD：获得／设置文件描述符标记，返回相应标志</li><li>F_GETFL/F_SETFL：获得／设置文件状态标记，设置给 arg 描述状态标志，arg 的值有 O_RDONLY , O_WRONLY , O_RDWR , O_APPEND , O_NONBLOCK , O_SYNC 和 O_ASYNC。如 fcntl(fd,F_SETFL,0) 为设置阻塞。返回一个正的进程 ID 或负的进程组 ID</li><li>F_GETOWN/F_SETOWN：获得／设置异步I/O所有权</li><li>F_GETLK/F_SETLK/F_SETLKW：获得／设置记录锁</li></ul><br/>
 				</li>
 			<li></li>
 			<li></li>
@@ -665,11 +684,22 @@
 				&nbsp; FFDLY：换页延迟，可以取 FF0 或 FF1<br/>
 				c_cflag：控制模式标志，指定终端硬件控制信息，值如下：<br/>
 				&nbsp; CBAUD：波特率（4+1位）（非 POSIX），如 B9600 是 9600 波特率；B115200 是 115200波特率<br/>
+					&nbsp; &nbsp; cfsetospeed(&newtios,B9600);cfsetispeed(&newtios,B9600);//设置波特率<br/>
 				&nbsp; CBAUDEX：附加波特率（1位）（非 POSIX）<br/>
-				&nbsp; CSIZE：字符长度，如 CS5 是 5 个数据位；CS8 是 8 个数据位<br/>
-				&nbsp; CSTOPB：设置 2 个停止位，不设则是 1 个停止位<br/>
+				&nbsp; CSIZE：字符长度，如 CS5 是 5 个数据位；CS8 是 8 个数据位，如：<br/>
+					&nbsp; &nbsp; tios.c_cflag &= ~CSIZE;tios.c_cflag |= CS8;// 8 位数据位，8 改成 7 就是 7bit<br/>
+				&nbsp; CSTOPB：设置 2 个停止位，不设则是 1 个停止位，如：<br/>
+					&nbsp; &nbsp; tios.c_cflag &= ~CSTOPB;// 1bit 停止位<br/>
+					&nbsp; &nbsp; tios.c_cflag |= CSTOPB;// 2bit 停止位<br/>
 				&nbsp; CREAD：接收使能<br/>
-				&nbsp; PARENB：奇偶校验使能<br/>
+				&nbsp; PARENB：奇偶校验使能，如：<br/>
+					&nbsp; &nbsp; tios.c_iflag |= IGNPAR;tios.c_cflag &= ~PARENB;//NONE，忽略奇偶校验错误<br/>
+					&nbsp; &nbsp; tios.c_iflag |= IGNPAR;tios.c_cflag |= PARENB;tios.c_cflag |= PARODD;//ODD<br/>
+					&nbsp; &nbsp; tios.c_iflag |= IGNPAR;tios.c_cflag |= PARENB;tios.c_cflag &= ~PARODD;//EVEN<br/>
+					&nbsp; &nbsp; 或<br/>
+					&nbsp; &nbsp; tios.c_cflag &= ~PARENB;tios.c_cflag &= ~INPCK;//NONE，奇偶校验不使能<br/>
+					&nbsp; &nbsp; tios.c_cflag |= (PARENB | PARODD);tios.c_cflag |= INPCK;//ODD。奇偶校验使能<br/>
+					&nbsp; &nbsp; tios.c_cflag |= PARENB;tios.c_cflag &= ~PARODD;tios.c_cflag |= INPCK;//EVEN<br/>
 				&nbsp; PARODD：对输入使用奇偶校验，对输出使用偶校验<br/>
 				&nbsp; HUPCL：关闭设备时挂起<br/>
 				&nbsp; CLOCAL：忽略调制解调器线路状态，本地连接<br/>
@@ -688,7 +718,7 @@
 				&nbsp; VINTR：Interrupt 字符，中断控制字符（ctrl+c）<br/>
 				&nbsp; VEOL：附加的 End-of-file 字符，附加行结束符（CR）<br/>
 				&nbsp; VQUIT：Quit 字符，退出操作符（ctrl+z）<br/>
-				&nbsp; VTIME：非规范模式读取时的超时时间<br/>
+				&nbsp; VTIME：非规范模式读取时的超时时间，单位百毫秒，不能超过 cc_t<br/>
 				&nbsp; VERASE：Erase 字符，删除操作符（Backspace 键）<br/>
 				&nbsp; VSTOP：Stop 字符<br/>
 				&nbsp; VKILL：Kill 字符，删除行符<br/>
@@ -696,21 +726,45 @@
 				&nbsp; VEOF：End-of-file 字符，文件结尾符<br/>
 				&nbsp; VSUSP：Suspend 字符<br/>
 				&nbsp; VMIN：非规范模式读取时的最小字符数<br/>
-				返回值：成功返回 0，失败返回非 0 并设置 errno 错误标识</li>
+				返回值：成功返回 0，失败返回非 0 并设置 errno 错误标识<br/>
+				VTIME 和 VMIN 属性设置的作用：映像 read 函数的返回<br/>
+				&nbsp; 1.VTIME 是等待时间，VMIN 是等待的最小字节数，可以为 0<br/>
+				&nbsp; 2.VTIME 为 0，VMIN 定义等待读取最小字节数时，read 只有在读取了 VMIN 个字节数或收到一个信号时才返回<br/>
+				&nbsp; 3.VMIN 为 0，VTIME 定义即使没有数据也可读取，read 返回前要等待 VTIME 时间，这时 read 不需要遇到文件结束标志才返回 0<br/>
+				&nbsp; 4.若 VMIN 和 VTIME 都是 0，则计时读不到数据，read 也会立即返回，同时，返回值为 0 表示 read 函数不需要等待文件结束标志就返回了<br/>
+				&nbsp; 5.若 VMIN 和 VTIME 都非 0，VTIME 定义接收到第一个字节数据后开始计算等待时间，若调用 read 可得到数据则马上开始计时，若调用 read 后还没数据则等接收第一个字节后计时。read 可能会在读取到 VMIN 个字节后返回，也可能在计时完毕后返回。</li>
 			<li>void cfmakeraw (struct termios *termios-p)：将中断设置为原始模式，该模式下所有的输入数据以字节为单位被处理<br/>
 				termios-p：可以先用 tcgetattr 获取参数，然后使用 tcgetattr 里面的 termios-p</li>
 			<li>int cfsetospeed(struct termios *termptr, speed_t speed)：配合 cfsetispeed 函数实现设置波特率<br/>
 				termptr：指向 termios 结构的指针<br/>
 				speed：输出的波特率<br/>
-				返回值：成功返回 0，失败返回 -1</li>
+				返回值：成功返回 0，失败返回 -1<br/>
+				如：cfsetospeed(&tios,B115200);cfsetispeed(&tios,B115200);</li>
 			<li>int cfsetispeed(struct termios *termptr, speed_t speed)：配合 cfsetospeed 函数实现设置波特率<br/>
 				termptr：指向 termios 结构的指针<br/>
-				speed：输出的波特率<br/>
+				speed：输入的波特率<br/>
 				返回值：成功返回 0，失败返回 -1</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>speed_t cfgetispeed(const struct termios *termios_p)：配合 cfgetospeed 实现获取波特率<br/>
+				termios_p：指向 termios 的结构体指针<br/>
+				返回值：成功返回输入波特率，失败返回 -1</li>
+			<li>speed_t cfgetospeed(const struct termios *termios_p)：配合 cfgetispeed 实现获取波特率<br/>
+				termios_p：指向 termios 的结构体指针<br/>
+				返回值：成功返回输出波特率，失败返回 -1</li>
+			<li>int tcflush(int fd, int queue_selector)：清空串口 buffer 中的数据<br/>
+				fd：文件描述符<br/>
+				queue_selector：对缓存区的操作，值如下<br/>
+				&nbsp; TCIFLUSH：清除/刷新正收到的数据，且不会读取出来<br/>
+				&nbsp; TCOFLUSH：清除/刷新正写入的数据，且不会发送至终端<br/>
+				&nbsp; TCIOFLUSH：清除/刷新所有正在发生的 I/O 数据，即将输出缓冲区和输入缓存区清空<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 errno 错误</li>
+			<li>int tcsetattr(int fd, int optional_actions, const struct termios *termios_p)：设置终端参数<br/>
+				fd：文件描述符<br/>
+				optional_actions：参数生效时间<br/>
+				&nbsp; TCSANOW：不等数据传输完毕就立即改变属性<br/>
+				&nbsp; TCSADRAIN：等待所有数据传输结束才改变属性<br/>
+				&nbsp; TCSAFLUSH：等待所有数据传输结束，清空输入输出缓冲区才改变属性<br/>
+				termios_p：指向 termios 的结构体指针<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 errno 错误</li>
 			<li></li>
 			<li></li>
 			<li></li>
