@@ -206,7 +206,7 @@
 					<legend>** <b>举例</b> **</legend>
 					#include &lt;stdio.h><br/>
 					int main(){<br/>
-						&nbsp; FILE *fp=fopen("socket_test.c","a+");<br/>
+						&nbsp; FILE *fp=fopen("main.c","a+");<br/>
 						&nbsp; if(fp == NULL)<br/>
 						&nbsp; {<br/>
 							&nbsp; &nbsp; printf("open fail.\n");<br/>
@@ -234,12 +234,73 @@
 			<li>char *fgets(char *str, int n, FILE *fp)：从指定的流中读取数据，每次读取一行，读取的数据放入 str 中。<br/>
 				str：指向数组的指针，数组存储读取的字符串<br/>
 				n：读取的最大字符数，包括最后的控制阀，若未到此值遇到换行符或已到达文件末尾则会停止<br/>
-				fp：指向 FILE 对象的指针</li>
+				fp：指向 FILE 对象的指针<br/>
+				返回值：成功返回相同的 str ，若到文件末尾或者没有读取到任何字符，str 的内容不变，返回一个空指针。发生错误，返回空指针。<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(){<br/>
+						&nbsp; char buff[1024];<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; char *p;<br/>
+						&nbsp; fp=fopen("main.c","r");<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; printf("file open fail.\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; while(1){<br/>
+							&nbsp; &nbsp; p=fgets(buff,1024,fp);<br/>
+							&nbsp; &nbsp; if((p == NULL)||(buff == NULL))<br/>
+								&nbsp; &nbsp; &nbsp; break;<br/>
+							&nbsp; &nbsp; printf("%s",p);<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int fclose( FILE *fp )：关闭一个流并刷新所有缓冲区。可以把缓冲区内最后剩余的数据输出到内核缓冲区，并释放文件指针和有关的缓冲区。<br/>
 				fp：指向 FILE 对象的指针<br/>
-				返回值：成功返回 0，失败返回 EOF（-1）</li>
+				返回值：成功返回 0，失败返回 EOF（-1）<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(){<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; fp=fopen("main.c","r");<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; printf("file open fail.\n");<br/>
+						&nbsp; }<br/>
+						&nbsp; else{<br/>
+							&nbsp; &nbsp; printf("file is open.\n");<br/>
+							&nbsp; &nbsp; if(fclose(fp) == EOF)<br/>
+								&nbsp; &nbsp; &nbsp; printf("file close fail.\n");<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>void perror(const char *str)：将上一个函数发生错误原因输出到标准设备，str 会先打印出来，然后再加上冒号和空格，最后加上错误原因（依据 errno 输出错误原因）<br/>
-				str：自定义消息，输出再错误消息之前</li>
+				str：自定义消息，输出再错误消息之前<br/>
+				即输出为：str: error（每个 error 指对应一个错误的字符串信息）<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(){<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; fp=fopen("main1.c","r");//并没有 main1.c 这个文件<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; perror("file open fail");//除了输出这段，还会打印后面的错误信息<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int vprintf(const char *format, va_list arg)：使用参数列表发送格式化输出到标准输出 stdout<br/>
 				format：包含了要被写入到标准输出 stdout 的文本，format 标签属性是 %[flags][width][.precision][length]specifier，具体 format 请参考 fprintf 函数。<br/>
 				arg：可变参数列表的对象<br/>
@@ -267,10 +328,56 @@
 				fp：文件标识符，可以是 fopen 打开的文件<br/>
 				format：包含了要被写入到流 stream 中的文本，format 标签属性是 %[flags][width][.precision][length]specifier，具体请参考 fprintf 函数<br/>
 				arg：可变参数列表的对象<br/>
-				返回值：成功返回字节数，失败返回负数</li>
+				返回值：成功返回字节数，失败返回负数<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdarg.h><br/>
+					FILE *fp;<br/>
+					int printff(char *format,...){<br/>
+						&nbsp; int n;<br/>
+						&nbsp; va_list ap;<br/>
+						&nbsp; va_start(ap,format);<br/>
+						&nbsp; n = vfprintf(fp,format,ap);//保存到 fp 文件流中<br/>
+						&nbsp; va_end(ap);<br/>
+						&nbsp; return n;<br/>
+					}<br/>
+					int main(){<br/>
+						&nbsp; fp=fopen("main.c","a+");<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; perror("open fail");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; printff("this is project.");<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>long ftell(FILE *fp)：用于得到文件位置指针当前位置相对于文件首的偏移字节数。<br/>
 				fp：文件标识符，可以是 fopen 打开的文件<br/>
-				返回值：返回位置标识符的当前值。如果发生错误，则返回 -1L</li>
+				返回值：返回位置标识符的当前值。如果发生错误，则返回 -1L<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(){<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; char buff[1024];<br/>
+						&nbsp; fp=fopen("socket_test.c","a+");<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; perror("open fail");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; printf("file curret position is %ld\n",ftell(fp));<br/>
+						&nbsp; fgets(buff,1024,fp);<br/>
+						&nbsp; printf("file curret position is %ld\n",ftell(fp));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int fseek(FILE *fp,long offset,int from)：设置 fp 的文件位置为给定的偏移 offset<br/>
 				fp：文件标识符<br/>
 				offset：相对 from 的偏移量，以字节为单位<br/>
@@ -278,10 +385,23 @@
 				&nbsp; SEEK_SET：文件的开头<br/>
 				&nbsp; SEEK_CUR：文件指针的当前位置<br/>
 				&nbsp; SEEK_END：文件的末尾<br/>
-				返回值：成功返回 0，失败返回非 0</li>
-			<li>void perror(const char *str)：将一个描述性错误消息输出到标准错误 stderr。先输出 str，后跟一个冒号+空格，之后就是错误信息<br/>
-				str：自定义消息，显示再原错误消息前<br/>
-				即输出为：str: error（每个 error 指对应一个错误的字符串信息）</li>
+				返回值：成功返回 0，失败返回非 0<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(){<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; char buff[1024];<br/>
+						&nbsp; fp=fopen("socket_test.c","r");<br/>
+						&nbsp; fseek(fp,10,SEEK_SET);<br/>
+						&nbsp; fgets(buff,1024,fp);<br/>
+						&nbsp; printf("%s\n",buff);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -300,41 +420,59 @@
 		<div id="ctype">
 			<h3>ctype.h</h3>
 			<ol>
-			<li>int toupper(int c)：把小写字母转换为大写字母</li>
-			<li>int tolower(int c)：把给定的字母转换为小写字母</li>
-			<li>int isxdigit(int c)：检查所传的字符是否是十六进制数字，十六进制一般用数字 0 到 9 和字母 A 到 F（或 a~f）</li>
-			<li>int isupper(int c)：检查所传的字符是否是大写字母，若是大写字母返回 true，否则返回 false </li>
-			<li>int islower(int c)：检查所传的字符是否是小写字母，若是返回 true，否则返回 false</li>
-			<li>int isspace(int c)：检查所传的字符是否是空白字符，空白字符包括空格符、tab水平制表符、换行符、tab垂直制表符、换页符、回车符。若是返回 true，否则返回 false</li>
-			<li>int ispunct(int c)：检查所传的字符是否是标点符号字符，若是返回 true，否则返回 false</li>
-			<li>int isprint(int c)：检查所传的字符是否是可打印的，若是返回 true，否则返回 false</li>
-			<li>int isgraph(int c)：检查所传的字符是否有图形表示法，若是返回非 0 值，否则返回 0</li>
-			<li>int isdigit(int c)：检查所传的字符是否是十进制数字字符，若是返回非 0 值，否则返回 0</li>
-			<li>int iscntrl(int c)：检查所传的字符是否是控制字符，若是返回非 0 值，否则返回 0</li>
-			<li>int isalpha(int c)：检查所传的字符是否是字母，若是返回非 0 值，否则返回 0</li>
-			<li>int isalnum(int c)：检查所传的字符是否是字母和数字，若是返回非 0 值，否则返回 0</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<ol>
-			</div><hr/>
-		<div id="assert">
-			<h3>assert.h</h3>
-			<ol>
-			<li>int toupper(int c)：把小写字母转换为大写字母</li>
-			<li>void assert(int expression)：允许诊断信息被写入到标准错误文件中。如果 expression 为 TRUE，assert() 不执行任何动作。如果 expression 为 FALSE，assert() 会在标准错误 stderr 上显示错误消息，并中止程序执行。</li>
+			<li>int toupper(int c)：把小写字母转换为大写字母<br/>
+				c：字符<br/>
+				返回值：如果 c 有相对应的大写字母，则该函数返回 c 的大写字母，否则 c 保持不变。<br/>
+				举例：char a='c';printf("%c\n",toupper(a));</li>
+			<li>int tolower(int c)：把给定的字母转换为小写字母<br/>
+				c：字符<br/>
+				返回值：如果 c 有相对应的小写字母，则该函数返回 c 的小写字母，否则 c 保持不变。<br/>
+				举例：char a='C';printf("%c",tolower(a));</li>
+			<li>int isxdigit(int c)：检查所传的字符是否是十六进制数字，十六进制一般用数字 0 到 9 和字母 A 到 F（或 a~f）<br/>
+				c：传入的数值<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='C';printf("%d\n",isxdigit(a));</li>
+			<li>int isupper(int c)：检查所传的字符是否是大写字母<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='C';printf("%d\n",isupper(a));</li>
+			<li>int islower(int c)：检查所传的字符是否是小写字母<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='c';printf("%d\n",islower(a));</li>
+			<li>int isspace(int c)：检查所传的字符是否是空白字符<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				空白字符包括：空格符' '、tab水平制表符'\t'、换行符'\n'、tab垂直制表符'\v'、换页符'\f'、回车符'\r'<br/>
+				举例：int a=' ';printf("%d\n",isspace(a));</li>
+			<li>int ispunct(int c)：检查所传的字符是否是标点符号字符<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='.';printf("%d\n",ispunct(a));</li>
+			<li>int isprint(int c)：检查所传的字符是否是可打印的<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='.';printf("%d\n",isprint(a));</li>
+			<li>int isgraph(int c)：检查所传的字符是否有图形表示法<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='.';printf("%d\n",isgraph(a));</li>
+			<li>int isdigit(int c)：检查所传的字符是否是十进制数字字符<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='9';printf("%d\n",isdigit(a));</li>
+			<li>int iscntrl(int c)：检查所传的字符是否是控制字符<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='\t';printf("%d\n",iscntrl(a));</li>
+			<li>int isalpha(int c)：检查所传的字符是否是字母<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='t';printf("%d\n",isalpha(a));</li>
+			<li>int isalnum(int c)：检查所传的字符是否是字母和数字<br/>
+				c：字符<br/>
+				返回值：成功返回非 0，失败返回 0<br/>
+				举例：int a='t';printf("%d\n",isalnum(a));</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -355,12 +493,69 @@
 		<div id="time">
 			<h3>time.h</h3>
 			<ol>
-			<li>int clock_gettime(clockid_t clk_id,struct timespec *tp)：可以根据需要，获取不同要求的精确时间（可以达到纳秒）。lock_gettime比gettimeofday更加精确<br/>
-			clk_id：<ul><li>CLOCK_MONOTONIC：从系统启动到这一刻起开始即使，不受系统时间被用户改变影响</li><li>CLOCK_REALTIME：系统时钟时间，随系统实时时间改变而改变，从1970/1/1,0:0:0开始计时，中间时刻若系统时间被用户改成其他则对应时间相应改变</li><li>CLOCK_PROCESS_CPUTIME_ID：本进程到当前代码系统CPU花费的时间</li><li>CLOCK_THREAD_CPUTIME_ID：本线程到当前代码系统CPU花费的时间</li></ul></li>
-			<li>int nanosleep(const struct timespec *req, struct timespec *rem)：暂停某个进程直到指定的时间后恢复。<br/>req：要暂停的时间，req->tv_sec 是以秒为单位，而 req->tv_nsec 以毫微秒为单位<br/>rem：剩余微秒时间<br/>成功返回 0，失败返回 -1，剩余微秒数纪录在 rem 中</li>
-			<li>time_t time(time_t *seconds)：返回自纪元（1970/1/1,00:00:00 UTC）起经过的时间，以秒为单位<br/>
-				seconds：time_t（为长整数别名）<br/>
-				返回值：若 seconds 不为空，则返回值也存储在变量 seconds 中。</li>
+			<li>int clock_gettime(clockid_t clk_id,struct timespec *tp)：可以根据需要，获取不同要求的精确时间（可以达到纳秒）。lock_gettime 比 gettimeofday 更加精确<br/>
+				clk_id：
+				<ul><li>CLOCK_MONOTONIC：从系统启动到这一刻起开始即使，不受系统时间被用户改变影响</li>
+				<li>CLOCK_REALTIME：系统时钟时间，随系统实时时间改变而改变，从 1970/1/1,0:0:0 开始计时，中间时刻若系统时间被用户改成其他则对应时间相应改变</li>
+				<li>CLOCK_PROCESS_CPUTIME_ID：本进程到当前代码系统 CPU 花费的时间</li>
+				<li>CLOCK_THREAD_CPUTIME_ID：本线程到当前代码系统 CPU 花费的时间</li></ul>
+				timespec：存储当前时间，秒和纳秒<br/>
+				返回值：成功返回 0
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; struct timespec time_value={0,0};<br/>
+						&nbsp; int a=clock_gettime(CLOCK_MONOTONIC,&time_value);<br/>
+						&nbsp; printf("sec=%lu,nsec=%lu\n",time_value.tv_sec,time_value.tv_nsec);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>int nanosleep(const struct timespec *req, struct timespec *rem)：暂停某个进程直到指定的时间后恢复。<br/>
+				req：要暂停的时间，req->tv_sec 是以秒为单位，而 req->tv_nsec 以毫微秒为单位<br/>
+				rem：剩余微秒时间<br/>
+				返回值：成功返回 0，失败返回 -1，剩余微秒数纪录在 rem 中
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; while(1)<br/>
+						&nbsp; {<br/>
+							&nbsp; &nbsp; struct timespec rem,req={5,600000};<br/>
+							&nbsp; &nbsp; printf("process start...\n");<br/>
+							&nbsp; &nbsp; nanosleep(&req,&rem);<br/>
+							&nbsp; &nbsp; printf("process ending...\n");<br/>
+							&nbsp; &nbsp; break;<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+				</li>
+			<li>time_t time(time_t *timer)：返回自纪元（1970/1/1,00:00:00 UTC）起经过的时间，以秒为单位<br/>
+				timer：time_t（为长整数别名）<br/>
+				返回值：返回总秒数。
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; time_t time_value;<br/>
+						&nbsp; time_value=time(NULL);//NULL 表示从 1970-1-1 开始计时<br/>
+						&nbsp; printf("%ld\n",time_value);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>struct tm *localtime(const time_t *timer)：使用 timer 的值来填充 tm 结构。timer 的值被分解为 tm 结构，并用本地时区表示。<br/>
 				timer：指向表示日历时间的 time_t 值的指针。<br/>
 				返回值：tm 结构指针</li>
