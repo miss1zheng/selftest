@@ -40,7 +40,192 @@
 		<ol><li>蓝牙的 MAC 功能：唯一识别码。<br/>
 		当两个蓝牙从机 mac 一致时会导致 APP 应用只搜索到一个。此时需要将 MAC 改成随机即可。<br/>
 		当两蓝牙一主一从时，主机将 MAC 改成和从机一致之后，可之间连接，当然，这需要代码支持。</li>
-		<li></li>
+		<li>GPS 定位数据解析：
+			<ul>
+			<li>$GPGGA （全球定位数据）<br/>
+				例：$GPGGA,092204.999,4250.5589,S,14718.5084,E,1,04,24.4,19.7,M,,,,0000*1F<br/>
+				字段 0：$GPGGA，语句 ID，表明该语句为 Global Positioning System Fix Data（GGA）GPS 定位信息<br/>
+				字段 1：UTC 时间，hhmmss.sss，时分秒格式<br/>
+				字段 2：纬度 ddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段 3：纬度 N（北纬）或 S（南纬）<br/>
+				字段4：经度 dddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段5：经度 E（东经）或 W（西经）<br/>
+				字段6：GPS 状态，0=未定位，1=非差分定位，2=差分定位，3=无效 PPS，6=正在估算<br/>
+				字段 7：正在使用的卫星数量（00 - 12）（前导位数不足则补 0）<br/>
+				字段 8：HDOP 水平精度因子（0.5 - 99.9）<br/>
+				字段 9：海拔高度（-9999.9 - 99999.9）<br/>
+				字段 10：地球椭球面相对大地水准面的高度<br/>
+				字段 11：差分时间（从最近一次接收到差分信号开始的秒数，如果不是差分定位将为空）<br/>
+				字段 12：差分站 ID 号 0000 - 1023（前导位数不足则补 0，如果不是差分定位将为空）<br/>
+				字段 13：校验值</li>
+			<li>$GPGSA （卫星 PRN 数据）<br/>
+				例：$GPGSA,A,3,01,20,19,13,,,,,,,,,40.4,24.4,32.2*0A<br/>
+				字段 0：$GPGSA，语句 ID，表明该语句为 GPS DOP and Active Satellites（GSA）当前卫星信息<br/>
+				字段 1：定位模式，A=自动手动 2D/3D，M=手动 2D/3D<br/>
+				字段 2：定位类型，1=未定位，2=2D 定位，3=3D 定位<br/>
+				字段 3：PRN 码（伪随机噪声码），第 1 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 4：PRN 码（伪随机噪声码），第 2 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 5：PRN 码（伪随机噪声码），第 3 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 6：PRN 码（伪随机噪声码），第 4 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 7：PRN 码（伪随机噪声码），第 5 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 8：PRN 码（伪随机噪声码），第 6 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 9：PRN 码（伪随机噪声码），第 7 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 10：PRN 码（伪随机噪声码），第 8 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 11：PRN 码（伪随机噪声码），第 9 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 12：PRN 码（伪随机噪声码），第 10 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 13：PRN 码（伪随机噪声码），第 11 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 14：PRN 码（伪随机噪声码），第 12 信道正在使用的卫星 PRN 码编号（00）（前导位数不足则补 0）<br/>
+				字段 15：PDOP 综合位置精度因子（0.5 - 99.9）<br/>
+				字段 16：HDOP 水平精度因子（0.5 - 99.9）<br/>
+				字段 17：VDOP 垂直精度因子（0.5 - 99.9）<br/>
+				字段 18：校验值</li>
+			<li>$GPGSV（卫星状态信息）<br/>
+				例：$GPGSV,3,1,10,20,78,331,45,01,59,235,47,22,41,069,,13,32,252,45*70<br/>
+				字段 0：$GPGSV，语句 ID，表明该语句为 GPS Satellites in View（GSV）可见卫星信息<br/>
+				字段 1：本次 GSV 语句的总数目（1 - 3）<br/>
+				字段 2：本条 GSV 语句是本次 GSV 语句的第几条（1 - 3）<br/>
+				字段 3：当前可见卫星总数（00 - 12）（前导位数不足则补 0）<br/>
+				字段 4：PRN 码（伪随机噪声码）（01 - 32）（前导位数不足则补 0）<br/>
+				字段 5：卫星仰角（00 - 90）度（前导位数不足则补 0）<br/>
+				字段 6：卫星方位角（00 - 359）度（前导位数不足则补 0）<br/>
+				字段 7：信噪比（00－99）dbHz<br/>
+				字段 8：PRN 码（伪随机噪声码）（01 - 32）（前导位数不足则补 0）<br/>
+				字段 9：卫星仰角（00 - 90）度（前导位数不足则补 0）<br/>
+				字段 10：卫星方位角（00 - 359）度（前导位数不足则补 0）<br/>
+				字段 11：信噪比（00－99）dbHz <br/>
+				字段 12：PRN 码（伪随机噪声码）（01 - 32）（前导位数不足则补 0）<br/>
+				字段 13：卫星仰角（00 - 90）度（前导位数不足则补 0）<br/>
+				字段 14：卫星方位角（00 - 359）度（前导位数不足则补 0）<br/>
+				字段 15：信噪比（00－99）dbHz<br/>
+				字段 16：校验值</li>
+			<li>$GPRMC（运输定位数据）<br/>
+				例：$GPRMC,024813.640,A,3158.4608,N,11848.3737,E,10.05,324.27,150706,,,A*50<br/>
+				字段 0：$GPRMC，语句 ID，表明该语句为 Recommended Minimum Specific GPS/TRANSIT Data（RMC）推荐最小 定位信息<br/>
+				字段 1：UTC 时间，hhmmss.sss 格式<br/>
+				字段 2：状态，A=定位，V=未定位<br/>
+				字段 3：纬度 ddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段 4：纬度 N（北纬）或 S（南纬）<br/>
+				字段 5：经度 dddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段 6：经度 E（东经）或 W（西经）<br/>
+				字段 7：速度，节，Knots<br/>
+				字段 8：方位角，度<br/>
+				字段 9：UTC 日期，DDMMYY 格式<br/>
+				字段 10：磁偏角，（000 - 180）度（前导位数不足则补 0）<br/>
+				字段 11：磁偏角方向，E=东 W=西<br/>
+				字段 16：校验值 </li>
+			<li>$GPVTG（地面速度信息）<br/>
+				例：$GPVTG,89.68,T,,M,0.00,N,0.0,K*5F<br/>
+				字段 0：$GPVTG，语句 ID，表明该语句为 Track Made Good and Ground Speed（VTG）地面速度信息<br/>
+				字段 1：运动角度，000 - 359，（前导位数不足则补 0）<br/>
+				字段 2：T=真北参照系<br/>
+				字段 3：运动角度，000 - 359，（前导位数不足则补 0）<br/>
+				字段 4：M=磁北参照系<br/>
+				字段 5：水平运动速度（0.00）（前导位数不足则补 0）<br/>
+				字段 6：N=节，Knots<br/>
+				字段 7：水平运动速度（0.00）（前导位数不足则补 0）<br/>
+				字段 8：K=公里/时，km/h<br/>
+				字段 9：校验值</li>
+			<li>$GPGLL（大地坐标信息）<br/>
+				例：$GPGLL,4250.5589,S,14718.5084,E,092204.999,A*2D<br/>
+				字段 0：$GPGLL，语句 ID，表明该语句为 Geographic Position（GLL）地理定位信息<br/>
+				字段 1：纬度 ddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段 2：纬度 N（北纬）或 S（南纬）<br/>
+				字段 3：经度 dddmm.mmmm，度分格式（前导位数不足则补 0）<br/>
+				字段 4：经度 E（东经）或 W（西经）<br/>
+				字段 5：UTC 时间，hhmmss.sss 格式</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>
+				<form>
+				<fieldset>
+					<legend>** <b>经纬度的度分和度度分转换</b> **</legend>
+				#include &lt;stdio.h><br/>
+				#include &lt;string.h><br/>
+				#include &lt;stdlib.h><br/><br/>
+
+				#define bcc_max 4*1024<br/>
+				void data_xor_del(char *data,int data_len)<br/>
+				{<br/>
+					&nbsp; char check = 0x00;<br/>
+					&nbsp; char bcc_data[bcc_max];<br/>
+					&nbsp; char String[10];<br/>
+					&nbsp; int i = 0;<br/>
+					&nbsp; memset(bcc_data,0,bcc_max);<br/>
+					&nbsp; memcpy(bcc_data,data,data_len);<br/>
+					&nbsp; while(data_len)<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; check ^= bcc_data[i];<br/>
+						&nbsp; &nbsp; i++;data_len--;<br/>
+					&nbsp; }<br/>
+					&nbsp; sprintf(String,"%x",check);<br/>
+					&nbsp; printf("%s\n",String);<br/>
+				}<br/><br/>
+
+				/*纬度<br/>
+				  3158.4608<br/>
+				  58.4608/60=0.974347，<br/>
+				  即结果为：31.974347<br/>
+				  经度<br/>
+				  11848.3737<br/>
+				  48.3737/60=0.806228，<br/>
+				  即结果为118.806228<br/>
+				*/<br/>
+				int ddmm2dd(const char *ddmm, char *dd)<br/>
+				{<br/>
+					&nbsp; if (NULL == ddmm || NULL == dd)<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; printf("ddmm null or dd null\n");<br/>
+						&nbsp; &nbsp; return -1;<br/>
+					&nbsp; }<br/>
+					&nbsp; int lenSrc = strlen(ddmm)+1;<br/>
+					&nbsp; int lenMm = 0;<br/>
+					&nbsp; int flag = 1; <br/>
+					&nbsp; memcpy(dd,ddmm,lenSrc);<br/>
+					&nbsp; char *pcMm;double dMm;int iMm; //把pcMm定位到小数点位置<br/>
+					&nbsp; pcMm = strstr(dd,"."); <br/>
+					&nbsp; if (pcMm == NULL) //不含小数点的情况<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; pcMm = dd+strlen(dd)-2;<br/>
+						&nbsp; &nbsp; iMm = atoi(pcMm);dMm = iMm /60.0;<br/>
+					&nbsp; }<br/>
+					&nbsp; else //含有小数点的情况<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; if (pcMm - dd > 2)//有度 <br/>
+						&nbsp; &nbsp; {<br/>
+							&nbsp; &nbsp; &nbsp; pcMm = pcMm - 2;<br/>
+						&nbsp; &nbsp; }<br/>
+						&nbsp; &nbsp; else //没有度,只有分<br/>
+						&nbsp; &nbsp; {<br/>
+							&nbsp; &nbsp; &nbsp; pcMm = dd;<br/>
+							&nbsp; &nbsp; &nbsp; flag = 0;<br/>
+						&nbsp; &nbsp; }<br/>
+						&nbsp; &nbsp; dMm = atof(pcMm);<br/>
+						&nbsp; &nbsp; dMm /= 60.0;<br/>
+					&nbsp; }<br/>
+					&nbsp; sprintf(pcMm,"%lf",dMm);<br/>
+					&nbsp; if ( flag )<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; strcpy(pcMm,pcMm+1);<br/>
+					&nbsp; }<br/>
+					&nbsp; pcMm = strstr(dd,".");<br/>
+					&nbsp; lenMm = strlen(pcMm);<br/>
+					&nbsp; if ( lenMm > (6+2))<br/>
+					&nbsp; {<br/>
+						&nbsp; &nbsp; memset(pcMm+6+2,0,lenMm-6-2);<br/>
+					&nbsp; }<br/>
+					&nbsp; return 1;<br/>
+				}</fieldset>
+				</form>
+				</li>
+			<li></li>
+			<li></li></ul>
+		</li>
 		<li></li>
 		<li></li>
 		<li></li>

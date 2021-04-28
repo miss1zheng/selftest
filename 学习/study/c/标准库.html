@@ -558,7 +558,22 @@
 				</li>
 			<li>struct tm *localtime(const time_t *timer)：使用 timer 的值来填充 tm 结构。timer 的值被分解为 tm 结构，并用本地时区表示。<br/>
 				timer：指向表示日历时间的 time_t 值的指针。<br/>
-				返回值：tm 结构指针</li>
+				返回值：tm 结构指针<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; struct tm *tm_value;<br/>
+						&nbsp; time_t alltime = time(NULL);<br/>
+						&nbsp; tm_value = localtime(&alltime);<br/>
+						&nbsp; printf("%d-%d-%d,%d:%d:%d",tm_value->tm_year,tm_value->tm_mon,tm_value->tm_mday,tm_value->tm_hour,tm_value->tm_min,tm_value->tm_sec);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)：格式化结构体 timeptr 表示的时间，并将值存储在 str 中。<br/>
 				str：指向目标数组的指针<br/>
 				maxsize：被复制到 str 最大字节数<br/>
@@ -591,7 +606,100 @@
 					<tr><td>%Z</td><td>时区名称或缩写</td><td>CDT</td></tr>
 					<tr><td>%</td><td></td><td></td></tr>
 				</table>
-				timeptr：指向 tm 结构的指针</li>
+				timeptr：指向 tm 结构的指针<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; char buff[215];<br/>
+						&nbsp; struct tm *tm_value;<br/>
+						&nbsp; time_t alltime = time(NULL);<br/>
+						&nbsp; tm_value = localtime(&alltime);<br/>
+						&nbsp; strftime(buff,215,"%F,%X",tm_value);<br/>
+						&nbsp; printf("%s\n",buff);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>clock_t clock(void)：处理器时钟所使用时间，一般用于计时程序或程序某一段的执行时间<br/>
+				返回值：时间，clock_t 是长整型<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; clock_t start,end;<br/>
+						&nbsp; start=clock();<br/>
+						&nbsp; for(int i=0;i<10000;i++)<br/>
+							&nbsp; &nbsp; ;<br/>
+						&nbsp; end=clock();<br/>
+						&nbsp; printf("%ld",end-start);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>char *asctime(const struct tm *timeptr)：把 timeptr 指向的 tm 结构体中储存的时间转换为字符串<br/>
+				timeptr：tm 结构体指针<br/>
+				返回值：返回的字符串格式为：Www Mmm dd hh:mm:ss yyyy。其中Www为星期；Mmm为月份；dd为日；hh为时；mm为分；ss为秒；yyyy为年份。
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; struct tm *tmvalue;<br/>
+						&nbsp; time_t alltime = time(NULL);<br/>
+						&nbsp; tmvalue = localtime(&alltime);<br/>
+						&nbsp; printf("%s",asctime(tmvalue));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>char *ctime(const time_t *timer)： 把日期和时间转换为字符串<br/>
+				timer：包含日历时间的 time_t 指针<br/>
+				返回值：返回的字符串格式为：Www Mmm dd hh:mm:ss yyyy 其中，Www 表示星期几，Mmm 是以字母表示的月份，dd 表示一月中的第几天，hh:mm:ss 表示时间，yyyy 表示年份。<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; time_t curtime;<br/>
+						&nbsp; time(&curtime);<br/>
+						&nbsp; printf("%s", ctime(&curtime));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>double difftime(time_t time1, time_t time2)：计算时间差<br/>
+				time1：结束时间<br/>
+				time2：开始时间<br/>
+				返回值：两时间差</li>
+			<li>struct tm *gmtime(const time_t *timer)：把日期和时间转换成格林威治（GMT）时间<br/>
+				timer：长整型<br/>
+				返回值：返回转换后的 tm 结构的时间
+				#include &lt;stdio.h><br/>
+				#include &lt;time.h><br/>
+				int main(){<br/>
+					&nbsp; time_t curtime;<br/>
+					&nbsp; struct tm *tmtime;<br/>
+					&nbsp; time(&curtime);<br/>
+					&nbsp; tmtime = gmtime(&curtime);<br/>
+					&nbsp; printf("english:%2d:%02d\n",(tmtime->tm_hour+0)%24, tmtime->tm_min);<br/>
+					&nbsp; printf("china:%2d:%02d\n", (tmtime->tm_hour+8)%24, tmtime->tm_min);<br/>
+					&nbsp; return 0;<br/>
+				}
+				</li>
+			<li>time_t mktime(struct tm *timeptr)：将时间转换为自1970年1月1日以来持续时间的秒数<br/>
+				timeptr：tm 结构体<br/>
+				返回值：成功返回总秒数，失败返回 -1</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -610,11 +718,10 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>size_t：无符号整型；<br/>
+				clock_t：长整型<br/>
+				time_t：长整型<br/>
+				tm：存储时间的结构体</li>
 			<li>tm：<br/>
 				struct tm {<br/>
 					&nbsp; int tm_sec; //秒，范围从 0 到 59<br/>
@@ -691,8 +798,6 @@
 				}</fieldset>
 				</form>
 				</li>
-			<li></li>
-			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
