@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MODBUS</title>
-	<meta http-equiv="Content-Type" content="charset=utf-8;text/html">
-	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<title>modbus</title>
+	<style>
+		a{text-decoration:none}
+		p{line-height:25px;}
+		.main_body th,td{line-height:25px;}
+	</style>
 </head>
 <body>
 	<div class="menu_body" style="padding-left: 20px;">
-		<a href="../../../home.html">首页</a>
-		<a href="../../study.html">学习</a>
-		<a href="../../../工具/tools.html">工具</a>
-		<a href="../../../阅读/read.html">阅读</a>
-		<a href="../../../娱乐/play.html">娱乐</a>
+		<a href="../../../../home.html">首页</a>
+		<a href="../../../study.html">学习</a>
+		<a href="../../../../工具/tools.html">工具</a>
+		<a href="../../../../阅读/read.html">阅读</a>
+		<a href="../../../../娱乐/play.html">娱乐</a>
 	</div>
 	<div class="left_body">
 		<ul>
@@ -33,8 +38,443 @@
 			<li><a href="../../系统/系统.html">系统</a></li>
 		</ul>
 	</div>
+	<div class="table_body">
+		<a href="#jianjie">简介</a><br/>
+		<a href="#xieyijiegou">协议结构</a><br/><a href="#qingqiufangshi">请求方式</a><br/>
+		<a href="#baotoujiegou">报头结构</a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		<a href="#"></a><br/><a href="#"></a><br/>
+		</div>
 	<div class="main_body">
-		<iframe src="./data/html.html" name="c" style="width: 100%;height: 100%;position: fixed;"></iframe>
+		<h3 id="jianjie">简介</h3>
+		<p>modbus：串行通讯协议，是一个主从协议。一主多从模式。modbus 协议包括三种通讯方式 ASCII、RTU 和 TCP</p>
+		<p>modbus协议类型：对于串行连接，存在两种分别是 modbus ascii 和 modbus rtu，rtu 是一种紧凑的，采用二进制标识数据的方式，ascii 是人类可读的，冗长的表示方式。</p>
+		<p>ascii 模式：: | 地址 | 功能码 | 数据个数 | 数据1 | ... | 数据n | LRC 高字节 | LRC 低字节 | 回车 | 换行<br/>
+			&nbsp;rtu 模式：地址 | 功能码 | 数据个数 | 数据1 | ... | 数据n | CRC 低字节 | CRC 高字节<br/>
+			RTU 格式后续命令 / 数据带有 CRC 的校验和，而 ASCII 格式采用<b style="color:red">纵向冗余校验</b>的校验和<br/>
+			ASCII 格式有特殊帧头（ASCII 码 3AH）和结束标志回车换行符（ASCII 码 0DH,0AH）</p>
+		<p>modbus poll 在 TCP 类型下属于 主机/客户端，modbus slave 属于 从机/服务器端。</p>
+		<p></p>
+		<p></p>
+		
+		<hr/><h3 id="">modbus rtu</h3>
+		<p>一主多从，从机地址为 0x00 表示广播地址，0x01-0xF7 作为从机地址，剩余 8 个为协议保留。<br/>
+			从机接收到主机请求，一般的处理方式有两种：积极响应和异常响应，积极响应是分析请求并执行相应的动作；异常相应是 CRC 校验出错等<br/>
+			通讯必须由主设备发起，没有办法要求从设备 “报告异常”（构建在以太网的 TCP/IP 协议之上，被称为 open-mbus 除外）主设备必须循环的询问每个从设备，并查找数据中的变化。<br/>
+			同一个 RTU 网络中不允许出现两台设备地址相同，这样会导致无限信号出现干扰，不能成功接收数据。</p>
+		<p>addr &nbsp;&nbsp;| cmd &nbsp; | reg &nbsp;&nbsp; | number &nbsp;| data &nbsp;| CRC<br/>
+			从机地址 | 功能码 | 寄存地址 | 数据长度 | 数据 &nbsp;| 校验位<br/>
+			8bit &nbsp;&nbsp;| 8bit &nbsp;| 16bit &nbsp; | 16bit &nbsp; | 8bit*n | 16bit<br/>
+			addr：从机地址，0x00 为广播帧，若从机收到非本从机地址的数据包则进行丢包处理<br/>
+			cmd：功能码，详见 <a href="#功能码">功能码</a><br/>
+			reg：寄存器地址，待发送/读取数据的首地址<br/>
+			number：数据长度，寄存器个数<br/>
+			data：数据，实际数据<br/>
+			CRC：校验码，若CRC 错误则会丢包并请求重发</p>
+		<p>错误帧：addr | cmd | error | CRC<br/>
+			从机地址 | 功能码 | 错误码 | 校验位<br/>
+			8bit | 8bit | 8bit | 16bit<br/>
+			error：错误码，详见 <a href=""></a></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<table border="1" cellspacing="0" >
+			<caption>RTU 功能码格式</caption>
+			<tr><th>RTU 功能码（以字节为单位）</th></tr>
+			<tr><td><b>01：读取线圈状态</b><br/>
+				请求：<br/>
+				addr(1) |0x01(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x01(1)|lenght(1)|data(n)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位<br/>
+				举例：<br/>
+				主机：01 01 <u>00 00</u> <u>00 14</u> <u>3C 05</u><br/>
+				从机：01 01 03 <u>11 82 04</u> <u>0D 28<br/>
+				注意：位操作，读单个或多个数量</td></tr>
+			<tr><td><b>02：读取离散量输入状态</b><br/>
+				请求：<br/>
+				addr(1) |0x02(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x02(1)|lenght(1)|data(n)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位<br/>
+				举例：<br/>
+				主机：01 02 <u>00 00</u> <u>00 14</u> <u>78 05</u><br/>
+				从机：01 02 03 <u>0A 88 00</u> <u>3E 4C</u><br/>
+				注意：位操作，读单个或多个数量</td></tr>
+			<tr><td><b>03：读取保持寄存器</b><br/>
+				请求：<br/>
+				addr(1) |0x03(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x03(1)|lenght(1)|data(n)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位<br/>
+				举例：<br/>
+				主机：01 03 <u>00 00</u> <u>00 05</u> <u>B5 C9</u><br/>
+				从机：01 03 0A <u>00 78 00 0A 03 E8 00 00 00 00</u> <u>EC 90</u><br/>
+				注意：字操作，读单个或多个数量</td></tr>
+			<tr><td><b>04：读取输入寄存器</b><br/>
+				请求：<br/>
+				addr(1) |0x04(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x04(1)|lenght(1)|data(n)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位<br/>
+				举例：<br/>
+				主机：01 04 <u>00 00</u> <u>00 05</u> <u>30 09</u><br/>
+				从机：00 04 0A <u>00 00 00 00 00 78 00 00 00 00</u> <u>71 77</u><br/>
+				注意：字操作，读单个或多个数量</td></tr>
+			<tr><td><b>05：写单个线圈</b><br/>
+				请求：<br/>
+				addr(1) |0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位&nbsp;|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位&nbsp;|校验低位|校验高位<br/>
+				举例：<br/>
+					<br/>
+				注意：位操作，写单个数量</td></tr>
+			<tr><td><b>06：写单个保持寄存器</b><br/>
+				请求：<br/>
+				addr(1) |0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位|校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位|校验低位|校验高位<br/>
+				举例：<br/>
+				<br/>
+				注意：字操作，写单个数量</td></tr>
+			<tr><td>07：读取异常状态
+				</td></tr>
+			<tr><td>08：回送诊断校验
+				</td></tr>
+			<tr><td>09：编程（只用于484）
+				</td></tr>
+			<tr><td>0x0F：写多个线圈<br/>
+				addr(1) |0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)&nbsp;|lenght(1)|outvalue0H(1)|outvalue0L(1)|...|outvaluenH(1)|outvaluenL(1)|CRCL(1) |CRCH(1)<br/>
+				从机地址|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位|字节长度 |输出值高位 &nbsp;|输出值低位 &nbsp;|...|输出值高位 &nbsp;|输出值低位|校验低位|校验高位<br/>
+				<br/>
+				注意：位操作，写多个数量</td></tr>
+			<tr><td>10：写多个保持寄存器<br/>
+				请求：<br/>
+				addr(1) | 0x10(1)| startaddrH(1)| startaddrL(1)| numH(1) | numL(1) | count(1) | dataL(1) | ... | dataH(1) |CRCL(1) |CRCH(1)<br/>
+				从机地址| 功能码 | 起始地址高位 | 起始地址低位 | 连续写入字个数高位（一个字2bit） | 连续写入字个数低位 | 写入值的数量 | 写入值低位 | ... |写入值高位 |校验低位|校验高位<br/>
+				应答：<br/>
+				addr(1) |0x06(1)|startaddrH(1)| startaddrL/1bit | dataH/1bit | dataL/1bit | CRCL/1bit |CRCH/1bit<br/>
+				从机地址|功能码 |起始地址高位 | 起始地址低位 | 写入值高位 | 写入值低位 | 校验低位 | 校验高位<br/>
+				举例：<br/>
+				<br/>
+				注意：字操作，写多个数量</td></tr>
+			<tr><td>11：读取事件计数
+				</td></tr>
+			<tr><td>12：读取通信事件记录
+				</td></tr>
+			<tr><td>13：编程（184/384/484/584等）
+				</td></tr>
+			<tr><td>14：探寻
+				</td></tr>
+			<tr><td>15：强置多线圈
+				</td></tr>
+			<tr><td>16：预置多线圈
+				</td></tr>
+			<tr><td>17：报告多寄存器
+				</td></tr>
+			<tr><td>18：可使主机模拟编程功能
+				</td></tr>
+			<tr><td>19：重置通信链路
+				</td></tr>
+			<tr><td>20：读取通用参数
+				</td></tr>
+			<tr><td>21：写入通用参数
+				</td></tr>
+			<tr><td>22：屏蔽写寄存器
+				</td></tr>
+			<tr><td>23：读/写多个寄存器
+				</td></tr>
+			<tr><td>43：读设备别识码
+				</td></tr>
+			<tr><td>22-42,44-64：保留作为扩展功能
+				</td></tr>
+			<tr><td>65-72：保留以备用功能所用
+				</td></tr>
+			<tr><td>73-119：非法功能
+				</td></tr>
+			<tr><td>120-127：保留，留作内部作用
+				</td></tr>
+			<tr><td>128-255：保留，用于异常应答
+				</td></tr>
+			<tr><td></td></tr>
+			<tr><td>总结：<br/>
+				1.线圈（DI）：开关输入信号，PLC的输出位，一个地址一个数据位，可读可写<br/>
+				2.离散量输入（DO）：主要用来读取单个位的数据，PLC的输入位，只读<br/>
+				3.输入寄存器（AI）：主要用来读取 16 位，也就是两个字节的数据，PLC中只能从模拟量输入端改变的寄存器，只读<br/>
+				4.保持寄存器（AO）：主要用来写入 16 位的数据，PLC中用于输出模拟量信号的寄存器，可读可写<br/>
+				5.开关量：只有 0 和 1 两种状态<br/>
+				6.数字量：数字量在时间和数量上都是离散的物理量，其表示的信号则为数字信号。数字量是由 0 和 1 组成的信号，经过编码形成有规律的信号，量化后的模拟量就是数字量<br/>
+				7.模拟量：模拟量是在时间和数量上都是连续的物理量，其表示的信号则为模拟信号。模拟量在连续的变化过程中任何一个取值都是一个具体有意义的物理量，如温度，电压，电流等<br/>
+				8.
+				</td></tr>
+		</table><br/>
+		<table border="1" cellspacing="0" >
+			<caption>错误功能码</caption>
+			<tr><th>功能码</th><th>描述</th></tr>
+			<tr><td>0x01</td><td>非法功能。对于服务器（或从站）来说，询问中接收到的功能码是不可允许的操作，可能是因为功能码仅适用于新设备而被选单元中不可实现同时，还指出服务器（或从站）在错误状态中处理这种请求，例如：它是未配置的，且要求返回寄存器值。</td></tr>
+			<tr><td>0x02</td><td>非法数据地址。对于服务器（或从站）来说，询问中接收的数据地址是不可允许的地址，特别是参考号和传输长度的组合是无效的。对于带有100个寄存器的控制器来说，偏移量96和长度4的请求会成功，而偏移量96和长度5的请求将产生异常码02。</td></tr>
+			<tr><td>0x03</td><td>非法数据值。对于服务器（或从站）来说，询问中包括的值是不可允许的值。该值指示了组合请求剩余结构中的故障。例如：隐含长度是不正确的。modbus协议不知道任何特殊寄存器的任何特殊值的重要意义，寄存器中被提交存储的数据项有一个应用程序期望之外的值</td></tr>
+			<tr><td>0x04</td><td>从站设备故障。当服务器（或从站）正在设法执行请求的操作时，产生不可重新获得的差</td></tr>
+			<tr><td>0x05</td><td>确认。与编程命令一起使用，服务器（或从站）已经接受请求，并且正在处理这个请求，但是需要长持续时间进行这些操作，返回这个响应防止在客户机（或主站）中发生超时错误，客户机（或主机）可以继续发送轮询程序完成报文来确认是否完成处理。</td></tr>
+			<tr><td>0x06</td><td>从属设备忙。与编程命令一起使用。服务器(或从站)正在处理长持续时间的程序命令。张服务器(或从站)空闲时，用户(或主站)应该稍后重新传输报文。</td></tr>
+			<tr><td>0x07</td><td></td></tr>
+			<tr><td>0x08</td><td>存储奇偶差错。与功能码20和21以及参考类型6一起使用，指示扩展文件区不能通过一致性校验。服务器(或从站)设法读取记录文件，但是在存储器中发现一个奇偶校验错误。客户机(或主方)可以重新发送请求，但可以在服务器(或从站)设备上要求服务</td></tr>
+			<tr><td>0x0A</td><td>不可用网关路径。与网关一起使用，指示网关不能为处理请求分配输入端口至输出端口的内部通信路径。通常意味着网关是错误配置的或过载的</td></tr>
+			<tr><td>0x0B</td><td>网关目标设备响应失败。与网关一起使用，指示没有从目标设备中获得响应。通常意味着设备未在网络中</td></tr>
+			<tr><td>0x66</td><td>写单个寄存器错误</td></tr>
+			<tr><td>0x90</td><td>写多个寄存器错误</td></tr>
+			<tr><td>0x85</td><td>非法</td></tr>
+			<tr><td>0x81</td><td></td></tr>
+			<tr><td>0x82</td><td></td></tr>
+			<tr><td>0x83</td><td>CRC 校验失败</td></tr>
+			<tr><td>0x84</td><td></td></tr>
+			<tr><td>0x85</td><td></td></tr>
+			<tr><td>0x86</td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+		</table><br/>
+		
+		<hr/><h3 id="">modbus ascii</h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		
+		<hr/><h3 id="">modbus tcp</h3>
+		<p>本质上是基于 modbus RTU 功能码数据包演变而来的，遵循 TCP/IP 网络层协议，是属于 TCP/IP 四层协议中的应用层。 其数据报文的基本格式是 MBAP + PDU；<br/>
+			MBAP 是 modbus TCP 与 mosbus RTU 最大的区别，而 PDU 其实可以理解为 modbusR TU 去掉 CRC 校验字节。</p>
+		<p>modbus tcp 服务器： 默认端口为 502，监听网络端口，等待客户端连接访问<br/>
+			modbus tcp 客户端：主动连接指定 id 的从机</p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<table border="1" cellspacing="0" >
+			<caption>MBAP 报文头/7byte</caption>
+			<tr><th>内容</th><th>描述</th></tr>
+			<tr><td>事务处理标识</td><td>报文的序列号，一般每次通信之后就要加 1 以区别不同的通信数据报文，一般由 pull 编号，2 字节</td></tr>
+			<tr><td>协议标识符</td><td>00 00 表示 Modbus TCP 协议； 这个是固定不可变的。2 字节</td></tr>
+			<tr><td>长度</td><td>接下来的数据长度，2 字节</td></tr>
+			<tr><td>单元标识符</td><td>设备地址，1字节</td></tr>
+		</table><br/>
+		<table border="1" cellspacing="0" >
+			<caption>PDU 结构</caption>
+			<tr><th>功能码(以字节为单位)</th></tr>
+			<tr><td><b>0x01：读线圈</b><br/>
+				请求：<br/>
+				MBAP(7)|0x01(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x01(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 01 <u>00 02</u> <u>00 08</u>（从地址 0x0002 开始读取 8 个线圈数据）<br/>
+				响应：<u>00 01 00 00 00 04 01</u> 01 01 01（长度 1，数据 01，也就是第一个线圈 ON，其余都是 OFF）
+			</td></tr>
+			<tr><td><b>0x02：读离散量输入</b><br/>
+				请求：<br/>
+				MBAP(7)|0x02(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |数据个数高位|数据个数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x02(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 02 <u>00 00</u> <u>00 12</u>（从地址 0x0000 开始读取 12 个离散量输入）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 02 03 <u>01 04 00</u>（长度 3，数据为 0x010400，表示第 1 个离散量输入和第 11 个离散量输入为 ON，其余为 OFF）<br/>
+				注意：数据长度 = 9+ceil（数据个数/8）
+				</td></tr>
+			<tr><td><b>0x03：读保持寄存器</b><br/>
+				请求：<br/>
+				MBAP(7)|0x03(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x03(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 03 <u>00 00</u> <u>00 03</u>（从地址 0x0000 开始读取 3 个寄存器值）<br/>
+				响应：<u>00 01 00 00 00 09 01</u> 03 06 <u>00 21 00 00 00 00</u>（长度为 6，第一个寄存器的数据为 0x21，其余为 0x00）<br/>
+				注意：数据长度=寄存器数*2+9，两个字节表示一个值
+				</td></tr>
+			<tr><td><b>0x04：读输入寄存器</b><br/>
+				请求：<br/>
+				MBAP(7)|0x04(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x04(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 04 <u>00 02</u> <u>00 05</u>（从地址为 0x0002 开始读取 5 个寄存器值）<br/>
+				响应：<u>00 01 00 00 00 0D 01</u> 04 0A <u>00 0C 00 00 00 00 00 00 00 00</u>（长度为 10，第一个寄存器的数据为 0x0c，其余为 0x00）<br/>
+				注意：数据长度=寄存器数*2+9，两个字节表示一个值
+				</td></tr>
+			<tr><td><b>0x05：写单个线圈</b><br/>
+				请求：<br/>
+				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（将地址为 0x0003 的线圈设为 ON）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（写入成功）<br/>
+				</td></tr>
+			<tr><td><b>0x06：写单个保持寄存器</b><br/>
+				请求：<br/>
+				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（向地址为 0x0000 的寄存器写入数据 0x000A）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（写入成功）<br/>
+				</td></tr>
+			<tr><td><b>0x0F：写多个线圈</b><br/>
+				请求：<br/>
+				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)&nbsp;|lenght(1)|outvalue0H(1)|outvalue0L(1)|...|outvaluenH(1)|outvaluenL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位|字节长度 |输出值高位 &nbsp;|输出值低位 &nbsp;|...|输出值高位 &nbsp;|输出值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 09 01</u> 0F <u>00 13</u> <u>00 0A</u> 02 <u>CD 01</u><br/>
+				响应：<u>00 01 00 00 00 06 01</u> 0F <u>00 13</u> <u>00 0A</u><br/>
+				</td></tr>
+			<tr><td><b>0x10：写多个保持寄存器</b><br/>
+				请求：<br/>
+				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)&nbsp;|lenght(1)|regvalue(n)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位|字节长度 |寄存器值<br/>
+				响应：<br/>
+				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 09 01</u> 10 <u>00 00</u> <u>00 01</u> 02 <u>00 0F</u>（从地址为 0x0000，数量为 0x0001 的寄存器写入数据，长度为 2，数据为 0x000F）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 10 <u>00 00</u> <u>00 01</u>（写入成功）<br/>
+				字节长度=13+寄存器数*2
+				</td></tr>
+			<tr><td><b>总结：</b><br/>
+				1.0x01 和 0x02 格式一致，0x03 和 0x04 格式一致，0x05 和 0x06 格式一致，0x0F 和 0x10 格式一致<br/>
+				2.0x01、0x02、0x03、0x04 是读，0x0F、0x10 是写<br/>
+				3.0x03 和 0x04 是读寄存器，虽然寄存器类型不同<br/>
+				4.0x05 和 0x06 是发什么就回什么<br/>
+				5.0x0F 和 0x10 是发的比回的多，多余部分为 lenght+data<br/>
+				6.0x01 和 0x02 读取的是一个字节对应一个值，而 0x03 和 0x04 读取的是两个字节对应一个值<br/>
+				7.线圈和保持寄存器是可读可写的，而离散和输入寄存器是只读的</td></tr>
+		</table><br/>
+		
+		<hr/><h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		
+		<hr/><h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		
+		<table border="1" cellspacing="0" >
+			<caption>功能码描述</caption>
+			<tr><th>功能码</th><th>描述</th><th>作用</th></tr>
+			<tr><td>0x01</td><td>读线圈</td><td>获取一组逻辑线圈的当前状态（ON/OFF），主从机都可改值，主机改值功能码变成0x0F ，从机改值功能码还是0x01</td></tr>
+			<tr><td>0x02</td><td>读离散量输入</td><td>获取一组开关输入的当前状态（ON/OFF），从改主不可改，主机改值功能码0x0F响应错误0x8F，从机改值功能码还是0x01</td></tr>
+			<tr><td>0x03</td><td>读保持寄存器</td><td>在一或多个保持寄存器获取当前二进制值，主从机都可改值，主机改值功能码变成0x10，从机改值功能码0x03</td></tr>
+			<tr><td>0x04</td><td>读输入寄存器</td><td>在一或多个输入寄存器获取当前二进制值，从改主不可改，主机改值功能码0x10响应错误0x90，从机改值功能码还是0x04</td></tr>
+			<tr><td>0x05</td><td>写单个线圈</td><td>强置一个逻辑线圈的通断状态</td></tr>
+			<tr><td>0x06</td><td>写单个保持寄存器</td><td>把具体二进制值写入保持寄存器</td></tr>
+			<tr><td>0x07</td><td>读取异常状态</td><td>获取8个内部线圈的通断状态，这8个线圈的地址由控制器决定，用户逻辑可将这些线圈定义已说明从机状态，短报文适宜于迅速读取状态</td></tr>
+			<tr><td>0x08</td><td>会送诊断校验</td><td>把诊断校验报文送从机以对通信处理进行评鉴</td></tr>
+			<tr><td>0x09</td><td>编程（只用于484）</td><td>使主机模拟编程器作用修改PC从机逻辑</td></tr>
+			<tr><td>0x0F</td><td>写多个线圈</td><td></td></tr>
+			<tr><td>0x10</td><td>写多个保持寄存器</td><td>可使主机与一台正在执行长程序从机通信，探询该从机是否已完成其操作认为，仅在含义功能码9的报文发送后，本功能码才发送</td></tr>
+			<tr><td>0x11</td><td>读取事件计数</td><td>可使主机发出单询问，并随即判定操作是否成功，尤其是该命令或其他应答产生通信错误时</td></tr>
+			<tr><td>0x12</td><td>读取通信事件记录</td><td>可使主机检索每台从机的modbus事务处理通信事件记录。如果某项事务处理完成，记录会给出有关错误。</td></tr>
+			<tr><td>0x13</td><td>编程</td><td>可使主机模拟编程器功能修改PC从机逻辑</td></tr>
+			<tr><td>0x14</td><td>探询</td><td>可使主机与正在执行认为的从机通信，定期控询该从机是否已完成其程序操作，仅在含有功能13的报文发送后，本功能码才得发送</td></tr>
+			<tr><td>0x15</td><td>强置多线圈</td><td>强置一串连续逻辑线圈的通断</td></tr>
+			<tr><td>0x16</td><td>预置多寄存器</td><td>把具体的二进制值写入一串连续的保持寄存器中</td></tr>
+			<tr><td>0x17</td><td>报告从机标识</td><td>可使主机判断编址从机的类型及该从机运行指示灯的状态</td></tr>
+			<tr><td>0x18</td><td>884/MICRO84</td><td>可使主机模拟编程功能，修改PC 状态逻辑</td></tr>
+			<tr><td>0x19</td><td>重置通信链路</td><td>发生非可修改错误后，是从机复位于已知状态，可重置顺序字节</td></tr>
+			<tr><td>0x20</td><td>读取通用参数</td><td>显示扩展存储器文件中的数据信息</td></tr>
+			<tr><td>0x21</td><td>写入通用参数</td><td>把通用参数写入扩展存储文件或修改</td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+		</table><br/>
+		
+		
+		<table border="1" cellspacing="0" >
+			<caption></caption>
+			<tr><th></th><th></th></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+			<tr><td></td><td></td></tr>
+		</table><br/>
+		
 	</div>
+	
 </body>
 </html>

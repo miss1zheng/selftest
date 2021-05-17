@@ -74,15 +74,42 @@
 		<li></li>
 		<li>错误解决：
 			<ul>
-			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
-			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
-			<li>错误 xxx|REBASE 1/234：<br/>原因：在本分支上进行代码 add 和 commit 之后，使用了 git push --rebase origin xxx，push 后有冲突，再使用 git pull --rebase origin master 拉错了分支，导致此问题出现。<br/>
-			解决方式：git rebase --abort，然后使用git pull origin xxx拉取最新分支，若出现 xxx|MERGING 冲突，则使用git diff获取下冲突文件的区别，里面有提示当前和冲突的log，此时再使用git reset --hard xx恢复到冲突的分支，再用git pull origin xxx分支，得到最新的代码</li>
+			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>
+				一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
+			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>
+				主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
+			<li>错误 xxx|REBASE 1/234：<br/>
+				原因：在本分支上进行代码 add 和 commit 之后，使用了 git push --rebase origin xxx，push 后有冲突，再使用 git pull --rebase origin master 拉错了分支，导致此问题出现。<br/>
+				解决方式：git rebase --abort，然后使用git pull origin xxx拉取最新分支，若出现 xxx|MERGING 冲突，则使用git diff获取下冲突文件的区别，里面有提示当前和冲突的log，此时再使用git reset --hard xx恢复到冲突的分支，再用git pull origin xxx分支，得到最新的代码</li>
 			<li>The requested URL returned error: 502</li>
-			<li>创建新版本库：<br/>touch README.md<br/>git init<br/>git add README.md<br/>git commit -m "first commit"<br/>git remote add origin ssh://ip:port/xxx/xx.git<br/>git push -u origin master</li>
-			<li>error: Cannot delete branch 'master' checked out at 'x://xx//xxx'<br/>原因：在当前分支删除当前分支时的错误<br/>解决方式：想删除 master 需要跳转到其他分支，然后再使用 branch -D master 删除 master 分支<br/>若只有当前一个分支，只需删除文件夹内所有的文件，包括 .git 文件，再使用 git init、git clone 重新拉取远程主分支 master 即可</li>
-			<li>fatal: unable to access 'https://github.com/xx.git/': OpenSSL SSL_read: Connection was reset, errno 10054<br/>原因：git push origin xx 后出现<br/>解决方式：在隐藏文件 .git 下的 config 文件 里把 url = https:// 改成 http（去除 s 即可）</li>
-			<li>fatal: unable to access 'http://github.com/miss1zheng/selftest.git/': Failed to connect to github.com port 443: Timed out：<br/>原因：git push origin xx 时出现<br/>解决方式：输入命令 git remote set-url origin http://github.com/xx.git/ 远程地址之后，再 git push origin xx 即可成功上传</li>
+			<li>创建新版本库：<br/>
+				touch README.md<br/>
+				git init<br/>
+				git add README.md<br/>
+				git commit -m "first commit"<br/>
+				git remote add origin ssh://ip:port/xxx/xx.git<br/>
+				git push -u origin master</li>
+			<li>error: Cannot delete branch 'master' checked out at 'x://xx//xxx'<br/>
+				原因：在当前分支删除当前分支时的错误<br/>解决方式：想删除 master 需要跳转到其他分支，然后再使用 branch -D master 删除 master 分支<br/>
+				若只有当前一个分支，只需删除文件夹内所有的文件，包括 .git 文件，再使用 git init、git clone 重新拉取远程主分支 master 即可</li>
+			<li>fatal: unable to access 'https://github.com/xx.git/': OpenSSL SSL_read: Connection was reset, errno 10054<br/>
+				原因：git push origin xx 后出现<br/>
+				解决方式：在隐藏文件 .git 下的 config 文件 里把 url = https:// 改成 http（去除 s 即可）</li>
+			<li>fatal: unable to access 'http://github.com/miss1zheng/selftest.git/': Failed to connect to github.com port 443: Timed out：<br/>
+				原因：git push origin xx 时出现<br/>
+				解决方式：输入命令 git remote set-url origin http://github.com/xx.git/ 远程地址之后，再 git push origin xx 即可成功上传</li>
+			<li>给已上传的 git 打上 tag 标签：<br/>
+				git tag vxxx.xxx.xx yyyy 其中 vxxx.xxx.xx 是 tag 标签，yyyy 是对于的 commit id，然后在使用 git push --tags</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<li></li>
 			<li></li></ul></li>
 		<li></li>

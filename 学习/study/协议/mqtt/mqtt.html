@@ -5,6 +5,9 @@
 	<meta http-equiv="Content-Type" content="charset=utf-8;text/html">
 	<link rel="shortcut icon" href="../../../../picture/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="../../../../home/all.css" >
+	<style>
+		p{line-height:25px;}
+	</style>
 </head>
 <body>
 	<div class="menu_body" style="padding-left: 20px;">
@@ -34,7 +37,136 @@
 		</ul>
 	</div>
 	<div class="main_body">
-		<iframe src="./data/mqtt.html" name="c" style="width: 100%;height: 100%;position: fixed;"></iframe>
+		<h3>简介</h3>
+		<p>MQTT：消息队列遥测传输，是 TCP 协议上的应用层协议。分为服务器端（消息代理）和客户端（发布订阅）。</p>
+		<p>数据包结构：<br/>
+			1.固定头：存在于所有 MQTT 数据包中，表示数据包类型及数据包的分组类标识<br/>
+			2.可变头：存在于部分 MQTT 数据包中，数据包类型决定了可变头是否存在及具体内容<br/>
+			3.消息体：存在于部分 MQTT 数据包中，表示客户端收到的具体内容</p>
+		<p>通信实现需要设置的部分：<br/>
+			ip:port：服务器参数，ip 可为域名或直接 ip，端口一般都是 1883<br/>
+			username:password：用户名和密码<br/>
+			clientid：设备 id<br/>
+			topic：主题<br/>
+			msg：消息<br/>
+			retain：保留标志位，详看 <a href="#retain">retain</a><br/>
+			keepalive：保活机制，详看 <a href="#keepalive">keepalive</a><br/>
+			cleansession：清理会话标志（0，1），详看 <a href="#cleansession">cleansession</a><br/>
+			qos：服务质量（0，1，2），详看 <a href="#qos">qos</a><br/>
+			duplicate：重复标志位<br/>
+			publish：发布主题消息<br/>
+			subscribe：订阅主题消息<br/>
+			unsubscribe：取消订阅<br/>
+			will：遗嘱消息，详看 <a href="#will">will</a><br/>
+			部分复杂的需详细说明，详看下面具体介绍。</p>
+		<p></p>
+		<p></p>
+		<h3 id="retain">retain</h3>
+		<p>retain：保留消息标志位，若设置为 1，则该消息为保留消息。这时，broker（消息代理，即服务器）会存储每个 topic 的最后一条保留消息和 qos，当订阅该 topic 客户端上线后，broker 将此消息投递到客户端。</p>
+		<p>retain 作用：让新订阅的客户端得到发布方最新的状态值。即使新订阅在发布之后上线同样能接收到最新的发布消息</p>
+		<p>保留消息删除方式：1.发送空消息体；2.发送最新的 topic 消息覆盖之前的；3.置为 0。</p>
+		<p></p>
+		<h3 id="keepalive">keepalive</h3>
+		<p>keepalive：指定连接最大空闲时间 keepalive，当客户端检测到连接空闲时间超过 keepalive 时，必须向 broker 发送心跳报文 PINGREQ，broker 收到心跳请求后返回心跳响应 PINGRESP。若 broker超过 1.5*keepalive 时间没收到心跳请求则断开连接，并且投递遗嘱消息到订阅方；同样，若客户端超过一定时间仍没收到心跳响应 PINGRESP 则断开连接。 <br/>
+			即在 1.5*keepalive 的时间间隔内（单位秒 second），若 broker 未收到客户端任何数据包则 broker 认为它和客户端之间的连接已断开；同样客户端若没收到 broker 的任何数据包，则客户端认为它和 broker 之间连接已断开。</p>
+		<p>PINGREQ：没有可变头和消息体。当客户端在一个 keepalive 时间内没向 broker 发送任何数据包，它应该向 broker 发送 PINGREQ 数据包</p>
+		<p>PINGRESP：没有可变头和消息体。当 broker 收到客户端的 PINGREQ 数据包，它应该回复客户端一个 PINGRESP 数据包</p>
+		<p></p>
+		<p></p>
+		<h3 id="cleansession">cleansession</h3>
+		<p>cleansession：某个客户端（以 clientid 作为标识）与 broker 之间的逻辑层的通信。发布或订阅 topic 时指定<br/>
+			生命周期（存在时间）：会话 >= 网络连接，即即使客户端与 broker 断开了会话还是可以存在</p>
+		<p>客户端的 session：<br/>
+			1.已发给 broker 但还未确认的 qos（1，2）级别的消息；<br/>
+			2.已从 broker 接收但还完成确认的 qos（2）级别的消息</p>
+		<p>服务器端的 session：<br/>
+			1.会话是否存在，即使会话状态的其他部分为空（session 有状态，可记录很多信息）；<br/>
+			2.客户端的订阅消息；<br/>
+			3.已发给客户端但还未确认的 qos（1，2）级别的消息；<br/>
+			4.即将传输给客户端的 qos（1，2）级别消息；<br/>
+			5.已从客户端接收但还未确认的 qos（2）级别的消息；<br/>
+			6.（可选）准备发送给客户端的 qos（0）级别的消息<br/>
+			session 可实现像历史没发出去的消息、鉴权信息等，可接着使用，如登录网站的 session 未过期的话则可以不用登录了</p>
+		<p>cleansession 值为 0：开启会话功能，网络断开重连后，恢复之前的 session 信息，即设备离线再上线时，离线期间的 qos（0，1，2）的消息全部接收，若同主题有多个消息，多个消息也全部接收。需要客户端和 broker 有相关 session 持久化机制<br/>
+			cleansession 值为 1：关闭会话重用机制。每次重连后都是一个新的session，会话保持与网络连接同样时长。</p>
+		<p>注意：<br/>
+			session 在断网后会删除（无论是客户端还是 session），以及在程序关闭后也就删除（因为是保存在内存中）<br/>
+			必定会收到在线和离线消息必须设置成：qos 为 1/2，cleansession 为 0</p>
+		<h3 id="qos">qos</h3>
+		<p>qos：服务质量，有三个级别，分别为0，1，2</p>
+		<p>Qos0：发送者只发一次消息，不会重发，broker 也不会响应确认消息，即只管发不管 broker 是否接收到消息，类似 UDP</p>
+		<p>Qos1：发送者至少发一次消息，broker 返回确认消息。在 qos1 下 broker 可能接收到重复消息<br/>
+			客户端和 broker 都会存储消息，客户端超时没收到 broker 返回的确认消息就会重发，收到即删除存储的消息，broker 可能收到客户端的多个重复消息，此时会根据 clientid 去除重复消息</p>
+		<p>Qos2：两次确认来保证消息的不丢失和不重复，在 qos2 下 broker 必会收到消息并只收到一次，具体如下：<br/>
+			1.客户端和 broker 都会存储消息，客户端重复发送消息直到收到 PUBREC 消息；<br/>
+			2.broker 存储 PUBREC 消息，重复返回 PUBREC 直到收到 PUBREL；<br/>
+			3.客户端收到 PUBREC 消息后删除消息，保存 PacketID，发送 PUBREL；<br/>
+			4.broker 收到 PUBREL（可能收到多个，但并不影响）后删除 PUBREC 信息，返回 PUBCOMP；客户端删除 PacketID（有可能没收到 PUBCOMP）<br/>
+			即客户端发送消息，broker 接收到消息后发送 PUBREC，客户端收到 PUBREC 后删除消息并发送 PUBREL，broker 收到 PUBREL 后发送 PUBCOMP，最后 broker 发送的 PUBCOMP 无论客户端是否收到能确定的是 broker 存储了消息而客户端已删除了消息。类似 TCP 的三次握手</p>
+		<p>三个级别的缺优点：<br/>
+			0：是只管发送，不管对方是否收到<br/>
+			1：至少发一次，但 broker 不确定是否客户端删除了消息<br/>
+			2：客户端不确定 broker 是否知道客户端已经删除了消息，客户端删除消息是为了避免 broker 把消息发给订阅者后删除消息，而客户端重发了消息后在 broker 里面又有了一条新消息</p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3 id="will">will</h3>
+		<p>will：遗嘱消息，发布或订阅者连接时可发布 will 到服务器存储</p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
 	</div>
 </body>
 </html>

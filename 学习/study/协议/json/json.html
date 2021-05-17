@@ -80,29 +80,39 @@
 		<p>枚举数据类型：属于复合数据类型（由原始数据类型融合而成，也就是，任何复杂的数据类型都可以解析成原始数据类型），如 ["one","two","three","four"]</p>
 		<p>对象数据类型：属于复合数据类型，用花括号括起来，由键值对构成，多个键值之间使用逗号分隔，如 {"one":1,"two":2,"three":3,"four":4} 或嵌套对象<br/>
 		{<br/>&nbsp;"one":{<br/>&nbsp;&nbsp;"two":2,<br/>&nbsp;&nbsp;"three":{<br/>&nbsp;&nbsp;&nbsp;"four:4,<br/>&nbsp;&nbsp;&nbsp;"five":5<br/>&nbsp;&nbsp;}<br/>&nbsp;}<br/>}<br/>注意：json 本身就是对象</p>
-		<p></p>
-		<p></p>
-		<p></p>
-		<p></p>
-		<p></p>
-		<p></p>
-		<p></p>
-		<table border="1" cellspacing="0" >
-			<tr><th colspan="2">请求方式</th></tr>
-			<tr><th>方法</th><th>说明</th></tr>
-			<tr><td>GET</td><td>获取资源</td></tr>
-			<tr><td>POST</td><td>上传资源</td></tr>
-			<tr><td>HEAD</td><td></td></tr>
-			<tr><td>PUT</td><td></td></tr>
-			<tr><td>DELETE</td><td></td></tr>
-			<tr><td>CONNECT</td><td></td></tr>
-			<tr><td>OPTIONS</td><td></td></tr>
-			<tr><td>TRACE</td><td></td></tr>
-			<tr><td>PATCH</td><td></td></tr>
-			<tr><td></td><td></td></tr>
-		</table>
 		
-		
+		<h3 id="">安全问题</h3>
+		<p>在 Web 中使用 JSON 最常见的两个安全性问题：跨站请求伪造和跨站脚本攻击。</p>
+		<p>跨站请求伪造：即 CSRF(cross-site request forgery)，是一种利用站点对用户浏览器信任而发起攻击的方式，如<br/>
+			[<br/>
+				&nbsp; {<br/>
+					&nbsp; &nbsp; "user":"name"<br/>
+				&nbsp; },<br/>
+				&nbsp; {<br/>
+					&nbsp; &nbsp; "phone":"10086"<br/>
+				&nbsp; }<br/>
+			]<br/>
+			这种 JSON 格式（顶层 JSON 数组）是合法的，但是它同时也可执行 JavaScript 脚本。这样黑客就可能进行攻击了，若想避免可使用非法的 JavaScript，如将数组作为值存入 JSON 对象。之后仅允许 POST 请求禁用 GET 请求，这样黑客就无法使用自己的 URL 中的链接了（get 请求数据得到响应，post 提交数据得到响应）<br/>
+			所以，为了防患未然：不在 JSON 中使用顶级数组，不要因为 GET 比 POST 便利就使用 GET</p>
+		<p>跨站脚本攻击：即 XSS(cross-site scripting)，是一种主任攻击。通过截取或将站点中所使用的第三方代码更换为恶意脚本，对站点进行攻击。</p>
+		<p>注入攻击：依赖于将数据注入到 Web 应用程序以方便恶意数据执行或编译的攻击。</p>
+		<p>Web ：<br/>
+			客户端：html、css、JavaScript<br/>
+			服务器端：php、asp.net、node.js、ruby on rails、java、go 等</p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
 	</div>
 	
 </body>
