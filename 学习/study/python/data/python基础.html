@@ -99,18 +99,81 @@
 	</form>
 		<p>
 	
+	<hr/><h3>Python 相关操作下载链接</h3>
+	<ul>
+	<li>python：<br/>
+		下载链接：<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>，可以下载安装包，或者直接下载源码压缩包<br/>
+		安装实现：若是安装包，一般可直接一路下一步，直到安装完成。<br/>
+		是否安装成功验证：按 win+r 键进入 cmd 命令行模式，然后输入 python 之后进入临时 python 编辑界面（一般输入 exit() 即可退出），这样就表示 python 安装成功了。</li>
+	<li>pip：<br/>
+		下载链接：<a href="https://pypi.org/project/pip/#downloads">https://pypi.org/project/pip/#downloads</a><br/>
+		安装实现：在上面链接中随便下载一个版本如 pip-9.0.1.tar.gz，然后解压到一个文件夹</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	
 	<hr/><h3>错误集</h3>
 	<ul>
 	<li>TypeError: datarecv() argument after * must be an iterable, not socket<br/>
-	源码：recvid=Thread(target = datarecv, args = (c), name = 'recv')<br/>
-	解决方式：传入参数需要是一个元组，所以修改一下代码，这里参数后面要加逗号(c,)即可</li>
+		源码：recvid=Thread(target = datarecv, args = (c), name = 'recv')<br/>
+		解决方式：传入参数需要是一个元组，所以修改一下代码，这里参数后面要加逗号(c,)即可</li>
 	<li>UnboundLocalError: local variable 'data' referenced before assignment<br/>
-	解决方式：主要是因为变量既可以是全局也可以是局部，没有让解释器清楚变量是全局变量还是局部变量，此时可以在局部变量函数内部加个global xxx对变量进行声明即可。</li>
+		解决方式：主要是因为变量既可以是全局也可以是局部，没有让解释器清楚变量是全局变量还是局部变量，此时可以在局部变量函数内部加个global xxx对变量进行声明即可。</li>
 	<li>OSError: [WinError 10038] 在一个非套接字上尝试了一个操作。<br/>
-	源码：c.send(data)<br/>解决方式：因为socket已关闭，但这里还要将数据发送出去，加上一个try:xxx except Exception as e:xx finally:xxxx即可</li>
+		源码：c.send(data)<br/>
+		解决方式：因为socket已关闭，但这里还要将数据发送出去，加上一个try:xxx except Exception as e:xx finally:xxxx即可</li>
 	<li>SyntaxError: name 'file_name' is assigned to before global declaration<br/>
-	原因：定义一个全局变量，在函数内部使用时加了 global 声明了这是个全局变量<br/>
-	解决方式：不在内部使用 global 进行声明即可，即函数内去除 global 的声明</li>
+		原因：定义一个全局变量，在函数内部使用时加了 global 声明了这是个全局变量<br/>
+		解决方式：不在内部使用 global 进行声明即可，即函数内去除 global 的声明</li>
+	<li>ImportError: No module named setuptools<br/>
+		原因：没有安装setuptools这个模块<br/>
+		解决方式：下载<a href="https://bootstrap.pypa.io/ez_setup.py">https://bootstrap.pypa.io/ez_setup.py</a>自动化安装脚本，并运行即可自动判别 python 版本进行自动化安装，之后再运行 python setup.py install 即可自动安装第三方模块</li>
+	<li>IndentationError: expected an indented block<br/>
+		原因：缩进错误<br/>
+		解决方式：找到对应的行，进行正确的缩进</li>
+	<li>TypeError: a bytes-like object is required, not 'str'<br/>
+		原因：类型错误，需要的是字节对象而不是字符串<br/>
+		解决方式：使用 encode 和 decode 进行转换。<br/>
+		注意：字符串通过 encode() 方法可编码为指定的 bytes；相反，从网络或磁盘读取的字节流通过 decode() 方法将 btye 编码成 str</li>
+	<li>AttributeError: 'Button' object has no attribute 'get'<br/>
+		原因：<br/> 
+		&nbsp; gui_text=tkinter.Text(win,height=5,width=100)<br/>
+        &nbsp; gui_text.pack()<br/>
+        &nbsp; gui_button=tkinter.Button(win,text="点击",command=text_write)<br/>
+		&nbsp; gui_button.pack()<br/>
+		&nbsp; gui_button.get(0.0,tkinter.END)//本来是要获取 Text 控件输入的数据不小心用了 Button 控件<br/>
+		解决方式：Button 控件没有 get 功能</li>
+	<li>TypeError: send_creat() argument after * must be an iterable, not socket<br/>
+		原因：在使用多线程时，会调用多线程类中的run()函数，这个函数需要传入一个可迭代对象，当我们的参数只有一个时，单独的数据不可迭代<br/>
+		解决方式：在数据后面加一个逗号使其编程元组，元组可迭代</li>
+	<li>RuntimeError: can't start new thread<br/>
+		原因：线程开得太多了，导致软件开始，不再能够被处理，卡死<br/>
+		解决方法：退出部分线程或加锁</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	
 	</ul>
 	</div>
 </body>

@@ -4,8 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<link rel="shortcut icon" href="../../../picture/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="../../../home/all.css" >
-	<title>huatu</title>
-	 <script type="text/javascript">
+	<title>画图</title>
+	<style>
+		overflow-x:scroll;/*横向滚动*/
+	</style>
+	<script type="text/javascript">
         var bot;//画布div
         var X,Y,X1,Y1;//坐标
         var flag=0;
@@ -46,8 +49,7 @@
             Y= e.offsetY;
         }
  
-        /**
-         *鼠标移动 */
+        /** 鼠标移动 */
         function mouseMoveAction(e){
             if(isMouseDown){
                 X1= e.offsetX;
@@ -57,21 +59,18 @@
             }
         }
  
-        /**
-         *鼠标弹起来
-         */
+        /** 鼠标弹起来 */
         function mouseUpAction(e){
             isMouseDown=false;
             flag=0;
         }
  
-        /**
-         * 绘制
-         */
+        /** 绘制 */
         function drowline(num1,num2,num3,num4){
             //开启新的路径
             if(flag)
                 context.beginPath();
+			context.lineCap="round";//设置所画线条结束的样式帽为圆形。即转角位置是圆而而不会看上去像两条线
             //移动画笔的初始位置
             context.moveTo(num1,num2);
             context.lineWidth=lineW;
@@ -90,7 +89,6 @@
         function clear_pic(){//清除画布
             context.clearRect(0,0,5000,5000);
         }
-
     </script>
 </head>
 <body>
@@ -102,17 +100,16 @@
 		<a href="../../../娱乐/play.html">娱乐</a>
 	</div>
 	<div class="main_body">
-		<div id="top">
-			<div><!-- 画笔颜色选择 -->
-				<input type="color" value="#FFF" id="myColor"/>
-				<button onclick="pen_click()">颜色确认</button>
-				&nbsp; &nbsp; &nbsp; &nbsp;
+		<div>
+			<!-- 画笔颜色选择 -->
+			<input type="color" value="#FFF" id="myColor"/>
+			<button onclick="pen_click()">颜色确认</button>
+			&nbsp; &nbsp; &nbsp; &nbsp;
 			<!-- 画笔粗细选择 -->
-				0<input type="range" value="0.1" id="myRange"/>1
-				<button onclick="line_wid()">粗细确认</button>
-				&nbsp; &nbsp; &nbsp; &nbsp;
+			0<input type="range" value="0.1" id="myRange"/>1
+			<button onclick="line_wid()">粗细确认</button>
+			&nbsp; &nbsp; &nbsp; &nbsp;
 			<input type="button" value="清除画布" onclick="clear_pic()">
-			</div>
 		</div>
 		<div id="bottom"><!-- 画板 -->
 			<canvas id="can" width="5000" height="5000"></canvas>
