@@ -77,15 +77,15 @@
 <hr>
 <div id="jichu">
 	<p>基础介绍<br>
-	GUI为图形开发界面，几个常用的GUI库如：Tkinter(python自带的标准库)、wxPython、Jython<br>
+	GUI 为图形开发界面，几个常用的 GUI 库如：Tkinter（python自带的标准库）、wxPython、Jython<br>
 	</p>
-	<p>import tkinter 或from tkinter import *，前者导入库，使用时每次用到库中函数都需要加上前缀tkinter（如tkinter.Tk()），而后者可直接使用函数（如Tk()）<br>
-	注释：#单行注释，三引号（单双引号都可以）多行注释</p>
+	<p>import tkinter 或 from tkinter import *，前者导入库，使用时每次用到库中函数都需要加上前缀 tkinter（如tkinter.Tk()），而后者可直接使用函数（如 Tk()）<br>
+	注释：# 单行注释，三引号（单双引号都可以）多行注释</p>
 	<form>
 		<fieldset>
 			<legend>** <b>主窗口 举例</b> **</legend>
 			from tkinter import * #导入库<br><br>
-			win=Tk() #创建窗口win<br>
+			win=Tk() #创建窗口 win<br>
 			win.title("GUI") #窗口名称<br>
 			#win["background"] = "white" #设置背景色<br>
 			win["background"]="#fff" <br><br>
@@ -121,7 +121,7 @@
 			&nbsp; r.geometry("%dx%d+%d+%d" % (w, h, x, y))<br>
 			center_window(win,500,500)<br>
 			"""<br><br>
-			win.mainloop() #主窗口循环显示，就是让win不断的刷新<br><br>
+			win.mainloop() #主窗口循环显示，就是让 win 不断的刷新<br><br>
 			<img src="./0/0.png" alt="main">
 		</fieldset>
 	</form>
@@ -158,7 +158,7 @@
 			</tr>
 			<tr>
 				<td>background(bg)</td>			
-				<td style="text-align:left">背景色,可以是英文名字，也可以是RGB格式</td>
+				<td style="text-align:left">背景色,可以是英文名字，也可以是 RGB 格式</td>
 			</tr>
 			<tr>
 				<td>foreground(fg)</td>			
@@ -167,7 +167,7 @@
 			<tr>
 				<td>bitmap</td>			
 				<td style="text-align:left">1. 指定显示到 Label 上的位图；<br>2. 如果指定了 image 选项，则该选项被忽略<br>
-				3. error、info、hourglass、questhead、question、warning、gray12、gray25、gray50、gray75</td>
+				3. error、info、hourglass、questhead、question、warning、gray12、gray25、gray50、gray75，可直接加载 .xbm 文件，前面需加 @ 符号，如 bitmap="@xx/xxx.xbm"</td>
 			</tr>
 			<tr>
 				<td>borderwidth(bd)</td>			
@@ -189,8 +189,7 @@
 				5. 默认值是 NONE</td>
 			</tr><tr>
 				<td>cursor</td>			
-				<td style="text-align:left">1当鼠标在 Label 上飘过的时候的鼠标样式<br/>
-					hand（握手）、heart（心形）、arrow（箭头），circle（圆形）、clock（钟形）、cross（十字架形）、dotbox（盒子）、exchange（转换形）、fleur（十字箭头形）、man、mouse（鼠标）、plus（+形）、shuttle、sizing、spider、spraycan、star、target、tcross、trek、watch（沙漏）</td>
+				<td style="text-align:left">1当鼠标在 Label 上飘过的时候的鼠标样式<br/>hand（握手）、heart（心形）、arrow（箭头），circle（圆形）、clock（钟形）、cross（十字架形）、dotbox（盒子）、exchange（转换形）、fleur（十字箭头形）、man、mouse（鼠标）、plus（+形）、shuttle、sizing、spider、spraycan、star、target、tcross、trek、watch（沙漏）</td>
 			</tr>
 			<tr>
 				<td>disabledbackground</td>			
@@ -206,7 +205,7 @@
 			</tr>
 			<tr>
 				<td>font</td>			
-				<td style="text-align:left">字体，如font='Times -10 bold'分别表示字体、字号、加粗、倾斜</td>
+				<td style="text-align:left">字体，如font='Times -10 bold italic underline overstrike'分别表示字体、字号、加粗、斜体、下划线，删除线</td>
 			</tr>
 			<tr>
 				<td>highlightbackground</td>			
@@ -235,7 +234,7 @@
 			</tr>
 			<tr>
 				<td>textvariable</td>			
-				<td style="text-align:left">显示文本自动更新，与StringVar等配合着用<br/>
+				<td style="text-align:left">显示文本自动更新，与 StringVar 等配合着用<br/>
 				注意：不可直接 textvariable="xxx" 这样显示不出 xxx 字符信息</td>
 			</tr>
 			<tr>
@@ -248,7 +247,7 @@
 			</tr>
 			<tr>
 				<td>underline</td>			
-				<td style="text-align:left">1. 跟 text 选项一起使用，用于指定哪一个字符添加下划线（例如用于表示键盘快捷键） ；<br>2. 默认值是 -1；<br>3. 例如设置为 1，则说明在 Button 的第 2 个字符处画下划线</td>
+				<td style="text-align:left">1. 跟 text 选项一起使用，用于指定哪一个字符添加下划线（例如用于表示键盘快捷键） ；<br>2. 默认值是 -1；<br>3. 例如设置为 1，则说明在 Button 的第 2 个字符处画下划线，下标从 0 开始</td>
 			</tr>
 			<tr>
 				<td>wraplength</td>			
@@ -256,11 +255,11 @@
 			</tr>
 			<tr>
 				<td>state</td>			
-				<td style="text-align:left">指定Label的状态，用于控制Label如何显示。可选值有：normal(默认)、active、disable</td>
+				<td style="text-align:left">指定 Label 的状态，用于控制 Label 如何显示。可选值有：normal（默认）、active、disable</td>
 			</tr>
 			<tr>
 				<td>relief</td>			
-				<td style="text-align:left">flat(默认，无边框，和Label显示一样)、sunken（不可以）、raised（往中间凸）、groove（中间凹）、ridge（中间凸）、solid（往中间凹）</td>
+				<td style="text-align:left">flat（默认，无边框，和 Label 显示一样）、sunken（不可以）、raised（往中间凸）、groove（中间凹）、ridge（中间凸）、solid（往中间凹）</td>
 			</tr>
 			<tr>
 				<td>takefocus</td>			
@@ -269,10 +268,10 @@
 		</tbody>
 	</table>
 	<p>背景由三部分构成：内容区 + 填充区 + 边框。<br>
-	&nbsp内容区参数：width、height指定区域大小；background指定背景颜色<br>
-	&nbsp填充区参数：内容区与边框之间间隔大小，单位像素，参数有padx、pady<br>
-	&nbsp边框参数：样式relief、边框宽度borderwidth（单位像素）、<br>
-	highlightbackground,highlightcolor,highlightthickness 三个边框参数仅在Label允许接收焦点的情况下（tackfocus=True），用于设置焦点获取前后高亮边框颜色以及高亮边框宽度</p>
+	&nbsp; 内容区参数：width、height 指定区域大小；background 指定背景颜色<br>
+	&nbsp; 填充区参数：内容区与边框之间间隔大小，单位像素，参数有 padx、pady<br>
+	&nbsp; 边框参数：样式 relief、边框宽度 borderwidth（单位像素）、<br>
+	highlightbackground，highlightcolor，highlightthickness 三个边框参数仅在 Label 允许接收焦点的情况下（tackfocus=True），用于设置焦点获取前后高亮边框颜色以及高亮边框宽度</p>
 	<form>
 		<fieldset>
 			<legend>** <b>Label 举例 </b>**</legend>
@@ -302,6 +301,16 @@
 			
 			例4：<br>from tkinter import *<br>
 			win=Tk()<br>
+			#这里的 BITMAP 就是位图了，在 .xbm 文件中就是这样定义使用的<br>
+			"""<br>
+			//xx 名称相同，yy 表示长宽，两个可取不同值，花括号内部是十六进制值，其他格式一致即可<br/>
+			//保存为 .xbm，之后就可以直接使用 bitmap="@zz.xbm" 获取到此文件的位图了，这里是直接设置到 python 文件中<br/>
+			#define xx_width yy<br>
+			#define xx_height yy<br>
+			#static char xx_bits[]={<br>
+			0x00,...<br>
+			}<br>
+			"""<br>
 			BITMAP = """<br>
 			#define im_width 32<br>
 			#define im_height 32<br>
@@ -324,7 +333,7 @@
 			0x9a,0xa4,0xde,0x4a,0x4a,0xd2,0xf5,0xaa<br>
 			};<br>
 			"""<br>
-			#使用tuple数据来创建图像<br>
+			#使用 tuple 数据来创建图像<br>
 			bmp = BitmapImage(data = BITMAP)<br>
 			Label(win, image=bmp,bg="#f1f1c0").pack()<br>
 			win.mainloop()<br>
@@ -334,7 +343,7 @@
 </div>
 <hr>
 <div id="button">
-	<p>Button：按钮，用于执行一个命令或操作。按钮能够包含文本或图象，并且你能够将按钮与一个Python函数或方法相关联。当这个按钮被按下时，Tkinter自动调用相关联的函数或方法。<br>
+	<p>Button：按钮，用于执行一个命令或操作。按钮能够包含文本或图象，并且你能够将按钮与一个 Python 函数或方法相关联。当这个按钮被按下时，Tkinter 自动调用相关联的函数或方法。<br>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<thread>
 			<td colspan="2">属性</td>
@@ -387,7 +396,7 @@
 			</tr>
 			<tr>
 				<td>state</td>			
-				<td style="text-align:left">指定按钮的状态,可选的有normal（默认）、active、 disabled。</td>
+				<td style="text-align:left">指定按钮的状态,可选的有 normal（默认）、active、 disabled。</td>
 			</tr>
 			<tr>
 				<td>text</td>			
@@ -403,11 +412,11 @@
 			</tr>
 			<tr>
 				<td>padx</td>			
-				<td style="text-align:left">设置文本与按钮边框x的距离</td>
+				<td style="text-align:left">设置文本与按钮边框 x 的距离</td>
 			</tr>
 			<tr>
 				<td>pady</td>			
-				<td style="text-align:left">按钮在y轴方向上的内边距(padding)</td>
+				<td style="text-align:left">按钮在 y 轴方向上的内边距(padding)</td>
 			</tr>
 			<tr>
 				<td>activebackground</td>			
@@ -419,7 +428,7 @@
 			</tr>
 			<tr>
 				<td>textvariable</td>			
-				<td style="text-align:left">可变文本，与StringVar等配合着用</td>
+				<td style="text-align:left">可变文本，与 StringVar 等配合着用</td>
 			</tr>
 			<tr>
 				<td>highlightbackground</td>			
@@ -435,11 +444,11 @@
 			</tr>
 			<tr>
 				<td>justify</td>			
-				<td style="text-align:left">显示多行文本的时候,设置不同行之间的对齐方式，可选项包括left, right, center</td>
+				<td style="text-align:left">显示多行文本的时候,设置不同行之间的对齐方式，可选项包括 left, right, center</td>
 			</tr>
 			<tr>
 				<td>relief</td>			
-				<td style="text-align:left">边框样式，设置控件3D效果，可选的有：flat(默认)、sunken、raised、groove、ridge。</td>
+				<td style="text-align:left">边框样式，设置控件 3D 效果，可选的有：flat（默认）、sunken、raised、groove、ridge。</td>
 			</tr>
 			<tr>
 				<td>underline</td>			
@@ -484,48 +493,145 @@
 				<td style="text-align:left">1. 指定使用 Tab 键可以将焦点移到该 Button 组件上（这样按下空格键也相当于触发按钮事件）<br>
 				2. 默认是开启的，可以将该选项设置为 False 避免焦点在此 Button 上</td>
 			</tr>
-			<thread>
-				<td colspan="2">方法</td>
-			</thread>
-			<tr>
-				<td>deselect()</td>			
-				<td style="text-align:left">清除单选按钮的状态</td>
-			</tr>
-			<tr>
-				<td>flash()</td>			
-				<td style="text-align:left">刷新 Button 组件，在激活状态颜色和正常颜色之间闪烁几次单选按钮，但保持它开始时的状态</td>
-			</tr>
-			<tr>
-				<td>invoke()</td>			
-				<td style="text-align:left">1.调用 Button 中 command 选项指定的函数或方法，并返回函数的返回值。<br>
-				2.如果 Button 的state(状态)是 "disabled"（不可用）或没有指定 command 选项，则该方法无效</td>
-			</tr>
-			<tr>
-				<td>select()</td>			
-				<td style="text-align:left">设置单选按钮为选中</td>
-			</tr>
 		</tbody>
 	</table>
 	
 	<form>
 		<fieldset>
 			<legend>** <b>Button 举例 </b>**</legend>
+			例1：<br/>
 			from tkinter import *<br>win=Tk()<br>
-			var = StringVar() #自动刷新字符串变量，可用set和get方法进行传值和取值，类似的还有IntVar<br>
+			var = StringVar() #自动刷新字符串变量，可用 set 和 get 方法进行传值和取值，类似的还有 IntVar<br>
 			var.set('close')<br>
 			on_hit=False<br>
 			Label(win, textvariable=var, bg='yellow').pack()<br>
 			def hit_me():#函数定义<br>
-				&nbspglobal on_hit<br>
-				&nbspif on_hit == False:<br>
-					&nbsp&nbspon_hit = True<br>
-					&nbsp&nbspvar.set('open')<br>
-				&nbspelse:<br>
-					&nbsp&nbspon_hit = False<br>
-					&nbsp&nbspvar.set('close')<br>
+				&nbsp; global on_hit<br>
+				&nbsp; if on_hit == False:<br>
+					&nbsp; &nbsp; on_hit = True<br>
+					&nbsp; &nbsp; var.set('open')<br>
+				&nbsp; else:<br>
+					&nbsp; &nbsp; on_hit = False<br>
+					&nbsp; &nbsp; var.set('close')<br>
 			Button(win,text="点击",bg="green",activebackground="yellow",font="楷体",command=hit_me).pack()<br>
 			win.mainloop()<br>结果为：</b></p>
-			<img src="./0/button0.png" alt="button0">&nbsp<img src="./0/button1.png" alt="button1">&nbsp<img src="./0/button.png" alt="button">
+			<img src="./0/button0.png" alt="button0"/>&nbsp;<img src="./0/button1.png" alt="button1"/>&nbsp;<img src="./0/button.png" alt="button"/>
+			<br/><br/>例2：<br/>
+			import tkinter<br/>
+			win=tkinter.Tk()<br/>
+			value=False<br/>
+			def hit():<br/>
+				&nbsp; global value<br/>
+				&nbsp; if value:<br/>
+					&nbsp; &nbsp; value=False<br/>
+					&nbsp; &nbsp; tkinter.Label(win,bg="red").place(x=100,y=0)<br/>
+				&nbsp; else:<br/>
+					&nbsp; &nbsp; value=True<br/>
+					&nbsp; &nbsp; tkinter.Label(win,bg="green").place(x=100,y=0)<br/>
+			tkinter.Button(win,text="点击",repeatdelay=300,repeatinterval=1000,command=hit).pack()<br/>
+			win.mainloop()
+		</fieldset>
+		<fieldset>
+			<legend>** <b>Button 和 Label 的 socket 功能实现</b>**</legend>
+			import tkinter<br/>
+			import socket<br/>
+			import threading<br/><br/>
+
+			send_data=b''<br/>
+			data=b''<br/>
+			def senddata(name,s):<br/>
+				&nbsp; global strdata,send_data,data<br/>
+				&nbsp; print("senddata starting...")<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; try:<br/>
+						&nbsp; &nbsp; &nbsp; s.send(b'')<br/>
+					&nbsp; &nbsp; except ConnectionAbortedError:<br/>
+						&nbsp; &nbsp; &nbsp; print("客户端已断开")<br/>
+						&nbsp; &nbsp; &nbsp; strdata.set("")<br/>
+						&nbsp; &nbsp; &nbsp; s.close()<br/>
+						&nbsp; &nbsp; &nbsp; break<br/>
+					&nbsp; &nbsp; if send_data != b'':#控件输入的数据发送<br/>
+						&nbsp; &nbsp; &nbsp; print("senddata send_data:",send_data)<br/>
+						&nbsp; &nbsp; &nbsp; s.send(send_data.encode("gbk"))<br/>
+						&nbsp; &nbsp; &nbsp; send_data=b''<br/>
+					&nbsp; &nbsp; elif data != b'':<br/>
+						&nbsp; &nbsp; &nbsp; print("senddata data:",data)<br/>
+						&nbsp; &nbsp; &nbsp; print("send:",data)<br/>
+						&nbsp; &nbsp; &nbsp; s.send(data)<br/>
+						&nbsp; &nbsp; &nbsp; data=b''<br/><br/>
+
+			def recvdata(name,s):<br/>
+				&nbsp; global strdata,data<br/>
+				&nbsp; print("recvdata starting...")<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; try:<br/>
+						&nbsp; &nbsp; &nbsp; data=s.recv(1024)<br/>
+					&nbsp; &nbsp; except OSError:<br/>
+						&nbsp; &nbsp; &nbsp; print ("客户端已断开")<br/>
+						&nbsp; &nbsp; &nbsp; strdata.set("")<br/>
+						&nbsp; &nbsp; &nbsp; s.close()<br/>
+						&nbsp; &nbsp; &nbsp; break<br/>
+					&nbsp; &nbsp; print("recvdata data:",data)<br/>
+					&nbsp; &nbsp; if data == b'':<br/>
+						&nbsp; &nbsp; &nbsp; try:<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; s.send("心跳".encode("gbk"))<br/>
+						&nbsp; &nbsp; &nbsp; except ConnectionAbortedError:<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; print ("客户端已断开")<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; strdata.set("")<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; s.close()<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; break<br/>
+						&nbsp; &nbsp; &nbsp; finally:<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; pass<br/>
+					&nbsp; &nbsp; else:<br/>
+						&nbsp; &nbsp; &nbsp; print("recvdata data1:",data.decode("gbk"))<br/>
+						&nbsp; &nbsp; &nbsp; temp=data.decode("gbk")<br/>
+						&nbsp; &nbsp; &nbsp; strdata.set(temp)<br/>
+						&nbsp; &nbsp; &nbsp; if temp == "拜拜":#服务器主动断开<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; strdata.set("")<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; s.close()<br/>
+							&nbsp; &nbsp; &nbsp; &nbsp; break<br/><br/>
+
+			def socket_creat():<br/>
+				&nbsp; global strdata,send_data,data<br/>
+				&nbsp; print("socket_creat start...")<br/>
+				&nbsp; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)<br/>
+				&nbsp; port=10099<br/>
+				&nbsp; s.bind(('localhost',port))<br/>
+				&nbsp; s.listen(5)<br/>
+				&nbsp; while True:<br/>
+					&nbsp; &nbsp; print ("waiting for connection.....")<br/>
+					&nbsp; &nbsp; c,addr=s.accept()<br/>
+					&nbsp; &nbsp; print("socket_creat ip port:",addr)<br/>
+					&nbsp; &nbsp; send=threading.Thread(target=senddata, args=("sendThread",c),daemon=True)<br/>
+					&nbsp; &nbsp; recv=threading.Thread(target=recvdata, args=("recvThread",c),daemon=True)<br/>
+					&nbsp; &nbsp; send.start()<br/>
+					&nbsp; &nbsp; recv.start()<br/>
+					&nbsp; &nbsp; send.join()   # 等待子线程运行结束<br/>
+					&nbsp; &nbsp; recv.join()<br/><br/>
+
+			def text_write():<br/>
+				&nbsp; global gui_data,send_data<br/>
+				&nbsp; gui_data=gui_send.get(0.0,tkinter.END)<br/>
+				&nbsp; send_data=gui_data<br/>
+				&nbsp; print("text_write:",send_data)<br/><br/>
+
+			def GUI_creat():<br/>
+				&nbsp; global win,strdata,gui_send,gui_data,send_data<br/>
+				&nbsp; print("GUI_creat start...")<br/>
+				&nbsp; win=tkinter.Tk()<br/>
+				&nbsp; strdata=tkinter.StringVar()<br/>
+				&nbsp; tkinter.Label(win,textvariable=strdata,bg="black",fg="white",anchor="nw",width=100,height=20,pady=1).pack()<br/>
+				&nbsp; gui_send=tkinter.Text(win,height=5,width=100)<br/>
+				&nbsp; gui_send.pack()<br/>
+				&nbsp; tkinter.Button(win,text="点击发送",command=text_write).pack()<br/>
+				&nbsp; win.mainloop()<br/><br/>
+
+			if __name__=="__main__":<br/>
+				&nbsp; print("start...")<br/>
+				&nbsp; gui_thread=threading.Thread(target=GUI_creat,name='gui creat',args=(),daemon=False)<br/>
+				&nbsp; gui_thread.start()<br/>
+				&nbsp; sock_thread=threading.Thread(target=socket_creat,name='socket creat',args=(),daemon=True)<br/>
+				&nbsp; sock_thread.start()
 		</fieldset>
 	</form>
 	
@@ -554,7 +660,7 @@
 				<td style="text-align:left">前景色</td>
 			</tr>
 			<tr>
-				<td>borderwidth</td>			
+				<td>borderwidth(bd)</td>			
 				<td style="text-align:left">组件边框宽度</td>
 			</tr>
 			<tr>
@@ -584,10 +690,6 @@
 			<tr>
 				<td>image</td>			
 				<td style="text-align:left">图片</td>
-			</tr>
-			<tr>
-				<td>confine</td>			
-				<td style="text-align:left">如果为 true (默认), 画布不能滚动到可滑动的区域外。</td>
 			</tr>
 			<tr>
 				<td>cursor</td>			
@@ -648,86 +750,86 @@
 			</tr>
 		
 			<thread>
-				<td colspan="2">绘图的方法<br>（注：绘图中的四个数值分别为左边两个代表x轴坐标，右边两个代表y轴坐标）</td>
+				<td colspan="2">绘图的方法</td>
 			</thread>
 			<tr>
-				<td>create_arc()</td>			
-				<td style="text-align:left">圆弧（ARC），扇形(PIESLICE)，弓形(CHORD)</td>
+				<td><a href="#create_arc">create_arc()</a></td>			
+				<td style="text-align:left">圆弧（arc），扇形(pieslice)，弓形(chord)</td>
 			</tr><tr>
-				<td>create_bitmap()</td>			
-				<td style="text-align:left">绘制位图，支持XBM</td>
+				<td><a href="#create_bitmap">create_bitmap()</a></td>			
+				<td style="text-align:left">绘制位图，支持 XBM</td>
 			</tr>
 			<tr>
-				<td>create_image()</td>			
+				<td><a href="#create_image">create_image()</a></td>			
 				<td style="text-align:left">绘制图片，支持GIF(x,y,image,anchor)</td>
 			</tr>
 			<tr>
-				<td>create_line()</td>			
+				<td><a href="#create_line">create_line()</a></td>			
 				<td style="text-align:left">绘制直线</td>
 			</tr>
 			<tr>
-				<td>create_oval()</td>			
+				<td><a href="#create_oval">create_oval()</a></td>			
 				<td style="text-align:left">绘制椭圆</td>
 			</tr><tr>
-				<td>create_polygon()</td>			
+				<td><a href="#create_polygon">create_polygon()</a></td>			
 				<td style="text-align:left">绘制多边形(坐标依次罗列，不用加括号，还有参数，fill,outline)</td>
 			</tr>
 			<tr>
-				<td>create_rectangle()</td>			
+				<td><a href="#create_rectangle">create_rectangle()</a></td>			
 				<td style="text-align:left">绘制矩形((a,b,c,d),值为左上角和右下角的坐标)</td>
 			</tr>
 			<tr>
-				<td>create_text()</td>			
+				<td><a href="#create_text">create_text()</a></td>			
 				<td style="text-align:left">绘制文字(字体参数font,)</td>
 			</tr>
 			<tr>
-				<td>create_window()</td>			
+				<td><a href="#create_window">create_window()</a></td>			
 				<td style="text-align:left">绘制窗口</td>
 			</tr>
 			<tr>
-				<td>delete()</td>			
+				<td><a href="#delete">delete()</a></td>			
 				<td style="text-align:left">删除绘制的图形</td>
 			</tr>
 			<tr>
-				<td>dchars()</td>			
+				<td><a href="#dchars">dchars()</a></td>			
 				<td style="text-align:left">删除指定位置图形</td>
 			</tr>
 			<tr>
-				<td>itemconfig()</td>			
+				<td><a href="#itemconfig">itemconfig()</a></td>			
 				<td style="text-align:left">修改图形属性，第一个参数为图形的ID，后边为想修改的参数。修改指定 item 的选项的当前值</td>
 			</tr>
 			<tr>
-				<td>itemconfigure()</td>			
+				<td><a href="#itemconfigure">itemconfigure()</a></td>			
 				<td style="text-align:left">跟 itemconfig() 一样</td>
 			</tr>
 			<tr>
-				<td>move()</td>			
+				<td><a href="#move">move()</a></td>			
 				<td style="text-align:left"> 将 item 移动到新位置（x, y）。移动图像（1，4，0），1为图像对象，4为横移4像素，0为纵移像素，然后用root.update()刷新即可看到图像的移动，为了使多次移动变得可视，最好加上time.sleep()函数；<br>
     只要用create_方法画了一个图形，就会自动返回一个ID,创建一个图形时将它赋值给一个变量，需要ID时就可以使用这个变量名。</td>
 			</tr>
 			<tr>
-				<td>coords()</td>			
+				<td><a href="#coords">coords()</a></td>			
 				<td style="text-align:left">返回对象的位置的两个坐标（4个数字元组），可改变大小或移动布画</td>
 			</tr>
 			<tr>
-				<td>addtag()</td>			
+				<td><a href="#addtag">addtag()</a></td>			
 				<td style="text-align:left">1.添加一个 Tag 到一系列画布对象中<br>
 				2.指定添加 Tag 的位置，可以是："above"，"all"，"below"，"closest"，"enclosed"，"overlapping" 或"withtag"</td>
 			</tr>
 			<tr>
-				<td>addtag_above()</td>			
+				<td><a href="#addtag_above">addtag_above()</a></td>			
 				<td style="text-align:left">1.为显示列表中 item 上方的画布对象添加 Tag<br>2.相当于 addtag(tag, "above", item)</td>
 			</tr>
 			<tr>
-				<td>addtag_all()</td>			
+				<td><a href="#addtag_all">addtag_all()</a></td>			
 				<td style="text-align:left">1.为 Canvas 组件中所有的画布对象添加 Tag<br>2.相当于 addtag(tag, "all")</td>
 			</tr>
 			<tr>
-				<td>addtag_below()</td>			
+				<td><a href="#addtag_below">addtag_below()</a></td>			
 				<td style="text-align:left">1.为显示列表中 item 下方的画布对象添加 Tag<br>2.相当于 addtag(tag, "below", item)</td>
 			</tr>
 			<tr>
-				<td>addtag_closest()</td>			
+				<td><a href="#addtag_closest">addtag_closest()</a></td>			
 				<td style="text-align:left">1.将 Tag 添加到与给定坐标（x, y）相临近的画布对象<br>
 				2.可选参数 halo 指定一个距离，表示以（x, y）为中心，该距离内的所有画布对象均添加 Tag<br>
 				3.可选参数 start 指定一个画布对象，该方法将为低于但最接近该对象的画布对象添加 Tag<br>
@@ -735,62 +837,62 @@
 				注：使用的是画布坐标系</td>
 			</tr>
 			<tr>
-				<td>addtag_enclosed()</td>			
+				<td><a href="#addtag_enclosed">addtag_enclosed()</a></td>			
 				<td style="text-align:left">1.为所有坐标在矩形（x1, y1, x2, y2）中的画布对象添加 Tag<br>
 				2.相当于 addtag(tag, "enclosed", x1, y1, x2,y2)</td>
 			</tr>
 			<tr>
-				<td>addtag_overlapped()</td>			
+				<td><a href="#addtag_overlapped">addtag_overlapped()</a></td>			
 				<td style="text-align:left">1.跟 addtag_enclosed() 方法相似，不过该方法范围更广（即使画布对象只有一部分在矩形中也算）<br>
 				2.相当于 addtag(tag, "overlapping", x1, y1,x2, y2)</td>
 			</tr>
 			<tr>
-				<td>addtag_withtag()</td>			
+				<td><a href="#addtag_withtag">addtag_withtag()</a></td>			
 				<td style="text-align:left">1.为 item 参数指定的画布对象添加 Tag<br>
 				2.item 参数如果指定一个 Tag，则为所有拥有此Tag 的画布对象添加新的 Tag<br>
 				3.item 参数如果指定一个画布对象，那么只为其添加 Tag<br>
 				4.相当于 addtag(tag, "withtag", item)</td>
 			</tr>
 			<tr>
-				<td>bbox()</td>			
+				<td><a href="#bbox">bbox()</a></td>			
 				<td style="text-align:left">1.返回一个四元组（x1, y1, x2, y2）用于描述args 指定的画布对象所在的矩形范围<br>
 				2.如果 args 参数忽略，返回所有的画布对象所在的矩形范围</td>
 			</tr>
 			<tr>
-				<td>canvasx()</td>			
+				<td><a href="#canvasx">canvasx()</a></td>			
 				<td style="text-align:left">1.将窗口坐标系的 X 坐标（screenx）转化为画布坐标系<br>
 				2.如果提供 gridspacing 参数，则转换结果将为该参数的整数倍</td>
 			</tr>
 			<tr>
-				<td>canvasy()</td>			
+				<td><a href="#canvasy">canvasy()</a></td>			
 				<td style="text-align:left">1.将窗口坐标系的 y 坐标（screenx）转化为画布坐标系<br>
 				2.如果提供 gridspacing 参数，则转换结果将为该参数的整数倍</td>
 			</tr>
 			<tr>
-				<td>dtag()</td>			
+				<td><a href="#dtag">dtag()</a></td>			
 				<td style="text-align:left">1.在 item 参数指定的画布对象中删除指定的 tag<br>
 				2.如果 tag 参数被忽略，则删除指定画布对象所有的tags</td>
 			</tr>
 			<tr>
-				<td>find_above()</td>			
+				<td><a href="#find_above">find_above()</a></td>			
 				<td style="text-align:left">1.返回在 item 参数指定的画布对象之上的 ID<br>
 				2.如果有多个画布对象符合要求，那么返回最顶端的那个<br>
 				3.如果 item 参数指定的是最顶层的画布对象，那么返回一个空元组</td>
 			</tr>
 			<tr>
-				<td>find_all()</td>			
+				<td><a href="#find_all">find_all()</a></td>			
 				<td style="text-align:left">1.返回 Canvas 组件上所有的画布对象<br>
 				2.返回格式是一个元组，包含所有画布对象的 ID<br>
 				3.按照显示列表的顺序返回</td>
 			</tr>
 			<tr>
-				<td>find_below()</td>			
+				<td><a href="#find_below">find_below()</a></td>			
 				<td style="text-align:left">1.返回在 item 参数指定的画布对象之下的 ID<br>
 				2.如果有多个画布对象符合要求，那么返回最底端的那个<br>
 				3.如果 item 参数指定的是最底层的画布对象，那么返回一个空元组</td>
 			</tr>
 			<tr>
-				<td>find_closest()</td>			
+				<td><a href="#find_closest">find_closest()</a></td>			
 				<td style="text-align:left">1.返回一个元组，包含所有靠近点（x, y）的画布对象的ID<br>
 				2.如果没有符合的画布对象，则返回一个空元组<br>
 				3.可选参数 halo 用于增加点（x, y）的辐射范围<br>
@@ -798,146 +900,146 @@
 				注意，点（x, y）的坐标是采用画布坐标系来表示</td>
 			</tr>
 			<tr>
-				<td>find_enclosed()</td>			
+				<td><a href="#find_enclosed">find_enclosed()</a></td>			
 				<td style="text-align:left">返回完全包含在限定矩形内所有画布对象的 ID</td>
 			</tr>
 			<tr>
-				<td>find_overlapping()</td>			
+				<td><a href="#find_overlapping">find_overlapping()</a></td>			
 				<td style="text-align:left">返回所有与限定矩形有重叠的画布对象的 ID（让然也包含在限定矩形内的画布对象）</td>
 			</tr>
 			<tr>
-				<td>find_withtag()</td>			
+				<td><a href="#find_withtag">find_withtag()</a></td>			
 				<td style="text-align:left">返回 item 指定的所有画布对象的 ID</td>
 			</tr>
 			<tr>
-				<td>focus()</td>			
+				<td><a href="#focus">focus()</a></td>			
 				<td style="text-align:left">1.将焦点移动到指定的 item<br>
 				2.如果有多个画布对象匹配，则将焦点移动到显示列表中第一个可以接受光标输入的画布对象</td>
 			</tr>
 			<tr>
-				<td>gettags()</td>			
+				<td><a href="#gettags">gettags()</a></td>			
 				<td style="text-align:left">返回与 item 相关联的所有 Tags</td>
 			</tr>
 			<tr>
-				<td>icursor()</td>			
+				<td><a href="#icursor">icursor()</a></td>			
 				<td style="text-align:left">1.将光标移动到 item 指定的画布对象<br>
 				2.这里要求 item 指定的画布对象支持文本输入和转移焦点</td>
 			</tr>
 			<tr>
-				<td>index()</td>			
+				<td><a href="#index">index()</a></td>			
 				<td style="text-align:left">1.返回 index 在指定 item 中的位置（沿用 Python 的惯例：0 表示第一）<br>
 				2.index 参数可以是：INSERT（当前光标的位置），END（最后一个字符的位置），SEL_FIRST（当前选中文本的起始位置），SEL_LAST（当前选中文本的结束位置），还可以使用格式为 "@x, y"（x 和 y 是画布坐标系）来获得与此坐标最接近的位置</td>
 			</tr>
 			<tr>
-				<td>insert()</td>			
+				<td><a href="#insert">insert()</a></td>			
 				<td style="text-align:left">1.在允许进行文本编辑的画布对象的指定位置插入文本<br>
 				2.index 参数可以是：INSERT（当前光标的位置），END（最后一个字符的位置），SEL_FIRST（当前选中文本的起始位置），SEL_LAST（当前选中文本的结束位置），还可以使用格式为 "@x, y"（x 和 y 是画布坐标系）来获得与此坐标最接近的位置</td>
 			</tr>
 			<tr>
-				<td>itemcget()</td>			
+				<td><a href="#itemcget">itemcget()</a></td>			
 				<td style="text-align:left"> 获得指定 item 的选项的当前值</td>
 			</tr>
 			<tr>
-				<td>lift()</td>			
+				<td><a href="#lift">lift()</a></td>			
 				<td style="text-align:left">将指定画布对象移动到显示列表的顶部</td>
 			</tr>
 			<tr>
-				<td>lower()</td>			
+				<td><a href="#lower">lower()</a></td>			
 				<td style="text-align:left">将指定画布对象移动到显示列表的底部</td>
 			</tr>
 			<tr>
-				<td>postscript()</td>			
+				<td><a href="#postscript">postscript()</a></td>			
 				<td style="text-align:left">将 Canvas 的当前内容封装成 PostScript格式</td>
 			</tr>
 			<tr>
-				<td>scale()</td>			
+				<td><a href="#scale">scale()</a></td>			
 				<td style="text-align:left">1.缩放 item 指定的画布对象<br>
 				2.xOrigin 和 yOrigin 决定要缩放的位置<br>
 				3.xScale 和 yScale 决定缩放的比例<br>
 				注意：该方法无法缩放 Text 画布对象</td>
 			</tr>
 			<tr>
-				<td>scan_mark()</td>			
+				<td><a href="#scan_mark">scan_mark()</a></td>			
 				<td style="text-align:left">1.使用这种方式来实现 Canvas 内容的滚动
 				2.需要将鼠标按钮事件及当前鼠标位置绑定到 scan_mark(x, y) 方法，然后再将 <motion> 事件及当前鼠标位置绑定到 scan_dragto(x,y) 方法，就可以实现 Canvas 在当前位置和sacn_mack(x, y) 指定的位置 (x, y) 之间滚动</td>
 			</tr>
 			<tr>
-				<td>scan_dragto()</td>			
+				<td><a href="#scan_dragto">scan_dragto()</a></td>			
 				<td style="text-align:left">和scan_mark一样</td>
 			</tr>
 			<tr>
-				<td>select_adjust()</td>			
+				<td><a href="#select_adjust">select_adjust()</a></td>			
 				<td style="text-align:left">调整选中范围，使得给定的 index 参数指定的位置在范围内</td>
 			</tr>
 			<tr>
-				<td>select_clear()</td>			
+				<td><a href="#select_clear">select_clear()</a></td>			
 				<td style="text-align:left">调整选中范围的起始位置为 index 参数指定的位置</td>
 			</tr>
 			<tr>
-				<td>select_item()</td>			
+				<td><a href="#select_item">select_item()</a></td>			
 				<td style="text-align:left">1.范围在 Canvas 组件中当前文本的选中范围<br>
 				2.如果没有则返回 None</td>
 			</tr>
 			<tr>
-				<td>select_to()</td>			
+				<td><a href="#select_to">select_to()</a></td>			
 				<td style="text-align:left">调整选中范围的结束位置为 index 参数指定的位置</td>
 			</tr>
 			<tr>
-				<td>tag_bind()</td>			
+				<td><a href="#tag_bind">tag_bind()</a></td>			
 				<td style="text-align:left">1.为 Canvas 组件上的画布对象绑定方法
 				2.event 参数是绑定的事件名称，callback 是与之关联的方法
 				3.注意：与绑定事件关联的是画布对象，而不是 Tag</td>
 			</tr>
 			<tr>
-				<td>tag_lower()</td>			
+				<td><a href="#tag_lower">tag_lower()</a></td>			
 				<td style="text-align:left">1.将一个或多个画布对象移至底部<br>
 				2.如果是多个画布对象，将它们都移至底部并保留原有顺序<br>
 				3.注意：该方法对窗口组件无效，请使用 lower 代替</td>
 			</tr>
 			<tr>
-				<td>tag_raise()</td>			
+				<td><a href="#tag_raise">tag_raise()</a></td>			
 				<td style="text-align:left">1.将一个或多个画布对象移至顶部<br>
 				2.如果是多个画布对象，将它们都移至顶部并保留原有顺序<br>
 				3.注意：该方法对窗口组件无效，请使用 lift 代替</td>
 			</tr>
 			<tr>
-				<td>tag_unbind()</td>			
+				<td><a href="#tag_unbind">tag_unbind()</a></td>			
 				<td style="text-align:left">解除与 item 绑定的事件</td>
 			</tr>
 			<tr>
-				<td>tkraise()</td>			
+				<td><a href="#tkraise">tkraise()</a></td>			
 				<td style="text-align:left">将指定画布对象移动到显示列表的顶部。跟 tag_raise 一样</td>
 			</tr>
 			<tr>
-				<td>type()</td>			
+				<td><a href="#type">type()</a></td>			
 				<td style="text-align:left"></td>
 			</tr>
 			<tr>
-				<td>xview()</td>			
+				<td><a href="#xview">xview()</a></td>			
 				<td style="text-align:left">1.该方法用于在水平方向上滚动 Canvas 组件的内容，一般通过绑定 Scollbar 组件的 command 选项来实现（具体操作参考：Scrollbar）<br>
 				2.如果第一个参数是 MOVETO，则第二个参数表示滚动到指定的位置：0.0 表示最左端，1.0 表示最右端<br>
 				3.如果第一个参数是 SCROLL，则第二个参数表示滚动的数量，第三个参数表示滚动的单位（可以是 UNITS 或 PAGES），例如：xview(SCROLL,3, UNITS) 表示向右滚动三行</td>
 			</tr>
 			<tr>
-				<td>xview_moveto()</td>			
+				<td><a href="#xview_moveto">xview_moveto()</a></td>			
 				<td style="text-align:left">跟 xview(MOVETO, fraction) 一样</td>
 			</tr>
 			<tr>
-				<td>xview_scroll()</td>			
+				<td><a href="#xview_scroll">xview_scroll()</a></td>			
 				<td style="text-align:left">跟 xview(SCROLL, number, what) 一样</td>
 			</tr>
 			<tr>
-				<td>yview()</td>			
+				<td><a href="#yview">yview()</a></td>			
 				<td style="text-align:left">1.该方法用于在垂直方向上滚动 Canvas 组件的内容，一般通过绑定 Scollbar 组件的 command 选项来实现（具体操作参考：Scrollbar）<br>
 				2.如果第一个参数是 MOVETO，则第二个参数表示滚动到指定的位置：0.0 表示最顶端，1.0 表示最底端<br>
 				3.如果第一个参数是 SCROLL，则第二个参数表示滚动的数量，第三个参数表示滚动的单位（可以是 UNITS 或 PAGES），例如：yview(SCROLL,3, PAGES) 表示向下滚动三页</td>
 			</tr>
 			<tr>
-				<td>yview_moveto()</td>			
+				<td><a href="#yview_moveto">yview_moveto()</a></td>			
 				<td style="text-align:left">跟 yview(MOVETO, fraction) 一样</td>
 			</tr>
 			<tr>
-				<td>yview_scroll()</td>			
+				<td><a href="#yview_scroll">yview_scroll()</a></td>			
 				<td style="text-align:left">跟 yview(SCROLL, number, what) 一样</td>
 			</tr>
 		</tbody>
@@ -948,7 +1050,7 @@
 	&nbsp Item handles 事实上是一个用于指定某个画布对象的整型数字（也成为画布对象的 ID）。当你在 Canvas 组件上创建一个画布对象的时候，Tkinter 将自动为其指定一个在该 Canvas 组件中独一无二的整型值。然后各种 Canvas 的方法可以通过这个值操纵该画布对象。<br>
 	&nbsp Tags 是附在画布对象上的标签，Tags 由普通的非空白字符串组成。一个画布对象可以与多个 Tags 相关联，一个 Tag 也可用于描述多个画布对象。然而，与 Text 组件不同，没有指定画布对象的 Tags 不能进行事件绑定和配置样式。也就是说，Canvas 组件的 Tags 是仅为画布对象所拥有。<br>
 	&nbsp Canvas 组件预定义了两个 Tags：ALL 和 CURRENT：all表示canvas组件中的所有画布对象；current表示鼠标指针下的画布对象（若有的话）</p>
-	<p>create_arc(bbox, **options)<br>
+	<p id="create_arc">create_arc(bbox, **options)<br>
 	-- 根据 bbox (x1, y1, x2, y2) 创建一个扇形（pieslice）、弓形（chord）或弧形（arc）</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>
@@ -1081,15 +1183,15 @@
 			canvas.pack()<br>
 			en = False<br>
 			def hidden():<br>
-				&nbspglobal en<br>
-				&nbspif en == False:<br>
-					&nbsp&nbspen = True<br>
-					&nbsp&nbspprint ("this is hidden")<br>
-					&nbsp&nbspcanvas.itemconfigure(a,state='hidden')<br>
-				&nbspelse:<br>
-					&nbsp&nbspen = False<br>
-					&nbsp&nbspprint ("this is normal")<br>
-					&nbsp&nbspcanvas.itemconfigure(a,state='normal')<br>
+				&nbsp; global en<br>
+				&nbsp; if en == False:<br>
+					&nbsp; &nbsp; en = True<br>
+					&nbsp; &nbsp; print ("this is hidden")<br>
+					&nbsp; &nbsp; canvas.itemconfigure(a,state='hidden')<br>
+				&nbsp; else:<br>
+					&nbsp; &nbsp; en = False<br>
+					&nbsp; &nbsp; print ("this is normal")<br>
+					&nbsp; &nbsp; canvas.itemconfigure(a,state='normal')<br>
 			Button(win,text='Hidden',command=hidden).pack()<br>
 			win.mainloop()<br>
 			<img src="./0/create_arc0.png" alt="create_arc0"> 
@@ -1097,7 +1199,7 @@
 			<img src="./0/create_arc2.png" alt="create_arc2">
 		</fieldset>
 	</form>
-	<p>create_bitmap(position, **options)<br>
+	<p id="create_bitmap">create_bitmap(position, **options)<br>
 	-- 在 position 指定的位置（x, y）创建一个位图对象<br>
 	-- 创建成功后返回该位图对象的 ID</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
@@ -1129,7 +1231,8 @@
 			</tr>
 			<tr>
 				<td>bitmap</td>			
-				<td style="text-align:left">指定显示的位图，有hourglass、error</td>
+				<td style="text-align:left">指定显示的位图，有 gray12、gray25、gray50、gray75、hourglass、error、questhead、info、warning 或 question，也可以直接使用 XBM(X Bitmap) 文件，在 XBM 文件名称前添加一个 @ 符号，如 bitmap="@hello.xbm"<br/>
+				举例：canvas.create_bitmap(10,10,bitmap="@aa.xbm")</td>
 			</tr>
 			<tr>
 				<td>disabledbackground</td>			
@@ -1172,7 +1275,7 @@
 			<img src="./0/create_bitmap1.png" alt="create_bitmap1">
 		</fieldset>
 	</form>
-	<p>create_line(coords, options)<br>
+	<p id="create_line">create_line(coords, options)<br>
 	根据 coords 给定的坐标，在画布上创建一条或多条线段。 如果给定的坐标超过两个点，则会首尾相连变成一条折线。</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
@@ -1309,7 +1412,7 @@
 			<img src="./0/create_line.png" alt="create_line"> 
 		</fieldset>
 	</form>
-	<p>create_rectangle(bbox, **options)<br>
+	<p id="create_rectangle">create_rectangle(bbox, **options)<br>
 	根据限定矩形 bbox，在画布上创建一个矩形。新创建的对象位于显示的最前端。<br>
 	（1）bbox：定义要创建对象的边界(x1, y1, x2, y2)<br>
 	（2）options： 选项的具体含义</p>
@@ -1428,7 +1531,7 @@
 			<img src="./0/create_rectangle.png" alt="create_rectangle"> 
 		</fieldset>
 	</form>
-	<p>create_image(position, **options)<br>
+	<p id="create_image">create_image(position, **options)<br>
 	-- 在 position 指定的位置（x, y）创建一个图片对象<br>
 	-- 创建成功后返回该图片对象的 ID</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
@@ -1448,7 +1551,9 @@
 			</tr>
 			<tr>
 				<td>image</td>			
-				<td style="text-align:left">指定要显示的图片</td>
+				<td style="text-align:left">指定要显示的图片<br/>
+				举例：img=tkinter.PhotoImage(file="aa.png")#必须和 image 分开，若直接在 create_image 里面令 image=PhotoImage 就无法显示出图片<br/>
+				canvas.create_image(10,10,image=img)</td>
 			</tr>
 			<tr>
 				<td>disabledimage</td>			
@@ -1479,7 +1584,7 @@
 			<img src="./0/create_image.png" alt="create_image"> 
 		</fieldset>
 	</form>
-	<p>create_oval：创建椭圆</p>
+	<p id="create_oval">create_oval：创建椭圆</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
 			<thread>
@@ -1600,7 +1705,7 @@
 			<img src="./0/create_oval.png" alt="create_oval"> 
 		</fieldset>
 	</form>
-	<p>create_polygon：创建多边形。</p>
+	<p id="create_polygon">create_polygon：创建多边形。</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
 			<thread>
@@ -1730,7 +1835,7 @@
 			<img src="./0/create_polygon.png" alt="create_polygon"> 
 		</fieldset>
 	</form>
-	<p>create_text：创建文本</p>
+	<p id="create_text">create_text：创建文本</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
 			<thread>
@@ -1811,7 +1916,7 @@
 			<img src="./0/create_text.png" alt="create_text"> 
 		</fieldset>
 	</form>
-	<p>create_window：创建窗口组件</p>
+	<p id="create_window">create_window：创建窗口组件</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
 			<thread>
@@ -1858,7 +1963,7 @@
 			<img src="./0/create_window.png" alt="create_window"> 
 		</fieldset>
 	</form>
-	<p>postscript：将 Canvas 的当前内容封装成 PostScript格式，暂无例子</p>
+	<p id="postscript">postscript：将 Canvas 的当前内容封装成 PostScript格式，暂无例子</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>	
 			<thread>
@@ -1899,7 +2004,7 @@
 		</tbody>
 	</table>
 
-	<p>对于按钮组件、菜单组件等可以在创建组件时通过command参数指定其事件处理函数。方法为bind;或者用bind_class方法进行类绑定，bind_all方法将所有组件事件绑定到事件响应函数上。<br></p>
+	<p>对于按钮组件、菜单组件等可以在创建组件时通过 command 参数指定其事件处理函数。方法为bind;或者用bind_class方法进行类绑定，bind_all方法将所有组件事件绑定到事件响应函数上。<br></p>
 	<form>
 		<fieldset>
 			<legend>** <b>交互式绘图 举例 </b>**</legend>
@@ -1908,11 +2013,11 @@
 			canvas = Canvas(win, width=400, height=200)<br>
 			canvas.pack()<br>
 			def paint( event ):<br>
-			   &nbsppython_green = "#476042"<br>
-			   &nbspx1, y1 = ( event.x - 1 ), ( event.y - 1 )<br>
-			   &nbspx2, y2 = ( event.x + 1 ), ( event.y + 1 )<br>
-			   &nbspcanvas.create_oval( x1, y1, x2, y2, fill = "#476042" )<br>
-			canvas.bind( "&ltB1-Motion&gt", paint )<br><!--其中 &lt 和 &gt 分别表示大于号和小于号<> 因为html里直接使用这两符号有时候得不到想要的效果-->
+			   &nbsp; python_green = "#476042"<br>
+			   &nbsp; x1, y1 = ( event.x - 1 ), ( event.y - 1 )<br>
+			   &nbsp; x2, y2 = ( event.x + 1 ), ( event.y + 1 )<br>
+			   &nbsp; canvas.create_oval( x1, y1, x2, y2, fill = "#476042" )<br>
+			canvas.bind( "&lt;B1-Motion&gt;", paint )<br><!--其中 &lt 和 &gt 分别表示大于号和小于号<> 因为html里直接使用这两符号有时候得不到想要的效果-->
 			Label(win, text="按住鼠标左键并移动，开始绘图").pack(side=BOTTOM)<br>
 			mainloop()<br>
 			<img src="./0/create_huizhi.png" alt="create_huizhi">
@@ -2017,7 +2122,7 @@
 	<form>
 		<fieldset>
 			<legend>** <b>checkbutton 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>def print_selection():<br>&nbsppass<br>
+			from tkinter import *<br>win=Tk()<br>def print_selection():<br>&nbsp;pass<br>
 			var1=IntVar()  #定义var1和var2整型变量用来存放选择行为返回值<br>var2=IntVar()<br>
 			Checkbutton(win, text='Python',variable=var1, onvalue=1, offvalue=0, command=print_selection).pack()    # 传值原理类似于radiobutton部件<br>
 			Checkbutton(win, text='C++',variable=var2, onvalue=1, offvalue=0, command=print_selection).pack()<br>
@@ -2104,7 +2209,8 @@
 			frame_r = Frame(frame)<br>
 			frame_l.pack(side='left')<br>frame_r.pack(side='right')<br>
 			Label(frame_l, text='on the frame_l1', bg='green').pack(side='left')<br>
-			Label(frame_r, text='on the frame_r1', bg='yellow').pack(side='right')<br>win.mainloop()<br>
+			Label(frame_r, text='on the frame_r1', bg='yellow').pack(side='right')<br>
+			win.mainloop()<br>
 			<img src="./0/frame.png" alt="frame">
 		</fieldset>
 	</form>
@@ -2233,28 +2339,36 @@
 		<fieldset>
 			<legend>** <b>Menu 举例 </b>**</legend>
 			from tkinter import *<br>
-	win=Tk()<br>def do_job():<br>&nbsppass<br>
-	menubar = Menu(win)<br>
-	# 创建一个File菜单项（默认不下拉，下拉内容包括New，Open，Save，Exit功能项）<br>
-	filemenu = Menu(menubar, tearoff=0)<br># 将上面定义的空菜单命名为File，放在菜单栏中，就是装入那个容器中<br>
-	menubar.add_cascade(label='File', menu=filemenu)<br>
-	# 在File中加入New、Open、Save等小菜单，即我们平时看到的下拉菜单，每一个小菜单对应命令操作。<br>
-	filemenu.add_command(label='New', command=do_job)<br>filemenu.add_command(label='Open', command=do_job)<br>
-	filemenu.add_command(label='Save', command=do_job)<br>filemenu.add_separator()    # 添加一条分隔线<br>
-	filemenu.add_command(label='Exit', command=win.quit) # win.quit为退出<br>
-	#创建一个Edit菜单项（默认不下拉，下拉内容包括Cut，Copy，Paste功能项）<br>
-	editmenu = Menu(menubar, tearoff=0)<br># 将上面定义的空菜单命名为 Edit，放在菜单栏中，就是装入那个容器中<br>
-	menubar.add_cascade(label='Edit', menu=editmenu)<br>
-	#同样的在 Edit 中加入Cut、Copy、Paste等小命令功能单元，如果点击这些单元, 就会触发do_job的功能
-	editmenu.add_command(label='Cut', command=do_job)<br>editmenu.add_command(label='Copy', command=do_job)<br>
-	editmenu.add_command(label='Paste', command=do_job)<br>#创建第二级菜单，即菜单项里面的菜单<br>
-	submenu = Menu(filemenu) # 和上面定义菜单一样，不过此处实在File上创建一个空的菜单<br>
-	filemenu.add_cascade(label='Import', menu=submenu, underline=0) # 给放入的菜单submenu命名为Import
-	#创建第三级菜单命令，即菜单项里面的菜单项里面的菜单命令<br>
-	submenu.add_command(label='Submenu_1', command=do_job)   # 这里和上面创建原理也一样，在Import菜单项中加入一个小菜单命令Submenu_1
-	#创建菜单栏完成后，配置让菜单栏menubar显示出来<br>
-	win.config(menu=menubar) #重新配置<br>
-	win.mainloop()<br>
+			win=Tk()<br>
+			def do_job():<br>
+				&nbsp; pass<br>
+			menubar = Menu(win)<br>
+			# 创建一个 File 菜单项（默认不下拉，下拉内容包括 New，Open，Save，Exit 功能项）<br>
+			filemenu = Menu(menubar, tearoff=0)<br>
+			# 将上面定义的空菜单命名为 File，放在菜单栏中，就是装入那个容器中<br>
+			menubar.add_cascade(label='File', menu=filemenu)<br>
+			# 在 File 中加入 New、Open、Save 等小菜单，即我们平时看到的下拉菜单，每一个小菜单对应命令操作。<br>
+			filemenu.add_command(label='New', command=do_job)<br>
+			filemenu.add_command(label='Open', command=do_job)<br>
+			filemenu.add_command(label='Save', command=do_job)<br>
+			filemenu.add_separator()    # 添加一条分隔线<br>
+			filemenu.add_command(label='Exit', command=win.quit) # win.quit 为退出<br>
+			#创建一个 Edit 菜单项（默认不下拉，下拉内容包括 Cut，Copy，Paste 功能项）<br>
+			editmenu = Menu(menubar, tearoff=0)<br>
+			# 将上面定义的空菜单命名为 Edit，放在菜单栏中，就是装入那个容器中<br>
+			menubar.add_cascade(label='Edit', menu=editmenu)<br>
+			#同样的在 Edit 中加入 Cut、Copy、Paste 等小命令功能单元，如果点击这些单元, 就会触发 do_job的功能<br>
+			editmenu.add_command(label='Cut', command=do_job)<br>
+			editmenu.add_command(label='Copy', command=do_job)<br>
+			editmenu.add_command(label='Paste', command=do_job)<br>
+			#创建第二级菜单，即菜单项里面的菜单<br>
+			submenu = Menu(filemenu) # 和上面定义菜单一样，不过此处实在File上创建一个空的菜单<br>
+			filemenu.add_cascade(label='Import', menu=submenu, underline=0) # 给放入的菜单 submenu 命名为 Import<br>
+			#创建第三级菜单命令，即菜单项里面的菜单项里面的菜单命令<br>
+			submenu.add_command(label='Submenu_1', command=do_job)   # 这里和上面创建原理也一样，在 Import 菜单项中加入一个小菜单命令 Submenu_1<br>
+			#创建菜单栏完成后，配置让菜单栏 menubar 显示出来<br>
+			win.config(menu=menubar) #重新配置<br>
+			win.mainloop()<br>
 			<img src="./0/menu.png" alt="menu">
 		</fieldset>
 	</form>
@@ -2266,45 +2380,60 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Menubutton 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>def callback():<br>&nbsppass<br> 
-	mb = Menubutton(win, text='点我', relief=RAISED) #relief设计按钮的样式<br>
-	mb.pack()<br>filemenu = Menu(mb, tearoff=False)<br>filemenu.add_command(label='打开', command=callback)<br>
-	filemenu.add_command(label='保存', command=callback)<br>filemenu.add_command()  #添加分割线<br>
-	filemenu.add_command(label='退出', command=win.quit)<br>mb.config(menu=filemenu)<br>
-	win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			def callback():<br>
+				&nbsp; pass<br> 
+			mb = Menubutton(win, text='点我', relief=RAISED) # relief 设计按钮的样式<br>
+			mb.pack()<br>
+			filemenu = Menu(mb, tearoff=False)<br>
+			filemenu.add_command(label='打开', command=callback)<br>
+			filemenu.add_command(label='保存', command=callback)<br>
+			filemenu.add_command()  #添加分割线<br>
+			filemenu.add_command(label='退出', command=win.quit)<br>
+			mb.config(menu=filemenu)<br>
+			win.mainloop()<br>
 			<img src="./0/menubutton.png" alt="menubutton">
 		</fieldset>
 	</form>
 </div>
 <hr>
 <div id="optionmenu">
-	<p>optionmenu：选择菜单，下拉菜单的改版，弥补了listbox无法下拉列表框的问题</p>
+	<p>optionmenu：选择菜单，下拉菜单的改版，弥补了 listbox 无法下拉列表框的问题</p>
 	
 	<form>
 		<fieldset>
 			<legend>** <b>OptionMenu 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>var = StringVar()<br>var.set('1') # 为变量var设置值<br>
-			OptionMenu(win, var,1,2,3,4).pack()<br>win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			var = StringVar()<br>
+			var.set('1') # 为变量var设置值<br>
+			OptionMenu(win, var,1,2,3,4).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/optionmenu.png" alt="optionmenu">
 		</fieldset>
 	</form>
 </div>
 <hr>
 <div id="message">
-	<p>message：消息框，类似label，但是能自动调整文本到给定的宽度或比例</p>
+	<p>message：消息框，类似 Label，但是能自动调整文本到给定的宽度或比例</p>
 
 	<form>
 		<fieldset>
 			<legend>** <b>Message 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>c=Message(win, text='你好！',width=50)<br>
-			c.pack()<br>win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			c=Message(win, text='你好！',width=50)<br>
+			c.pack()<br>
+			win.mainloop()<br>
 			<img src="./0/message.png" alt="message">
 		</fieldset>
 	</form>
 </div>
 <hr>
 <div id="panedwindow">
-	<p>PanedWindow(master=None, **options)(class)：<br>窗口布局管理，可包含一个或多个子控件，每个子控件可进行拉缩</p>
+	<p>PanedWindow(master=None, **options)(class)：<br>
+		窗口布局管理，可包含一个或多个子控件，每个子控件可进行拉缩</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<thread>
 			<td colspan="2">属性</td>
@@ -2324,31 +2453,41 @@
 			</tr>
 			<tr>
 				<td>cursor</td>			
-				<td style="text-align:left">指定当鼠标在PanedWindow上飘过的时候的鼠标样式<br>默认值由系统指定</td>
+				<td style="text-align:left">指定当鼠标在 PanedWindow 上飘过的时候的鼠标样式<br>
+				默认值由系统指定</td>
 			</tr>
 			<tr>
 				<td>handlepad</td>			
-				<td style="text-align:left">调节“手柄”的位置<br>例如orient=VERTICAL，则handlepad选项表示“分割线”上的手柄与左端的距离<br>默认值是8像素</td>
+				<td style="text-align:left">调节“手柄”的位置<br>
+				例如 orient=VERTICAL，则 handlepad 选项表示“分割线”上的手柄与左端的距离<br>
+				默认值是8像素</td>
 			</tr>
 			<tr>
 				<td>handlesize</td>			
-				<td style="text-align:left">设置“手柄”的尺寸（由于“手柄”必须是一个正方形，所以是设置正方形的边长）<br>默认值是8像素</td>
+				<td style="text-align:left">设置“手柄”的尺寸（由于“手柄”必须是一个正方形，所以是设置正方形的边长）<br>
+				默认值是8像素</td>
 			</tr>
 			<tr>
 				<td>height</td>			
-				<td style="text-align:left">设置PanedWindow的高度<br>如果忽略该选项，则高度由子组件的尺寸决定</td>
+				<td style="text-align:left">设置 PanedWindow 的高度<br>
+				如果忽略该选项，则高度由子组件的尺寸决定</td>
 			</tr>
 			<tr>
 				<td>opaqueresize</td>			
-				<td style="text-align:left">该选项定义了用户调整窗格尺寸的操作<br>如果该选项的值为True（默认），窗格的尺寸随用户鼠标的拖拽而改变<br>如果该选项的值为False，窗格的尺寸在用户释放鼠标的时候才更新到新的位置</td>
+				<td style="text-align:left">该选项定义了用户调整窗格尺寸的操作<br>
+				如果该选项的值为 True（默认），窗格的尺寸随用户鼠标的拖拽而改变<br>
+				如果该选项的值为 False，窗格的尺寸在用户释放鼠标的时候才更新到新的位置</td>
 			</tr>
 			<tr>
 				<td>orient</td>			
-				<td style="text-align:left">指定窗格的分布方式<br>可以是HORIZONTAL（横向分布）和VERTICAL（纵向分布）</td>
+				<td style="text-align:left">指定窗格的分布方式<br>
+				可以是HORIZONTAL（横向分布）和VERTICAL（纵向分布）</td>
 			</tr>
 			<tr>
 				<td>relief</td>			
-				<td style="text-align:left">指定边框样式<br>默认值是FLAT<br>另外你还可以设置SUNKEN，RAISED，GROOVED或RIDGE</td>
+				<td style="text-align:left">指定边框样式<br>
+				默认值是FLAT<br>
+				另外你还可以设置 SUNKEN，RAISED，GROOVED 或 RIDGE</td>
 			</tr>
 			<tr>
 				<td>sashpad</td>			
@@ -2356,7 +2495,9 @@
 			</tr>
 			<tr>
 				<td>sashrelief</td>			
-				<td style="text-align:left">设置分割线的样式<br>默认值是FLAT<br>另外你还可以设置SUNKEN，RAISED，GROOVED或RIDGE</td>
+				<td style="text-align:left">设置分割线的样式<br>
+				默认值是FLAT<br>
+				另外你还可以设置 SUNKEN，RAISED，GROOVED 或 RIDGE</td>
 			</tr>
 			<tr>
 				<td>sashwidth</td>			
@@ -2364,11 +2505,13 @@
 			</tr>
 			<tr>
 				<td>showhandle</td>			
-				<td style="text-align:left">设置是否显示调节窗格的手柄<br>默认值为False</td>
+				<td style="text-align:left">设置是否显示调节窗格的手柄<br>
+				默认值为 False</td>
 			</tr>
 			<tr>
 				<td>width</td>			
-				<td style="text-align:left">设置PanedWindow的宽度<br>如果忽略该选项，则高度由子组件的尺寸决定</td>
+				<td style="text-align:left">设置 PanedWindow 的宽度<br>
+				如果忽略该选项，则高度由子组件的尺寸决定</td>
 			</tr>
 			<td colspan="2">方法</td>
 			<tr>
@@ -2381,8 +2524,10 @@
 			</tr>
 			<tr>
 				<td>identify(x, y)</td>			
-				<td style="text-align:left">给定一个坐标 (x, y)，返回该坐标所在的元素名称<br>如果该坐标位于子组件上，返回空字符串
-				<br>如果该坐标位于分割线上，返回一个二元组 (n, 'sash')，n 为 0 表示第一个分割线<br>如果该坐标位于手柄上，返回一个二元组 (n, 'handle')，n 为 0 表示第一个手柄</td>
+				<td style="text-align:left">给定一个坐标 (x, y)，返回该坐标所在的元素名称<br>
+				如果该坐标位于子组件上，返回空字符串<br>
+				如果该坐标位于分割线上，返回一个二元组 (n, 'sash')，n 为 0 表示第一个分割线<br>
+				如果该坐标位于手柄上，返回一个二元组 (n, 'handle')，n 为 0 表示第一个手柄</td>
 			</tr>
 			<tr>
 				<td>panecget(child, option)</td>			
@@ -2390,8 +2535,10 @@
 			</tr>
 			<tr>
 				<td>paneconfig(child, **option)</td>			
-				<td style="text-align:left">设置子组件的各种选项<br>after：添加新的子组件到指定子组件后边<br>
-				before：添加新的子组件到指定子组件前边<br>height：指定子组件的高度</td>
+				<td style="text-align:left">设置子组件的各种选项<br>
+				after：添加新的子组件到指定子组件后边<br>
+				before：添加新的子组件到指定子组件前边<br>
+				height：指定子组件的高度</td>
 			</tr>
 		</tbody>
 	</table>
@@ -2401,20 +2548,20 @@
 			from tkinter import *<br>
 			win=Tk()<br>
 			def panedwin():<br>
-				&nbsp m1 = PanedWindow(sashrelief=SUNKEN) #默认是左右分布的<br>
-				&nbsp m1.pack(fill=BOTH, expand=1)<br>
-				&nbsp left = PanedWindow(orient=VERTICAL, sashrelief=SUNKEN)<br>
-				&nbsp m1.add(left)<br>
-				&nbsp top = Label(left, text='左上界面')<br>
-				&nbsp left.add(top)<br>
-				&nbsp bottom = Label(left, text='左下界面')<br>
-				&nbsp left.add(bottom)<br>
-				&nbsp m2 = PanedWindow(orient=VERTICAL, sashrelief=SUNKEN)<br>
-				&nbsp m1.add(m2)<br>
-				&nbsp top = Label(m2, text='右上界面')<br>
-				&nbsp m2.add(top)<br>
-				&nbsp bottom = Label(m2, text='右下界面')<br>
-				&nbsp m2.add(bottom)<br>
+				&nbsp; m1 = PanedWindow(sashrelief=SUNKEN) #默认是左右分布的<br>
+				&nbsp; m1.pack(fill=BOTH, expand=1)<br>
+				&nbsp; left = PanedWindow(orient=VERTICAL, sashrelief=SUNKEN)<br>
+				&nbsp; m1.add(left)<br>
+				&nbsp; top = Label(left, text='左上界面')<br>
+				&nbsp; left.add(top)<br>
+				&nbsp; bottom = Label(left, text='左下界面')<br>
+				&nbsp; left.add(bottom)<br>
+				&nbsp; m2 = PanedWindow(orient=VERTICAL, sashrelief=SUNKEN)<br>
+				&nbsp; m1.add(m2)<br>
+				&nbsp; top = Label(m2, text='右上界面')<br>
+				&nbsp; m2.add(top)<br>
+				&nbsp; bottom = Label(m2, text='右下界面')<br>
+				&nbsp; m2.add(bottom)<br>
 
 			panedwin()<br>
 			win.mainloop()<br>
@@ -2492,18 +2639,45 @@
 			</tr>
 			<tr>
 				<td>textvariable</td>			
-				<td style="text-align:left">可变文本显示，与StringVar等配合着用</td>
+				<td style="text-align:left">可变文本显示，与 StringVar 等配合着用</td>
+			</tr>
+		<thread>
+			<td colspan="2">方法</td>
+		</thread>
+			<tr>
+				<td>select()</td>			
+				<td style="text-align:left">设置某一个单选按钮为选中的状态，默认第一个选中，这时可通过此方法指定特定单选按钮被选中</td>
+			</tr>
+			<tr>
+				<td>deselect()</td>			
+				<td style="text-align:left">清除单选按钮，如默认第一个选中，这时若想一个都不选，这时设置第一个为此方法则可实现</td>
+			</tr>
+			<tr>
+				<td>flash()</td>			
+				<td style="text-align:left">在激活状态颜色和正常颜色之间闪烁几次单选按钮<br/>注意：必须设置 activeforeground 或者 activebackground 中的任何一个或者全部，否则没有效果</td>
+			</tr>
+			<tr>
+				<td></td>			
+				<td style="text-align:left"></td>
+			</tr>
+			<tr>
+				<td></td>			
+				<td style="text-align:left"></td>
 			</tr>
 		</tbody>
 	</table>
 	<form>
 		<fieldset>
 			<legend>** <b>Radiobutton 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>def print_selection():<br>&nbsppass<br>var = StringVar() <br>
-	Radiobutton(win, text='Option A', variable=var, value='A', command=print_selection).pack()<br>
-	Radiobutton(win, text='Option B', variable=var, value='B', command=print_selection).pack()<br>
-	Radiobutton(win, text='Option C', variable=var, value='C', command=print_selection).pack()<br>
-	win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			def print_selection():<br>
+				&nbsp; pass<br>
+			var = StringVar() <br>
+			Radiobutton(win, text='Option A', variable=var, value='A', command=print_selection).pack()<br>
+			Radiobutton(win, text='Option B', variable=var, value='B', command=print_selection).pack()<br>
+			Radiobutton(win, text='Option C', variable=var, value='C', command=print_selection).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/radiobutton.png" alt="radiobutton">
 		</fieldset>
 	</form>
@@ -2515,10 +2689,13 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Scale 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>def print_selection(v):<br>&nbsppass<br>
-	# 第5步，创建一个尺度滑条，长度200字符，从0开始10结束，以2为刻度，精度为0.01，触发调用print_selection函数<br>
-	Scale(win, label='try me', from_=0, to=10, orient=HORIZONTAL, length=200, showvalue=0,tickinterval=2, resolution=0.01, command=print_selection).pack()<br>
-	win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			def print_selection(v):<br>
+				&nbsp; pass<br>
+			# 第 5 步，创建一个尺度滑条，长度 200 字符，从 0 开始 10 结束，以 2 为刻度，精度为 0.01，触发调用 print_selection 函数<br>
+			Scale(win, label='try me', from_=0, to=10, orient=HORIZONTAL, length=200, showvalue=0,tickinterval=2, resolution=0.01, command=print_selection).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/scale.png" alt="scale">
 		</fieldset>
 	</form>
@@ -2530,7 +2707,10 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Scrollbar 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>Scrollbar(win).pack(side='right')<br>win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			Scrollbar(win).pack(side='right')<br>
+			win.mainloop()<br>
 			<img src="./0/scrollbar.png" alt="scrollbar">
 		</fieldset>
 	</form>
@@ -2542,7 +2722,9 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Spinbox 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>Spinbox(win, values= (1, 2, "3", 4)).pack()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			Spinbox(win, values= (1, 2, "3", 4)).pack()<br>
 			win.mainloop()<br>
 			<img src="./0/spinbox.png" alt="spinbox">
 		</fieldset>
@@ -2605,7 +2787,10 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Text 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>Text(win, height=3).pack()<br>win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			Text(win, height=3).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/text.png" alt="text">
 		</fieldset>
 	</form>
@@ -2617,9 +2802,14 @@
 	<form>
 		<fieldset>
 			<legend>** <b>Toplevel 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>def create():<br>&nbsptop = Toplevel()<br>
-    &nbspmsg = Message(top,text="这是一个顶级窗口")<br>&nbspmsg.pack()
-	Button(win,text="创建顶级窗口",command = create).pack()<br>win.mainloop()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			def create():<br>
+				&nbsp; top = Toplevel()<br>
+				&nbsp; msg = Message(top,text="这是一个顶级窗口")<br>
+				&nbsp; msg.pack()
+			Button(win,text="创建顶级窗口",command = create).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/toplevel.png" alt="toplevel">
 		</fieldset>
 	</form>
@@ -2665,15 +2855,18 @@
 	<form>
 		<fieldset>
 			<legend>** <b>messagebox 举例 </b>**</legend>
-			from tkinter import *<br>from tkinter.messagebox import *<br>win=Tk()<br>def hit_me():<br>
-    &nbspshowinfo(title='Hi', message='你好！') # 提示信息对话窗<br>
-    &nbspshowwarning(title='Hi', message='有警告！') # 提出警告对话窗<br>
-    &nbspshowerror(title='Hi', message='出错了！') # 提出错误对话窗<br>
-    &nbspprint(askquestion(title='Hi', message='你好！')) # 询问选择对话窗return 'yes', 'no'<br>
-    &nbspprint(askyesno(title='Hi', message='你好！')) # return 'True', 'False'<br>
-    &nbspprint(askokcancel(title='Hi', message='你好！'))<br>
-	Button(win, text='hit me', bg='gray', font=('Arial', 14), command=hit_me).pack()<br>
-	win.mainloop()<br>
+			from tkinter import *<br>
+			from tkinter.messagebox import *<br>
+			win=Tk()<br>
+			def hit_me():<br>
+				&nbsp; showinfo(title='Hi', message='你好！') # 提示信息对话窗<br>
+				&nbsp; showwarning(title='Hi', message='有警告！') # 提出警告对话窗<br>
+				&nbsp; showerror(title='Hi', message='出错了！') # 提出错误对话窗<br>
+				&nbsp; print(askquestion(title='Hi', message='你好！')) # 询问选择对话窗return 'yes', 'no'<br>
+				&nbsp; print(askyesno(title='Hi', message='你好！')) # return 'True', 'False'<br>
+				&nbsp; print(askokcancel(title='Hi', message='你好！'))<br>
+			Button(win, text='hit me', bg='gray', font=('Arial', 14), command=hit_me).pack()<br>
+			win.mainloop()<br>
 			<img src="./0/messagebox.png" alt="messagebox">
 		</fieldset>
 	</form>
@@ -2850,8 +3043,11 @@
 	<form>
 		<fieldset>
 			<legend>** <b>grid 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>for i in range(3):<br>&nbspfor j in range(3):<br>
-			&nbsp&nbspLabel(win, text=1).grid(row=i, column=j, padx=10, pady=10, ipadx=10, ipady=10)<br>
+			from tkinter import *<br>
+			win=Tk()<br>
+			for i in range(3):<br>
+				&nbsp; for j in range(3):<br>
+					&nbsp; &nbsp; Label(win, text=1).grid(row=i, column=j, padx=10, pady=10, ipadx=10, ipady=10)<br>
 			win.mainloop()<br>
 			<img src="./0/grid.png" alt="grid">
 		</fieldset>
@@ -2901,7 +3097,8 @@
 	<form>
 		<fieldset>
 			<legend>** <b>place 举例 </b>**</legend>
-			from tkinter import *<br>win=Tk()<br>
+			from tkinter import *<br>
+			win=Tk()<br>
 			Label(win, text='Pl', font=('Arial', 20), ).place(x=50, y=100, anchor='nw')<br>
 			win.mainloop()<br>
 			<img src="./0/place.png" alt="place">
