@@ -180,13 +180,88 @@
 				2.访问过的链接显示为紫色并带有下划线；<br/>
 				3.点击链接时，链接显示为红色并带有下划线。</p>
 			<p>属性：<br/>
-				href：指定链接地址，如<br/>
-				&nbsp; 1.href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是 .xx 文件则需要在后面加正斜杠）；<br/>
-				&nbsp; 2.href="" 这里是跳转到最前面，页首<br/>
-				&nbsp; 3.id="demo" &nbsp; href="#demo" 在文档某个位置设置 id，然后再在另一个地方设置 href，这样点击 href 链接地方之后会跳转到 id 位置<br/>
-				&nbsp; 4.href="X://xx/xx.html" 跳转到另一个页面，这个页面的位置是本地磁盘上的<br/>
-				target：定义被链接文档在何处显示，如 target="_blank" 即在新窗口打开，而 target="_top" 直接在本窗口打开；<br/>
-				id：创建 HTML 文档书签标记，跳转到文档指定位置（若为空则会跳转到页面最顶端），如 id="this1"（此时href="#this1"）可从 href 定义处点击跳转到 id 使用处（也可以直接使用 href="xxx/xx.html#this1" 即从另一个页面跳转到 xx 页面的 this 处）。</p>
+			<ol><li>href：指定链接地址<br/>
+				网络链接：href="http://www.baidu.com/"（注意：请始终将正斜杠添加到子文件夹，即若最后不是 .xx 文件则需要在后面加正斜杠）；<br/>
+				页首位置：href="" 这里是跳转到最前面，页首<br/>
+				本页指定位置链接：id="demo" &nbsp; href="#demo" 在文档某个位置设置 id，然后再在另一个地方设置 href，这样点击 href 链接地方之后会跳转到 id 位置<br/>
+				本地链接：href="X://xx/xx.html" 跳转到另一个页面，这个页面的位置是本地磁盘上的<<li>
+				<li>target：定义被链接文档在何处显示<br/>
+					target="_blank"：在新窗口打开；<br/>
+					target="_top"：直接在本窗口打开，并替换当前整个窗口；<br/>
+					_parent：在父窗口中打开链接<br/>
+					_self：默认，当前页面跳转，在相同窗口中打开被链接文档<br/>
+					framename：在指定的框架中打开被链接文档</li>
+				<li>id：创建 HTML 文档书签标记，跳转到文档指定位置（若为空则会跳转到页面最顶端），如 id="this1"（此时href="#this1"）可从 href 定义处点击跳转到 id 使用处（也可以直接使用 href="xxx/xx.html#this1" 即从另一个页面跳转到 xx 页面的 this 处）。</li>
+				<li>rel/rev：rel 属性指定从源文档到目标文档的关系，而 rev 属性则指定从目标文档到源文档的关系。可同时使用<br/>
+					rel="next" rev="prev"：从源到目标的关系是移动到下一个文档，而从目标到源的关系则是返回前一个文档<br/>
+					属性值有：<br/>
+					&nbsp; alternate：文档的可选版本（例如打印页、翻译页或镜像）；<br/>
+					&nbsp; stylesheet：文档的外部样式表；<br/>
+					&nbsp; start：集合中的第一个文档；<br/>
+					&nbsp; next：集合中的下一个文档；<br/>
+					&nbsp; prev：集合中的前一个文档；<br/>
+					&nbsp; contents：文档目录；<br/>
+					&nbsp; index：文档索引；<br/>
+					&nbsp; glossary：文档中所用字词的术语表或解释；<br/>
+					&nbsp; copyright：包含版权信息的文档；<br/>
+					&nbsp; chapter：文档的章；<br/>
+					&nbsp; section：文档的节；<br/>
+					&nbsp; subsection：文档的子段；<br/>
+					&nbsp; appendix：文档附录；<br/>
+					&nbsp; help：帮助文档；<br/>
+					&nbsp; bookmark：相关文档；<br/>
+					&nbsp; nofollow：Google 使用 "nofollow"，用于指定 Google 搜索引擎不要跟踪链接；<br/>
+					&nbsp; licence：<br/>	 
+					&nbsp; tag：<br/>
+					&nbsp; friend：</li>
+				<li>type：规定目标 URL 的 MIME 类型，仅在 href 属性存在时使用<br/>
+					type="text/html"：目标类型为 html</li>
+				<li>shape/coords：两者配合使用，可规定 &lt;object&gt; 或 &lt;img&gt; 元素中链接的尺寸、形状和位置<br/>
+					shape="rect"：定义矩形区域<br/>
+					circle：圆形区域<br/>
+					poly：多边形区域<br/>
+					default：全部区域<br/>
+					coords="x1,y1,x2,y2"：矩形的左上角和右下角坐标<br/>
+					x,y,radius：圆形的圆心坐标和半径<br/>
+					x1,y1,x2,y2,...,xn,yn：多边形的各边角坐标<br/>
+					比如配合 &lt;map>、&lt;object> 创建图像地图</li>
+				<li>name：指定锚名称；创建（大型）文档内的书签；<br/>
+					name="C4"：指定锚名称为 C4</li>
+				<li>charset：指定作为链接目标的文档中所使用的字符编码<br/>
+					charset="UTF-8"：编码为 utf-8</li>
+				<li>download：下载链接地址<br/>
+					download="/xx/xx.png"：文件名称没有限定值，浏览器会自动在文件名称末尾添加该下载文件的后缀（.html .pdf .txt .png 等）</li>
+				<li>hreflang：指定被链接文档的语言<br/>
+					hreflang="en"：英语<br/>
+					注意：和 lang 属性不同的是，hreflang 属性不会指定标签中的内容所使用的语言，而是指定被 href 属性调用的文档所使用的语言</li>
+				<li>media：规定目标 URL 的媒介类型<br/>
+					media="print and (resolution:300dpi)"：可打印的媒体属性页<br/>
+					all：默认值，适合所有设备<br/>
+					aural：语音合成器<br/>
+					braille：盲文反馈装置<br/>
+					handheld：手持设备（小屏幕，有限带宽）<br/>
+					projection：投影机<br/>
+					print：打印预览模式/打印页面<br/>
+					screen：计算机屏幕<br/>
+					tty：电传打字机以及使用等宽字符网络的类似媒介<br/>
+					tv：电视类型设备（低分辨率，有限的分页能力）<br/>
+					width：目标显示区域宽度，可用 min- 和 max- 前缀，如 media="screen and (min-width:500px)"<br/>
+					height：目标显示区域高度，可用 min- 和 max- 前缀，如 media="screen and (max-height:700px)"<br/>
+					device-width：目标显示器/纸张宽度，可用 min- 和 max- 前缀，如 media="screen and (device-width:500px)"<br/>
+					devic-height：目标显示器/纸张高度，可用 min- 和 max- 前缀，如 media="screen and (device-height:500px)"<br/>
+					orientation：目标显示器/纸张的取向，portrait 或 landscape，如 media="all and (orientation: landscape)"<br/>
+					aspect-ratio：目标显示区域的宽度/高度比，可用 min- 和 max- 前缀，如 media="screen and (aspect-ratio:16/9)"<br/>
+					device-aspect-ratio：目标显示器/纸张的 device-width/device-height 比率，可用 min- 和 max- 前缀，如 media="screen and (aspect-ratio:16/9)"<br/>
+					color：目标显示器的 bits per color，可用 min- 和 max- 前缀，如 media="screen and (color:3)"<br/>
+					color-index：目标显示器能够处理的颜色数，可用 min- 和 max- 前缀，如 media="screen and (min-color-index:256)"<br/>
+					monochrome：在单色帧缓冲中的每像素比特，可用 min- 和 max- 前缀，如 media="screen and (monochrome:2)"<br/>
+					resolution：目标显示器/纸张的像素密度 (dpi or dpcm)，可用 min- 和 max- 前缀，如 media="print and (resolution:300dpi)"<br/>
+					scan：tv 显示器的扫描方法，"progressive" 和 "interlace"，如 media="tv and (scan:interlace)"<br/>
+					grid：输出设备是网格还是位图，"1" 代表网格，"0" 是其他，如 media="handheld and (grid:1)"<br/>
+					可使用的运算符有：and：与；not：非；,（逗号）：或</li>
+				<li></li>
+				<li></li>
+				</ol>
 			<p><b style="color:red">例如：</b><br/>
 				&lt;a href="http://www.baidu.com" target="_blank">百度（www.baidu.com）&lt;/a><br/>
 				<b style="color:red">结果：</b><br/>
