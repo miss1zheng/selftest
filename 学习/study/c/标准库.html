@@ -515,7 +515,7 @@
 					#include &lt;time.h><br/>
 					int main(){<br/>
 						&nbsp; struct timespec time_value={0,0};<br/>
-						&nbsp; int a=clock_gettime(CLOCK_MONOTONIC,&time_value);<br/>
+						&nbsp; int a=clock_gettime(CLOCK_MONOTONIC,&amp;time_value);<br/>
 						&nbsp; printf("sec=%lu,nsec=%lu\n",time_value.tv_sec,time_value.tv_nsec);<br/>
 						&nbsp; return 0;<br/>
 					}
@@ -536,7 +536,7 @@
 						&nbsp; {<br/>
 							&nbsp; &nbsp; struct timespec rem,req={5,600000};<br/>
 							&nbsp; &nbsp; printf("process start...\n");<br/>
-							&nbsp; &nbsp; nanosleep(&req,&rem);<br/>
+							&nbsp; &nbsp; nanosleep(&amp;req,&rem);<br/>
 							&nbsp; &nbsp; printf("process ending...\n");<br/>
 							&nbsp; &nbsp; break;<br/>
 						&nbsp; }<br/>
@@ -574,7 +574,7 @@
 					int main(){<br/>
 						&nbsp; struct tm *tm_value;<br/>
 						&nbsp; time_t alltime = time(NULL);<br/>
-						&nbsp; tm_value = localtime(&alltime);<br/>
+						&nbsp; tm_value = localtime(&amp;alltime);<br/>
 						&nbsp; printf("%d-%d-%d,%d:%d:%d",tm_value->tm_year,tm_value->tm_mon,tm_value->tm_mday,tm_value->tm_hour,tm_value->tm_min,tm_value->tm_sec);<br/>
 						&nbsp; return 0;<br/>
 					}
@@ -623,7 +623,7 @@
 						&nbsp; char buff[215];<br/>
 						&nbsp; struct tm *tm_value;<br/>
 						&nbsp; time_t alltime = time(NULL);<br/>
-						&nbsp; tm_value = localtime(&alltime);<br/>
+						&nbsp; tm_value = localtime(&amp;alltime);<br/>
 						&nbsp; strftime(buff,215,"%F,%X",tm_value);<br/>
 						&nbsp; printf("%s\n",buff);<br/>
 						&nbsp; return 0;<br/>
@@ -661,7 +661,7 @@
 					int main(){<br/>
 						&nbsp; struct tm *tmvalue;<br/>
 						&nbsp; time_t alltime = time(NULL);<br/>
-						&nbsp; tmvalue = localtime(&alltime);<br/>
+						&nbsp; tmvalue = localtime(&amp;alltime);<br/>
 						&nbsp; printf("%s",asctime(tmvalue));<br/>
 						&nbsp; return 0;<br/>
 					}
@@ -678,8 +678,8 @@
 					#include &lt;time.h><br/>
 					int main(){<br/>
 						&nbsp; time_t curtime;<br/>
-						&nbsp; time(&curtime);<br/>
-						&nbsp; printf("%s", ctime(&curtime));<br/>
+						&nbsp; time(&amp;curtime);<br/>
+						&nbsp; printf("%s", ctime(&amp;curtime));<br/>
 						&nbsp; return 0;<br/>
 					}
 				</fieldset>
@@ -688,25 +688,66 @@
 			<li>double difftime(time_t time1, time_t time2)：计算时间差<br/>
 				time1：结束时间<br/>
 				time2：开始时间<br/>
-				返回值：两时间差</li>
+				返回值：两时间差（time1-time2），以秒为单位
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					#include &lt;unistd.h><br/>
+					int main(){<br/>
+						&nbsp; time_t start_t, end_t;<br/>
+						&nbsp; double diff_t;<br/>
+						&nbsp; time(&amp;start_t);<br/>
+						&nbsp; sleep(5);<br/>
+						&nbsp; time(&amp;end_t);<br/>
+						&nbsp; diff_t = difftime(end_t, start_t);<br/>
+						&nbsp; printf("diff time is %f\n", diff_t);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form></li>
 			<li>struct tm *gmtime(const time_t *timer)：把日期和时间转换成格林威治（GMT）时间<br/>
 				timer：长整型<br/>
 				返回值：返回转换后的 tm 结构的时间
-				#include &lt;stdio.h><br/>
-				#include &lt;time.h><br/>
-				int main(){<br/>
-					&nbsp; time_t curtime;<br/>
-					&nbsp; struct tm *tmtime;<br/>
-					&nbsp; time(&curtime);<br/>
-					&nbsp; tmtime = gmtime(&curtime);<br/>
-					&nbsp; printf("english:%2d:%02d\n",(tmtime->tm_hour+0)%24, tmtime->tm_min);<br/>
-					&nbsp; printf("china:%2d:%02d\n", (tmtime->tm_hour+8)%24, tmtime->tm_min);<br/>
-					&nbsp; return 0;<br/>
-				}
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; time_t curtime;<br/>
+						&nbsp; struct tm *tmtime;<br/>
+						&nbsp; time(&amp;curtime);<br/>
+						&nbsp; tmtime = gmtime(&amp;curtime);<br/>
+						&nbsp; printf("english:%2d:%02d\n",(tmtime->tm_hour+0)%24, tmtime->tm_min);<br/>
+						&nbsp; printf("china:%2d:%02d\n", (tmtime->tm_hour+8)%24, tmtime->tm_min);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
 				</li>
 			<li>time_t mktime(struct tm *timeptr)：将时间转换为自1970年1月1日以来持续时间的秒数<br/>
 				timeptr：tm 结构体<br/>
-				返回值：成功返回总秒数，失败返回 -1</li>
+				返回值：成功返回总秒数，失败返回 -1
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;time.h><br/>
+					int main(){<br/>
+						&nbsp; time_t curtime,alltime;<br/>
+						&nbsp; struct tm *tmtime;<br/>
+						&nbsp; time(&amp;curtime);<br/>
+						&nbsp; printf("current is %ld\n",curtime);//本地时间（北京东八区+8）<br/>
+						&nbsp; tmtime = gmtime(&amp;curtime);<br/>
+						&nbsp; alltime=mktime(tmtime);<br/>
+						&nbsp; printf("all time is %ld\n",alltime);//格林威治时间<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+			</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -877,20 +918,27 @@
 			<li>int fcntl(int fd, int cmd)/int fcntl(int fd, int cmd, long arg)/int fcntl(int fd, int cmd, struct flock *lock)：根据文件描述词来操作文件的特性<br/>
 				fd：文件描述符<br/>
 				cmd：命令参数
-					<ul><li>F_DUPFD：复制一个现有的描述符，返回新的文件描述符</li>
-					<li>F_GETFD/F_SETFD：获得／设置文件描述符标记，返回相应标志</li>
-					<li>F_GETFL/F_SETFL：获得／设置文件状态标记，设置给 arg 描述状态标志。如：<br/>
-						fcntl(fd,F_SETFL,0) 为设置阻塞。返回一个正的进程 ID 或负的进程组 ID</li>
-					<li>F_GETOWN/F_SETOWN：获得／设置异步I/O所有权</li>
-					<li>F_GETLK/F_SETLK/F_SETLKW：获得／设置记录锁</li></ul>
+					<ul><li>F_DUPFD：复制一个现有的描述符，返回新的文件描述符，返回值具体描述：<br/>
+						最小的大于或等于arg的一个可用的描述符<br/>
+						与原始操作符一样的某对象的引用如果对象是文件(file)的话,返回一个新的描述符,这个描述符与arg共享相同的偏移量<br/>
+						相同的访问模式(读,写或读/写)<br/>
+						相同的文件状态标志(如:两个文件描述符共享相同的状态标志) </li>
+					<li>F_GETFD/F_SETFD：获得/设置文件描述符标记，返回相应标志</li>
+					<li>F_GETFL/F_SETFL：获得/设置文件状态标记，设置给 arg 描述状态标志。如：<br/>
+						fcntl(fd,F_SETFL,0) //设置为阻塞<br/>
+						fcntl(fd, F_SETFL, flags | O_NONBLOCK) //设置为非阻塞<br/>
+						返回相应标志<br/>
+						F_SETFL 设置给 arg 描述符状态标志,可以更改的几个标志是：O_APPEND， O_NONBLOCK，O_SYNC和O_ASYNC</li>
+					<li>F_GETOWN/F_SETOWN：获得/设置异步 I/O 所有权，返回一个正的进程 ID 或负的进程组 ID</li>
+					<li>F_GETLK/F_SETLK/F_SETLKW：获得/设置记录锁</li></ul>
 				arg：状态标志
 					<ul><li>O_RDONLY</li>
 					<li>O_WRONLY</li>
 					<li>O_RDWR</li>
-					<li>O_APPEND</li>
-					<li>O_NONBLOCK</li>
+					<li>O_APPEND：强制每次写(write)操作都添加在文件大的末尾</li>
+					<li>O_NONBLOCK：非阻塞 I/O。如果 read 调用没有可读取的数据，或者如果 write 操作将阻塞，read 或 write 调用返回 -1 和 EAGAIN 错误</li>
 					<li>O_SYNC</li>
-					<li>O_ASYNC</li></ul>
+					<li>O_ASYNC： 当 I/O 可用的时候，允许 SIGIO 信号发送到进程组，例如：当有数据可以读的时候</li></ul>
 				lock：
 				</li>
 			<li></li>
@@ -905,7 +953,19 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>struct flock{<br/>
+				short int l_type; //锁定状态<br/>
+				short int l_whence; //偏移量的起始位置<br/>
+				off_t l_start; //锁定区域开头位置<br/>
+				off_t l_len; //锁定区域的大小<br/>
+				pid_t l_pid; //锁定动作的进程<br/>
+				};<br/>
+				l_type 取值有：1.F_RDLCK：建立一个供读取用的锁定（共享锁）；2.F_WRLCK：建立一个供写入用的锁定（互斥锁）；3.F_UNLCK：删除之前建立的锁定（解锁）<br/>
+				l_whence 取值有：1.SEEK_SET 以文件开头为锁定的起始位置；2.SEEK_CUR：以目前文件读写位置为锁定的起始位置；3.SEEK_END：以文件结尾为锁定的起始位置<br/>
+				l_start：相对 l_whence 位置的偏移量，两者一起确定锁定区域的开始位置<br/>
+				l_len：锁定区域的长度，如果为 0 表示从起点(由 l_whence 和 l_start 决定的开始位置)开始直到最大可能偏移量为止。<br/>
+				注意：为了锁整个文件，需要将 l_whence、l_start、l_len 都设置为0
+			</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1043,7 +1103,11 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>STDIN_FILENO：标准输入<br/>
+				STDOUT_FILENO：标准输出<br/>
+				STDERR_FILENO：标准错误<br/>
+				对比 c 标准库中的标准输入输出错误 stdin、stdout、stderr<br/>
+				使用 stdin 的函数主要有：fread、fwrite、fclose等；使用 STDIN_FILENO 的函数有：read、write、close等</li>
 			<ol>
 			</div><hr/>
 		<div>
