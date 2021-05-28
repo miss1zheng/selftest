@@ -420,7 +420,9 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>stdin：c 标准输入流；<br/>
+				stdout：c 标准输出流<br/>
+				errno：错误，可使用 strerror(errno) 获取对应的错误输出</li>
 			<li></li>
 			</ol>
 			</div><hr/>
@@ -883,7 +885,8 @@
 				<li>O_APPEND：追加写，如果文件已经有内容，这次打开文件所写的数据附加到文件的末尾而不覆盖原来的内容</li>
 				<li>O_NOCTTY：如果路径名指向终端设备，不要把这个设备用作控制终端</li>
 				<li>O_NONBLOCK：如果路径名指向 FIFO/块文件/字符文件，则把文件的打开和后继 I/O 设置为非阻塞模式</li>
-				<li>O_NDELAY：对于串口的打开操作，必须使用 O_NOCTTY 参数，它表示打开的是一个终端设备，程序不会成为该端口的控制终端。如果不使用此标志，任务的一个输入(比如键盘终止信号等)都会影响进程</li>
+				<li>O_NDELAY：对于串口的打开操作，必须使用 O_NOCTTY 参数，它表示打开的是一个终端设备，程序不会成为该端口的控制终端。如果不使用此标志，任务的一个输入(比如键盘终止信号等)都会影响进程<br/>
+					设置了 O_NDELAY 而当前不可写，那么 write 接口会设置 errno 为 EAGAIN，但是 write 接口会返回 0 而不是 -1</li>
 				<li>O_TRUNC：如果文件存在，并且以只写/读写方式打开，则清空文件全部内容</li>
 				<li>O_EXCL：如果要创建的文件已存在，则返回 -1，并且修改 errno 的值</li>
 				<li>O_DSYNC：等待物理 I/O 结束后再 write。在不影响读取新写入的数据的前提下，不等待文件属性更新</li>
@@ -940,6 +943,47 @@
 					<li>O_SYNC</li>
 					<li>O_ASYNC： 当 I/O 可用的时候，允许 SIGIO 信号发送到进程组，例如：当有数据可以读的时候</li></ul>
 				lock：
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;unistd.h><br/>
+					#include &lt;fcntl.h><br/>
+					#include &lt;errno.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;stdlib.h><br/>
+					#include &lt;stdio.h><br/>
+
+					int main(void){<br/>
+						&nbsp; char buf[10];<br/>
+						&nbsp; int n;<br/>
+						&nbsp; int flags;<br/>
+						&nbsp; int i=0;<br/>
+						&nbsp; flags = fcntl(STDIN_FILENO, F_GETFL);//获取当前 flags<br/>
+						&nbsp; flags |= O_NONBLOCK;//设置新的 flags，非阻塞<br/>
+						&nbsp; if (fcntl(STDIN_FILENO, F_SETFL, flags) == -1)//更新 flags<br/>
+						&nbsp; {<br/>
+							&nbsp; &nbsp; printf("fcntl error.\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+					tryagain:<br/>
+						&nbsp; n = read(STDIN_FILENO, buf, 10);//读取标准输入的数据<br/>
+						&nbsp; if (n &lt; 0)//读取失败<br/>
+						&nbsp; {<br/>
+							&nbsp; &nbsp; if (errno == EAGAIN)<br/>
+							&nbsp; &nbsp; {<br/>
+								&nbsp; &nbsp; &nbsp; if (i++ > 10)<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
+								&nbsp; &nbsp; &nbsp; sleep(1);<br/>
+								&nbsp; &nbsp; &nbsp; write(STDOUT_FILENO, "try again\n",strlen("try again\n"));<br/>
+								&nbsp; &nbsp; &nbsp; goto tryagain;<br/>
+							&nbsp; &nbsp; }<br/>
+							&nbsp; &nbsp; printf("read stdin error.\n");<br/>
+						&nbsp; }<br/>
+						&nbsp; write(STDOUT_FILENO, buf, n);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
 				</li>
 			<li></li>
 			<li></li>
@@ -1096,7 +1140,56 @@
 				&nbsp; FD_CLR(int fd, fd_set *fdset)：清除文件描述符 fd 与 fdset 的联系<br/>
 				&nbsp; FD_ISSET(int fd, fd_set *fdset)：检查 fdset 联系的文件描述符 fd 是否被置位，返回 0 表示失败，非 0 表示成功<br/>
 				原理如下：<br/><img src="./data/socket原理.jpg" alt="socket基本原理"/>
-			</li>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;unistd.h><br/>
+					#include &lt;sys/time.h><br/>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;sys/ioctl.h><br/>
+					#include &lt;fcntl.h><br/>
+
+					#define RECV_AT_MAX_LEN 1024<br/>
+					int main(void){<br/>
+						&nbsp; struct timeval select_timeouts = {0, 1};<br/>
+						&nbsp; fd_set readset;<br/>
+						&nbsp; int n = 0 ,ret = 0;<br/>
+
+						&nbsp; select_timeouts.tv_sec = 0;<br/>
+						&nbsp; select_timeouts.tv_usec = 0;<br/>
+
+						&nbsp; int fd = open("main.c",O_RDWR | O_NOCTTY | O_NDELAY);<br/>
+
+						&nbsp; if (fd &lt; 0){<br/>
+							&nbsp; &nbsp; printf("no this file\n");<br/>
+						&nbsp; }else{<br/>
+							&nbsp; &nbsp; ioctl(fd, (('R'&lt;&lt;8)|1|(0x4004&lt;&lt;16)), 0x400);<br/>
+							&nbsp; &nbsp; ioctl(fd, (('R'&lt;&lt;8)|4|(0x4004&lt;&lt;16)), 0);//从设备驱动层读取数据<br/>
+						
+							&nbsp; &nbsp; FD_ZERO(&amp;readset);//清空 fdset 与所有文件描述符的联系<br/>
+							&nbsp; &nbsp; FD_SET(fd, &amp;readset);//建立文件描述符 fd 与 readset 的联系<br/>
+							&nbsp; &nbsp; ret = select(fd+1, &amp;readset, NULL, NULL, &amp;select_timeouts);<br/>
+
+							&nbsp; &nbsp; if(ret > 0)<br/>
+							&nbsp; &nbsp; {<br/>
+								&nbsp; &nbsp; &nbsp; if(FD_ISSET(fd, &amp;readset))//检查 readset 联系的文件描述符 fd 是否被置位<br/>
+								&nbsp; &nbsp; &nbsp; {<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; char data[RECV_AT_MAX_LEN+1];<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; memset(data,0,RECV_AT_MAX_LEN+1);<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; n=read(fd,data,RECV_AT_MAX_LEN);<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; if(n>0){<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("len:%d,data:%s",n,data);<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1137,15 +1230,58 @@
 				s：指向要填充的内存块<br/>
 				ch：填充设置的值<br/>
 				n：填充的字符数<br/>
-				返回值：成功返回指向存储区s的指针</li>
+				返回值：成功返回指向存储区s的指针
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+
+					int main(void){<br/>
+						&nbsp; char data[]="hello,world";<br/>
+						&nbsp; memset(data,0x35,sizeof(data));<br/>
+						&nbsp; printf("data:%s\n",data);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>void *memcpy(void *dest, const void *src, size_t n)：从源内存地址的起始位置开始拷贝若干个字节到目标内存地址中<br/>
 				dest：指向用于存储复制内容的目标数组，类型强制转换为 void* 指针<br/>
 				src：指向要复制的数据源，类型强制转换为 void* 指针<br/>
 				n：要被复制的字节数<br/>
-				返回值：指向目标存储区的指针</li>
+				返回值：指向目标存储区的指针
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+
+					int main(void){<br/>
+						&nbsp; char data[]="hello,world";<br/>
+						&nbsp; memcpy(data,"hello,children",strlen("hello,children"));<br/>
+						&nbsp; printf("data:%s\n",data);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>size_t strlen(const char *str)：计算字符串长度，直到碰到第一个字符串结束符'\0'为止<br/>
 				str：要计算的字符串<br/>
-				返回值：返回字符串长度，不包括结束符 NULL（‘\0’）</li>
+				返回值：返回字符串长度，不包括结束符 NULL（‘\0’）
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+
+					int main(void){<br/>
+						&nbsp; char data[]="hello,world";<br/>
+						&nbsp; printf("len:%d\n", strlen("hello,children"));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form></li>
 			<li>int memcmp(const void *s1, const void *s2, size_t n)：把存储区 s1 和存储区 s2 的前 n 个字节进行比较（按字节比较 ascii 值）。<br/>
 				s1：指向内存块的指针<br/>
 				s2：指向内存块的指针<br/>
@@ -1491,7 +1627,9 @@
 				optval：选项值，optname 获取的返回值<br/>
 				optlen：选项值长度<br/>
 				返回值：成功为 0，失败为 -1<br/>
-				当 level 为 IPPROTO_TCP，optname 为 TCP_INFO，时，optval 的值可获取当前 TCP 连接状态，如 ooptval 值为 tcp_info sock_info 时，sock_info.tcpi_state 获取的就是状态，可为 TCP_ESTABLISHED（已建立连接）、</li>
+				当 level 为 IPPROTO_TCP，optname 为 TCP_INFO，时，optval 的值可获取当前 TCP 连接状态，如 ooptval 值为 tcp_info sock_info 时，sock_info.tcpi_state 获取的就是状态，可为 TCP_ESTABLISHED（已建立连接）<br/>
+				SO_RCVTIMEO/SO_SNDTIMEO 会导致 read/write 函数返回 EAGAIN（即 errno == EAGAIN）</li>
+			
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1815,7 +1953,7 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>sys/time.h</h3>
 			<ol>
 			<li></li>
 			<li></li>
@@ -1831,7 +1969,11 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>struct timeval<br/>
+				{<br/>
+					time_t      tv_sec;     /* seconds */<br/>
+					suseconds_t tv_usec;    /* microseconds */<br/>
+				};</li>
 			<ol>
 			</div><hr/>
 		<div>

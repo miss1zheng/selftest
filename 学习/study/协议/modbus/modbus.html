@@ -100,9 +100,11 @@
 		<p></p>
 		<p></p>
 		<table border="1" cellspacing="0" >
-			<caption>RTU 功能码格式</caption>
-			<tr><th>RTU 功能码（以字节为单位）</th></tr>
+			<caption>功能码格式</caption>
+			<tr><th>功能码（以字节为单位）</th></tr>
 			<tr><td><b>01：读取线圈状态</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x01(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
@@ -111,10 +113,38 @@
 				从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位<br/>
 				举例：<br/>
 				主机：01 01 <u>00 00</u> <u>00 14</u> <u>3C 05</u><br/>
-				从机：01 01 03 <u>11 82 04</u> <u>0D 28<br/>
+				从机：01 01 03 <u>11 02 00</u> <u>6D 2B</u><br/>
 				注意：位操作，读单个或多个数量<br/>
-				请求：起始地址为 0x0000 - 0xffff；线圈数量为 1 - 2000（0x7D0）</td></tr>
+				请求：起始地址为 0x0000 - 0xffff；线圈数量为 1 - 2000（0x7D0）
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(7)|0x01(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x01(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 01 <u>00 00</u> <u>00 14</u>（从地址 0x0000 开始读取 20 个线圈数据）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 01 03 <u>11 02 00</u>
+				</li>
+				<li>ASCII<br/>
+				请求：<br/>
+				start(1)|addr(2) |0x01(2)|startaddrH(2)|startaddrL(2)|numH(2) &nbsp;|numL(2) &nbsp;|LRCL(1) |LRCH(1) |0x0D|0x0A<br/>
+				起始符&nbsp;|从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位|回车|换行<br/>
+				应答：<br/>
+				start(1)|addr(2) |0x01(2)|lenght(2)|data(n)|LRCL(1) |LRCH(1) |0x0D|0x0A<br/>
+				起始符&nbsp;|从机地址|功能码 |数据长度 |数据 &nbsp;|校验低位|校验高位|回车|换行<br/>
+				举例：<br/>
+				主机：3A <u>30 31</u> <u>30 31</u> <u>30 30 30 30</u> <u>30 30 31 34</u> <u>45 41</u> 0D 0<br/>
+				从机：3A <u>30 31</u> <u>30 31</u> <u>30 33</u> <u>31 31 30 32 30 30</u> <u>45 38</u> 0D 0A<br/>
+				注意：两字节是指每个数据转换成十六进制数据处理了
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>02：读取离散量输入状态</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x02(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
@@ -124,8 +154,27 @@
 				举例：<br/>
 				主机：01 02 <u>00 00</u> <u>00 14</u> <u>78 05</u><br/>
 				从机：01 02 03 <u>0A 88 00</u> <u>3E 4C</u><br/>
-				注意：位操作，读单个或多个数量</td></tr>
+				注意：位操作，读单个或多个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(7)|0x02(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |数据个数高位|数据个数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x02(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 02 <u>00 00</u> <u>00 12</u>（从地址 0x0000 开始读取 12 个离散量输入）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 02 03 <u>01 04 00</u>（长度 3，数据为 0x010400，表示第 1 个离散量输入和第 11 个离散量输入为 ON，其余为 OFF）<br/>
+				注意：数据长度 = 9+ceil（数据个数/8）
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>03：读取保持寄存器</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x03(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
@@ -135,8 +184,27 @@
 				举例：<br/>
 				主机：01 03 <u>00 00</u> <u>00 05</u> <u>B5 C9</u><br/>
 				从机：01 03 0A <u>00 78 00 0A 03 E8 00 00 00 00</u> <u>EC 90</u><br/>
-				注意：字操作，读单个或多个数量</td></tr>
+				注意：字操作，读单个或多个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(7)|0x03(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x03(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 03 <u>00 00</u> <u>00 03</u>（从地址 0x0000 开始读取 3 个寄存器值）<br/>
+				响应：<u>00 01 00 00 00 09 01</u> 03 06 <u>00 21 00 00 00 00</u>（长度为 6，第一个寄存器的数据为 0x21，其余为 0x00）<br/>
+				注意：数据长度=寄存器数*2+9，两个字节表示一个值
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>04：读取输入寄存器</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x04(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1) &nbsp;|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位|校验低位|校验高位<br/>
@@ -146,8 +214,27 @@
 				举例：<br/>
 				主机：01 04 <u>00 00</u> <u>00 05</u> <u>30 09</u><br/>
 				从机：00 04 0A <u>00 00 00 00 00 78 00 00 00 00</u> <u>71 77</u><br/>
-				注意：字操作，读单个或多个数量</td></tr>
+				注意：字操作，读单个或多个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(7)|0x04(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				响应：<br/>
+				MBAP(7)|0x04(1)|lenght(1)|data(n)<br/>
+				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 04 <u>00 02</u> <u>00 05</u>（从地址为 0x0002 开始读取 5 个寄存器值）<br/>
+				响应：<u>00 01 00 00 00 0D 01</u> 04 0A <u>00 0C 00 00 00 00 00 00 00 00</u>（长度为 10，第一个寄存器的数据为 0x0c，其余为 0x00）<br/>
+				注意：数据长度=寄存器数*2+9，两个字节表示一个值
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>05：写单个线圈</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位&nbsp;|校验低位|校验高位<br/>
@@ -156,8 +243,26 @@
 				从机地址|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位&nbsp;|校验低位|校验高位<br/>
 				举例：<br/>
 					<br/>
-				注意：位操作，写单个数量</td></tr>
+				注意：位操作，写单个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（将地址为 0x0003 的线圈设为 ON）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（写入成功）<br/>
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>06：写单个保持寄存器</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位|校验低位|校验高位<br/>
@@ -166,7 +271,23 @@
 				从机地址|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位|校验低位|校验高位<br/>
 				举例：<br/>
 				<br/>
-				注意：字操作，写单个数量</td></tr>
+				注意：字操作，写单个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
+				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（向地址为 0x0000 的寄存器写入数据 0x000A）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（写入成功）<br/>
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td>07：读取异常状态
 				</td></tr>
 			<tr><td>08：回送诊断校验
@@ -174,11 +295,31 @@
 			<tr><td>09：编程（只用于484）
 				</td></tr>
 			<tr><td>0x0F：写多个线圈<br/>
+				<ol>
+				<li>RTU<br/>
 				addr(1) |0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)&nbsp;|lenght(1)|outvalue0H(1)|outvalue0L(1)|...|outvaluenH(1)|outvaluenL(1)|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位|字节长度 |输出值高位 &nbsp;|输出值低位 &nbsp;|...|输出值高位 &nbsp;|输出值低位|校验低位|校验高位<br/>
 				<br/>
-				注意：位操作，写多个数量</td></tr>
+				注意：位操作，写多个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)&nbsp;|lenght(1)|outvalue0H(1)|outvalue0L(1)|...|outvaluenH(1)|outvaluenL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位|字节长度 |输出值高位 &nbsp;|输出值低位 &nbsp;|...|输出值高位 &nbsp;|输出值低位<br/>
+				响应：<br/>
+				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 09 01</u> 0F <u>00 13</u> <u>00 0A</u> 02 <u>CD 01</u><br/>
+				响应：<u>00 01 00 00 00 06 01</u> 0F <u>00 13</u> <u>00 0A</u><br/>
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td><b>10：写多个保持寄存器</b><br/>
+				<ol>
+				<li>RTU<br/>
 				请求：<br/>
 				addr(1) |0x10(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp; &nbsp; |numL(1) &nbsp; &nbsp; |count(1) &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;|dataH(1)&nbsp;|...|dataL(1)&nbsp;|CRCL(1) |CRCH(1)<br/>
 				从机地址|功能码 |起始地址高位 |起始地址低位 |寄存器个数高位|寄存器个数低位|数据长度(寄存器个数x2)|写入值高位|...|写入值低位|校验低位|校验高位<br/>
@@ -189,7 +330,24 @@
 				主机：01 10 <u>01 8E</u> <u>00 01</u> 02 <u>00 00</u> <u>69 BE</u><br/>
 				从机：01 10 <u>01 8E</u> <u>00 01</u> <u>60 1E</u><br/>
 				响应错误：01 90 01 8D C0（写操作非法功能，可能是向输入寄存器写数据）<br/>
-				注意：字操作，写多个数量</td></tr>
+				注意：字操作，写多个数量
+				</li>
+				<li>TCP<br/>
+				请求：<br/>
+				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)&nbsp;|lenght(1)|regvalue(n)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位|字节长度 |寄存器值<br/>
+				响应：<br/>
+				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)<br/>
+				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
+				举例：<br/>
+				请求：<u>00 01 00 00 00 09 01</u> 10 <u>00 00</u> <u>00 01</u> 02 <u>00 0F</u>（从地址为 0x0000，数量为 0x0001 的寄存器写入数据，长度为 2，数据为 0x000F）<br/>
+				响应：<u>00 01 00 00 00 06 01</u> 10 <u>00 00</u> <u>00 01</u>（写入成功）<br/>
+				字节长度=13+寄存器数*2
+				</li>
+				<li>ASCII<br/>
+				</li>
+				</ol>
+				</td></tr>
 			<tr><td>11：读取事件计数
 				</td></tr>
 			<tr><td>12：读取通信事件记录
@@ -240,6 +398,13 @@
 				8.离散量：将模拟量离散化之后得到的物理量<br/>
 				9.脉冲量就是瞬间电压或电流由某一值跃变到另一值的信号量。在量化后，其变化持续有规律就是数字量，如果其由0变成某一固定值并保持不变，其就是开关量。<br/>
 				10.异常功能码：每个对应功能码+0x80，如 0x01 功能码对应的异常功能码为 0x81；0x10 异常码为 0x90<br/>
+				1.0x01 和 0x02 格式一致，0x03 和 0x04 格式一致，0x05 和 0x06 格式一致，0x0F 和 0x10 格式一致<br/>
+				2.0x01、0x02、0x03、0x04 是读，0x0F、0x10 是写<br/>
+				3.0x03 和 0x04 是读寄存器，虽然寄存器类型不同<br/>
+				4.0x05 和 0x06 是发什么就回什么<br/>
+				5.0x0F 和 0x10 是发的比回的多，多余部分为 lenght+data<br/>
+				6.0x01 和 0x02 读取的是一个字节对应一个值，而 0x03 和 0x04 读取的是两个字节对应一个值<br/>
+				7.线圈和保持寄存器是可读可写的，而离散和输入寄存器是只读的
 				</td></tr>
 		</table><br/>
 		<table border="1" cellspacing="0" >
@@ -264,20 +429,6 @@
 			<tr><td>0x84</td><td></td></tr>
 			<tr><td>0x85</td><td></td></tr>
 			<tr><td>0x86</td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
-			<tr><td></td><td></td></tr>
 			<tr><td></td><td></td></tr>
 			<tr><td></td><td></td></tr>
 			<tr><td></td><td></td></tr>
@@ -330,110 +481,7 @@
 			<tr><td>长度</td><td>接下来的数据长度，2 字节</td></tr>
 			<tr><td>单元标识符</td><td>设备地址，1字节</td></tr>
 		</table><br/>
-		<table border="1" cellspacing="0" >
-			<caption>PDU 结构</caption>
-			<tr><th>功能码(以字节为单位)</th></tr>
-			<tr><td><b>0x01：读线圈</b><br/>
-				请求：<br/>
-				MBAP(7)|0x01(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;|numL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |线圈数高位|线圈数低位<br/>
-				响应：<br/>
-				MBAP(7)|0x01(1)|lenght(1)|data(n)<br/>
-				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 01 <u>00 02</u> <u>00 08</u>（从地址 0x0002 开始读取 8 个线圈数据）<br/>
-				响应：<u>00 01 00 00 00 04 01</u> 01 01 01（长度 1，数据 01，也就是第一个线圈 ON，其余都是 OFF）
-			</td></tr>
-			<tr><td><b>0x02：读离散量输入</b><br/>
-				请求：<br/>
-				MBAP(7)|0x02(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |数据个数高位|数据个数低位<br/>
-				响应：<br/>
-				MBAP(7)|0x02(1)|lenght(1)|data(n)<br/>
-				MBAP &nbsp;|功能码 |数据长度 |数据<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 02 <u>00 00</u> <u>00 12</u>（从地址 0x0000 开始读取 12 个离散量输入）<br/>
-				响应：<u>00 01 00 00 00 06 01</u> 02 03 <u>01 04 00</u>（长度 3，数据为 0x010400，表示第 1 个离散量输入和第 11 个离散量输入为 ON，其余为 OFF）<br/>
-				注意：数据长度 = 9+ceil（数据个数/8）
-				</td></tr>
-			<tr><td><b>0x03：读保持寄存器</b><br/>
-				请求：<br/>
-				MBAP(7)|0x03(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
-				响应：<br/>
-				MBAP(7)|0x03(1)|lenght(1)|data(n)<br/>
-				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 03 <u>00 00</u> <u>00 03</u>（从地址 0x0000 开始读取 3 个寄存器值）<br/>
-				响应：<u>00 01 00 00 00 09 01</u> 03 06 <u>00 21 00 00 00 00</u>（长度为 6，第一个寄存器的数据为 0x21，其余为 0x00）<br/>
-				注意：数据长度=寄存器数*2+9，两个字节表示一个值
-				</td></tr>
-			<tr><td><b>0x04：读输入寄存器</b><br/>
-				请求：<br/>
-				MBAP(7)|0x04(1)|startaddrH(1)|startaddrL(1)|numH(1) &nbsp;&nbsp;|numL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
-				响应：<br/>
-				MBAP(7)|0x04(1)|lenght(1)|data(n)<br/>
-				MBAP &nbsp;|功能码 |数据长度 |寄存器数据<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 04 <u>00 02</u> <u>00 05</u>（从地址为 0x0002 开始读取 5 个寄存器值）<br/>
-				响应：<u>00 01 00 00 00 0D 01</u> 04 0A <u>00 0C 00 00 00 00 00 00 00 00</u>（长度为 10，第一个寄存器的数据为 0x0c，其余为 0x00）<br/>
-				注意：数据长度=寄存器数*2+9，两个字节表示一个值
-				</td></tr>
-			<tr><td><b>0x05：写单个线圈</b><br/>
-				请求：<br/>
-				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
-				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
-				响应：<br/>
-				MBAP(1)|0x05(1)|outaddrH(1) |outaddrL(1) |outvalueH(1)|outvalueL(1)<br/>
-				MBAP &nbsp;|功能码 |输出地址高位|输出地址低位|输出值高位&nbsp;|输出值低位<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（将地址为 0x0003 的线圈设为 ON）<br/>
-				响应：<u>00 01 00 00 00 06 01</u> 05 <u>00 03</u> <u>FF 00</u>（写入成功）<br/>
-				</td></tr>
-			<tr><td><b>0x06：写单个保持寄存器</b><br/>
-				请求：<br/>
-				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
-				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
-				响应：<br/>
-				MBAP(1)|0x06(1)|regaddrH(1) &nbsp;|regaddrL(1) &nbsp;|regvalueH(1)|regvalueL(1)<br/>
-				MBAP &nbsp;|功能码 |寄存器地址高位|寄存器地址低位|寄存器值高位|寄存器值低位<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（向地址为 0x0000 的寄存器写入数据 0x000A）<br/>
-				响应：<u>00 01 00 00 00 06 01</u> 06 <u>00 00</u> <u>00 0A</u>（写入成功）<br/>
-				</td></tr>
-			<tr><td><b>0x0F：写多个线圈</b><br/>
-				请求：<br/>
-				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)&nbsp;|lenght(1)|outvalue0H(1)|outvalue0L(1)|...|outvaluenH(1)|outvaluenL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位|字节长度 |输出值高位 &nbsp;|输出值低位 &nbsp;|...|输出值高位 &nbsp;|输出值低位<br/>
-				响应：<br/>
-				MBAP(1)|0x0F(1)|startaddrH(1)|startaddrL(1)|outnumH(1)&nbsp;|outnumL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |输出个数高位|输出个数低位<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 09 01</u> 0F <u>00 13</u> <u>00 0A</u> 02 <u>CD 01</u><br/>
-				响应：<u>00 01 00 00 00 06 01</u> 0F <u>00 13</u> <u>00 0A</u><br/>
-				</td></tr>
-			<tr><td><b>0x10：写多个保持寄存器</b><br/>
-				请求：<br/>
-				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)&nbsp;|lenght(1)|regvalue(n)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位|字节长度 |寄存器值<br/>
-				响应：<br/>
-				MBAP(1)|0x10(1)|startaddrH(1)|startaddrL(1)|regnumH(1)&nbsp;|regnumL(1)<br/>
-				MBAP &nbsp;|功能码 |起始地址高位 |起始地址低位 |寄存器数高位|寄存器数低位<br/>
-				举例：<br/>
-				请求：<u>00 01 00 00 00 09 01</u> 10 <u>00 00</u> <u>00 01</u> 02 <u>00 0F</u>（从地址为 0x0000，数量为 0x0001 的寄存器写入数据，长度为 2，数据为 0x000F）<br/>
-				响应：<u>00 01 00 00 00 06 01</u> 10 <u>00 00</u> <u>00 01</u>（写入成功）<br/>
-				字节长度=13+寄存器数*2
-				</td></tr>
-			<tr><td><b>总结：</b><br/>
-				1.0x01 和 0x02 格式一致，0x03 和 0x04 格式一致，0x05 和 0x06 格式一致，0x0F 和 0x10 格式一致<br/>
-				2.0x01、0x02、0x03、0x04 是读，0x0F、0x10 是写<br/>
-				3.0x03 和 0x04 是读寄存器，虽然寄存器类型不同<br/>
-				4.0x05 和 0x06 是发什么就回什么<br/>
-				5.0x0F 和 0x10 是发的比回的多，多余部分为 lenght+data<br/>
-				6.0x01 和 0x02 读取的是一个字节对应一个值，而 0x03 和 0x04 读取的是两个字节对应一个值<br/>
-				7.线圈和保持寄存器是可读可写的，而离散和输入寄存器是只读的</td></tr>
-		</table><br/>
+		
 		
 		<hr/><h3></h3>
 		<p></p>
