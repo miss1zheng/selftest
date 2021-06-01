@@ -1286,27 +1286,133 @@
 				s1：指向内存块的指针<br/>
 				s2：指向内存块的指针<br/>
 				n：要被比较的字节数<br/>
-				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+
+					int main(void){<br/>
+						&nbsp; char a[]="hello,world",b[12]="hello,world";<br/>
+						&nbsp; printf("memcmp1=%d\n",memcmp(a,b,11));<br/>
+						&nbsp; printf("memcmp2=%d\n",memcmp(a,b,12));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int strcmp(const char *s1, const char *s2)：比较两个字符串并根据比较结果返回整数。直到出现不同的字符或遇'\0'为止。<br/>
 				s1：指向字符串的指针<br/>
 				s2：指向字符串的指针<br/>
-				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					int main(void){<br/>
+						&nbsp; char a[]="hello,world",b[12]="hello,world";<br/>
+						&nbsp; printf("strcmp=%d\n",strcmp(a,b));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>void bzero(void *s, int n)：置字节字符串前 n 个字节为零且包括‘\0’。<br/>
 				s：要置零的数据的起始地址<br/>
-				n：要置零的数据字节个数</li>
+				n：要置零的数据字节个数
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					int main(void){<br/>
+						&nbsp; char a[]="hello,world",b[12]="hello,world";<br/>
+						&nbsp; bzero(b,12);<br/>
+						&nbsp; printf("strcmp=%d\n",strcmp(a,b));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int strncmp(const char *s1, const char *s2, size_t n)：比较 s1 和 s2 的前 n 个字节<br/>
 				s1：要比较的字符串<br/>
 				s2：要比较的字符串<br/>
-				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0</li>
-			<li>char *strerror(int errnum)：通过标准错误的标号，获得错误的描述字符串 ，将单纯的错误标号转为字符串描述。<br/>errnum：最新的错误标号<br/>返回值：指向错误信息的指针</li>
+				n：要比较的长度<br/>
+				返回值：s1&gt;s2 返回正数；s1&lt;s2 返回负数；s1=s2 返回 0
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					int main(void){<br/>
+						&nbsp; char a[]="hello,world",b[12]="hello,world";<br/>
+						&nbsp; printf("strncmp=%d\n",strncmp(a,b,12));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>char *strerror(int errnum)：通过标准错误的标号，获得错误的描述字符串 ，将单纯的错误标号转为字符串描述。<br/>
+				errnum：最新的错误标号<br/>
+				返回值：指向错误信息的指针
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;errno.h><br/>
+					int main(void){<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; fp=fopen("main0.c","r");<br/>
+						&nbsp; if(fp==NULL)<br/>
+							&nbsp; &nbsp; printf("error:%s\n",strerror(errno));<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>char *strcpy(char* dest, const char *src)：将 src 数据拷贝到 dest 里面<br/>
 				src：要复制的数据<br/>
-				dest：存储复制内容的数据</li>
+				dest：存储复制内容的数据
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					int main(void){<br/>
+						&nbsp; char a[]="hello",b[12]="hello,world";<br/>
+						&nbsp; strcpy(a,b);";<br/>
+						&nbsp; printf("a:%s\n",a);";<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>char *strcat(char *dest, const char *src)：把 src 指向的字符串追加到 dest 指向的字符串结尾。<br/>
 				dest：指向目标数组<br/>
 				src：指向要追加的字符串<br/>
-				返回值：返回一个指向最终目标字符串 dest 的指针</li>
-			<li></li>
+				返回值：返回一个指向最终目标字符串 dest 的指针
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					int main(void){<br/>
+						&nbsp; char a[]="hello",b[12]="hello,world";<br/>
+						&nbsp; strcat(a,b);";<br/>
+						&nbsp; printf("a:%s\n",a);";<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>char *strncpy(char *dest, const char *src, size_t n)：把 src 所指向的字符串复制到 dest，最多复制 n 个字符<br/>
+				dest：指向目标数组<br/>
+				src：指向要追加的字符串<br/>
+				n：要被拷贝的字节数<br/>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1402,10 +1508,34 @@
 				<form>
 				<fieldset>
 					<legend>** <b>获取 IP</b> **</legend>
-					struct ifreq ifr;<br/>
-					const char *eth_inf = "wan1";<br/>
-					strncpy(ifr.ifr_name, eth_inf, IFNAMSIZ);<br/>
-					ioctl(sockfd, SIOCGIFADDR, &ifr); //获取 IP 地址
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;errno.h><br/>
+					#include &lt;sys/socket.h><br/>
+					#include &lt;sys/ioctl.h><br/>
+					#include &lt;unistd.h><br/>
+					#include &lt;net/if.h><br/>
+					#include &lt;arpa/inet.h><br/>
+					int main(void){<br/>
+						&nbsp; struct ifreq ifr;<br/>
+
+						&nbsp; int s=socket(AF_INET,SOCK_DGRAM,0);<br/>
+						&nbsp; if(s == -1){<br/>
+							&nbsp; &nbsp; printf("error: %s\n", strerror(errno));<br/>
+						&nbsp; }<br/>
+						&nbsp; strncpy(ifr.ifr_name, "lo", IFNAMSIZ);<br/>
+						&nbsp; ifr.ifr_name[IFNAMSIZ - 1] = 0;<br/>
+						  
+						&nbsp; if (ioctl(s, SIOCGIFADDR, &ifr) &lt; 0){<br/>
+							&nbsp; &nbsp; //若找不到设备，可使用 ifconfig 命令在 linux 命令行中查询具体有那些设备<br/>
+							&nbsp; &nbsp; printf("ioctl error: %s\n", strerror(errno));<br/>
+							&nbsp; &nbsp; close(s);<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; printf("ip:%s\n",inet_ntoa(((struct sockaddr_in*)&amp;(ifr.ifr_addr))->sin_addr));<br/>
+						&nbsp; close(s);<br/>
+						&nbsp; return 0;<br/>
+					}
 					</fieldset>
 				</form>
 				<form>
@@ -1452,7 +1582,7 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>SIOCGIFADDR：</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1501,19 +1631,55 @@
 				attr：指向属性对象的指针，为 NULL 则使用默认的属性<br/>
 				成功返回 0，失败返回错误码</li>
 			<li>int pthread_cond_destroy(pthread_cond_t *cond)：销毁条件变量<br/>
-				cond：指向pthread_cond_t结构的指针<br/>
-				返回值：函数成功返回0；否则错误</li>
+				cond：指向 pthread_cond_t 结构的指针<br/>
+				返回值：函数成功返回0；否则错误<br/>
+				注意：只有在没有线程在该条件变量上等待时才能注销此条件变量，否则返回 EBUSY</li>
 			<li>int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr)：初始化条件变量（动态创建）<br/>
-				返回值：函数成功返回0；否则错误</li>
+				cond：条件变量<br/>
+				attr：一般为 NULL<br/>
+				返回值：函数成功返回0；否则错误<br/>
+				注意：1.此为动态创建，静态创建为 pthread_cond_t cond=PTHREAD_COND_INITIALIZER//宏为常量；2.使用 pthread_mutex_destroy 注销条件变量；3.一般 attr 值为 NULL</li>
 			<li>int pthread_mutex_lock(pthread_mutex_t *mutex)：互斥锁上锁<br/>
 				mutex：互斥对象<br/>
-				返回值：成功返回 0，失败返回非 0 值</li>
+				返回值：成功返回 0，失败返回非 0 值<br/>
+				注意：此函数和 pthread_mutex_unlock 成对出现
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;pthread.h><br/>
+					#include &lt;errno.h><br/>
+					#include &lt;fcntl.h><br/>
+					#include &lt;unistd.h><br/>
+					pthread_mutex_t mut_fd;<br/>
+					int main(void){<br/>
+						&nbsp; int fd;<br/>
+						&nbsp; fd=open("other.c", O_RDWR|O_CREAT);<br/>
+						&nbsp; if(fd==-1){<br/>
+							&nbsp; &nbsp; printf("open error:%d",errno);<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; pthread_mutex_lock(&amp;mut_fd);<br/>
+						&nbsp; write(fd,"hello,world\r\nwe are the children.",33);<br/>
+						&nbsp; pthread_mutex_unlock(&amp;mut_fd);<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li>int pthread_mutex_unlock(pthread_mutex_t *mutex)：互斥锁解锁<br/>
 				mutex：互斥对象<br/>
-				返回值：成功返回 0，失败返回非 0 值</li>
-			<li></li>
-			<li></li>
-			<li></li>
+				返回值：成功返回 0，失败返回非 0 值<br/>
+				举例：详见 pthread_mutex_lock 函数</li>
+			<li>int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)：无条件等待<br/>
+				注意：必须放在 pthread_mutex_lock 和 pthread_mutex_unlock 之间</li>
+			<li>int pthread_cond_timedwait(pthread_cond_t *cond, pthread_mutex_t *mutex, const struct timespec *abstime)：计时等待<br/>
+				abstime：与 time() 系统调用相同意义的绝对时间形式出现，0 表示格林尼治时间 1970 年 1 月 1 日 0 时 0 分 0 秒<br/>
+				返回值：倒是未满足条件则返回 ETIMEOUT 结束等待<br/>
+				注意：必须和一个互斥锁配合，以防止多个线程同时请求 pthread_cond_wait()（或 pthread_cond_timedwait()）的竞争条件。mutex 互斥锁必须是普通锁（PTHREAD_MUTEX_TIMED_NP）或者适应锁（PTHREAD_MUTEX_ADAPTIVE_NP），且在调用 pthread_cond_wait() 前必须由本线程加锁。</li>
+			<li>pthread_cond_signal(pthread_cond_t *cond)：发送一个信号给另外一个正在处于阻塞等待状态的线程，使其脱离阻塞状态，继续执行<br/>
+				返回值：如果没有线程处在阻塞等待状态，pthread_cond_signal 也会成功返回<br/>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1528,25 +1694,29 @@
 				af：地址族（AF_INET；AF_INET6）<br/>
 				type：数据传输方式或套接字类型（SOCK_STREAM：TCP连接；SOCK_DGRAM：UDP连接）<br/>
 				protocol：传输协议（IPPROTO_TCP：TCP；IPPROTO_UDP：UDP，在头文件 netinet/in.h 里面），一般设置为 0<br/>
-				返回值：成功返回套接字描述符，失败返回 -1</li>
+				返回值：成功返回套接字描述符，失败返回 -1<br/>
+				举例：详见 shutdown</li>
 			<li>int bind(int s,struct sockaddr *addr, int addrlen)：服务器绑定端口信息<br/>
 				s：socket 描述符<br/>
-				addr：<br/>
-				addrlen：<br/>
+				addr：sockaddr 结构体，服务器参数<br/>
+				addrlen：大小，可使用 sizeof 获取<br/>
 				返回值：成功返回 0，失败返回 -1</li>
 			<li>int listen(int s， int backlog)：服务器端监听连接<br/>
 				s：socket 描述符<br/>
-				返回值：成功返回 0，失败返回 -1</li>
+				返回值：成功返回 0，失败返回 -1<br/>
+				举例：请看 bind 函数</li>
 			<li>int accept(int s, void *addr, int *addrlen)：服务器端连接请求<br/>
 				s：socket 描述符<br/>
 				addr：目标地址信息<br/>
 				addrlen：目标地址长度<br/>
-				返回值：成功返回已连接的 socket 描述符，失败返回 -1</li>
+				返回值：成功返回已连接的 socket 描述符，失败返回 -1<br/>
+				举例：请看 bind 函数</li>
 			<li>int connect(int s, struct sockaddr *addr,int addrlen)：建立连接<br/>
 				s：socket 描述符<br/>
 				addr：目标地址信息<br/>
 				addrlen：目标地址长度<br/>
-				返回值：成功返回 0，失败返回 -1</li>
+				返回值：成功返回 0，失败返回 -1<br/>
+				举例：详见 shutdown</li>
 			<li>int sendto (int s, const void *buf, int len, unsigned int flags, const struct sockaddr *to, int tolen)：UDP 发送数据<br/>s：socket 描述符<br/>buf：数据报缓存地址<br/>len：数据报长度<br/>flags：该参数一般为0<br/>to：struct sockaddr_in 类型，指明目标 ip 信息<br/>tolen：对方地址长度，一般为：sizeof(struct sockaddr_in)<br/>返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
 			<li>int recvfrom(int s, void *buf, int len, unsigned int flags, struct sockaddr *from, int *fromlen)：UDP 接收数据<br/>
 				s：socket 描述符<br/>
@@ -1570,20 +1740,23 @@
 				flags：该参数一般为 0
 				<ul><li>MSG_NOSIGNAL：禁止send向系统发送消息（注意：linux下当连接断开但还发数据时，send函数会有反应并向系统发送一个异常消息，而不做处理系统会出BrokePipe导致程序退出）</li>
 				</ul>
-				返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
+				返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中<br/>
+				举例：详见 shutdown</li>
 			<li>int recv(int s,void *buf,int len,unsigned int flags)：TCP 接收数据<br/>
 				s：socket 描述符<br/>
 				buf：接收数据的缓冲区<br/>
 				len：数据长度<br/>
 				flags：该参数一般为 0<br/>
-				返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中</li>
+				返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中<br/>
+				举例：详见 shutdown</li>
 			<li>int shutdown(int s,int howto)：禁止在一个套接口上进行数据的接收与发送。之后再使用 close 关闭套接字。<br/>
 				s：socket 描述符<br/>
 				howto：断开方式
 				<ul><li>SHUT_RD：断开输入流。套接字无法接收数据（即使输入缓冲区收到数据也被抹去），无法调用输入相关函数</li>
 				<li>SHUT_WR：断开输出流。套接字无法发送数据，但如果输出缓冲区中还有未传输的数据，则将传递到目标主机</li>
 				<li>SHUT_RDWR：同时断开 I/O 流。相当于分两次调用 shutdown()，其中一次以 SHUT_RD 为参数，另一次以 SHUT_WR 为参数</li>
-				</ul></li>
+				</ul>
+				返回值：成功返回 0，失败返回 -1</li>
 			<li>int getsockname(int s,struct sockaddr* localaddr,socklen_t *addrlen)：获取一个已捆绑或已连接的套接字的名字，即服务器端可通过它获取相关客户端地址，而客户端可通过它得到当前已连接成功的服务器地址<br/>
 				s：socket 描述符，此为已捆绑或已连接的套接字<br/>
 				localaddr：接收套接口的地址（名字）<br/>
@@ -1594,10 +1767,10 @@
 				s：套接字描述符<br/>
 				level：协议层次
 					<ul><li>SOL_SOCKET：套接字层</li>
-					<li>IPPROTO_IP：ip层</li>
-					<li>IPPROTO_TCP：tcp层</li></ul>
+					<li>IPPROTO_IP：ip 层</li>
+					<li>IPPROTO_TCP：tcp 层</li></ul>
 				optname：选项名称
-					<ul><li>：（SOL_SOCKET）</li>
+					<ul>
 					<li>SO_ACCEPTCONN：套接字是否处于监听模式（SOL_SOCKET）</li>
 					<li>SO_BROADCAST：是否允许发送广播信息（SOL_SOCKET）</li>
 					<li>SO_CONNECT_TIME：返回套接字建立连接的时间，以秒为单位，如尚未连接，返回0xffffffff（SOL_SOCKET）</li>
@@ -1626,11 +1799,21 @@
 					<li>TCP_INFO：查看当前 TCP 信息（IPPRO_TCP）</li></ul>
 				optval：选项值，optname 获取的返回值<br/>
 				optlen：选项值长度<br/>
-				返回值：成功为 0，失败为 -1<br/>
+				返回值：成功为 0，失败为 -1 并设置 errno<br/>
+				errno 值如下
+				<ul><li>EBADF：s 描述符无效；</li>
+					<li>EFAULT：optval 指向内存是无效进程空间</li>
+					<li>EINVAL：在调用 setsockopt() 时，optlen 无效</li>
+					<li>ENOPROTOOPT：指定的协议层不能识别选项</li>
+					<li>ENOTSOCK：sock描述的不是套接字</li>
+					</ul>
 				当 level 为 IPPROTO_TCP，optname 为 TCP_INFO，时，optval 的值可获取当前 TCP 连接状态，如 ooptval 值为 tcp_info sock_info 时，sock_info.tcpi_state 获取的就是状态，可为 TCP_ESTABLISHED（已建立连接）<br/>
-				SO_RCVTIMEO/SO_SNDTIMEO 会导致 read/write 函数返回 EAGAIN（即 errno == EAGAIN）</li>
-			
-			<li></li>
+				SO_RCVTIMEO/SO_SNDTIMEO 会导致 read/write 函数返回 EAGAIN（即 errno == EAGAIN）<br/>
+				举例：详见 shutdown</li>
+			<li>int setsockopt(int s, int level, int optname, const void *optval, socklen_t optlen)：设置套接字选项<br/>
+				参数：和上面 getsockopt 获取套接字选项类似<br/>
+				返回值：成功返回 0，失败返回 -1<br/>
+				举例：详见 shutdown</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1673,7 +1856,13 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>struct sockaddr_in{<br/>
+				sa_family_t &nbsp; 	sin_family;		//地址族<br/>
+				uint16_t &nbsp; &nbsp; sin_port;		//端口号<br/>
+				struct in_addr	sin_addr;		//32 位 IP<br/>
+				char&nbsp; &nbsp; &nbsp; &nbsp;sin_zero[8];	//暂未使用<br/>
+			};<br/>
+			注意：此结构体也可包含在 netinet/in.h 头文件里</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1714,7 +1903,150 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>
+			<form>
+			<fieldset>
+				<legend>** <b>TCP Client 举例</b> **</legend>
+				#include &lt;stdio.h><br/>
+				#include &lt;sys/socket.h><br/>
+				#include &lt;arpa/inet.h><br/>
+				#include &lt;string.h><br/>
+				#include &lt;unistd.h><br/>
+				#include &lt;netinet/tcp.h><br/>
+				int main(void){<br/>
+					&nbsp; char buff[1024];<br/>
+					&nbsp; int len, buff_len, connect_flag;<br/>
+					&nbsp; //keepAlive：保活开关；keepIdle：连接在60s无数据来往则进行探测；keepInterval：探测是发包时间间隔；keepCount：探测尝试次数。设置后若断开则 socket 读写时立即失败并返回 ETIMEDOUT 错误
+					&nbsp; int keepAlive=1, keepIdle=60, keepInterval=5, keepCount=9, ch_opt=1;<br/>
+					&nbsp; struct timeval timeout_recv = {60, 0};<br/>
+					&nbsp; struct sockaddr_in s_add;<br/>
+					&nbsp; struct hostent *hptr;<br/>
+					&nbsp; struct tcp_info s_info;<br/>
+						
+					&nbsp; int s=socket(AF_INET, SOCK_STREAM, 0);<br/>
+					&nbsp; if(s==-1){<br/>
+						&nbsp; &nbsp; printf("socket creat fail\n");<br/>
+						&nbsp; &nbsp; return 0;<br/>
+					&nbsp; }<br/>
+					&nbsp; //设置套接字选项<br/>
+					&nbsp; setsockopt(s, 1, 9, (void *)&amp;keepAlive, sizeof(keepAlive));<br/>
+					&nbsp; setsockopt(s, 6, 4, (void*)&amp;keepIdle, sizeof(keepIdle));<br/>
+					&nbsp; setsockopt(s, 6, 5, (void *)&amp;keepInterval, sizeof(keepInterval));<br/>
+					&nbsp; setsockopt(s, 6, 6, (void *)&amp;keepCount, sizeof(keepCount));<br/>
+					&nbsp; setsockopt(s, IPPROTO_TCP, TCP_NODELAY, (void *)&amp;ch_opt, sizeof(ch_opt));<br/>
+					&nbsp; setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (char *)&amp;timeout_recv, sizeof(struct timeval));<br/>
+					&nbsp; //服务器参数<br/>
+					&nbsp; bzero(&amp;s_add,sizeof(struct sockaddr_in));<br/>
+					&nbsp; s_add.sin_family=AF_INET;<br/>			
+					&nbsp; s_add.sin_port=htons(10000);<br/>
+					&nbsp; s_add.sin_addr.s_addr = inet_addr("127.0.0.1");<br/>
+					&nbsp; //域名解析<br/>
+					&nbsp; /*<br/>
+					&nbsp; hptr = gethostbyname((char *)"www.baidu.com");<br/>
+					&nbsp; if(hptr == NULL){<br/>
+							&nbsp; &nbsp; printf("DNS is fail\n");<br/>
+					&nbsp; }else<br/>
+							&nbsp; &nbsp; s_add.sin_addr = *((struct in_addr *)hptr->h_addr);<br/>
+					&nbsp; */<br/>
+					&nbsp; connect_flag=connect(s,(struct sockaddr *)(&amp;s_add), sizeof(struct sockaddr));<br/>
+					&nbsp; if(connect_flag < 0)<br/>
+							&nbsp; &nbsp; printf("connect fail\n");<br/>
+					&nbsp; else{<br/>
+						&nbsp; &nbsp; printf("connect ok\n");<br/>
+						&nbsp; &nbsp; len = sizeof(s_info);<br/>
+						&nbsp; &nbsp; getsockopt(s, IPPROTO_TCP, TCP_INFO, &amp;s_info, (socklen_t *)&len);<br/>
+						&nbsp; &nbsp; if(s_info.tcpi_state == TCP_ESTABLISHED)//已连接<br/>
+						&nbsp; &nbsp; {<br/>
+							&nbsp; &nbsp; &nbsp; buff_len=send(s, "hello,world", strlen("hello,world"), 0);<br/>
+							&nbsp; &nbsp; &nbsp; printf("send len:%d\n", buff_len);<br/>
+							&nbsp; &nbsp; &nbsp; buff_len=recv(s, buff, sizeof(buff), 0);<br/>
+							&nbsp; &nbsp; &nbsp; if(buff_len > 0){<br/>
+								&nbsp; &nbsp; &nbsp; &nbsp; printf("data:%s", buff);<br/>
+							&nbsp; &nbsp; &nbsp; }<br/>
+						&nbsp; &nbsp; }<br/>
+						&nbsp; &nbsp; else//未连接<br/>
+						&nbsp; &nbsp; {<br/>
+							&nbsp; &nbsp; &nbsp; shutdown(s, SHUT_RDWR);<br/>
+							&nbsp; &nbsp; &nbsp; close(s);<br/>
+							&nbsp; &nbsp; &nbsp; bzero(&amp;s_info, sizeof(struct tcp_info));<br/>
+						&nbsp; &nbsp; }<br/>
+					&nbsp; }<br/>
+					&nbsp; return 0;<br/>
+				}
+			</fieldset>
+			</form>
+			<form>
+			<fieldset>
+				<legend>** <b>TCP Server 举例</b> **</legend>
+				#include &lt;stdio.h><br/>
+				#include &lt;sys/socket.h><br/>
+				#include &lt;arpa/inet.h><br/>
+				#include &lt;string.h><br/>
+				#include &lt;unistd.h><br/>
+				#include &lt;errno.h><br/>
+				int main(void){<br/>
+					&nbsp; struct sockaddr_in s_add;//服务器<br/>
+					&nbsp; struct sockaddr_in c_addr;//客户端<br/>
+					&nbsp; int len, buff_len, opt, ret, c, s;<br/>
+					&nbsp; char buff[1024];<br/>
+					&nbsp; fd_set accept_set;<br/>
+					&nbsp; struct timeval select_timeouts;<br/>
+					
+					&nbsp; s = socket(AF_INET, SOCK_STREAM, 0);//创建套接字<br/>
+					&nbsp; if(s &lt; 0){<br/>
+						&nbsp; &nbsp; printf("socket creat fail\n");<br/>
+						&nbsp; &nbsp; return 0;<br/>
+					&nbsp; }<br/>
+					&nbsp; //设置套接字选项<br/>
+					&nbsp; opt = SO_REUSEADDR;<br/>
+					&nbsp; setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &amp;opt, sizeof(opt) );<br/>
+					&nbsp; //设置服务器参数<br/>
+					&nbsp; bzero(&amp;s_add, sizeof(struct sockaddr_in));<br/>
+					&nbsp; s_add.sin_family = AF_INET;//IPV4<br/>
+					&nbsp; s_add.sin_port = htons(10000);<br/>
+					&nbsp; s_add.sin_addr.s_addr = inet_addr("127.0.0.1");//回环地址。htonl(INADDR_ANY);本机地址<br/>
+					&nbsp; ret = bind(s,(struct sockaddr *)(&amp;s_add), sizeof(struct sockaddr));<br/>
+					&nbsp; if(ret &lt; 0){<br/>
+						&nbsp; &nbsp; printf("bind fail\n");<br/>
+						&nbsp; &nbsp; close(s);<br/>
+						&nbsp; &nbsp; return 0;<br/>
+					&nbsp; }<br/>
+					&nbsp; ret=listen(s,5);<br/>
+					&nbsp; if(ret &lt; 0){<br/>
+						&nbsp; &nbsp; printf("listen fail\n");<br/>
+						&nbsp; &nbsp; close(s);<br/>
+						&nbsp; &nbsp; return 0;<br/>
+					&nbsp; }<br/>
+					&nbsp; while(1){<br/>
+						&nbsp; &nbsp; FD_ZERO(&amp;accept_set);<br/>
+						&nbsp; &nbsp; FD_SET(s, &amp;accept_set);<br/>
+						&nbsp; &nbsp; ret = select(s+1, &amp;accept_set, NULL, NULL, &amp;select_timeouts);<br/>
+						&nbsp; &nbsp; if(ret > 0){<br/>
+							&nbsp; &nbsp; &nbsp; if(FD_ISSET(s, &amp;accept_set)){<br/>
+								&nbsp; &nbsp; &nbsp; &nbsp; len=sizeof(struct sockaddr_in);<br/>
+								&nbsp; &nbsp; &nbsp; &nbsp; c = accept(s, (struct sockaddr *)&amp;c_addr, (socklen_t *)&amp;len);<br/>
+								&nbsp; &nbsp; &nbsp; &nbsp; if(c > 0){<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; buff_len = recv(c, buff, 1024, 0);<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(buff_len > 0){<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("recv ok\n");<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(send(s,buff,buff_len,0)>0)<br/>
+											&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("send ok\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else if(buff_len==0 || (buff_len!=EWOULDBLOCK && buff_len!=EINTR))//连接异常，需要关闭<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("disconnect\n");<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; close(c);<br/>
+										&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+							&nbsp; &nbsp; &nbsp; }<br/>
+						&nbsp; &nbsp; }<br/>
+					&nbsp; }<br/>
+					&nbsp; return 0;<br/>
+				}
+			</fieldset>
+			</form>
+			</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1909,7 +2241,7 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>in_addr_t s_addr：无符号长整形</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1974,6 +2306,373 @@
 					time_t      tv_sec;     /* seconds */<br/>
 					suseconds_t tv_usec;    /* microseconds */<br/>
 				};</li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>netinet/tcp.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>SO_DEBUG<br/>
+				SO_DONTROUTE<br/>
+				SO_KEEPALIVE<br/>
+				SO_LINGER<br/>
+				SO_OOBINLINE<br/>
+				SO_RECVBUF<br/>
+				SO_RCVLOWAT<br/>
+				SO_SNDBUF<br/>
+				SO_SNDLOWAT<br/>
+				TCP_MAXSEG<br/>
+				TCP_NODELAY</li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>struct tcp_info {<br/>
+				&nbsp; __u8	tcpi_state;		   //tcp state: TCP_SYN_SENT,TCP_SYN_RECV,TCP_FIN_WAIT1,TCP_CLOSE 等<br/>
+				&nbsp; __u8	tcpi_ca_state;     //congestion state：<br/>
+				&nbsp; __u8	tcpi_retransmits;  //重传数，表示当前待重传的包数，这个值在重传完毕后清零<br/>
+				&nbsp; __u8	tcpi_probes;		///* 持续定时器或保活定时器发送且未确认的段数*/<br/>
+				&nbsp; __u8	tcpi_backoff;		//用来计算持续定时器的下一个设计值的指数退避算法指数，在传送超时是会递增。<br/>
+				&nbsp; __u8	tcpi_options;		//tcp头部选项是否包含：扩展因子、时间戳、MSS等内容<br/>
+				&nbsp; __u8	tcpi_snd_wscale : 4, tcpi_rcv_wscale : 4; //扩展因子数值<br/>
+				&nbsp; __u8	tcpi_delivery_rate_app_limited:1;  //限速标志<br/>
+
+				&nbsp; __u32	tcpi_rto;		//重传超时时间，这个和RTT有关系，RTT越大，rto越大<br/>
+				&nbsp; __u32	tcpi_ato;		//用来延时确认的估值，单位为微秒. <br/>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //在收到TCP报文时，会根据本次与上次接收的时间间隔来调整改制，在设置延迟确认定时器也会根据<br/>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //条件修改该值<br/>
+				&nbsp; __u32	tcpi_snd_mss;	// 本端的MSS<br/>
+				&nbsp; __u32	tcpi_rcv_mss;	// 对端的MSS<br/>
+
+				&nbsp; __u32	tcpi_unacked;	//未确认的数据段数<br/>
+				&nbsp; __u32	tcpi_sacked;    //2个含义：server端在listen阶段，可以接收连接的数量；收到的SACK报文数量<br/>
+				&nbsp; __u32	tcpi_lost;		//本端在发送出去被丢失的报文数。重传完成后清零<br/>
+				&nbsp; __u32	tcpi_retrans;   //重传且未确认的数据段数<br/>
+				&nbsp; __u32	tcpi_fackets;
+
+				&nbsp; /* Times. */<br/>
+				&nbsp; __u32	tcpi_last_data_sent;	//当前时间-最近一个包的发送时间，单位是毫秒<br/>
+				&nbsp; __u32	tcpi_last_ack_sent;     //未使用<br/>
+				&nbsp; __u32	tcpi_last_data_recv;	//当前时间-最近接收数据包的时间，单位是毫秒<br/>
+				&nbsp; __u32	tcpi_last_ack_recv;     //当前时间-最近接收ack的时间，单位是毫秒<br/>
+
+				&nbsp; /* Metrics. */<br/>
+				&nbsp; __u32	tcpi_pmtu;			//最后一次更新的路径MTU<br/>
+				&nbsp; __u32	tcpi_rcv_ssthresh;   //当前接收窗口的大小<br/>
+				&nbsp; __u32	tcpi_rtt;			//smoothed round trip time,微妙<br/>
+				&nbsp; __u32	tcpi_rttvar;		//描述RTT的平均偏差，该值越大，说明RTT抖动越大<br/>
+				&nbsp; __u32	tcpi_snd_ssthresh;  //拥塞控制慢开始阈值<br/>
+				&nbsp; __u32	tcpi_snd_cwnd;		//拥塞控制窗口大小<br/>
+				&nbsp; __u32	tcpi_advmss;		//本端的MSS上限<br/>
+				&nbsp; __u32	tcpi_reordering;	//没有丢包时，可以重新排序的数据段数<br/>
+
+				&nbsp; __u32	tcpi_rcv_rtt;		// 作为接收端，测出的RTT值，单位为微秒. 这个值不是对方计算并传送过来的rtt，而是作为接收端，在没发送数据的情况下<br/>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 通过接收发送端发送的数据的情况计算得到的rtt值。在数据发送方，如果不接受数据，这个值一般情况下为0。<br/>
+				&nbsp; __u32	tcpi_rcv_space;		//当前接收缓存的大小<br/>
+
+				&nbsp; __u32	tcpi_total_retrans;  //统计总重传的包数，持续增长。<br/>
+
+				&nbsp; __u64	tcpi_pacing_rate;		//发送速率<br/>
+				&nbsp; __u64	tcpi_max_pacing_rate;	//最大发送速率，默认是unlimited，可以通过SO_MAX_PACING_RATE来设置<br/>
+				&nbsp; __u64	tcpi_bytes_acked;    //RFC4898 tcpEStatsAppHCThruOctetsAcked<br/>
+				&nbsp; __u64	tcpi_bytes_received; //RFC4898 tcpEStatsAppHCThruOctetsReceived<br/>
+				&nbsp; __u32	tcpi_segs_out;	     //RFC4898 tcpEStatsPerfSegsOut<br/>
+				&nbsp; __u32	tcpi_segs_in;	     //RFC4898 tcpEStatsPerfSegsIn<br/>
+
+				&nbsp; __u32	tcpi_notsent_bytes;<br/>
+				&nbsp; __u32	tcpi_min_rtt;<br/>
+				&nbsp; __u32	tcpi_data_segs_in;	//RFC4898 tcpEStatsDataSegsIn<br/>
+				&nbsp; __u32	tcpi_data_segs_out;	//RFC4898 tcpEStatsDataSegsOut<br/>
+
+				&nbsp; __u64   tcpi_delivery_rate;<br/>
+
+				&nbsp; __u64	tcpi_busy_time;      //me (usec) busy sending data<br/>
+				&nbsp; __u64	tcpi_rwnd_limited;   //Time (usec) limited by receive window<br/>
+				&nbsp; __u64	tcpi_sndbuf_limited; //Time (usec) limited by send buffer<br/>
+			};<br/>
+			tcpi_state 状态：<br/>
+				&nbsp; CLOSED：表示初始状态。对服务端和C客户端双方都一样。<br/>
+				&nbsp; LISTEN：表示监听状态。服务端调用了listen函数，可以开始accept连接了。<br/>
+				&nbsp; SYN_SENT：表示客户端已经发送了SYN报文。当客户端调用connect函数发起连接时，首先发SYN给服务端，然后自己进入SYN_SENT状态，并等待服务端发送ACK+SYN。<br/>
+				&nbsp; SYN_RCVD：表示服务端收到客户端发送SYN报文。服务端收到这个报文后，进入SYN_RCVD状态，然后发送ACK+SYN给客户端。<br/>
+				&nbsp; ESTABLISHED：表示连接已经建立成功了。服务端发送完ACK+SYN后进入该状态，客户端收到ACK后也进入该状态。<br/>
+				&nbsp; FIN_WAIT_1：表示主动关闭连接。无论哪方调用close函数发送FIN报文都会进入这个这个状态。<br/>
+				&nbsp; FIN_WAIT_2：表示被动关闭方同意关闭连接。主动关闭连接方收到被动关闭方返回的ACK后，会进入该状态。<br/>
+				&nbsp; TIME_WAIT：表示收到对方的FIN报文并发送了ACK报文，就等2MSL后即可回到CLOSED状态了。如果FIN_WAIT_1状态下，收到对方同时带FIN标志和ACK标志的报文时，可以直接进入TIME_WAIT状态，而无须经过FIN_WAIT_2状态。<br/>
+				&nbsp; CLOSING：表示双方同时关闭连接。如果双方几乎同时调用close函数，那么会出现双方同时发送FIN报文的情况，此时就会出现CLOSING状态，表示双方都在关闭连接。<br/>
+				&nbsp; CLOSE_WAIT：表示被动关闭方等待关闭。当收到对方调用close函数发送的FIN报文时，回应对方ACK报文，此时进入CLOSE_WAIT状态。<br/>
+				&nbsp; LAST_ACK：表示被动关闭方发送FIN报文后，等待对方的ACK报文状态，当收到ACK后进入CLOSED状态。<br/>
+			</li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>net/if.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>struct ifreq{<br/>
+				#define IFHWADDRLEN 6<br/>
+					&nbsp; union{<br/>
+						&nbsp; &nbsp; char ifrn_name[IFNAMSIZ];//Interface name, e.g. "en0".<br/>
+					&nbsp; } ifr_ifrn;<br/>
+				 
+					&nbsp; union {<br/>
+						&nbsp; &nbsp; struct sockaddr ifru_addr;<br/>
+						&nbsp; &nbsp; struct sockaddr ifru_dstaddr;<br/>
+						&nbsp; &nbsp; struct sockaddr ifru_broadaddr;<br/>
+						&nbsp; &nbsp; struct sockaddr ifru_netmask;<br/>
+						&nbsp; &nbsp; struct  sockaddr ifru_hwaddr;<br/>
+						&nbsp; &nbsp; short ifru_flags;<br/>
+						&nbsp; &nbsp; int ifru_ivalue;<br/>
+						&nbsp; &nbsp; int ifru_mtu;<br/>
+						&nbsp; &nbsp; struct ifmap ifru_map;<br/>
+						&nbsp; &nbsp; char ifru_slave[IFNAMSIZ];<br/>
+						&nbsp; &nbsp; char ifru_newname[IFNAMSIZ];<br/>
+						&nbsp; &nbsp; void __user * ifru_data;<br/>
+						&nbsp; &nbsp; struct if_settings ifru_settings;<br/>
+					&nbsp; }ifr_ifru;<br/>
+				};
+				</li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>.h</h3>
+			<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<ol>
 			</div><hr/>
 		<div>
