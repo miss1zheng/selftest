@@ -747,9 +747,14 @@
 			</div><hr/>
 		<div>
 			<h3>warning解决</h3>
-			<ol><li>warning: this 'else' clause does not guard... [-Wmisleading-indentation]...else<br/>解决方法：else 后面没有括号，加个括号增加严谨性<br/>原因：tab 键和空格键不严谨，或混用导致的</li>
-			<li> warning: excess elements in array initializer<br/>解决方式：这种多半是因为数组的元素没有赋值的大，比如数组定义 5 个元素，但是赋值的时候多了一个，变成了 6 个就会有这样的警告发出</li>
-			<li></li>
+			<ol><li>warning: this 'else' clause does not guard... [-Wmisleading-indentation]...else<br/>
+				原因：tab 键和空格键不严谨，或混用导致的<br/>
+				解决方法：else 后面没有括号，加个括号增加严谨性</li>
+			<li> warning: excess elements in array initializer<br/>
+				解决方式：这种多半是因为数组的元素没有赋值的大，比如数组定义 5 个元素，但是赋值的时候多了一个，变成了 6 个就会有这样的警告发出</li>
+			<li>对‘pthread_create’未定义的引用<br/>
+				原因：缺少 lpthread 该库支持<br/>
+				解决方式：gcc -o ss other.c -lpthread（ss 为最终可执行文件，-lpthread 临时加入该库）</li>
 			<li></li>
 			<li></li>
 			<li></li>

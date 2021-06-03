@@ -233,7 +233,9 @@
 			<li></li>
 			<li></li></ul>
 		</li>
-		<li>source insight中文乱码处理：file -> reload as encoding... -> 然后在里面选中对应的编码即可</li>
+		<li>source insight 中文乱码处理：file -> reload as encoding... -> 然后在里面选中对应的编码即可</li>
+		<li>source insght 工具栏折叠隐藏了，如何恢复原来的可视界面：找到 Settings 内的文件，一般位置在  C:\Users\用户名\Documents\Source Insight 4.0\Settings ，然后打开 config_all.xml 文件，找到第一个 Toolbars 字样，删除此标签（标签包括开始和结束标签）保存，然后重新打开 source insight，<br/>
+			注意：为防止下次还出现此情况，可将 config_all.xml 备份。这样下次可直接使用此备份替代即可</li>
 		<li>PLC 中的 X、Y、M、S、T、C 的意思：<br/>
 			X：输入继电器，接 plc 的输入信号<br/>
 			Y：输出继电器，接 plc 的输出信号<br/>
@@ -241,8 +243,14 @@
 			S：状态继电器<br/>
 			T：时间继电器，计时器<br/>
 			C：计数器</li>
-		<li></li>
-		<li></li>
+		<li>485 通信使能控制脚收发实现：<br/>
+			1.发送拉高，接收拉低<br/>
+			2.判断完全发送完了之后，还需判断空闲标志位<br/>
+			3.以上条件满足再根据串口参数，设置延时，比如 >=115200 不需要加延时；2400需要加延时（具体延时根据 波特率 校验位 停止位等确定）</li>
+		<li>SMS 编码方式：<br/>
+			1.7 段编码，有压缩<br/>
+			2.8 段编码，即 char 类型发送，发什么就是什么<br/>
+			3.UCS 编码，两个 char 标识一个汉字，转成 UCS 编码</li>
 		<li></li>
 		<li></li>
 		<li></li>
