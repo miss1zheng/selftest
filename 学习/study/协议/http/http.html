@@ -253,6 +253,7 @@
 		<tr><th>状态码</th><th>英文名称</th><th>中文描述</th></tr>
 		<tr><td>100</td><td>Continue</td><td>继续。客户端应继续其请求。<br/>服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求</td></tr>
 		<tr><td>101</td><td>Switching Protocols</td><td>切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</td></tr>
+		<tr><td>103</td><td>Checkpoint</td><td>用于 PUT 或者 POST 请求恢复失败时的恢复请求建议</td></tr>
 		<tr><td>200</td><td>OK</td><td>请求成功。一般用于GET与POST请求（之后就是对get和post请求的应答文档）</td></tr>
 		<tr><td>201</td><td>Created</td><td>已创建。成功请求并创建了新的资源</td></tr>
 		<tr><td>202</td><td>Accepted</td><td>已接受。已经接受请求，但未处理完成</td></tr>
@@ -268,6 +269,7 @@
 		<tr><td>305</td><td>Use Proxy</td><td>使用代理。所请求的资源必须通过代理访问<br/>客户请求的文档应该通过Location头所指明的代理服务器提取</td></tr>
 		<tr><td>306</td><td>Unused</td><td>已经被废弃的HTTP状态码</td></tr>
 		<tr><td>307</td><td>Temporary Redirect</td><td>临时重定向。与302类似。使用GET请求重定向<br/>被请求的页面已经临时移至新的url</td></tr>
+		<tr><td>308</td><td>Resume Incomplete</td><td>用于 PUT 或者 POST 请求恢复失败时的恢复请求建议</td></tr>
 		<tr><td>400</td><td>Bad Request</td><td>客户端请求的语法错误，服务器无法理解</td></tr>
 		<tr><td>401</td><td>Unauthorized</td><td>请求要求用户的身份认证</td></tr>
 		<tr><td>402</td><td>Payment Required</td><td>保留，将来使用</td></tr>
@@ -292,6 +294,7 @@
 		<tr><td>503</td><td>Service Unavailable</td><td>由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td></tr>
 		<tr><td>504</td><td>Gateway Time-out</td><td>充当网关或代理的服务器，未及时从远端服务器获取请求<br/>网关超时</td></tr>
 		<tr><td>505</td><td>HTTP Version not supported</td><td>服务器不支持请求的HTTP协议的版本，无法完成处理</td></tr>
+		<tr><td>511</td><td>Network Authentication Required	用户需要提供身份验证来获取网络访问入口</td></tr>
 		</table>
 		
 		<p>报头详细说明</p>
@@ -341,6 +344,7 @@
 			<tr><td>Expires</td><td>实体报头给出响应过期的日期和时间</td></tr>
 			<tr><td></td><td></td></tr>
 		</table>
+	<br/><br/><br/>
 	</div>
 	
 </body>
