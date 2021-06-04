@@ -1535,14 +1535,60 @@
 				size：内存块新的大小，以字节为单位<br/>
 				返回值：成功返回一个指针，指向重新分配大小的内存，失败返回 NULL<br/>
 				举例：详见 free 函数</li>
+			<li>void srand (usigned int see)：设置 rand() 产生随机数时的随机数种子<br/>
+				see：整型，可使用 time(0)/time(NULL) 或 getpid(0) 的返回值作为此值<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdlib.h><br/>
+					#include &lt;time.h><br/>
+					int main(void){<br/>
+						&nbsp; srand(time(0));//随机种子<br/>
+						&nbsp; int num = 0;<br/>
+						&nbsp; for(int i=0; i&lt;5; i++){<br/>
+							&nbsp; &nbsp; num = rand()%(100-50+1)+50;//取值范围，公式(n-m+1)+m，范围[m,n]<br/>
+							&nbsp; &nbsp; printf("rand:%d\n", num);<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>int rand(void)：产生随机数，内部实现是用线性同余法实现的，是伪随机数，由于周期较长，因此在一定范围内可以看成是随机的<br/>
+				返回值：0-RAND_MAX 之间的伪随机数<br/>
+				注意：在调用 rand()函数之前，可以使用 srand()函数设置随机数种子，如果没有设置随机数种子，rand() 函数在调用时，自动设计随机数种子为 1。随机种子相同，每次产生的随机数也会相同
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdlib.h><br/>
+					#include &lt;time.h><br/>
+					int main(void){<br/>
+						&nbsp; srand(1);//默认，程序每次启动值一样，需配合 rand，rand 返回值才是最终的随机值<br/>
+						&nbsp; for(int i=0; i&lt;5; i++){<br/>
+							&nbsp; &nbsp; printf("rand:%d\n", rand());<br/>
+						&nbsp; }<br/>
+						&nbsp; srand(time(0));//随机，两次 srand 设置时间不能小于1s，否则也会重复<br/>
+						&nbsp; for(int i=0; i&lt;5; i++){<br/>
+							&nbsp; &nbsp; printf("rand:%d\n", rand());<br/>
+						&nbsp; }<br/>
+						&nbsp; //时间短于1s，会和上面的重复<br/>
+						&nbsp; srand(time(NULL));//随机，两次 srand 设置时间不能小于1s，否则也会重复<br/>
+						&nbsp; for(int i=0; i&lt;5; i++){<br/>
+							&nbsp; &nbsp; printf("rand:%d\n", rand());<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>RAND_MAX：随机值的最大值</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -1882,12 +1928,22 @@
 				</ul>
 				返回值：成功返回 0，失败返回 -1<br/>
 				举例：详见 TCP Client 例子</li>
-			<li>int getsockname(int s,struct sockaddr* localaddr,socklen_t *addrlen)：获取一个已捆绑或已连接的套接字的名字，即服务器端可通过它获取相关客户端地址，而客户端可通过它得到当前已连接成功的服务器地址<br/>
+			<li>int getsockname(int s,struct sockaddr* localaddr,socklen_t *addrlen)：获取一个已捆绑或已连接的套接字的名字，即服务器端可通过它获取相关客户端地址（accept 之后），而客户端可通过它得到当前已连接成功的服务器地址（connect 之后）<br/>
 				s：socket 描述符，此为已捆绑或已连接的套接字<br/>
-				localaddr：接收套接口的地址（名字）<br/>
+				localaddr：接收套接口的地址（名字），本地协议地址<br/>
 				addrlen：地址缓冲区长度<br/>
 				返回值：成功返回 0，失败返回 SOCKET_ERROR<br/>
-				注意：TCP 连接不进行 bind 指定 ip 和端口时只有在调用 connect 连接成功后此函数才会正确获取当前正在通信的 IP 和端口；而 UDP 始终无法获取到正确 IP （为 0），端口正确。</li>
+				注意：TCP 连接不进行 bind 指定 ip 和端口时只有在调用 connect 连接成功后此函数才会正确获取当前正在通信的 IP 和端口；而 UDP 始终无法获取到正确 IP （为 0），端口正确。<br/>
+				getpeername 和 getsockname 比较：<br/>
+				&nbsp; （令服务器为 127.0.0.1:10000，客户端无）<br/>
+				&nbsp; 客户端 connect 之后：getpeername -> 127.0.0.1:10000；getsockname -> 127.0.0.1:4983<br/>
+				&nbsp; 服务器端 accept 之后：getpeername -> 127.0.0.1:4983；getsockname -> 127.0.0.1:10000<br/>
+				举例：详见 TCP Client 例子</li>
+			<li>int getpeername(int s, struct sockaddr *peeraddr, socklen_t *addrlen)：获取与套接口相连的端地址，accept 成功后，获取当前连接的客户端的 IP 地址和端口号<br/>
+				peeraddr：外地协议地址<br/>
+				返回值：成功返回 0，失败返回 -1<br/>
+				注意：虽然 accept 之后就已经可以获取到地址了，但是此函数随时可用，多个客户端时尤为重要<br/>
+				举例：详见 TCP Client 例子</li>
 			<li>int getsockopt(int s, int level, int optname, void *optval, socklen_t *optlen)：获取一个套接口选项。<br/>
 				s：套接字描述符<br/>
 				level：协议层次
@@ -1999,6 +2055,14 @@
 						&nbsp; &nbsp; getsockopt(s, IPPROTO_TCP, TCP_INFO, &amp;s_info, (socklen_t *)&len);<br/>
 						&nbsp; &nbsp; if(s_info.tcpi_state == TCP_ESTABLISHED)//已连接<br/>
 						&nbsp; &nbsp; {<br/>
+							&nbsp; &nbsp; &nbsp; struct sockaddr_in serv, guest;<br/>
+							&nbsp; &nbsp; &nbsp; socklen_t serv_len = sizeof(serv);<br/>
+							&nbsp; &nbsp; &nbsp; socklen_t guest_len = sizeof(guest);<br/>
+							&nbsp; &nbsp; &nbsp; getsockname(s, (struct sockaddr *)&amp;guest, &amp;guest_len);<br/>
+							&nbsp; &nbsp; &nbsp; getpeername(s, (struct sockaddr *)&amp;serv, &amp;serv_len);<br/>
+							&nbsp; &nbsp; &nbsp; inet_ntop(AF_INET, &amp;guest.sin_addr, guest_ip, sizeof(guest_ip));<br/>
+							&nbsp; &nbsp; &nbsp; inet_ntop(AF_INET, &amp;serv.sin_addr, serv_ip, sizeof(serv_ip));<br/>
+							&nbsp; &nbsp; &nbsp; printf("host  %s:%d, guest  %s:%dn", serv_ip, ntohs(serv.sin_port), guest_ip, ntohs(guest.sin_port));<br/>
 							&nbsp; &nbsp; &nbsp; buff_len=send(s, "hello,world", strlen("hello,world"), 0);<br/>
 							&nbsp; &nbsp; &nbsp; printf("send len:%d\n", buff_len);<br/>
 							&nbsp; &nbsp; &nbsp; buff_len=recv(s, buff, sizeof(buff), 0);<br/>
@@ -2151,28 +2215,138 @@
 			<li>int msgget(key_t key, int msgflg)：创建新的或打开已存在的消息队列，其消息数量受系统限制。<br/>
 				key：消息队列对象的关键字，与已有的消息队列对象的关键字进行比较判断是否已创建，即新的或已有的队列 id<br/>
 				msgflg：消息队列访问权限<br/>
+				&nbsp; 0/IPC_PRIVATE：建立新的消息队列<br/>
 				&nbsp; IPC_CREAT：创建新的消息队列，若已存在则打开<br/>
 				&nbsp; IPC_EXCL：与 IPC_CREAT 一起使用表示消息队列不存在则创建，若要创建的消息队列已存在则返回错误<br/>
 				&nbsp; IPC_NOWAIT：读写消息队列要求无法满足时，不阻塞<br/>
-				返回值：失败返回 -1，成功返回 key 命名的消息队列标识符<br/>
-				失败的 error 值：EACCESS（拒绝进入）、EEXIST（队列已存在不能创建）、EIDRM（队列已标记为删除）、ENOENT（队列不存在）、ENOMEM（没有足够内存创建队列）、ENOSPC（超过最大队列限制）<br/>
-				msgget(key, IPC_CREAT|0600);//这里 |0600 是指第一个 0 表示后面的 600 是个 8 进制数；后面的 600 表示创建用户/用户组/普通用户的权限（类型 chmod 命令）</li>
+				返回值：失败返回 -1 并设置 error，成功返回 key 命名的消息队列标识符<br/>
+				失败的 error 值：<br/>
+				&nbsp; EACCESS：拒绝进入，没有权限<br/>
+				&nbsp; EEXIST：队列已存在不能创建<br/>
+				&nbsp; EIDRM：队列已标记为删除<br/>
+				&nbsp; ENOENT：队列不存在<br/>
+				&nbsp; ENOMEM：没有足够内存创建队列<br/>
+				&nbsp; ENOSPC：超过最大队列限制<br/>
+				msgget(key, IPC_CREAT|0600);//这里 |0600 是指第一个 0 表示后面的 600 是个 8 进制数；后面的 600 表示创建用户/用户组/普通用户的权限（类型 chmod 命令）<br/>
+				举例：详见“消息队列举例”</li>
 			<li>int msgrcv (int msqid, void *msgp, size_t msgsz,long msgtype, int flag)：从消息队列获取消息<br/>
 				msqid：消息队列标识符，msgget 函数的返回值<br/>
-				msgp：接收消息的缓存区<br/>
-				msgsz：接收消息的大小<br/>
+				msgp：接收消息的缓存区，指向一个长整型数，包括消息类型+消息数据<br/>
+				msgsz：接收消息的大小。若返回的消息大于 msgsz，而且在 flag 中设置了 MSG_NOERROR，则该消息被截短（在这种情况下，不通知我们消息截短了）。如果没有设置这一标志，而消息又太长，则出错返回 E2BIG（消息仍留在队列中）<br/>
 				msgtype：期望接收的消息类型<br/>
 				&nbsp; 0：获取队列中的第一个消息（最早的消息）<br/>
 				&nbsp; &gt;0：获取具有相同消息类型的第一个消息（类型为 msgtype 的第一个消息）<br/>
 				&nbsp; &lt;0：获取类型小于等于 msgtype 的绝对值的第一个消息<br/>
 				flag：控制当队列中没有相应类型的消息可接收时将发生的事件<br/>
-				返回值：成功返回接收缓存区的字节数，失败返回 -1</li>
-			<li>int msgsnd(int msqid, const void *msgp, size_t msgsz, int flag)：将消息添加到消息队列中<br/>
+				&nbsp; 0: 阻塞式接收消息，没有该类型的消息msgrcv函数一直阻塞等待<br/>
+				&nbsp; IPC_NOWAIT：使操作不阻塞。这使得如果没有所指定类型的消息，则 msgrcv 出错返回 ENOMSG。如果没有指定 IPC_NOWAIT，则进程阻塞直至有了指定类型
+					的消息，或从系统中删除了此队列（出错返回 EIDRM），或捕捉到一个信号并从信号处理程序返回（出错返回 EINTR）<br/>
+				&nbsp; IPC_EXCEPT：与 msgtype 配合使用返回队列中第一个类型不为 msgtype 的消息<br/>
+				&nbsp; IPC_NOERROR：如果队列中满足条件的消息内容大于所请求的 size 字节，则把该消息截断，截断部分将被丢弃<br/>
+				返回值：成功返回接收缓存区的字节数，失败返回 -1 并设置 error失败的 error 值：<br/>
+				&nbsp; E2BIG：消息数据长度大于msgsz而msgflag没有设置IPC_NOERROR<br/>
+				&nbsp; EIDRM：标识符为msqid的消息队列已被删除<br/>
+				&nbsp; EACCESS：无权限读取该消息队列<br/>
+				&nbsp; EFAULT：参数msgp指向无效的内存地址<br/>
+				&nbsp; ENOMSG：参数msgflg设为IPC_NOWAIT，而消息队列中无消息可读<br/>
+				&nbsp; EINTR：等待读取队列内的消息情况下被信号中断<br/>
+				注意：此函数为阻塞函数，接触阻塞条件有：1.消息队列中有了满足条件的消息；2.msqid 代表的消息队列被删除；3.调用 msgrcv() 的进程被信号中断<br/>
+				举例：详见“消息队列举例”</li>
+			<li>int msgsnd(int msqid, const void *msgp, size_t msgsz, int flag)：将消息添加到消息队列尾端<br/>
 				msqid：消息队列标识符，msgget 函数的返回值<br/>
-				msgp：接收消息的缓存区<br/>
-				msgsz：接收消息的大小<br/>
-				flag：控制当队列中没有相应类型的消息可接收时将发生的事件<br/>
-				返回值：成功返回 0，失败返回 -1</li>
+				msgp：发送消息的缓存区，指向一个长整型数，包括消息类型+消息数据<br/>
+				msgsz：发送消息的大小，若为 0 则无消息数据<br/>
+				flag：事件<br/>
+				&nbsp; 0：当消息队列满时，msgsnd 将会阻塞，直到消息能写进消息队列<br/>
+				&nbsp; IPC_NOWAIT：类似于文件 I/O 的非阻塞 I/O 标志。若消息队列已满（或者是队列中的消息总数等于系统限制值，或队列中的字节总数等于系统限制值），则指定 IPC_NOWAIT 使得 msgsnd 立即出错返回 EAGAIN。如果没有指定 IPC_NOWAIT，
+					则进程阻塞直到有空间可以容纳要发送的消息，或从系统中删除了此队列，或捕捉到一个信号，并从信号处理程序返回。在第二种情况下，返回 EIDRM（“标志符被删除”）。最后一种情况则返回 EINTR。<br/>
+				&nbsp; IPC_NOERROR：若发送的消息大于 size 字节，则把该消息截断，截断部分将被丢弃，且不通知发送进程<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 error<br/>
+				注意：此为阻塞函数，解除阻塞条件有：1.不满足消息队列满或个数满两个条件，即消息队列中有容纳该消息的空间；2.msqid 代表的消息队列被删除；3.调用 msgsnd 函数的进程被信号中断<br/>
+				举例：详见“消息队列举例”</li>
+			<li>int msgctl(int msqid, int cmd, struct msqid_ds *buf)：设置或获取消息队列属性，与信号量和共享存储有关<br/>
+				msqid：消息队列标识符，msgget 函数的返回值<br/>
+				cmd：<br/>
+				&nbsp; IPC_STAT：取此队列的 msqid_ds 结构，并将其存放在 buf 指向的结构中函数的返回值<br/>
+				&nbsp; IPC_SET：按由 buf 指向的结构中的值，设置与此队列相关的结构中的四个字段（msg_perm.uid、msg_perm.gid、msg_perm、mode 和 msg_qbytes）<br/>
+				&nbsp; IPC_RMID：从系统中删除该消息队列以及仍在该队列上的所有数据。这种删除立即生效<br/>
+				buf：消息队列管理结构体<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 error<br/>
+				失败的 error 值：<br/>
+				&nbsp; EACCESS：无权限读取该消息队列<br/>
+				&nbsp; EFAULT：参数 buf 指向无效的内存地址<br/>
+				&nbsp; EIDRM：标识符为 msqid 的消息队列已被删除<br/>
+				&nbsp; EINVAL：无效的参数 cmd 或 msqid<br/>
+				&nbsp; EPERM：参数 cmd 为 IPC_SET 或 IPC_RMID，却无足够的权限执行<br/>
+				举例：详见“消息队列举例”</li>
+			<li></li>
+			<li>
+				<form>
+				<fieldset>
+				<legend>** <b>消息队列举例</b> **</legend>
+				#include &lt;stdio.h><br/>
+				#include &lt;string.h><br/>
+				#include &lt;unistd.h><br/>
+				#include &lt;sys/ipc.h><br/>
+				#include &lt;sys/msg.h><br/>
+				#include &lt;error.h><br/>
+
+				struct msgbuf{<br/>
+					&nbsp; long mtype;//固定长整型，指定类型，为后续发送和接收提供标识<br/>
+					&nbsp; char mtext[512];<br/>
+				};<br/>
+				int main(void){<br/>
+					&nbsp; int msqid;<br/>
+					&nbsp; struct msqid_ds info;<br/>
+					&nbsp; struct msgbuf buf;<br/>
+					&nbsp; int flag;<br/>
+					&nbsp; int sendlen, recvlen;<br/>
+					&nbsp; msqid = msgget(IPC_PRIVATE, 0666);//创建新消息队列<br/>
+					&nbsp; if(msqid &lt; 0){<br/>
+						&nbsp; &nbsp; perror("get ipc_id error");<br/>
+						&nbsp; &nbsp; return -1 ;<br/>
+					&nbsp; }<br/>
+					&nbsp; buf.mtype = 1;<br/>
+					&nbsp; strcpy(buf.mtext, "happy new year!");<br/>
+					&nbsp; sendlen = sizeof(struct msgbuf)-sizeof(long);<br/>
+					&nbsp; flag = msgsnd(msqid, &amp;buf, sendlen, 0);//发送信号消息<br/>
+					&nbsp; if(flag &lt; 0){<br/>
+						&nbsp; &nbsp; perror("send message error");<br/>
+						&nbsp; &nbsp; return -1;<br/>
+					&nbsp; }<br/>
+					&nbsp; buf.mtype = 3;<br/>
+					&nbsp; strcpy(buf.mtext, "good bye!");<br/>
+					&nbsp; sendlen = sizeof(struct msgbuf)-sizeof(long);<br/>
+					&nbsp; flag = msgsnd(msqid, &amp;buf, sendlen, 0);//发送信号消息<br/>
+					&nbsp; if(flag &lt; 0){<br/>
+						&nbsp; &nbsp; perror("send message error");<br/>
+						&nbsp; &nbsp; return -1 ;<br/>
+					&nbsp; }<br/>
+					&nbsp; flag = msgctl(msqid, IPC_STAT, &amp;info);<br/>
+					&nbsp; if(flag &lt; 0){<br/>
+						&nbsp; &nbsp; perror("get message status error");<br/>
+						&nbsp; &nbsp; return -1 ;<br/>
+					&nbsp; }<br/>
+					&nbsp; printf("uid:%d, gid=%d, cuid=%d, cgid=%d\n", info.msg_perm.uid, info.msg_perm.gid, info.msg_perm.cuid, info.msg_perm.cgid);<br/>
+					&nbsp; printf("read-write:%03o, cbytes = %lu, qnum = %lu, qbytes= %lu\n", info.msg_perm.mode&amp;0777, info.msg_cbytes, info.msg_qnum, info.msg_qbytes);<br/>
+					&nbsp; recvlen = sizeof(struct msgbuf)-sizeof(long);<br/>
+					&nbsp; memset(&amp;buf, 0x00, sizeof(struct msgbuf));<br/>
+					&nbsp; flag = msgrcv(msqid, &amp;buf, recvlen ,0,0);//倒数第二个为非 3 则获取第一个消息（happy...），为 3 则获取（bye...）
+					&nbsp; if(flag &lt; 0){<br/>
+						&nbsp; &nbsp; perror("recv message error");<br/>
+						&nbsp; &nbsp; return -1;<br/>
+					&nbsp; }<br/>
+					&nbsp; printf("type=%ld, message=%s\n", buf.mtype, buf.mtext);<br/>
+					&nbsp; flag = msgctl(msqid, IPC_RMID, NULL);<br/>
+					&nbsp; if(flag &lt; 0){<br/>
+						&nbsp; &nbsp; perror("rm message queue error");<br/>
+						&nbsp; &nbsp; return -1;<br/>
+					&nbsp; }<br/>
+					&nbsp; return 0;<br/>
+				}
+				</fieldset>
+				</form>
+			</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2180,10 +2354,21 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>struct msqid_ds{
+				&nbsp; struct ipc_perm msg_perm;
+				&nbsp; struct msg *msg_first;      /* first message on queue,unused  */
+				&nbsp; struct msg *msg_last;       /* last message in queue,unused */
+				&nbsp; __kernel_time_t msg_stime;  /* last msgsnd time */
+				&nbsp; __kernel_time_t msg_rtime;  /* last msgrcv time */
+				&nbsp; __kernel_time_t msg_ctime;  /* last change time */
+				&nbsp; unsigned long  msg_lcbytes; /* Reuse junk fields for 32 bit */
+				&nbsp; unsigned long  msg_lqbytes; /* ditto */
+				&nbsp; unsigned short msg_cbytes;  /* current number of bytes on queue */
+				&nbsp; unsigned short msg_qnum;    /* number of messages in queue */
+				&nbsp; unsigned short msg_qbytes;  /* max number of bytes on queue */
+				&nbsp; __kernel_ipc_pid_t msg_lspid;   /* pid of last msgsnd */
+				&nbsp; __kernel_ipc_pid_t msg_lrpid;   /* last receive pid */
+				};</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -2613,7 +2798,7 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>sys/type.h</h3>
 			<ol>
 			<li></li>
 			<li></li>
@@ -2629,7 +2814,7 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>key_t：长整型</li>
 			<ol>
 			</div><hr/>
 		<div>

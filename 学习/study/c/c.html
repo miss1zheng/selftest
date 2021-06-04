@@ -755,7 +755,9 @@
 			<li>对‘pthread_create’未定义的引用<br/>
 				原因：缺少 lpthread 该库支持<br/>
 				解决方式：gcc -o ss other.c -lpthread（ss 为最终可执行文件，-lpthread 临时加入该库）</li>
-			<li></li>
+			<li>error: stray ‘\302’ in program<br/>
+				原因：一般这种错误提示会出现在从其他地方拷贝代码的过程中，是指源程序中含有非法字符（如中文、中文空格等非 ASCII 字符）<br/>
+				解决方法：重新写入或知道那部分是中文改了即可</li>
 			<li></li>
 			<li></li>
 			<li></li>
