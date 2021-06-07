@@ -278,15 +278,54 @@
 		</p>
 	<p>/sys/class/gpio/：读取设置 GPIO<br/>
 		/sys/class/gpio/export：通知系统需要导出控制的GPIO引脚编号<br/>
+		&nbsp; echo 12 > /sys/class/gpio/export：向 export 写如 12 号引脚，命令成功后会生成 /sys/class/gpio/gpio12 目录，若没有出现此目录则说明此引脚不可导出<br/>
 		/sys/class/gpio/unexport：通知系统取消导出<br/>
 		/sys/class/gpio/gpiochipX：保存系统中 GPIO 寄存器的信息，包括每个寄存器控制引脚的起始编号 base，寄存器名称，引脚总数 导出一个引脚的操作步骤<br/>
-		/sys/class/gpio/gpiox/direction：引脚输出还是输入<br/>
+		/sys/class/gpio/gpiox/direction：引脚输出还是输入，即 echo out(in/high/low) > /sys/class/gpio/gpio12/direction；其中 in 为输入，out 为输出，high 为输出并设置为高电平，low 为输出并设置低电平<br/>
 		/sys/class/gpio/gpiox/value：设置高电平或低电平<br/>
 		可在内核配置界面看到 Device Drivers->GPIO Support ->/sys/class/gpio/...(sysfs interface)，内核界面进入方式：cd /usr/src/linux-xxx（一般这里是内核解压后的目录，里面有 kernel），然后直接使用 make menuconfig 即可出现图形界面</p>
-	<p>/etc_rw/TZ：读取设置时区</p>
+	<p>/etc_rw/TZ：读取设置时区，CST-8 是世界时区+8（CST有多种，如 美国、澳大利亚、中国、古巴）；GMT 是格林威治时间；</p>
 	<p>/etc/passwd：用户密码</p>
 	<p>/etc/</p>
-	<p></p>
+	<p>/etc/syslog.conf：日志配置文件。文件中的一项配置记录由“选项”(selector)和“动作”(action)两个部分组成，两者间用 tab 制表符（'\t'）进行分隔，而“选项”又由一个或多个形如“类型.级别”格式的保留字段组合而成，各保留字段间用分号分隔<br/>
+		如：类型.级别 [;类型.级别]TAB动作<br/>
+		类型：<br/>
+		&nbsp; auth：认证系统，即询问用户名和口令<br/>
+		&nbsp; cron：系统定时系统执行定时任务时发出的信息<br/>
+		&nbsp; daemon：某些系统的守护程序的 syslog，如由 in.ftpd 产生的 log<br/>
+		&nbsp; kern：内核的 syslog 信息<br/>
+		&nbsp; lpr：打印机的 syslog 信息<br/>
+		&nbsp; mail：邮件系统的 syslog 信息<br/>
+		&nbsp; mark：定时发送消息的时标程序<br/>
+		&nbsp; news：新闻系统的 syslog 信息<br/>
+		&nbsp; user：本地用户应用程序的 syslog 信息<br/>
+		&nbsp; uucp：uucp 子系统的 syslog 信息<br/>
+		&nbsp; local0-7：种本地类型的 syslog 信息,这些信息可以又用户来定义<br/>
+		&nbsp; *：代表以上各种设备<br/>
+		级别：<br/>
+		&nbsp; emerg：紧急，处于 Panic 状态。通常应广播到所有用户<br/>
+		&nbsp; alert：告警，当前状态必须立即进行纠正。例如，系统数据库崩溃<br/>
+		&nbsp; crit：关键状态的警告。例如，硬件故障<br/>
+		&nbsp; err：其它错误<br/>
+		&nbsp; warn：警告<br/>
+		&nbsp; notice：注意；非错误状态的报告，但应特别处理<br/>
+		&nbsp; info：通报信息<br/>
+		&nbsp; debug：调试程序时的信息<br/>
+		&nbsp; none：通常调试程序时用，指示带有 none 级别的类型产生的信息无需送出。如 *.debug;mail.none 表示调试时除邮件信息外其它信息都送出<br/>
+		动作：<br/>
+		&nbsp; /filename：日志文件。由绝对路径指出的文件名，此文件必须事先建立<br/>
+		&nbsp; @host：远程主机；@ 符号后面可以是 ip，也可以是域名，默认在 /etc/hosts 文件下loghost这个别名已经指定给了本机<br/>
+		&nbsp; user1,user2：指定用户。如果指定用户已登录，那么他们将收到信息<br/>
+		&nbsp; *：所有用户。所有已登录的用户都将收到信息<br/>
+		比如：<br/>
+		&nbsp; *.info;mail.none;authpriv.none /var/log/messages：将 info 或更高级别的消息送到 /var/log/messages，除了mail以外，其中 * 是通配符，代表任何设备；none 表示不对任何级别的信息进行记录<br/>
+		&nbsp; local0.*\t/var/log/boot.log：将和系统启动相关的信息记录到 /var/log/boot.log 文件中<br/>
+		&nbsp; uucp,news.crit /var/log/spooler：将 uucp 和 news 设备的 crit 级别的信息记录到 /var/log/spooler 文件中<br/>
+		&nbsp; *.emerg *：将任何设备的 emerg 级别的信息发送给所有正在系统上的用户<br/>
+		&nbsp; cron.* /var/log/cron：将 cron 设备中的任何级别的信息记录到 /var/log/cron 文件中，这主要是和系统中定期执行的任务相关的信息<br/>
+		&nbsp; mail.* /var/log/maillog：将 mail 设备中的任何级别的信息记录到 /var/log/maillog 文件中，这主要是和电子邮件相关的信息<br/>
+		&nbsp; authpriv.* /var/log/secure：将 authpirv 设备的任何级别的信息记录到 /var/log/secure 文件中，这主要是一些和认证、权限使用相关的信息<br/>
+		&nbsp; *.err;kern.debug;daemon.notice;mail.crit    [TAB]   /var/adm/messages：这里 *.err 标识所有的一般错误信息；kern.debug 表示核心产生的调试信息；daemon.notice 表示守护进程的注意信息；mail.crit 表示邮件系统的关键警告信息</p>
 	<p></p>
 	<p></p>
 	<p></p>

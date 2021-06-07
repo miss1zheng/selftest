@@ -1708,7 +1708,7 @@
 			<h3>pthread.h</h3>
 			<ol>
 			<li>int pthread_create(pthread_t *restrict tidp,const pthread_attr_t *restrict_attr,void*（*start_rtn)(void*),void *restrict arg)：创建线程。<br/>
-				tidp：指向线程标识符的指针<br/>
+				tidp：指向线程标识符的指针，线程 id<br/>
 				restrict_attr：设置线程属性<br/>
 				void*（*start_rtn)(void*)：线程运行函数的起始地址<br/>
 				arg：运行函数的参数，若不止一个参数，则需要将全部参数放入结构体中<br/>
@@ -1717,7 +1717,7 @@
 				举例：详见 pthread_cond_signal 函数</li>
 			<li>int pthread_mutex_destroy(pthread_mutex_t *mutex)：销毁互斥锁<br/>
 				mutex：指向要销毁的互斥锁的指针<br/>
-				成功返回 0，失败返回错误码<br/>
+				返回值：成功返回 0，失败返回错误码<br/>
 				举例：详见 pthread_cond_signal 函数</li>
 			<li>int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr)：初始化互斥锁<br/>
 				mutex：指向要初始化的互斥锁的指针<br/>
@@ -1908,7 +1908,7 @@
 				buf：发送数据的缓冲区<br/>
 				len：数据长度<br/>
 				flags：该参数一般为 0
-				<ul><li>MSG_NOSIGNAL：禁止send向系统发送消息（注意：linux下当连接断开但还发数据时，send函数会有反应并向系统发送一个异常消息，而不做处理系统会出BrokePipe导致程序退出）</li>
+				<ul><li>MSG_NOSIGNAL：禁止 send 向系统发送消息（注意：linux 下当连接断开但还发数据时，send 函数会有反应并向系统发送一个异常消息，而不做处理系统会出 BrokePipe 导致程序退出）</li>
 				</ul>
 				返回值：成功返回发送的字节数，失败返回 -1，错误原因在 errno 中<br/>
 				举例：详见 TCP Server 例子</li>
@@ -1975,9 +1975,9 @@
 					<li>IP_OPTINOS：IP首部选项（IPPROTO_IP）</li>
 					<li>IP_TOS：服务类型（IPPROTO_IP）</li>
 					<li>IP_TTL：生存时间（IPPROTO_IP）</li>
-					<li>TCP_MAXSEG：TCP最大数据段的大小（IPPRO_TCP）</li>
-					<li>TCP_NODELAY：不使用Nagle算法（IPPRO_TCP）</li>
-					<li>TCP_INFO：查看当前 TCP 信息（IPPRO_TCP）</li></ul>
+					<li>TCP_MAXSEG：TCP最大数据段的大小（IPPROTO_TCP）</li>
+					<li>TCP_NODELAY：不使用Nagle算法（IPPROTO_TCP）</li>
+					<li>TCP_INFO：查看当前 TCP 信息（IPPROTO_TCP）</li></ul>
 				optval：选项值，optname 获取的返回值<br/>
 				optlen：选项值长度<br/>
 				返回值：成功为 0，失败为 -1 并设置 errno<br/>
@@ -2818,13 +2818,48 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>syslog.h</h3>
 			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>void openlog (char *ident, int option, int facility)：打开系统日志记录程序的连接，打开之后就可以用 syslog 或 vsyslog 函数向系统日志里添加信息了<br/>
+				ident：固定地加在每行日志的前面以标识这个日志，通常就写成当前程序的名称以作标记<br/>
+				option：<br/>
+				&nbsp; LOG_CONS：直接写入系统控制台，如果有一个错误，同时发送到系统日志记录<br/>
+				&nbsp; LOG_NDELAY：立即打开连接（通常，打开连接时记录的第一条消息）<br/>
+				&nbsp; LOG_NOWAIT：不要等待子进程，因为其有可能在记录消息的时候就被创建了（GNU C 库不创建子进程，所以该选项在 Linux 上没有影响。）<br/>
+				&nbsp; LOG_ODELAY：延迟连接的打开直到 syslog 函数调用（这是默认值，无需指定）<br/>
+				&nbsp; LOG_PERROR：（不在 SUSv3 情况下）同时输出到 stderr（标准错误文件）<br/>
+				&nbsp; LOG_PID：包含每个消息的 PID（进程号）<br/>
+				facility：指定程序的类型<br/>
+				&nbsp; LOG_AUTH：安全/认证<br/>
+		        &nbsp; LOG_AUTHPRIV：安全/认证（私有）<br/>
+		        &nbsp; LOG_CRON：cron 和 at<br/>
+		        &nbsp; LOG_DAEMON：daemon 系统守护进程，如 inetd、routed 等<br/>
+		        &nbsp; LOG_FTP：FTP 守护进程<br/>
+		        &nbsp; LOG_KERN：内核产生的消息<br/>
+		        &nbsp; LOG_LOCAL0-7：保留供本地使用<br/>
+		        &nbsp; LOG_LPR：行式打印机系统，如 lpd、lpc 等<br/>
+		        &nbsp; LOG_MAIL：邮件系统<br/>
+		        &nbsp; LOG_NEWS：新闻系统<br/>
+		        &nbsp; LOG_SYSLOG：syslogd 内部生成的消息，syslogd 守护进程本身<br/>
+		        &nbsp; LOG_USER (default)：通用用户级消息<br/>
+		        &nbsp; LOG_UUCP：UUCP 系统<br/>
+				</li>
+			<li>void syslog(int priority, char *format, ...)：把日志消息发给系统程序 syslogd 去记录<br/>
+				priority：消息级别<br/>
+				&nbsp; LOG_EMERG：系统不可用<br/>
+		        &nbsp; LOG_ALERT：必须立即采取行动<br/>
+		        &nbsp; LOG_CRIT：临界条件<br/>
+		        &nbsp; LOG_ERR：出错条件<br/>
+		        &nbsp; LOG_WARNING：警告条件<br/>
+		        &nbsp; LOG_NOTICE：注意<br/>
+		        &nbsp; LOG_INFO：通告信息<br/>
+		        &nbsp; LOG_DEBUG：debug 调试信息<br/>
+				format：消息格式，和 printf 函数一样<br/>
+				</li>
+			<li>void closelog(void)：关闭 openlog 打开的连接</li>
+			<li>int setlogmask(int mask)：设置进程的记录有限级屏蔽字，当设置了记录优先级屏蔽字时，各条消息除非已在记录优先级屏蔽字中进行了设置，否则不被记录<br/>
+				返回值：调用它之前的屏蔽字</li>
+			<li>void vsyslog(int priority, const char *format, va_list ap)：处理可变参数列表</li>
 			<li></li>
 			<li></li>
 			<li></li>
