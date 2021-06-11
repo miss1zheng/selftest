@@ -256,26 +256,34 @@
 				<caption>发送格式</caption>
 				<tr><th>格式</th>	<th>名称</th>					<th>长度</th>	<th>描述</th></tr>
 				<tr><td>SCA</td>	<td>Service Center Address</td>	<td>1-12</td>	<td>短消息服务中心号码</td></tr>
-				<tr><td>PDU-TYPE</td><td>Protocol Data Unit</td>	<td>1</td>		<td>协议数据单元类型</td></tr>
+				<tr><td>PDU-Type</td><td>Protocol Data Unit</td>	<td>1</td>		<td>协议数据单元类型</td></tr>
 				<tr><td>MR</td>		<td>Message Reference</td>		<td>1</td>		<td>所有成功的短信发送参考数目，0-255</td></tr>
 				<tr><td>DA</td>		<td>Destination Address</td>	<td>2-12</td>	<td>接收方手机号=len+type+phone，81 国内；91 国外（必须在号码前加 86，否则无法发送）</td></tr>
 				<tr><td>PID</td>	<td>Protocol Identifer</td>		<td>1</td>		<td>参数显示消息中心以何种方式处理消息内容，对于标准的 MS-to-SC 只需设置成 00</td></tr>
 				<tr><td>DCS</td>	<td>Data Coding Scheme</td>		<td>1</td>		<td>参数显示用户数据编码</td></tr>
-				<tr><td>SCTS</td>	<td>Service Center Time Stamp</td><td>7</td>	<td>消息中心收到消息的时间戳</td></tr>
+				<!--<tr><td>SCTS</td>	<td>Service Center Time Stamp</td><td>7</td>	<td>消息中心收到消息的时间戳</td></tr>
+				不确定是否有此字段-->
 				<tr><td>VP</td>		<td>Validity Period</td>		<td>0,1,7</td>	<td>参数显示消息有效期</td></tr>
 				<tr><td>UDL</td>	<td>User Data Lenghth</td>		<td>1</td>		<td>用户数据长度，7-bit 指原始短消息字符个数，非编码后字节数；8-bit 指字节数；UCS2 指字节数，为原始短消息的字节数两倍</td></tr>
-				<tr><td>UD</td>		<td>User Data</td>				<td>0-XX</td>	<td>用户数据</td></tr>
-				<tr><td></td><td></td><td></td><td></td><td></td></tr>
+				<tr><td>UD</td>		<td>User Data</td>				<td>0-140</td>	<td>用户数据</td></tr>
 			</table>
 			比如：向 15050850677 发送一条短信，内容“Test”<br/>
-			0011000D91685150800576F70000C404D4F29C0E<br/>
-			解析如下：
-			<table border="1"  cellspacing="0">
-				<tr><td>SCA</td>	<td>PDU-Type</td><td>MR</td><td>DA</td>					<td>PID</td><td>DCS</td><td>VP</td>		<td>UDL</td><td>UD</td></tr>
-				<tr><td>1-12</td>	<td>1</td>		<td>1</td>	<td>2-12</td>				<td>1</td>	<td>1</td>	<td>0,1,7</td>	<td>1</td><td>0-xx</td></tr>
-				<tr><td>00</td>		<td>11</td>		<td>00</td>	<td>0D91685150800576F7</td>	<td>00</td>	<td>00</td>	<td>C4</td>		<td>04</td><td>D4F29C0E</td></tr>
+			00 11 00 0D91685150800576F7 00 00 C4 04 D4F29C0E<br/>
+			0891683108200505F0 11 00 0D91683196032930F0 00 00 00 06 C8329BFD0E01<br/>
+			解析如下：<br/>
+			SCA：00，0891683108200505F0（长度08+地址格式91+SMSC地址683108200505F0[需要对换下，奇数位在最后补‘F’，即8613800250500]）<br/>
+			PDU-Type：11<br/>
+			MR：00<br/>
+			DA：0D91685150800576F7（长度0d+地址格式91+目标地址685150800576F7[8615050850677]），0D91683196032930F0（0d+91+8613693092030）<br/>
+			PID：00，点到点方式<br/>
+			DCS：00（7-bit）<br/>
+			VP：C4，00（5分钟）<br/>
+			UDL：04，06<br/>
+			UD：D4F29C0E（Test），C8329BFD0E01（Hello!）<br/>
+			<br/>
 			</table>
-			其中 DA 组成为：长度+类型+号码=1+1+第一字节得出的长度（0D 91 685150800576F，奇数则在末尾加‘F’补齐）<br/>
+			SCA：也就是没有<br/>
+			DA：长度+类型+号码=1+1+第一字节得出的长度（0D 91 685150800576F（15050850677），奇数则在末尾加‘F’补齐）<br/>
 			<br/>
 			<table border="1"  cellspacing="0">
 				<caption>接收格式</caption>
@@ -290,7 +298,7 @@
 				<tr><td>UD</td><td>User Data</td><td>0-XX</td><td>用户数据</td></tr>
 			</table>
 			比如：从 15050850677 接收一条短信，内容“你好”<br/>
-			0891683110402505F0240B915150800576F7000801112081600423044F60597DFF01<br/>
+			0891683110402505F0240B915150800576F7000801112081600423044F60597D<br/>
 			解析如下：
 			<table border="1"  cellspacing="0">
 				<tr><td>SCA</td>			<td>PDU-Type</td><td>DA</td>				<td>PID</td><td>DCS</td><td>SCTS</td>			<td>UDL</td><td>UD</td></tr>
@@ -298,9 +306,9 @@
 				<tr><td>0891683110402505F</td><td>24</td>	<td>0B915150800576F7</td>	<td>00</td>	<td>08</td>	<td>01112081600423</td>	<td>04</td><td>4F60597D</td></tr>
 			</table>
 			其中 SCA 组成为：长度+类型+号码=1+1+第一字节得出的长度（08 91 683110402505F0）<br/>
-			SCTS：如 30302180635480 表示 2003/3/12,08:36:45+8
-			</li>
-		<li></li>
+			SCTS：如 30302180635480 表示 2003/3/12,08:36:45+8<br/>
+			SMS 的 pdu 工具：PDUspy.exe</li>
+		<li>卡的 ICCID 可用于识别运营商：第 6 位为 0/2/4/7 的是移动；1/3 是电信；6/9 是联通（注意：第五六位为 01 是联通）</li>
 		<li></li>
 		<li></li>
 		<li></li>
