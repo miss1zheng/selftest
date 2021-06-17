@@ -2468,7 +2468,132 @@
 				&nbsp; 2.VTIME 为 0，VMIN 定义等待读取最小字节数时，read 只有在读取了 VMIN 个字节数或收到一个信号时才返回<br/>
 				&nbsp; 3.VMIN 为 0，VTIME 定义即使没有数据也可读取，read 返回前要等待 VTIME 时间，这时 read 不需要遇到文件结束标志才返回 0<br/>
 				&nbsp; 4.若 VMIN 和 VTIME 都是 0，则计时读不到数据，read 也会立即返回，同时，返回值为 0 表示 read 函数不需要等待文件结束标志就返回了<br/>
-				&nbsp; 5.若 VMIN 和 VTIME 都非 0，VTIME 定义接收到第一个字节数据后开始计算等待时间，若调用 read 可得到数据则马上开始计时，若调用 read 后还没数据则等接收第一个字节后计时。read 可能会在读取到 VMIN 个字节后返回，也可能在计时完毕后返回。</li>
+				&nbsp; 5.若 VMIN 和 VTIME 都非 0，VTIME 定义接收到第一个字节数据后开始计算等待时间，若调用 read 可得到数据则马上开始计时，若调用 read 后还没数据则等接收第一个字节后计时。read 可能会在读取到 VMIN 个字节后返回，也可能在计时完毕后返回。
+				<form>
+				<fieldset>
+				<legend>** <b>消息队列举例</b> **</legend>
+				#include &lt;stdio.h><br/>
+				#include &lt;fcntl.h><br/>
+				#include &lt;termios.h><br/>
+				#include &lt;string.h><br/>
+				#include &lt;unistd.h><br/>
+
+				static struct termios newtios,oldtios; //termianal settings<br/>
+
+				int main(void){<br/>
+					&nbsp; int fd;<br/>
+					&nbsp; fd = open("/dev/ttyS0", O_RDWR|O_NONBLOCK);<br/>
+					&nbsp; if(fd == -1){<br/>
+						&nbsp; &nbsp; printf("ttyS0 is open fail.\n");<br/>
+						&nbsp; &nbsp; return 0;<br/>
+					&nbsp; }<br/>
+					&nbsp; fcntl(fd, F_SETFL, 0);	//设置阻塞<br/>
+					&nbsp; tcgetattr(fd, &newtios);//获取参考参数并保存<br/>
+					&nbsp; memcpy(&oldtios, &newtios, sizeof(newtios));<br/>
+					&nbsp; cfmakeraw(&newtios);//配置新参数<br/><br/>
+					
+					&nbsp; newtios.c_iflag |= IGNPAR; //忽略奇偶校验<br/>
+					&nbsp; newtios.c_oflag &= ~(OPOST | ONLCR | OLCUC | OCRNL | ONOCR | ONLRET | OFILL);<br/>
+					&nbsp; newtios.c_cflag = CS8 | CLOCAL | CREAD;<br/>
+					&nbsp; newtios.c_cc[VMIN] = 1; //接收一字节单元块<br/>
+					&nbsp; newtios.c_cc[VTIME] = 0; //没有字符时间间隔<br/><br/>
+					
+					&nbsp; //数据位<br/>
+					&nbsp; switch(8){<br/>
+					&nbsp; case 7:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~CSIZE;<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= CS7;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 8:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~CSIZE;<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= CS8;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; default:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~CSIZE;<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= CS8;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; }<br/>
+					&nbsp; //停止位<br/>
+					&nbsp; switch(1){<br/>
+					&nbsp; case 1:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~CSTOPB;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 2:<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= CSTOPB;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; default:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~CSTOPB;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; }<br/>
+					&nbsp; //校验位<br/>
+					&nbsp; switch(0){<br/>
+					&nbsp; case 0://无校验<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~PARENB;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 1://奇校验<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= PARENB;<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= PARODD;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 2://偶校验<br/>
+						&nbsp; &nbsp; newtios.c_cflag |= PARENB;<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~PARODD;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; default:<br/>
+						&nbsp; &nbsp; newtios.c_cflag &= ~PARENB;<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; }<br/>
+					&nbsp; //波特率<br/>
+					&nbsp; switch(115200){<br/>
+					&nbsp; case 300:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B300);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B300);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 1200:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B1200);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B1200);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 2400:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B2400);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B2400);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 4800:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B4800);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B4800);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 9600:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B9600);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B9600);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 115200:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B115200);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B115200);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; case 921600:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B921600);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B921600);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; default:<br/>
+						&nbsp; &nbsp; cfsetospeed(&newtios,B115200);<br/>
+						&nbsp; &nbsp; cfsetispeed(&newtios,B115200);<br/>
+						&nbsp; &nbsp; break;<br/>
+					&nbsp; }<br/><br/>
+
+					&nbsp; tcflush(fd, TCIFLUSH);//清空接收的数据<br/>
+					&nbsp; tcsetattr(fd, TCSADRAIN, &newtios);<br/>
+					&nbsp; int len = 0;<br/>
+					&nbsp; len = write(fd,"hello,world\n",strlen("hello,world\n"));<br/>
+					&nbsp; if(len > 0)<br/>
+						&nbsp; &nbsp; printf("send len:%d", len);<br/>
+					&nbsp; char buff[1024] = {0};<br/>
+					&nbsp; len = read(fd,buff,1024);<br/>
+					&nbsp; if(len > 0)<br/>
+						&nbsp; &nbsp; printf("recv data:%s", buff);<br/>
+					&nbsp; close(fd);<br/><br/>
+					&nbsp; return 0;<br/>
+				}<br/>
+				</fieldset>
+				</form>
+				</li>
 			<li>void cfmakeraw (struct termios *termios-p)：将中断设置为原始模式，该模式下所有的输入数据以字节为单位被处理<br/>
 				termios-p：可以先用 tcgetattr 获取参数，然后使用 tcgetattr 里面的 termios-p</li>
 			<li>int cfsetospeed(struct termios *termptr, speed_t speed)：配合 cfsetispeed 函数实现设置波特率<br/>

@@ -85,7 +85,7 @@
 		<fieldset>
 			<legend>** <b>主窗口 举例</b> **</legend>
 			from tkinter import * #导入库<br><br>
-			win=Tk() #创建窗口 win<br>
+			win = Tk() #创建窗口 win<br>
 			win.title("GUI") #窗口名称<br>
 			#win["background"] = "white" #设置背景色<br>
 			win["background"]="#fff" <br><br>
@@ -104,22 +104,22 @@
 			ws = win.winfo_screenwidth()<br>
 			hs = win.winfo_screenheight()<br><br>
 			#标题边上的图标<br>
-			win.tk.call("wm","iconphoto",win._w,tkinter.PhotoImage(file="./aa.png")) #不支持 ico 图标，并且这些参数都不能改变，只需改变 file 后的图标位置即可<br>
-			#win.iconphoto(False,tkinter.PhotoImage(file="./aa.bmp"))#False 表示该腿部仅适用于当前特定窗口，若创建了其他子窗口则不适用了，设置 True 则表示应用于所有；PhotoImage 是图标位置，可用 png 和 jpg 和 gif（静态的）和 bmp 等，不能是 ico<br>
+			win.tk.call("wm", "iconphoto", win._w, tkinter.PhotoImage(file="./aa.png")) #不支持 ico 图标，并且这些参数都不能改变，只需改变 file 后的图标位置即可<br>
+			#win.iconphoto(False, tkinter.PhotoImage(file="./aa.bmp"))#False 表示该腿部仅适用于当前特定窗口，若创建了其他子窗口则不适用了，设置 True 则表示应用于所有；PhotoImage 是图标位置，可用 png 和 jpg 和 gif（静态的）和 bmp 等，不能是 ico<br>
 			#win.iconbitmap("./aa.ico") #只能是 ico 位图<br><br>
 			
-			win.resizable(1,1) #框体大小可调性，分别表示x,y方向的可变性，0为不可变，1为可变<br>
-			win.geometry('100x100') #窗口大小，若设置为 geometry('100x100+50+50')，则加后面带的时x和y轴坐标<br>
+			win.resizable(1, 1) #框体大小可调性，分别表示 x,y 方向的可变性，0 为不可变，1 为可变<br>
+			win.geometry('100x100') #窗口大小，若设置为 geometry('100x100+50+50')，则加后面带的是 x 和 y 轴坐标<br>
 			"""<br>
 			#将应用打开时放置在屏幕中央，并设置长宽<br>
-			def center_window(r,w, h):<br>
+			def center_window(r, w, h):<br>
 			&nbsp; #获取屏幕大小<br>
 			&nbsp; ws = r.winfo_screenwidth()<br>
 			&nbsp; hs = r.winfo_screenheight()<br>
 			&nbsp; x = (ws/2) - (w/2)<br>
 			&nbsp; y = (hs/2) - (h/2)<br>
 			&nbsp; r.geometry("%dx%d+%d+%d" % (w, h, x, y))<br>
-			center_window(win,500,500)<br>
+			center_window(win, 500, 500)<br>
 			"""<br><br>
 			win.mainloop() #主窗口循环显示，就是让 win 不断的刷新<br><br>
 			<img src="./0/0.png" alt="main">
@@ -222,7 +222,8 @@
 			<tr>
 				<td>image</td>			
 				<td style="text-align:left">标签中的图片，该选项优先于 text 和 bitmap 选项<br>
-				photo=PhotoImage(file="xx.png")</td>
+				photo=PhotoImage(file="xx.png")<br>
+				支持：png、gif、jpg 等；不支持：xbm、ico、bmp 等</td>
 			</tr>
 			<tr>
 				<td>justify</td>			
@@ -276,31 +277,31 @@
 		<fieldset>
 			<legend>** <b>Label 举例 </b>**</legend>
 			例1：<br>from tkinter import *<br>
-			win=Tk()<br>
+			win = Tk()<br>
 			v= StringVar()<br>
 			v.set("tkinter,\nthis myself's\n project.")<br>
-			Label(win,textvariable=v,bg="green",fg="yellow",width="10",height=3,padx=2,pady=2,borderwidth=3,relief="sunken",anchor="nw").pack()<br>
+			Label(win, textvariable=v, bg="green", fg="yellow", width="10", height=3, padx=2, pady=2, borderwidth=3, relief="sunken", anchor="nw").pack()<br>
 			win.mainloop()<br>
 			<img src="./0/label.png" alt="label"><br><br>
 			
-			例2：<br>from tkinter import *<br>
-			win=Tk()<br>
-			v = PhotoImage(file="kong.png")<br>
-			Label(win, text="tkinger",image=v,width=80,height=80).pack()<br>
+			例2：<br>import tkinter<br>
+			win = tkinter.Tk()<br>
+			v = tkinter.PhotoImage(file="aa.png")<br>
+			tkinter.Label(win, text="tkinger", image=v, width=80, height=80).pack()<br>
 			win.mainloop()<br>
 			<img src="./0/label0.png" alt="label0"><br><br>
 			
 			例3：（文字在图片的左方）<br>from tkinter import *<br>
-			win=Tk()<br>
+			win = Tk()<br>
 			v= StringVar()<br>
 			v.set("tkinter,\nthis myself's\n project.")<br>
 			c = PhotoImage(file="kong.png")<br>
-			Label(win,textvariable=v,bg="green",fg="yellow",relief="sunken",image=c,compound="right").pack()<br>
+			Label(win, textvariable=v, bg="green", fg="yellow", relief="sunken", image=c, compound="right").pack()<br>
 			win.mainloop()<br>
 			<img src="./0/label1.png" alt="label1"><br><br>
 			
 			例4：<br>from tkinter import *<br>
-			win=Tk()<br>
+			win = Tk()<br>
 			#这里的 BITMAP 就是位图了，在 .xbm 文件中就是这样定义使用的<br>
 			"""<br>
 			//xx 名称相同，yy 表示长宽，两个可取不同值，花括号内部是十六进制值，其他格式一致即可<br/>
@@ -334,8 +335,8 @@
 			};<br>
 			"""<br>
 			#使用 tuple 数据来创建图像<br>
-			bmp = BitmapImage(data = BITMAP)<br>
-			Label(win, image=bmp,bg="#f1f1c0").pack()<br>
+			bmp = BitmapImage(data=BITMAP)<br>
+			Label(win, image=bmp, bg="#f1f1c0").pack()<br>
 			win.mainloop()<br>
 			<img src="./0/label2.png" alt="label2">
 		</fieldset>
@@ -500,10 +501,11 @@
 		<fieldset>
 			<legend>** <b>Button 举例 </b>**</legend>
 			例1：<br/>
-			from tkinter import *<br>win=Tk()<br>
+			from tkinter import *<br>
+			win = Tk()<br>
 			var = StringVar() #自动刷新字符串变量，可用 set 和 get 方法进行传值和取值，类似的还有 IntVar<br>
 			var.set('close')<br>
-			on_hit=False<br>
+			on_hit = False<br>
 			Label(win, textvariable=var, bg='yellow').pack()<br>
 			def hit_me():#函数定义<br>
 				&nbsp; global on_hit<br>
@@ -513,22 +515,22 @@
 				&nbsp; else:<br>
 					&nbsp; &nbsp; on_hit = False<br>
 					&nbsp; &nbsp; var.set('close')<br>
-			Button(win,text="点击",bg="green",activebackground="yellow",font="楷体",command=hit_me).pack()<br>
+			Button(win, text="点击", bg="green", activebackground="yellow", font="楷体", command=hit_me).pack()<br>
 			win.mainloop()<br>结果为：</b></p>
 			<img src="./0/button0.png" alt="button0"/>&nbsp;<img src="./0/button1.png" alt="button1"/>&nbsp;<img src="./0/button.png" alt="button"/>
 			<br/><br/>例2：<br/>
 			import tkinter<br/>
-			win=tkinter.Tk()<br/>
-			value=False<br/>
+			win = tkinter.Tk()<br/>
+			value = False<br/>
 			def hit():<br/>
 				&nbsp; global value<br/>
 				&nbsp; if value:<br/>
 					&nbsp; &nbsp; value=False<br/>
-					&nbsp; &nbsp; tkinter.Label(win,bg="red").place(x=100,y=0)<br/>
+					&nbsp; &nbsp; tkinter.Label(win, bg="red").place(x=100, y=0)<br/>
 				&nbsp; else:<br/>
 					&nbsp; &nbsp; value=True<br/>
-					&nbsp; &nbsp; tkinter.Label(win,bg="green").place(x=100,y=0)<br/>
-			tkinter.Button(win,text="点击",repeatdelay=300,repeatinterval=1000,command=hit).pack()<br/>
+					&nbsp; &nbsp; tkinter.Label(win, bg="green").place(x=100, y=0)<br/>
+			tkinter.Button(win, text="点击", repeatdelay=300, repeatinterval=1000, command=hit).pack()<br/>
 			win.mainloop()
 		</fieldset>
 		<fieldset>
@@ -537,10 +539,10 @@
 			import socket<br/>
 			import threading<br/><br/>
 
-			send_data=b''<br/>
-			data=b''<br/>
-			def senddata(name,s):<br/>
-				&nbsp; global strdata,send_data,data<br/>
+			send_data = b''<br/>
+			data = b''<br/>
+			def senddata(name, s):<br/>
+				&nbsp; global strdata, send_data, data<br/>
 				&nbsp; print("senddata starting...")<br/>
 				&nbsp; while True:<br/>
 					&nbsp; &nbsp; try:<br/>
@@ -551,27 +553,27 @@
 						&nbsp; &nbsp; &nbsp; s.close()<br/>
 						&nbsp; &nbsp; &nbsp; break<br/>
 					&nbsp; &nbsp; if send_data != b'':#控件输入的数据发送<br/>
-						&nbsp; &nbsp; &nbsp; print("senddata send_data:",send_data)<br/>
+						&nbsp; &nbsp; &nbsp; print("senddata send_data:", send_data)<br/>
 						&nbsp; &nbsp; &nbsp; s.send(send_data.encode("gbk"))<br/>
-						&nbsp; &nbsp; &nbsp; send_data=b''<br/>
+						&nbsp; &nbsp; &nbsp; send_data = b''<br/>
 					&nbsp; &nbsp; elif data != b'':<br/>
-						&nbsp; &nbsp; &nbsp; print("senddata data:",data)<br/>
-						&nbsp; &nbsp; &nbsp; print("send:",data)<br/>
+						&nbsp; &nbsp; &nbsp; print("senddata data:", data)<br/>
+						&nbsp; &nbsp; &nbsp; print("send:", data)<br/>
 						&nbsp; &nbsp; &nbsp; s.send(data)<br/>
-						&nbsp; &nbsp; &nbsp; data=b''<br/><br/>
+						&nbsp; &nbsp; &nbsp; data = b''<br/><br/>
 
 			def recvdata(name,s):<br/>
 				&nbsp; global strdata,data<br/>
 				&nbsp; print("recvdata starting...")<br/>
 				&nbsp; while True:<br/>
 					&nbsp; &nbsp; try:<br/>
-						&nbsp; &nbsp; &nbsp; data=s.recv(1024)<br/>
+						&nbsp; &nbsp; &nbsp; data = s.recv(1024)<br/>
 					&nbsp; &nbsp; except OSError:<br/>
 						&nbsp; &nbsp; &nbsp; print ("客户端已断开")<br/>
 						&nbsp; &nbsp; &nbsp; strdata.set("")<br/>
 						&nbsp; &nbsp; &nbsp; s.close()<br/>
 						&nbsp; &nbsp; &nbsp; break<br/>
-					&nbsp; &nbsp; print("recvdata data:",data)<br/>
+					&nbsp; &nbsp; print("recvdata data:", data)<br/>
 					&nbsp; &nbsp; if data == b'':<br/>
 						&nbsp; &nbsp; &nbsp; try:<br/>
 							&nbsp; &nbsp; &nbsp; &nbsp; s.send("心跳".encode("gbk"))<br/>
@@ -583,8 +585,8 @@
 						&nbsp; &nbsp; &nbsp; finally:<br/>
 							&nbsp; &nbsp; &nbsp; &nbsp; pass<br/>
 					&nbsp; &nbsp; else:<br/>
-						&nbsp; &nbsp; &nbsp; print("recvdata data1:",data.decode("gbk"))<br/>
-						&nbsp; &nbsp; &nbsp; temp=data.decode("gbk")<br/>
+						&nbsp; &nbsp; &nbsp; print("recvdata data1:", data.decode("gbk"))<br/>
+						&nbsp; &nbsp; &nbsp; temp = data.decode("gbk")<br/>
 						&nbsp; &nbsp; &nbsp; strdata.set(temp)<br/>
 						&nbsp; &nbsp; &nbsp; if temp == "拜拜":#服务器主动断开<br/>
 							&nbsp; &nbsp; &nbsp; &nbsp; strdata.set("")<br/>
@@ -592,45 +594,45 @@
 							&nbsp; &nbsp; &nbsp; &nbsp; break<br/><br/>
 
 			def socket_creat():<br/>
-				&nbsp; global strdata,send_data,data<br/>
+				&nbsp; global strdata, send_data, data<br/>
 				&nbsp; print("socket_creat start...")<br/>
-				&nbsp; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)<br/>
-				&nbsp; port=10099<br/>
-				&nbsp; s.bind(('localhost',port))<br/>
+				&nbsp; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br/>
+				&nbsp; port = 10099<br/>
+				&nbsp; s.bind(('localhost', port))<br/>
 				&nbsp; s.listen(5)<br/>
 				&nbsp; while True:<br/>
 					&nbsp; &nbsp; print ("waiting for connection.....")<br/>
-					&nbsp; &nbsp; c,addr=s.accept()<br/>
-					&nbsp; &nbsp; print("socket_creat ip port:",addr)<br/>
-					&nbsp; &nbsp; send=threading.Thread(target=senddata, args=("sendThread",c),daemon=True)<br/>
-					&nbsp; &nbsp; recv=threading.Thread(target=recvdata, args=("recvThread",c),daemon=True)<br/>
+					&nbsp; &nbsp; c,addr = s.accept()<br/>
+					&nbsp; &nbsp; print("socket_creat ip port:", addr)<br/>
+					&nbsp; &nbsp; send = threading.Thread(target=senddata, args=("sendThread",c), daemon=True)<br/>
+					&nbsp; &nbsp; recv = threading.Thread(target=recvdata, args=("recvThread",c), daemon=True)<br/>
 					&nbsp; &nbsp; send.start()<br/>
 					&nbsp; &nbsp; recv.start()<br/>
 					&nbsp; &nbsp; send.join()   # 等待子线程运行结束<br/>
 					&nbsp; &nbsp; recv.join()<br/><br/>
 
 			def text_write():<br/>
-				&nbsp; global gui_data,send_data<br/>
-				&nbsp; gui_data=gui_send.get(0.0,tkinter.END)<br/>
-				&nbsp; send_data=gui_data<br/>
-				&nbsp; print("text_write:",send_data)<br/><br/>
+				&nbsp; global gui_data, send_data<br/>
+				&nbsp; gui_data = gui_send.get(0.0, tkinter.END)<br/>
+				&nbsp; send_data = gui_data<br/>
+				&nbsp; print("text_write:", send_data)<br/><br/>
 
 			def GUI_creat():<br/>
-				&nbsp; global win,strdata,gui_send,gui_data,send_data<br/>
+				&nbsp; global win, strdata, gui_send, gui_data, send_data<br/>
 				&nbsp; print("GUI_creat start...")<br/>
-				&nbsp; win=tkinter.Tk()<br/>
-				&nbsp; strdata=tkinter.StringVar()<br/>
-				&nbsp; tkinter.Label(win,textvariable=strdata,bg="black",fg="white",anchor="nw",width=100,height=20,pady=1).pack()<br/>
-				&nbsp; gui_send=tkinter.Text(win,height=5,width=100)<br/>
+				&nbsp; win = tkinter.Tk()<br/>
+				&nbsp; strdata = tkinter.StringVar()<br/>
+				&nbsp; tkinter.Label(win, textvariable=strdata, bg="black", fg="white", anchor="nw", width=100, height=20, pady=1).pack()<br/>
+				&nbsp; gui_send=tkinter.Text(win, height=5, width=100)<br/>
 				&nbsp; gui_send.pack()<br/>
-				&nbsp; tkinter.Button(win,text="点击发送",command=text_write).pack()<br/>
+				&nbsp; tkinter.Button(win, text="点击发送", command=text_write).pack()<br/>
 				&nbsp; win.mainloop()<br/><br/>
 
 			if __name__=="__main__":<br/>
 				&nbsp; print("start...")<br/>
-				&nbsp; gui_thread=threading.Thread(target=GUI_creat,name='gui creat',args=(),daemon=False)<br/>
+				&nbsp; gui_thread=threading.Thread(target=GUI_creat, name='gui creat', args=(), daemon=False)<br/>
 				&nbsp; gui_thread.start()<br/>
-				&nbsp; sock_thread=threading.Thread(target=socket_creat,name='socket creat',args=(),daemon=True)<br/>
+				&nbsp; sock_thread=threading.Thread(target=socket_creat, name='socket creat', args=(), daemon=True)<br/>
 				&nbsp; sock_thread.start()
 		</fieldset>
 	</form>
@@ -653,11 +655,7 @@
 			</tr>
 			<tr>
 				<td>background(bg)</td>			
-				<td style="text-align:left">背景色</td>
-			</tr>
-			<tr>
-				<td>foreground(fg)</td>			
-				<td style="text-align:left">前景色</td>
+				<td style="text-align:left">背景色<br/>注意：由于没有文字说明，所以没有前景色 fg</td>
 			</tr>
 			<tr>
 				<td>borderwidth(bd)</td>			
@@ -681,15 +679,7 @@
 			</tr>
 			<tr>
 				<td>highlightthickness</td>			
-				<td style="text-align:left">指定高亮边框的宽度</td>
-			</tr>
-			<tr>
-				<td>bitmap</td>			
-				<td style="text-align:left">位图</td>
-			</tr>
-			<tr>
-				<td>image</td>			
-				<td style="text-align:left">图片</td>
+				<td style="text-align:left">指定高亮（highlightbackground）边框的宽度</td>
 			</tr>
 			<tr>
 				<td>cursor</td>			
@@ -697,7 +687,7 @@
 			</tr>
 			<tr>
 				<td>relief</td>			
-				<td style="text-align:left">边框样式,可选值为 FLAT（默认）、SUNKEN、RAISED、GROOVE、RIDGE。</td>
+				<td style="text-align:left">边框样式,可选值为 flat（默认）、sunken、raised、groove、ridge。</td>
 			</tr>
 			<tr>
 				<td>scrollregion</td>			
@@ -725,7 +715,7 @@
 			</tr>
 			<tr>
 				<td>state</td>			
-				<td style="text-align:left">设置 Canvas 的状态：NORMAL(默认) 或 DISABLED</td>
+				<td style="text-align:left">设置 Canvas 的状态：normal(默认) 或 disabled</td>
 			</tr>
 			<tr>
 				<td>selectforeground</td>			
@@ -1050,8 +1040,9 @@
 	&nbsp Item handles 事实上是一个用于指定某个画布对象的整型数字（也成为画布对象的 ID）。当你在 Canvas 组件上创建一个画布对象的时候，Tkinter 将自动为其指定一个在该 Canvas 组件中独一无二的整型值。然后各种 Canvas 的方法可以通过这个值操纵该画布对象。<br>
 	&nbsp Tags 是附在画布对象上的标签，Tags 由普通的非空白字符串组成。一个画布对象可以与多个 Tags 相关联，一个 Tag 也可用于描述多个画布对象。然而，与 Text 组件不同，没有指定画布对象的 Tags 不能进行事件绑定和配置样式。也就是说，Canvas 组件的 Tags 是仅为画布对象所拥有。<br>
 	&nbsp Canvas 组件预定义了两个 Tags：ALL 和 CURRENT：all表示canvas组件中的所有画布对象；current表示鼠标指针下的画布对象（若有的话）</p>
-	<p id="create_arc">create_arc(bbox, **options)<br>
-	-- 根据 bbox (x1, y1, x2, y2) 创建一个扇形（pieslice）、弓形（chord）或弧形（arc）</p>
+	<p id="create_arc">create_arc(bbox, **options)：可创建一个扇形（pieslice）、弓形（chord）或弧形（arc）<br>
+		&nbsp; bbox(x1, y1, x2, y2)：元组，分别表示椭圆的左上角和右下角。<br>
+		&nbsp; options：选项，如 start 开始位置，extent 旋转度数，fill 填充颜色等，详见表格</p>
 	<table border="1" cellpadding="0" cellspacing="0" style="text-align:center">
 		<tbody>
 			<thread>
@@ -2043,6 +2034,103 @@
 			win.mainloop()<br>
 			<img src="./0/create_delete.png" alt="create_delete">
 			<img src="./0/create_delete1.png" alt="create_delete1">
+		</fieldset>
+	</form>
+	<form>
+		<fieldset>
+			<legend>** <b>勾股定理绘图</b> **</legend>
+			import tkinter<br>
+			import math<br><br>
+			
+			'''<br>
+			A=30°;B=60°;C=90°<br>
+			勾三股四弦五：a=3;b=4;c=5<br>
+			cos30°=0.8;cos60°=0.5;cos90°=0<br>
+			正弦定理：a/sinA=b/sinB=c/sinC<br>
+			两边一角得到另一边：c*c=a*a+b*b-2*a*b*cosC<br>
+			'''<br><br>
+			# math.radians(72) 参数角度，返回弧度值<br>
+			# math.cos(3) 参数弧度，得出 cos 值，-1 到 1 之间<br>
+			# math.sqrt(4) 开根号<br>
+			wulen = math.sqrt(50*50+50*50-2*50*50*math.cos(math.radians(60))) #返回值 50<br><br>
+
+			#圆心位置<br>
+			circle = 300<br>
+			radial = 50<br>
+			gap = circle-radial<br><br>
+			#最上面的点坐标<br>
+			x1 = radial+gap<br>
+			y1 = gap<br><br>
+			#左上角<br>
+			pub1 = radial*math.sin(math.radians(72))<br>
+			x2 = circle-pub1<br>
+			y2 = circle-radial*math.sin(math.radians(180-90-72))<br><br>
+			#右上角<br>
+			x3 = circle+pub1<br>
+			y3 = y2<br><br>
+			#左下角<br>
+			pub2 = radial*math.sin(math.radians(36))<br>
+			x4 = circle-pub2<br>
+			y4 = circle+radial*math.sin(math.radians(180-90-36))<br><br>
+			#右下角<br>
+			x5 = circle+pub2<br>
+			y5 = y4<br><br>
+
+			#最下角<br>
+			pub3 = (radial/math.sin(math.radians(36/2)))*math.sin(math.radians(180-72/2-36/2))<br>
+			x11 = circle<br>
+			y11 = circle+pub3<br><br>
+			#左上角<br>
+			x12 = circle-(pub3*math.sin(math.radians(72/2)))<br>
+			y12 = circle-(pub3*math.sin(math.radians(180-90-72/2)))<br><br>
+			#右上角<br>
+			x13 = circle+(pub3*math.sin(math.radians(72/2)))<br>
+			y13 = y12<br><br>
+			#左下角<br>
+			pub4 = (radial/math.sin(math.radians(36/2)))*math.sin(math.radians(72/2))<br>
+			x14 = circle-(pub2+pub4)<br>
+			y14 = y4<br><br>
+			#右下角<br>
+			x15 = circle+pub2+pub4<br>
+			y15 = y4<br><br>
+
+			win = tkinter.Tk()<br>
+			can = tkinter.Canvas(win, bg="yellow", bd=30, height=600, width=600, cursor="plus", relief="groove")#创建布画<br><br>
+
+			can.create_oval(gap, gap, gap+2*radial, gap+2*radial, outline="orange")#椭圆<br>
+			can.create_oval(circle-pub3, circle-pub3, y11, y11, outline="cyan")<br><br>
+			can.create_rectangle(gap, gap, gap+2*radial, gap+2*radial, outline="yellow", fill="")#矩形<br>
+			can.create_rectangle(circle-pub3, circle-pub3, y11, y11, outline="blue", fill="")<br><br>
+
+			#左上角<br>
+			pub5 = (circle-pub3)-(y11-(circle-pub3))/2<br>
+			#右下角<br>
+			pub6 = (circle-pub3)+(y11-(circle-pub3))/2<br>
+			can.create_arc(circle-pub3, pub5, y11, pub6, fill="", outline="purple", start=0, extent=180, style="arc")#扇形、弦<br>
+			can.create_arc(pub5, circle-pub3, pub6, y11, fill="", outline="purple", start=90, extent=180, style="arc")<br>
+			pub7 = y11+(y11-(circle-pub3))/2<br>
+			can.create_arc(circle-pub3, pub6, y11, pub7, fill="", outline="purple", start=180, extent=180, style="arc")<br>
+			pub8 = y11-(y11-(circle-pub3))/2<br>
+			can.create_arc(pub8, circle-pub3, pub7, y11, fill="", outline="purple", start=270, extent=180, style="arc")<br><br>
+
+			can.create_line(x12, y12,<br>
+				&nbsp; x11, y11,<br>
+				&nbsp; x13, y13,<br>
+				&nbsp; x14, y14,<br>
+				&nbsp; x15, y15,<br>
+				&nbsp; x12, y12,<br>
+				&nbsp; fill="green")#直线<br><br>
+			point1=[x1, y1,<br>
+				&nbsp; x4, y4,<br>
+				&nbsp; x3, y3,<br>
+				&nbsp; x2, y2,<br>
+				&nbsp; x5, y5,<br>
+				&nbsp; x1, y1]<br>
+			can.create_polygon(point1, outline="red", fill="")#多边形<br><br>
+
+			can.pack()<br>
+			win.mainloop()<br>
+			<img src="./xx.png" alt="create_huizhi">
 		</fieldset>
 	</form>
 <div>

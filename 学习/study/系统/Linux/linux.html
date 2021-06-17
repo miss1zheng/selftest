@@ -326,7 +326,21 @@
 		&nbsp; mail.* /var/log/maillog：将 mail 设备中的任何级别的信息记录到 /var/log/maillog 文件中，这主要是和电子邮件相关的信息<br/>
 		&nbsp; authpriv.* /var/log/secure：将 authpirv 设备的任何级别的信息记录到 /var/log/secure 文件中，这主要是一些和认证、权限使用相关的信息<br/>
 		&nbsp; *.err;kern.debug;daemon.notice;mail.crit    [TAB]   /var/adm/messages：这里 *.err 标识所有的一般错误信息；kern.debug 表示核心产生的调试信息；daemon.notice 表示守护进程的注意信息；mail.crit 表示邮件系统的关键警告信息</p>
-	<p></p>
+	<p>串口信息：<br/>
+		1.DB9 定义：<br/>
+		&nbsp; CDC数据载波检测<br/>
+		&nbsp; RXD接收数据<br/>
+		&nbsp; TXD发送数据<br/>
+		&nbsp; DTR数据中断准备<br/>
+		&nbsp; GND信号地<br/>
+		&nbsp; DSR数据设备准备好<br/>
+		&nbsp; RTS请求发送<br/>
+		&nbsp; CTS清楚发送<br/>
+		&nbsp; DELL振铃指示<br/>
+		2.查看串口是否可用：对串口发送数据，如 echo hello > /dev/ttyS0（即com1）<br/>
+		3.串口名称使用：ls -l /dev/ttyS*（一般 ttyS0 是 com1，ttyS1 对应 com2，以此类推）<br/>
+		4.查看串口驱动：cat /proc/tty/driver/*<br/>
+		5.获取可用串口列表：dmesg | grep tty</p>
 	<p></p>
 	<p></p>
 	<p></p>
