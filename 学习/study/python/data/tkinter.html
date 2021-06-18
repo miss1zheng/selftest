@@ -1147,7 +1147,8 @@
 			<tr>
 				<td>style</td>			
 				<td style="text-align:left">1. 指定该方法创建的是扇形（pieslice）、弓形（chord）还是弧形（arc）<br>
-				2. 默认创建的是扇形</td>
+				2. 默认创建的是扇形
+				注意：对于 arc 来说，fill 设置无用，因为这只是一条弧线</td>
 			</tr>
 			<tr>
 				<td>tags</td>			
@@ -1310,14 +1311,6 @@
 				<td style="text-align:left">当画布对象状态为 ACTIVE 的时候，指定边框的宽度</td>
 			</tr>
 			<tr>
-				<td>arrow</td>			
-				<td style="text-align:left">1. 默认线段是不带箭头的<br>
-				2. 你可以通过设置该选项添加箭头到线段中<br>
-				3. FIRST 表示添加箭头到线段开始的位置<br>
-				4. LAST 表示添加箭头到线段结束的位置<br>
-				5. BOTH 表示两端均添加箭头</td>
-			</tr>
-			<tr>
 				<td>arrowshape</td>			
 				<td style="text-align:left">1. 用一个三元组 (a, b, c) 来指定箭头的形状<br>
 				2. a, b, c 分别代表箭头填充长度，箭头长度，箭头宽度<br>
@@ -1328,8 +1321,9 @@
 				<td style="text-align:left">1. 指定线段两端的样式<br>
 				2. 该选项的值可以是：<br>
 				-- butt（线段的两段平切于起点和终点），默认<br>
-				-- projecting（线段的两段在起点和终点的位置分别延长一半 width 选项设置的长度）<br>
-				-- round（线段的两段在起点和终点的位置分别延长一半 width 选项设置的长度并以圆角绘制）</td>
+				-- projecting（线段的两段在起点和终点的位置分别延长一半 width 选项设置的长度），即 butt 是直接以坐标为原点开始，而 projecting 是 原点左右一起延伸共 width 个长度<br>
+				-- round（线段的两段在起点和终点的位置分别延长一半 width 选项设置的长度并以圆角绘制）<br>
+				注意：若指定了 arrow 则此属性无效</td>
 			</tr>
 			<tr>
 				<td>dashoffset</td>			
@@ -1382,10 +1376,6 @@
 			<tr>
 				<td>tags</td>			
 				<td style="text-align:left">为创建的画布对象添加标签</td>
-			</tr>
-			<tr>
-				<td>width</td>			
-				<td style="text-align:left">指定边框的宽度 </td>
 			</tr>
 		</tbody>
 	</table>
