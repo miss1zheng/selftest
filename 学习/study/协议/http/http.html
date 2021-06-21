@@ -64,25 +64,69 @@
 		</div>
 	<div class="main_body">
 		<h3 id="jianjie">简介</h3>
-		<p>HTTP：超文本传输协议（输入web协议族），基于 TCP 短连接的应用层协议。<br/>总体过程为：建立连接->客户端向服务器端提出请求->服务器给客户端做出响应->关闭连接。<br/>基于客户端/服务端（C/S）的架构模型，通过一个可靠的链接来交换信息，是一个无状态的请求/响应协议。<br/>一个HTTP"客户端"是一个应用程序（Web浏览器或其他任何客户端），通过连接到服务器达到向服务器发送一个或多个HTTP的请求的目的。
-		<br/>一个HTTP"服务器"同样也是一个应用程序（通常是一个Web服务，如Apache Web服务器或IIS服务器等，通过80端口进行监听），通过接收客户端的请求并向客户端发送HTTP响应数据。</p>
+		<p>HTTP：超文本传输协议（输入web协议族），基于 TCP 短连接的应用层协议。<br/>
+			总体过程为：建立连接->客户端向服务器端提出请求->服务器给客户端做出响应->关闭连接。<br/>
+			基于客户端/服务端（C/S）的架构模型，通过一个可靠的链接来交换信息，是一个无状态的请求/响应协议。<br/>
+			一个 HTTP"客户端"是一个应用程序（Web 浏览器或其他任何客户端），通过连接到服务器达到向服务器发送一个或多个HTTP的请求的目的。<br/>
+			一个 HTTP"服务器"同样也是一个应用程序（通常是一个 Web 服务，如 Apache Web 服务器或 IIS 服务器等，通过 80 端口进行监听），通过接收客户端的请求并向客户端发送 HTTP 响应数据。</p>
 
 		<hr/><h3 id="xieyijiegou">协议结构</h3>
 		<li>请求报文格式：</li>
-		<p>Method uri version\r\n ————请求行————<br/>Name: value\r\n&nbsp; &nbsp; &nbsp;————请求头————<br/>......<br/>Name: value\r\n&nbsp; &nbsp; &nbsp;————请求头————<br/>\r\n<br/>Content0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————请求数据，正文——</p>
+		<p>Method uri version\r\n ————请求行————<br/>
+			Name: value\r\n&nbsp; &nbsp; &nbsp;————请求头————<br/>
+			......<br/>Name: value\r\n&nbsp; &nbsp; &nbsp;————请求头————<br/>
+			\r\n<br/>
+			Content0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————请求数据，正文——</p>
 		 <li>响应报文格式：</li>
-		<p>Version status reasonphrase\r\n ————状态行————<br/>Name: value\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————响应头————<br/>......<br/>Name: value\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————响应头————<br/>\r\n<br/>Content1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ————响应体，正文————</p>
-		<p>具体说明如下：<br/>Method：请求方法，如get、post、head、put 等。<br/>Uri：统一资源标识符。<br/>Version：协议版本，如 HTTP/1.1 或 HTTP/1.0 等。<br/>
-		Name: value：键值对，使用冒号与空格“: ”隔开，一个 name 可以对应多个value，各 value 之间使用逗号隔开。如：Accept-Encoding: gzip, deflate。<br/>Content0：请求数据，正文。<br/>Status：状态码，如200表示请求成功。<br/>Reasonphrase：原因短语，状态码的解释说明，如ok。<br/>Content1 ：响应体，正文。</p>
+		<p>Version status reasonphrase\r\n ————状态行————<br/>
+			Name: value\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————响应头————<br/>
+			......<br/>
+			Name: value\r\n&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;————响应头————<br/>
+			\r\n<br/>
+			Content1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ————响应体，正文————</p>
+		<p>具体说明如下：<br/>
+			Method：请求方法，如 GET、POST、HEAD、PUT 等。<br/>
+			Uri：统一资源标识符。<br/>
+			Version：协议版本，如 HTTP/1.1 或 HTTP/1.0 等。<br/>
+			Name: value：键值对，使用冒号与空格“: ”隔开，一个 name 可以对应多个 value，各 value 之间使用逗号隔开。如：Accept-Encoding: gzip, deflate。<br/>
+			Content0：请求数据，正文。<br/>
+			Status：状态码，如 200 表示请求成功。<br/>
+			Reasonphrase：原因短语，状态码的解释说明，如 ok。<br/>
+			Content1 ：响应体，正文。</p>
 		
 		<p>示例如下：</p>
-		<p>GET：<br/>
-		GET http://www.baidu.com/ HTTP/1.1\r\nUser-Agent: <br/>
-		Agent1563764425\r\nHost: www.baidu.com\r\n\r\ndata<br/>
-		POST：<br/>
-		POST http://qbwup.imtt.qq.com/ HTTP/1.1\r\nHost: <br/>
-		qbwup.imtt.qq.com\r\nConnection: keep-alive\r\nContent-Length: <br/>
-		333\r\n\r\ndata<br/>	
+		<p>&nbsp; GET：<br/>
+		&nbsp; 1.<br/>
+		GET http://www.xxx.com/data HTTP/1.1\r\nHost: www.xx.com:80\r\n\r\n<br/>
+			&nbsp; 2.请求<br/>
+			GET https://www.fiddler2.com/UpdateCheck.aspx?isBeta=False HTTP/1.1<br/>
+			User-Agent: Fiddler/5.0.20204.45441 (.NET 4.7.2; WinNT 10.0.17763.0; zh-CN; 12xAMD64; Auto Update; Full Instance; Extensions: APITesting, AutoSaveExt, Class1, EventLog, FiddlerOrchestraAddon, HostsFile, RulesTab2, SAZClipboardFactory, SimpleFilter, Timeline)<br/>
+			Pragma: no-cache<br/>
+			Host: www.fiddler2.com<br/>
+			Accept-Language: zh-CN<br/>
+			Referer: http://fiddler2.com/client/TELE/5.0.20204.45441<br/>
+			Accept-Encoding: gzip, deflate<br/>
+			Connection: close<br/>
+			<br/>
+			&nbsp; 3.响应<br/>
+			HTTP/1.1 200 OK<br/>
+			Cache-Control: private<br/>
+			Content-Type: text/plain; charset=utf-8<br/>
+			Content-Encoding: gzip<br/>
+			Vary: Accept-Encoding<br/>
+			Server: Microsoft-IIS/8.5<br/>
+			X-AspNet-Version: 4.0.30319<br/>
+			X-Powered-By: ASP.NET<br/>
+			Date: Mon, 21 Jun 2021 02:06:37 GMT<br/>
+			Connection: close<br/>
+			Content-Length: 823<br/>
+			<br/>
+			xxxxx<br/>
+			<br/>
+			*** FIDDLER: RawDisplay truncated at 128 characters. Right-click to disable truncation. ***<br/>
+		&nbsp; POST：<br/>
+		&nbsp; 1.<br/>
+		POST http://www.xxx.com/ HTTP/1.1\r\nHost: www.xxx.com:80\r\nContent-Length: 1024\r\n\r\ndata\r\n\r\n<br/>	
 		</p>
 		
 		<hr/><h3 id="qingqiufangshi">请求方式</h3>

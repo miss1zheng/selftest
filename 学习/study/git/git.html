@@ -77,7 +77,7 @@
 			<li>error: The following untracked working tree files would be overwritten by checkout:<br/>
 				一般是改了代码，可以使用git status查看下，此时可以进行代码提交，然后再切换分支，或者并不想要这个已改的代码，则可以使用git reset --hard && git clean -dxf恢复原代码，再切换。</li>
 			<li>error: failed to push some refs to 'https://xxx/xx.git'<br/>
-				主要原因使远程库和本地库不一致导致的，可使用git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
+				主要原因使远程库和本地库不一致导致的，可使用 git pull --rebase origin master 把远程库中的更新合并到（pull=fetch+merge）本地库中，–-rebase的作用是取消掉本地库中刚刚的commit，并把他们接到更新后的版本库之中。再执行git push -u origin master将代码上传</li>
 			<li>错误 xxx|REBASE 1/234：<br/>
 				原因：在本分支上进行代码 add 和 commit 之后，使用了 git push --rebase origin xxx，push 后有冲突，再使用 git pull --rebase origin master 拉错了分支，导致此问题出现。<br/>
 				解决方式：git rebase --abort，然后使用git pull origin xxx拉取最新分支，若出现 xxx|MERGING 冲突，则使用git diff获取下冲突文件的区别，里面有提示当前和冲突的log，此时再使用git reset --hard xx恢复到冲突的分支，再用git pull origin xxx分支，得到最新的代码</li>
@@ -100,7 +100,10 @@
 				解决方式：输入命令 git remote set-url origin http://github.com/xx.git/ 远程地址之后，再 git push origin xx 即可成功上传</li>
 			<li>给已上传的 git 打上 tag 标签：<br/>
 				git tag vxxx.xxx.xx yyyy 其中 vxxx.xxx.xx 是 tag 标签，yyyy 是对于的 commit id，然后在使用 git push --tags</li>
-			<li></li>
+			<li>xx|REBASE 1/307错误：<br/>
+				原因：远程仓库已经有分支，然后新推上一个差异很大的分支推不上去，之后使用 git pull --rebase origin master 不小心下拉了主分支内容，这样再进行分支切换，切换不成功<br/>
+				解决方式：1.先使用 git rebase --edit-todo 解决已提交的很多个 commit：进入之后跳到“pick”位置，然后点击两次“d”键（删除提交），删除全部的 pick 后，用“:wq”保存下来。<br/>
+				2.再使用 git push origin xxx 获取远程分支最新代码，此时还是会有另外一种 |REBASE 2/2，这之后，按照前面的“错误 xxx|REBASE 1/234”错误解决即可</li>
 			<li></li>
 			<li></li>
 			<li></li>
