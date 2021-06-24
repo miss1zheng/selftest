@@ -205,14 +205,65 @@
 				<fieldset>
 					<legend>** <b>举例</b> **</legend>
 					#include &lt;stdio.h><br/>
+					#include &lt;stdlib.h><br/>
+					#include &lt;string.h><br/>
 					int main(){<br/>
-						&nbsp; FILE *fp=fopen("main.c","a+");<br/>
-						&nbsp; if(fp == NULL)<br/>
-						&nbsp; {<br/>
-							&nbsp; &nbsp; printf("open fail.\n");<br/>
+						&nbsp; FFILE *fd1, *fd2;<br/>
+						&nbsp; char file_name[50]={0}, start_postion[10]="IMEI:", end_postion[10]=",SN";<br/>
+						&nbsp; char *p, *q, *temp;<br/>
+						&nbsp; char buff[1025];<br/>
+
+						&nbsp; printf("input file is:");<br/>
+						&nbsp; scanf("%s", file_name);<br/>
+						&nbsp; fd1 = fopen(file_name, "rb");<br/>
+						&nbsp; if(fd1 == NULL){<br/>
+							&nbsp; &nbsp; printf("input file open fail.\n");<br/>
+							&nbsp; &nbsp; goto end;<br/>
+						&nbsp; }<br/><br/>
+						
+						&nbsp; memset(file_name, 0, 50);<br/>
+						&nbsp; printf("output file is:");<br/>
+						&nbsp; scanf("%s", file_name);<br/>
+						&nbsp; fd2 = fopen(file_name, "wb+");<br/>
+						&nbsp; if(fd2 == NULL){<br/>
+							&nbsp; &nbsp; printf("file2 open fail.\n");<br/>
+							&nbsp; &nbsp; goto end_file1;<br/>
 						&nbsp; }<br/>
-						&nbsp; fclose(fp);<br/>
-					}
+						&nbsp; while(1){<br/>
+							&nbsp; &nbsp; memset(buff, 0, 1025);<br/>
+							&nbsp; &nbsp; temp = fgets(buff, 1024, fd1);<br/>
+							&nbsp; &nbsp; if((temp == NULL)||(buff == NULL))<br/>
+								&nbsp; &nbsp; &nbsp; goto end_file2;<br/>
+							&nbsp; &nbsp; printf("%s", buff);<br/>
+							&nbsp; &nbsp; q = buff;<br/>
+							&nbsp; &nbsp; if((p = strstr(q, start_postion)) != NULL){<br/>
+								&nbsp; &nbsp; &nbsp; p += strlen(start_postion);<br/>
+								&nbsp; &nbsp; &nbsp; q = strstr(p, end_postion);<br/>
+								&nbsp; &nbsp; &nbsp; if(q != NULL){<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; fwrite("'", 1, 1, fd2);//参 3 指定个数<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; fwrite(p, q-p, 1, fd2);<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; fwrite("\n", 1, 1, fd2);<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/><br/>
+						
+					end_file2:<br/>
+						&nbsp; fclose(fd2);<br/>
+					end_file1:<br/>
+						&nbsp; fclose(fd1);<br/>
+					end:<br/>
+						&nbsp; system("pause");//编译完后会暂停<br/>
+						&nbsp; exit(0);//退出，linux 中的关机<br/>
+						&nbsp; while(1);//为了安全退出<br/>
+						&nbsp; return 0;<br/>
+					}<br/>
+					比如：<br/>
+					第一个文件内容：<br/>
+					IMEI:863866049621139,SN:00402421051300601339<br/>
+					IMEI:863866049623333,SN:00402421051300623332<br/>
+					第二个写入的文件内容<br/>
+					'863866049621139<br/>
+					'863866049623333
 				</fieldset>
 				</form>
 				</li>
@@ -409,8 +460,19 @@
 				</fieldset>
 				</form>
 				</li>
-			<li></li>
-			<li></li>
+			<li>size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *fp)：把参 1 指向的数组中的数据写入到 fp 中<br/>
+				ptr：要被写入的元素数组指针<br/>
+				size：要被写入的每个元素的大小，字节为单位<br/>
+				nmemb：元素个数，每个元素大小为 size 字节<br/>
+				fp：指向 FILE 对象的指针，FILE 对象指定了一个输出流<br/>
+				返回值：成功返回 size_t 对象，表示元素总数，若返回值和 nmemb 参数不一致则显示错误<br/>
+				举例：详见 fopen 函数</li>
+			<li>size_t fread(void *ptr, size_t size, size_t nmemb, FILE *fp)：将 fp 读取数据到参 1 指向的数组中<br/>
+				ptr：指向带有最小尺寸 size*nmemb 字节的内存块的指针<br/>
+				size：读取的每个元素的大小，以字节为单位<br/>
+				nmemb：元素的个数，每个元素的大小为 size 字节<br/>
+				fp：指向 FILE 对象的指针，该 FILE 对象指定了一个输入流<br/>
+				返回值：成功返回读取的元素总数，返回值若与 nmemb 不一致则可能发生错误或到达文件末尾</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -893,6 +955,21 @@
 				<li>O_RSYNC：读(read)等待所有写入同一区域的写操作完成后再进行</li>
 				<li>O_SYNC：等待物理 I/O 结束后再 write，包括更新文件属性的 I/O</li>
 				</ul>
+				mode：只有当在 flags 中使用 O_CREAT 时才有效，否则被忽略
+				<ul>
+				<li>S_IRWXU：00700，允许文件的属主读、写和执行文件</li>
+				<li>S_IRUSR (S_IREAD)：00400，允许文件的属主读文件</li>
+				<li>S_IWUSR (S_IWRITE)：00200，允许文件的属主写文件</li>
+				<li>S_IXUSR (S_IEXEC)：00100，允许文件的属主执行文件</li>
+				<li>S_IRWXG：00070，允许文件所在的分组读、写和执行文件</li>
+				<li>S_IRGRP：00040，允许文件所在的分组读文件</li>
+				<li>S_IWGRP：00020，允许文件所在的分组写文件</li>
+				<li>S_IXGRP：00010，允许文件所在的分组执行文件</li>
+				<li>S_IRWXO：00007，允许其他用户读、写和执行文件</li>
+				<li>S_IROTH：00004，允许其他用户读文件</li>
+				<li>S_IWOTH：00002，允许其他用户写文件</li>
+				<li>S_IXOTH：00001，允许其他用户执行文件</li>
+				</ul>
 				返回值：成功返回新打开的文件描述符，失败返回 -1<br/>
 				如目标文件存在，使用两个参数的 open，如果目标文件不存在，需要 open 创建，则第三个参数表示创建文件的默认权限<br/>
 				打开的文件描述符一定要记得关闭，否则资源会被大量的占用，导致内存不够<br/>
@@ -929,7 +1006,7 @@
 					<li>F_GETFD/F_SETFD：获得/设置文件描述符标记，返回相应标志</li>
 					<li>F_GETFL/F_SETFL：获得/设置文件状态标记，设置给 arg 描述状态标志。如：<br/>
 						fcntl(fd,F_SETFL,0) //设置为阻塞<br/>
-						fcntl(fd, F_SETFL, flags | O_NONBLOCK) //设置为非阻塞<br/>
+						fcntl(fd, F_SETFL, O_NONBLOCK) //设置为非阻塞<br/>
 						返回相应标志<br/>
 						F_SETFL 设置给 arg 描述符状态标志,可以更改的几个标志是：O_APPEND， O_NONBLOCK，O_SYNC和O_ASYNC</li>
 					<li>F_GETOWN/F_SETOWN：获得/设置异步 I/O 所有权，返回一个正的进程 ID 或负的进程组 ID</li>
@@ -1054,7 +1131,8 @@
 				fd：文件描述符<br/>
 				buf：缓冲区<br/>
 				count：请求读取的字节数<br/>
-				返回值：成功返回读取的字节数，失败返回 -1 并设置 errno，若在调用read前已到达文件末尾则返回 0
+				返回值：成功返回读取的字节数，失败返回 -1 并设置 errno，若在调用read前已到达文件末尾则返回 0<br/>
+				注意：若读取超大文件（即文件大小 > count），则会根据操作系统不同返回不等于 count 字节的长度。原因是操作系统不同，windows 下 .txt 文件是以“\r\n”结尾。若想返回结果相同，请 open 的时候指定文件以二进制打开，即加入“b”方式打开文件。
 				<form>
 				<fieldset>
 					<legend>** <b>举例</b> **</legend>
@@ -1103,7 +1181,7 @@
 			<li>unsigned sleep(unsigned seconds)：执行挂起指定的秒数<br/>
 				seconds：挂起时间，单位秒<br/>
 				返回值：成功返回 0，失败返回剩余秒数<br/>
-				sleep()是在库函数中实现的，它是通过alarm()来设定报警时间。具体例子请看 usleep 函数</li>
+				sleep()是在库函数中实现的，它是通过 alarm() 来设定报警时间。具体例子请看 usleep 函数</li>
 			<li>void usleep(int micro_seconds)：进程挂起指定的时间<br/>
 				micro_seconds：挂起时间，单位微秒（1000000us=1s，1000us=1ms）<br/>
 				返回值：成功返回 0，失败返回剩余秒数。
@@ -1190,6 +1268,158 @@
 				</fieldset>
 				</form>
 				</li>
+			<li>off_t lseek(int fildes, off_t offset, int whence)：移动文件的读写位置<br/>
+				fildes：open 打开的文件描述符<br/>
+				offset：根据 whence 来移动读写偏移数<br/>
+				whence：<br/>
+				&nbsp; SEEK_SET：offset 即为新的读取位置，若 offset 为 0 则是从文件开头读取（注意：open 设置了 O_APPEND 则读取位置默认会指向文件末尾）<br/>
+				&nbsp; SEEK_CUR：以当前的读取位置向后增加 offset 个位移数<br/>
+				&nbsp; SEEK_END：将读取位置指向危机末尾，再增加 offset 个位移数<br/>
+				注意：当 whence 值为 SEEK_CUR 或 SEEK_END 时, offet 允许负值的出现<br/>
+				返回值：成功返回当前读写位置（距离开头的字节数），失败返回 -1 并设置 errno<br/>
+				注意，以下是几个特殊用法<br/>
+				&nbsp; lseek(fd, 0, SEEK_SET)：从文件开头读写<br/>
+				&nbsp; lseek(fd, 0, SEEK_END)：从文件末尾开始读写，返回整个文件大小<br/>
+				&nbsp; lseek(fd, 0, SEEK_CUR)：查看当前读写位置
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;unistd.h><br/>
+					#include &lt;fcntl.h><br/>
+					int main(void)<br/>
+					{<br/>
+						&nbsp; int fd = open("test.xlsx",O_RDONLY);<br/>
+						&nbsp; if(fd == -1){<br/>
+							&nbsp; &nbsp; printf("file open fail.\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }
+						&nbsp; int len=lseek(fd,0,SEEK_END);//获取文件大小<br/>
+						&nbsp; printf("%d\n",len);<br/>
+						&nbsp; close(fd);<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>unsigned int alarm(unsigned int seconds)：</li>
+			<li>pid_t fork( void)：创建子进程<br/>
+				返回值：失败返回负数，成功调用一次返回两个值，为 0 表示新进程的子进程，正数表示父进程或调用者，该值包含新创建的子进程的进程号<br/>
+				子进程和父进程：fork 用于创建一个新进程，称为子进程，它与进程（称为系统调用 fork 的进程）同时运行，此进程称为父进程<br/>
+				举例：详见 kill 函数</li>
+			<li>pid_t vfork(void)：在已有的进程中创建一个新的进程，和 fork 一样<br/>
+				返回值：失败返回 -1，成功时，子进程返回0，父进程返回子进程的进程号<br/>
+				pid_t：无符号整型<br/>
+				&nbsp; fork() 与 vfock() 的区别：
+				<ol>
+				<li>fork()：子进程拷贝父进程的数据段，代码段，即子进程拷贝父进程的地址空间，子进程是父进程的复制品<br/>
+					vfork()：子进程与父进程共享数据段，准确来说，在调用 exec 或 exit 之前与父进程数据是共享的</li>
+				<li>fork()：父子进程的执行次序不确定<br/>
+					vfork()：保证子进程先运行，在调用 exec（进程替换）或 exit（退出进程）之前与父进程数据是共享的,在它调用 exec 或 exit 之后父进程才可能被调度运行</li>
+				<li>vfork()：保证子进程先运行，在它调用 exec 或 exit 之后父进程才可能被调度运行。如果在调用这两个函数之前子进程依赖于父进程的进一步动作，则会导致死锁</li>
+				<li></li>
+				</ol>
+				<br/>
+				举例：详见 dup2 函数</li>
+			<li>pid_t getpid(void)/int _getpid( void )：获取当前进程的进程号，前面一个是旧版原型，后面是新版推荐原型，推荐使用后面的<br/>
+				返回值：返回当前进程的进程号<br/>
+				举例：详见 kill 函数</li>
+			<li>pid_t getpgrp(void)：获取进程组的进程号</li>
+			<li>pid_t getppid(void)：获取父进程的进程号</li>
+			<li>int pipe(int fd[2])：创建一个无名管道，以实现进程间的通信<br/>
+				fd：为 int 型数组的首地址，存放了管道的文件描述符，fd[0] 读取数据，fd[1] 写入数据<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 errno<br/>
+				小知识：无名管道<br/>
+				&nbsp; 半双工，数据在同一时刻只能在一个方向上流动<br/>
+				&nbsp; 数据只能从管道的一端写入，从另一端读出<br/>
+				&nbsp; 写入管道中的数据遵循先入先出的规则<br/>
+				&nbsp; 管道所传送的数据是无格式的，这要求管道的读出方与写入方必须事先约定好数据的格式，如多少字节算一个消息等<br/>
+				&nbsp; 管道不是普通的文件，不属于某个文件系统，其只存在于内存中<br/>
+				&nbsp; 管道在内存中对应一个缓冲区。不同的系统其大小不一定相同<br/>
+				&nbsp; 从管道读数据是一次性操作，数据一旦被读走，它就从管道中被抛弃，释放空间以便写更多的数据<br/>
+				&nbsp; 管道没有名字，只能在具有公共祖先的进程（父进程与子进程，或者两个兄弟进程，具有亲缘关系）之间使用 (非常重点)<br/>
+				举例：详见 dup2 函数</li>
+			<li>int dup(int oldfd)：复制文件描述符<br/>
+				返回值：返回新的文件描述符，是当前可用文件描述符中最小数值<br/>
+				dup() 和 dup2() 的区别：<br/>
+				dup2() 可以用 newfd 来指定新描述符数值，若 newfd 指向的文件已经被打开，会先将其关闭。若 newfd 等于 oldfd，就不关闭 newfd，newfd 和 oldfd 共同指向一份文件。<br/>
+				举例：详见 dup2 函数
+				</li>
+			<li>int dup2(int oldfd, int newfd)：复制文件描述符，复制的文件描述符和原来的文件描述符共享各种文件状态<br/>
+				oldfd：要被复制的文件描述符，必须是已经打开过的<br/>
+				newfd：复制后的文件描述符，可以是 0-255 任意取值，若是已打开的文件描述符则会先关闭。若 newfd 等于 oldfd，就不关闭 newfd，newfd 和 oldfd 共同指向一份文件<br/>
+				返回值，成功返回新文件描述符，失败返回 -1 并设置 errno<br/>
+				dup2() 相当于调用 fcntl(oldfd, F_DUPFD, newfd)
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;unistd.h><br/>
+					#include &lt;signal.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;sys/wait.h><br/><br/>
+
+					int main(void)<br/>
+					{<br/>
+						&nbsp; int pid, status, fd[2], out_fd, cpy_fd;<br/>
+						&nbsp; char buff[1024]="hello,world!\n";<br/>
+						&nbsp; if(pipe(fd) &lt; 0){//管道创建，0读取，1写入<br/>
+							&nbsp; &nbsp; printf("pipo crate fail\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; pid = vfork();//进程创建<br/>
+						&nbsp; if(pid < 0){//失败<br/>
+							&nbsp; &nbsp; printf("vfork is fail\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; else if(pid > 0){//父进程<br/>
+							&nbsp; &nbsp; close(fd[1]);//由于半双工，读取时不能写入，写入时不能读取<br/>
+							&nbsp; &nbsp; read(fd[0], buff, strlen(buff));<br/>
+							&nbsp; &nbsp; close(fd[0]);<br/>
+							&nbsp; &nbsp; printf("buff:%s\n", buff);<br/>
+							&nbsp; &nbsp; if(waitpid(pid, NULL, 0)>0){<br/>
+								&nbsp; &nbsp; &nbsp; printf("get pid is fail\n");<br/>
+								&nbsp; &nbsp; &nbsp; return 0;<br/>
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/>
+						&nbsp; else{//子进程<br/>
+							&nbsp; &nbsp; close(fd[0]);<br/>
+							&nbsp; &nbsp; if(fd[1] != STDOUT_FILENO){<br/>
+								&nbsp; &nbsp; &nbsp; printf("dup start\n");<br/>
+								&nbsp; &nbsp; &nbsp; if((out_fd = dup(STDOUT_FILENO))&lt;0){//用于下面的重定向后的恢复<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("dup is fail\n");<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; //将输出流定向输出到 fd[1]，即将 printf 原打印到屏幕的数据重定向到 fd[1]<br/>
+								&nbsp; &nbsp; &nbsp; if ((cpy_fd = dup2(fd[1], STDOUT_FILENO)) != STDOUT_FILENO){//复制文件描述符，即将 fd[1] 设置程输出流，若原 STDOUT_FILENO 打开则会关闭<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("cpy file flag is fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; printf("dup2 end\n");//由于输出流重定向到fd[1]，所以屏幕上不会由此数据<br/>
+								&nbsp; &nbsp; &nbsp; if(dup2(out_fd, cpy_fd)&lt;0){//恢复输出流<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("dup to dup2 fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; printf("ending...\n");<br/>
+								&nbsp; &nbsp; &nbsp; close(fd[1]);<br/>
+								&nbsp; &nbsp; &nbsp; if (execl("/bin/sh", "ls", "-al", "/etc/passwd", (char*)0) == -1){//执行文件<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("execl fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; return -1;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/>
+
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>int execl(const char * path, const char * arg, ...)：执行文件<br/>
+				path：文件路径<br/>
+				之后的参数：执行该文件时传递过去的 argv(0),argv[1], ..., 最后一个参数必须用空指针（NULL）作结束<br/>
+				<br/><br/>
+				举例：详见 dup2 函数</li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1688,7 +1918,7 @@
 				</fieldset>
 				</form>
 				</li>
-			<li></li>
+			<li>void abort(void)：向进程发送 SIGABORT 信号，默认情况下进程会异常退出，当然可定义自己的信号处理函数。即使 SIGABORT 被进程设置为阻塞信号，调用 abort() 后，SIGABORT 仍然能被进程接收</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2734,6 +2964,14 @@
 		<div>
 			<h3>sys/time.h</h3>
 			<ol>
+			<li>int setitimer(int which, const struct itimerval *value, struct itimerval *ovalue)：设置定时器<br/>
+				which：计时方式<br/>
+				&nbsp; TIMER_REAL：按实际时间计时，计时到达将给进程发送 SIGALRM 信号<br/>
+				&nbsp; ITIMER_VIRTUAL：仅当进程执行时才进行计时。计时到达将发送 SIGVTALRM 信号给进程<br/>
+				&nbsp; ITIMER_PROF：当进程执行时和系统为该进程执行动作时都计时。与 ITIMER_VIRTUAL 是一对，该定时器经常用来统计进程在用户态和内核态花费的时间。计时到达将发送 SIGPROF 信号给进<br/>
+				value：
+				ovalue：如果不为空，则其中保留的是上次调用设定的值</li>
+			<li>int getitimer(int which, struct itimerval *value)：获取定时器的状态</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2745,13 +2983,14 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li>struct timeval<br/>
-				{<br/>
-					time_t      tv_sec;     /* seconds */<br/>
-					suseconds_t tv_usec;    /* microseconds */<br/>
+			<li>struct itimerval {
+					&nbsp; struct timeval it_interval; /* 下一次的取值 */
+					&nbsp; struct timeval it_value; /* 本次的设定值 */
+
+			};</li>
+			<li>struct timeval{<br/>
+					&nbsp; time_t      tv_sec;     /* 秒 */<br/>
+					&nbsp; suseconds_t tv_usec;    /* 微妙，1s=1000000 us */<br/>
 				};</li>
 			<ol>
 			</div><hr/>
@@ -2998,7 +3237,7 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>sys/stat.h</h3>
 			<ol>
 			<li></li>
 			<li></li>
@@ -3015,31 +3254,227 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<ol>
-			</div><hr/>
-		<div>
-			<h3>.h</h3>
-			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>S_IRWXU：00700，允许文件的属主读、写和执行文件</li>
+			<li>S_IRUSR (S_IREAD)：00400，允许文件的属主读文件</li>
+			<li>S_IWUSR (S_IWRITE)：00200，允许文件的属主写文件</li>
+			<li>S_IXUSR (S_IEXEC)：00100，允许文件的属主执行文件</li>
+			<li>S_IRWXG：00070，允许文件所在的分组读、写和执行文件</li>
+			<li>S_IRGRP：00040，允许文件所在的分组读文件</li>
+			<li>S_IWGRP：00020，允许文件所在的分组写文件</li>
+			<li>S_IXGRP：00010，允许文件所在的分组执行文件</li>
+			<li>S_IRWXO：00007，允许其他用户读、写和执行文件</li>
+			<li>S_IROTH：00004，允许其他用户读文件</li>
+			<li>S_IWOTH：00002，允许其他用户写文件</li>
+			<li>S_IXOTH：00001，允许其他用户执行文件</li>
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>signal.h</h3>
 			<ol>
+			<li>int kill(pid_t pid, int sig)：给指定 pid 进程发送 sig 信号<br/>
+				pid：接收信号的进程（组）的进程号<br/>
+				&nbsp; >0：发送信号给指定的进程<br/>
+				&nbsp; =0：将信号发送给当前进程所属进程组里的所有进程，即发送信号给与调用 kill 函数进程属于同一进程组的所有进程<br/>
+				&nbsp; =-1：将信号发送给除 1 号进程和自身以外的所有进程，即发送给进程有权限发送的系统中所有进程<br/>
+				&nbsp; &lt;-1：将信号发送给属于进程组为 pid 绝对值的所有进程<br/>
+				sig：发送的信号值<br/>
+				&nbsp; = 0：不发送信号,可用于检查目标进程是否存在，以及当前进程是否具有向目标进程发送信号的权限（root 权限的进程可以向任何进程发送信号，非 root 权限的进程只能向属于同一个 session 或者同一个用户的进程发送信号）<br/>
+				&nbsp; 1-31：不可靠信号，不支持排队, 信号可能会丢失, 也叫做非实时信号<br/>
+				&nbsp; 34-64：可靠信号，支持排队, 信号不会丢失, 也叫做实时信号<br/>
+				&nbsp; 注意：session：终端，如登录 linux 时系统会分配登录用户一个 session，在这个终端运行的所有程序，包括前台进程组和后台进程组，一般都属于这个 Session，当用户退出Linux登录时，前台进程组和后台有对终端输出的进程将会收到SIGHUP信号。这个信号的默认操作为终止进程，因此前台进程组和后台有终端输出的进程就会中止。<br/>
+				&nbsp; 以下为常用的信号值<br/>
+				&nbsp; &nbsp; SIGHUP：1，终端挂起或者控制进程终止<br/>
+				&nbsp; &nbsp; SIGINT：2，键盘中断，在用户键入 INTR 字符（通常是 Ctrl+C）时发出，用于通知前台进程组终止进程<br/>
+				&nbsp; &nbsp; SIGQUIT：3，键盘的退出键被按下（如 esc 键），QUIT 字符（通常是 Ctrl+\）来控制。<br/>
+				&nbsp; &nbsp; SIGILL：4，非法指令，通常是因为可执行文件本身出现错误，或者试图执行数据段，堆栈溢出时也有可能产生这个信号<br/>
+				&nbsp; &nbsp; SIGABRT：6，由 abort(3)发出的退出指令<br/>
+				&nbsp; &nbsp; SIGFPE：8，在发生致命的算术运算错误时发出，不仅包括浮点运算错误，还包括溢出及除数为 0 等其它所有的算术的错误<br/>
+				&nbsp; &nbsp; SIGKILL：9，用来立即结束程序的运行。本信号不能被阻塞、处理和忽略。如果管理员发现某个进程终止不了，可尝试发送这个信号<br/>
+				&nbsp; &nbsp; SIGSEGV：11，无效的内存引用。试图访问未分配给自己的内存，或试图往没有写权限的内存地址写数据<br/>
+				&nbsp; &nbsp; SIGPIPE：13，管道破裂: 写一个没有读端口的管道。这个信号通常在进程间通信产生，比如采用 FIFO（管道）通信的两个进程，读管道没打开或者意外终止就往管道写，写进程会收到 SIGPIPE 信号。此外用 Socket 通信的两个进程，写进程在写 Socket 的时候，读进程已经终止<br/>
+				&nbsp; &nbsp; SIGALRM：14，由 alarm(2) 发出的信号。时钟定时信号，计算的是实际的时间或时钟时间<br/>
+				&nbsp; &nbsp; SIGTERM：15，终止信号，与 SIGKILL 不同的是该信号可以被阻塞和处理。通常用来要求程序自己正常退出<br/>
+				&nbsp; &nbsp; SIGUSR1：30,10,16，用户自定义信号 1<br/>
+				&nbsp; &nbsp; SIGUSR2：31,12,17，用户自定义信号 2<br/>
+				&nbsp; &nbsp; SIGCHLD：20,17,18，子进程结束信号，父进程会收到这个信号<br/>
+				&nbsp; &nbsp; SIGCONT：19,18,25，进程继续（曾被停止的进程）<br/>
+				&nbsp; &nbsp; SIGSTOP：17,19,23，DEF 终止进程，注意它和 terminate 以及 interrupt 的区别：该进程还未结束，只是暂停执行，本信号不能被阻塞，处理或忽略<br/>
+				&nbsp; &nbsp; SIGTSTP：18,20,24，控制终端（tty）上按下停止键，用户键入 SUSP 字符时（通常是 Ctrl+Z）发出这个信号<br/>
+				&nbsp; &nbsp; SIGTTIN：21,21,26，后台进程企图从控制终端读<br/>
+				&nbsp; &nbsp; SIGTTOU：22,22,27，后台进程企图从控制终端写<br/>
+				返回值：成功返回 0，失败返回 -1 并设置 errno<br/>
+				errno 值：<br/>
+				&nbsp; EINVAL：参数 sig 不合法<br/>
+				&nbsp; ESRCH：参数 pid 所指定的进程或进程组不存在<br/>
+				&nbsp; EPERM：权限不够无法传送信号给指定进程
+				<form>
+				<fieldset>
+					<legend>** <b>写入 文件 或 串口设备</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdlib.h><br/>
+					#include &lt;unistd.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;signal.h><br/>
+					#include &lt;sys/wait.h><br/><br/>
+
+					void handler(int sig)<br/>
+					{<br/>
+						&nbsp; switch(sig){<br/>
+						&nbsp; case 1:<br/>
+							&nbsp; &nbsp; printf("Ctrl+c\n");<br/>
+							&nbsp; &nbsp; break;<br/>
+						&nbsp; case 3:<br/>
+							&nbsp; &nbsp; printf("Ctrl+\\\n");<br/>
+							&nbsp; &nbsp; break;<br/>
+						&nbsp; }<br/>
+						&nbsp; exit(0);<br/>
+					}<br/><br/>
+
+					int main(void)<br/>
+					{<br/>
+						&nbsp; int pid, status;<br/>
+						&nbsp; pid = fork();//进程创建，linux 函数，windows 没有此函数<br/>
+						&nbsp; if(pid < 0){//失败<br/>
+							&nbsp; &nbsp; printf("fork is fail\n");<br/>
+							&nbsp; &nbsp; exit(0);<br/>
+						&nbsp; }<br/>
+						&nbsp; else if(pid == 0){//子进程<br/>
+							&nbsp; &nbsp; printf("chrild pid=%d.\n",getpid());//获取子进程 ID 号<br/>
+							&nbsp; &nbsp; signal(SIGINT,handler);//ctrl+c，用 handler 回调函数处理 SIGINT 信号可多次使用<br/>
+							&nbsp; &nbsp; signal(SIGQUIT,handler);//ctrl+反斜杠<br/>
+							&nbsp; &nbsp; while(1){<br/>
+								&nbsp; &nbsp; &nbsp; sleep(1);<br/>
+								&nbsp; &nbsp; &nbsp; printf("pass\n");<br/>
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/>
+						&nbsp; else{//父进程<br/>
+							&nbsp; &nbsp; printf("father pid=%d.",getpid());<br/>
+							&nbsp; &nbsp; sleep(5);<br/>
+							&nbsp; &nbsp; kill(pid,SIGINT);//向 pid 发送一个信号<br/>
+							&nbsp; &nbsp; //wait(NULL);//使父进程阻塞，成功返回子进程号，若无子进程则返回 -1，并设置 errno 为 ECHILD<br/>
+							&nbsp; &nbsp; wait(&status);//等待子进程退出<br/>
+							&nbsp; &nbsp; if(WIFEXITED(status))//返回非 0，正常退出子进程<br/>
+								&nbsp; &nbsp; &nbsp; printf("child process normal exit\n");<br/>
+							&nbsp; &nbsp; else<br/>
+								&nbsp; &nbsp; &nbsp; printf("child process exit error.\n");<br/>
+							&nbsp; &nbsp; int ret = WEXITSTATUS(status);//子进程退出方式<br/>
+							&nbsp; &nbsp; printf("exit(%d)\n",ret);<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>void (*signal(int sig, void (*func)(int)))(int)：设置一个函数来处理信号，即带有 sig 参数的信号处理程序<br/>
+				sig：信号值，常用的如下<br/>
+				&nbsp; SIGABRT：程序异常终止<br/>
+				&nbsp; SIGFPE：算术运算出错，如除数为 0 或溢出（不一定是浮点运算）<br/>
+				&nbsp; SIGILL：非法函数映象，如非法指令，通常是由于代码中的某个变体或者尝试执行数据导致的<br/>
+				&nbsp; SIGINT：中断信号，如 ctrl+C，通常由用户生成<br/>
+				&nbsp; SIGSEGV：非法访问存储器，如访问不存在的内存单元<br/>
+				&nbsp; SIGTERM：发送给本程序的终止请求信号<br/>
+				func：指向函数的指针，返回值为 int，可以是程序定义的函数，也可以是以下函数<br/>
+				SIG_DFL：默认的信号处理程序<br/>
+				SIG_IGN：忽视信号<br/>
+				注意：此函数的分解版如下<br/>
+				typedef void (*sighandler_t)(int);<br/>
+				sighandler_t signal(int sig, sighandler_t handler));<br/>
+				第一个参数指定信号的值，第二个参数指定针对前面信号值的处理，可以忽略该信<br/>
+				如果 signal() 调用成功，返回最后一次为安装信号 sig 而调用 signal() 时的 handler 值；失败则返回 SIG_ERR<br/>
+				传递给信号处理例程的整数参数是信号值，这样可以使得一个信号处理例程处理多个信号<br/>
+				举例：详见 kill 函数</li>
+			<li>int sigaction(int sig,const struct sigaction *act,struct sigaction *oldact))：改变进程接收到特定信号后的行为<br/>
+				sig：可以为除SIGKILL及SIGSTOP外的任何一个特定有效的信号<br/>
+				act：指向结构 sigaction 的一个实例的指针，指定了对特定信号的处理，可以为空，进程会以缺省方式对信号处理<br/>
+				oldact：保存返回的原来对相应信号的处理，可指定为 NULL<br/>
+				注意：如果把第 2、第 3 个参数都设为 NULL，那么该函数可用于检查信号的有效性</li>
+			<li>int sigqueue(pid_t pid, int sig, const union sigval val)：信号发送，主要是针对实时信号提出的（当然也支持前 32 种），支持信号带有参数，与函数 sigaction() 配合使用<br/>
+				pid：进程号<br/>
+				sig：即将发送的信号<br/>
+				val：指定了信号传递的参数，即通常所说的4字节值<br/>
+				返回值：成功返回 0，失败返回 -1<br/>
+				sigqueue() 比 kill() 传递了更多的附加信息，但 sigqueue() 只能向一个进程发送信号，而不能发送信号给一个进程组。如果signo=0，将会执行错误检查，但实际上不发送任何信号，0值信号可用于检查pid的有效性以及当前进程是否有权限向目标进程发送信号</li>
+			<li>int raise(int sig)：向进程本身发送信号<br/>
+				sig：即将发送的信号值<br/>
+				返回值：成功返回 0，失败返回 -1</li>
+			<li>int sigemptyset(sigset_t *set)：初始化 set 中传入的信号集，清空其中所有信号<br/>
+				</li>
+			<li>int sigfillset(sigset_t *set)：把信号集填 1，让 set 包含所有的信号</li>
+			<li>int sigaddset(sigset_t *set, int signum)：把信号集对应位置为 1</li>
+			<li>int sigdelset(sigset_t *set, int signum)：把信号集对应位置为 0</li>
+			<li>int sigismember(const sigset_t *set, int signum)：判断 signal 是否在信号集</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>siginfo_t {<br/>
+				&nbsp; int		si_signo;	/* 信号值，对所有信号有意义*/<br/>
+				&nbsp; int		si_errno;	/* errno值，对所有信号有意义*/<br/>
+				&nbsp; int		si_code;	/* 信号产生的原因，对所有信号有意义*/<br/>
+					&nbsp; &nbsp; union{			/* 联合数据结构，不同成员适应不同信号 */<br/>
+					&nbsp; &nbsp; //确保分配足够大的存储空间<br/>
+					&nbsp; &nbsp; int _pad[SI_PAD_SIZE];<br/>
+					&nbsp; &nbsp; //对SIGKILL有意义的结构<br/>
+					&nbsp; &nbsp; struct{<br/>
+						&nbsp; &nbsp; &nbsp; ...<br/>
+					&nbsp; &nbsp; }...<br/>
+					&nbsp; &nbsp; ... ...<br/>
+					&nbsp; &nbsp; ... ...<br/>
+					&nbsp; &nbsp; //对SIGILL, SIGFPE, SIGSEGV, SIGBUS有意义的结构<br/>
+					&nbsp; &nbsp; struct{<br/>
+						&nbsp; &nbsp; &nbsp; ...<br/>
+					&nbsp; &nbsp; }...<br/>
+					&nbsp; &nbsp; ... ...<br/>
+				&nbsp; }<br/>
+			}</li>
+			<li>struct sigaction{<br/>
+					void       (*sa_handler)(int); //信号处理程序，不接受额外数据，SIG_IGN 为忽略，SIG_DFL 为默认动作<br/>
+					void       (*sa_sigaction)(int, siginfo_t *, void *); //信号处理程序，能够接受额外数据和 sigqueue 配合使用<br/>
+					sigset_t   sa_mask;//阻塞关键字的信号集，可以再调用捕捉函数之前，把信号添加到信号阻塞字，信号捕捉函数返回之前恢复为原先的值<br/>
+					int        sa_flags;//影响信号的行为 SA_SIGINFO 表示能够接受数据<br/>
+				};</li>
+			<li>typedef union sigval{<br/>
+				&nbsp; int  sival_int;<br/>
+				&nbsp; void *sival_ptr;<br/>
+				}sigval_t;</li>
+			<ol>
+			</div><hr/>
+		<div>
+			<h3>sys/wait.h</h3>
+			<ol>
+			<li>pid_t wait(int *status)：使父进程阻塞（即调用 wait 的进程），直到一个子进程结束或收到一个指定信号为止，若没有子进程或子进程已结束，则此函数会立即返回<br/>
+				status：子进程退出的状态，若 status 不为空则可通过它获取子进程结束状态<br/>
+				&nbsp; WIFEXITED(status) 返回非 0 值表示子进程正常退出<br/>
+				&nbsp; WEXITSTATUS(status) 返回值为子进程退出状态，如子进程是 exit(1) 退出则返回 1，exit(0) 退出则返回 0<br/>
+				返回值：成功返回已成功结束运行的子进程的进程号，失败返回 -1<br/>
+				注意：wait(NULL) 时返回子进程的进程号，但没有子进程则会返回 -1 并设置 errno 为 ECHILD<br/>
+				举例：详见 kill 函数</li>
+			<li>pid_t waitpid(pid_t pid, int *status, int options)：<br/>
+				pid：进程号<br/>
+				&nbsp; >0：等待进程号为 pid 的子进程<br/>
+				&nbsp; =0：等待同一进程组中的任何子进程，也就是说任何和调用 waitpid() 函数的进程在同一个进程组的进程<br/>
+				&nbsp; =-1：等待任何子进程退出，此时的 waitpid()和 wait()一样<br/>
+				&nbsp; &lt;-1：等待进程组号为 pid 绝对值的任何子进程<br/>
+				status：子进程状态信息，若不关心子进程退出的话，可直接传入空<br/>
+				&nbsp; WIFEXITED(status)：如果子进程正常结束，它就返回真；否则返回假<br/>
+				&nbsp; WEXITSTATUS(status)：如果WIFEXITED(status)为真，则可以用该宏取得子进程exit()返回的结束代码<br/>
+				&nbsp; WIFSIGNALED(status)：如果子进程因为一个未捕获的信号而终止，它就返回真；否则返回假<br/>
+				&nbsp; WTERMSIG(status)：如果WIFSIGNALED(status)为真，则可以用该宏获得导致子进程终止的信号代码<br/>
+				&nbsp; WIFSTOPPED(status)：如果当前子进程被暂停了，则返回真；否则返回假<br/>
+				&nbsp; WSTOPSIG(status)：如果WIFSTOPPED(status)为真，则可以使用该宏获得导致子进程暂停的信号代码<br/>
+				options：控制选项，可设置为 0<br/>
+				&nbsp; WNOHANG：如果 pid 指定的子进程没有结束，waitpid() 函数也会立即返回 0，而不是阻塞在这个函数上等待；如果结束了，则返回该子进程的进程号<br/>
+				&nbsp; WUNTRACED：如果子进程进入暂停状态，则马上返回<br/>
+				返回值：成功返回已成功结束运行的子进程的进程号，若使用选项 WNOHANG 且没有子进程退出则返回 0，失败返回 -1<br/>
+				注意：若令 waitpid(-1,status,0) 则和 wait(status) 一致<br/>
+				举例：详见 dup2 函数</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -3051,10 +3486,8 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>WIFEXITED(status)：获取 wait 的子进程是否正常退出</li>
+			<li>WEXITSTATUS(int status)：获取 wait 函数的子进程退出状态</li>
 			<ol>
 			</div><hr/>
 		<div>
@@ -3222,7 +3655,8 @@
 			<ol>
 			<li>__FILE__：当前程序文件名，包括路径</li>
 			<li>__LINE__：当前文件下的代码行号</li>
-			<li>__FUNCTION__：当前函数</li>
+			<li>__FUNCTION__：当前函数名</li>
+			<li>__PRETTY_FUNCTION__：当前整个函数 包括函数类型，参数类型</li>
 			<li>__TIME__：当前编译时间</li>
 			<li>__DATE__：当前编译日期</li>
 			<li>__STDC__：编译器是否遵循 ANSI C 标准，是为非 0 值</li>

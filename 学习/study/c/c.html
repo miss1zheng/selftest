@@ -131,6 +131,8 @@
 				<tr><td>float</td><td>4</td><td>1.2E-38~3.4E+38</td></tr>
 				<tr><td>double</td><td>8</td><td>2.3E-308~1.7E+308</td></tr>
 				<tr><td>long double</td><td>16</td><td>3.4E-4932~1.1E+4932</td></tr>
+				<tr><td colspan="3">注意：size_t 在 32bit 系统中是 unsigned int，在 64bit 中是 unsigned long<br/>
+					而 ssize_t 是 size_t 的 unsigned</td></tr>
 			</table>
 			</div><hr/>
 		<div>
@@ -728,6 +730,107 @@
 					system("pause");<br/>
 					return 0;<br/>
 				}
+				</fieldset>
+			</form>
+			</div><hr/>
+		<div>
+			<h3>技巧使用</h3>
+			<p><p>
+			<form>
+				<fieldset>
+				<legend>** <b>数组为 0</b> **</legend>
+				struct var{<br/>
+					&nbsp; int len;<br/>
+					&nbsp; char data[0];<br/>
+				};<br/>
+				int main()<br/>
+				{<br/>
+					&nbsp; struct var a;};<br/>
+					&nbsp; for (int i=0; i&lt;a.len; i++)<br/>
+						&nbsp; &nbsp; printf("%02x ", a.data[i]);<br/>
+				}<br/>
+				解析：这里 data[0] 仅仅意味着程序中通过 var 结构体实例的 data[i] 成员和访问 len 之后的第 i 个地址<br/>
+				并没有为 data[] 数组分配内存，所以 sizeof(struct var) == sizeof(int)
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b>case 的另类使用</b> **</legend>
+				int main()<br/>
+				{<br/>
+					&nbsp; char data[10]={'a','z','7','F','Z',0x46,0x31,0x15,'\t'};<br/>
+					&nbsp; for(int i=0; i&lt;6; i++){<br/>
+						&nbsp; &nbsp; switch(data[i]){<br/>
+						&nbsp; &nbsp; case '0'...'9':<br/>
+							&nbsp; &nbsp; &nbsp; printf("0-9:%c\n", data[i]);<br/>
+							&nbsp; &nbsp; &nbsp; break;<br/>
+						&nbsp; &nbsp; case 'a'...'f':<br/>
+							&nbsp; &nbsp; &nbsp; printf("a-f:%c\n", data[i]);<br/>
+							&nbsp; &nbsp; &nbsp; break;<br/>
+						&nbsp; &nbsp; case 'A'...'F':<br/>
+							&nbsp; &nbsp; &nbsp; printf("A-F:%c\n", data[i]);<br/>
+							&nbsp; &nbsp; &nbsp; break;<br/>
+						&nbsp; &nbsp; default:<br/>
+							&nbsp; &nbsp; &nbsp; printf("%02x ",data[i]);<br/>
+						&nbsp; &nbsp; }<br/>
+					&nbsp; }<br/>
+				}<br/>
+				case x...y 语法，即在 [x,y] 区间的数都满足此 case 条件<br/>
+				如 上面的 case '0'...'9' 就是 ascii 数字 0-9 之间的数都满足
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b>min 的实现</b> **</legend>
+				#define min(x, y)({\<br/>
+					&nbsp; const typeof(x) _x=(x);\<br/>
+					&nbsp; const typeof(y) _y=(y);\<br/>
+					&nbsp; (void)(&amp;_x==&amp;_y);\<br/>
+					&nbsp; _x&lt;_y?_x:_y;\<br/>
+				})<br/>
+				int main()<br/>
+				{<br/>
+					&nbsp; int a=10,b=20;<br/>
+					&nbsp; printf("min=%d\n", min(++a, ++b));<br/>
+				}<br/>
+				typeof() 可获取 x，y 的类型<br/>
+				(void)(&_x==&_y); 判断 _x，_y 的类型是否一致，不一致编译时会产生 waning 或直接 error<br/>
+				不直接使用_x&lt;_y?_x:_y; 是为了避免 min(++i,++j) 导致的出现两次自增
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b></b> **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b></b> **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b></b> **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b></b> **</legend>
+				<br/>
+				
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+				<legend>** <b></b> **</legend>
+				<br/>
+				
 				</fieldset>
 			</form>
 			</div><hr/>

@@ -341,9 +341,32 @@
 		3.串口名称使用：ls -l /dev/ttyS*（一般 ttyS0 是 com1，ttyS1 对应 com2，以此类推）<br/>
 		4.查看串口驱动：cat /proc/tty/driver/*<br/>
 		5.获取可用串口列表：dmesg | grep tty</p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<p>linux 内核源码目录结构：<br/>
+		&nbsp; arch：硬件结构相关代码，如 arm、mips，存放的时各个平台及各个平台芯片对 linux 内核进程调度、内存管理、中断等的支持，以及每个具体的soc（系统级芯片）和电路板的板级支持代码<br/>
+		&nbsp; block：块设备驱动程序 io 调度<br/>
+		&nbsp; crypto：常用加密和散列算法（如 aes、sha）<br/>
+		&nbsp; documentation：内核各部分通用解释和注释<br/>
+		&nbsp; drivers：设备驱动程序，每个不同的驱动占一个子目录，如 char、block、net、i2c 等<br/>
+		&nbsp; fs：文件系统，如 ext、fat、ntfs 等<br/>
+		&nbsp; include：头文件，与系统相关头文件，内核 api 级别头文件<br/>
+		&nbsp; init：内核初始化代码<br/>
+		&nbsp; ipc：进程间通信代码<br/>
+		&nbsp; kernel：内核最核心部分，如进程调度、定时器等<br/>
+		&nbsp; lib：库文件<br/>
+		&nbsp; mm：内存管理<br/>
+		&nbsp; net：网络相关<br/>
+		&nbsp; scripts：用于配置内核的脚本文件<br/>
+		&nbsp; security：注意是 Selinux 模块<br/>
+		&nbsp; sound：音频设备的驱动核心代码和常用设备驱动<br/>
+		&nbsp; usr：打包和压缩的 cpio 等</p>
+	<p>linux 内核组成：主要由进程调度、内存管理、虚拟文件系统、网络接口和进程间通信 5 各子系统组成<br/>
+		进程调度：<br/>
+		内存管理：<br/>
+		虚拟文件系统：<br/>
+		网络接口：<br/>
+		进程间通信：<br/>
+		</p>
+	<p>linux 内核空间和用户空间</p>
 	<p></p>
 	<p></p>
 	<p></p>
