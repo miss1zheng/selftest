@@ -34,7 +34,151 @@
 		</ul>
 	</div>
 	<div class="main_body">
-		<iframe src="./data/ftp.html" name="c" style="width: 100%;height: 100%;position: fixed;"></iframe>
+		<div>
+			<h3>简介</h3>
+			<p>FTP：下载文件的一种服务器，默认端口为 20 和 21，一般 20 作为命令通道，21 作为数据传输通道</p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
+		<div>
+			<h3>FTP 命令和数据通道传输</h3>
+			<ol>
+			<li>连接 FTP 命令服务器：118.178.124.117:21<br/>
+				服务器响应：“220 Microsoft FTP Service”</li>
+			<li>用户名登录服务器：“USER xxx\r\n”<br/>
+				服务器有 xxx 用户响应：“331 Password required for xxx.”</li>
+			<li>以二进制打开文件：“TYPE I\r\n	”<br/>
+				服务器响应：“200 Type set to I.”</li>
+			<li>发送用户名密码：“PASS yyy\r\n”<br/>
+				密码正确响应：“230 User logged in.”</li>
+			<li>获取文件大小：“SIZE xx/xxx/xxxx.yy\r\n”<br/>
+				服务器响应：“213 31836”</li>
+			<li>进入被动模式：“PASV\r\n”<br/>
+				服务器响应：“227 Entering Passive Mode (118,178,124,117,69,242).”<br/>
+				注意：这里会附带 下载服务器的 ip 和端口，此时就可以连接下载服务器了，就可以开始后面的文件下载了</li>
+			<li>开始进入文件路径：“RETR xx/xxx/xxxx.yy\r\n”<br/>
+				服务器响应：“150 Opening BINARY mode data connection”<br/>
+				多次操作后响应：“125 Data connection already open; Transfer starting.” 和 </li>
+			<li>当服务器响应“226 Transfer complete.”则表示数据已经传输完成了</li>
+			</ol>
+			<p>注意：下载服务器不能建立数据连接的可能因素：1.连接超时，导致服务器端口已关闭<br/>
+				在数据口进入被动，响应 227 之后外带的下载服务器 ip 和端口后，在这时就可以直接连接下载服务器了，然后命令服务器一直上传 RETR 使得需要下载的文件通过下载服务器下发到客户端</p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
+		<div>
+			<h3>FTP 服务器搭建（windows 自带的 IIS）</h3>
+			<p>搭建 FTP 服务器</p>
+			<ol>
+			<li>配置 IIS Web 服务器：<br/>
+				控制面板 -> 程序 -> 启用或关闭 widows 功能（直接按 win+r，输入 optionalfeatures） -> Internet information services（中文版：Internet 信息服务）-> 
+				配置 IIS（包括 FTP 服务器全勾选，和 Web 管理工具 -> IIS 6 管理兼容性 -> IIS 元数据库和 IIS 6 配置兼容性，这里勾选上，和 IIS 管理服务，和 IIS 管理脚本和工具，和 IIS 管理控制台，这些勾选上），完成后点击确定保存下来<br/>
+				配置完成后在 控制面板 -> 系统和安全 -> 管理工具，这里面可以看到“Internet Information Services(IIS)管理器”</li>
+			<li>配置 IIS web 站点：<br/>
+				根据上面进入 Web 服务器，或直接在开始菜单搜索“IIS”即可进入<br/>
+				新建 ftp 站点</li>
+			<li>左边栏“连接” -> 账号 -> 网站 -> 右击鼠标 -> 添加 FTP 站点<br/>
+				输入站点名称，和路径，路径就是 FTP 下载文件时文件保存的路径<br/>
+				点击下一步</li>
+			<li>绑定和 SSL 设置：<br/>
+				ip 和端口写 本机 ip（可通过 ipconfig 命令查看到 ip 地址，端口设置为 21，默认是 21）<br/>
+				勾选自动启动 FTP 站点 -> 无 SSL(L) -> 下一步</li>
+			<li>身份验证和授权信息：<br/>
+				勾选 匿名 -> 基本 -> 授权（所有用户）-> 权限 -> 读取和写入 都勾选 -> 完成<br/>
+				这时候就创建成功了一个前面输入的站点名称，在 网站 下面就出现了一个对应的站点</li>
+			<li>以上已经创建完毕，若突然想增加用户名和密码设置：<br/>
+				在 计算机管理 -> 系统工具 -> 本地用户和组 -> 用户 -> 右击 新用户 -> 创建一个新用户（用户名 ftp，勾选“不能更改密码”和”密码永不过期“）</li>
+			<li>网站 -> 点击 创建成功的站点 -> FTP 身份验证 -> FTP 身份验证（右击 基本身份验证 -> 启用，和右击 匿名身份验证 -> 禁用）</li>
+			<li>网站 -> 点到 FTP 身份验证 -> 这时右边栏出现 基本设置 ->编辑网站 -> 连接为 -> 特定用户 -> 设置凭据（这里就是刚刚在 计算机管理 里面设置的用户信息）->确定</li>
+			<li></li>
+			</ol>
+			<p>测试前面搭建的 FTP 服务器</p>
+			<ol>
+			<li>在 浏览器 或 文件管理器地址栏 输入 FTP 地址（如 ftp:\\192.168.0.100），若采用的是匿名则可直接进入，无需输入用户名和密码</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			</ol>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
+		<div>
+			<h3>电脑自带的 cmd 命令下进行下载和上传操作</h3>
+			<p>FTP 主动和被动模式：两个端口，一个数据口（一般 20），一个命令口（一般 21）<br/>
+				主动模式的端口是固定的，如命令口为 n（20）则数据口为 n+1（21）<br/>
+				被动模式下端口是自动分配的，命令口 20，数据口可能为 1024-5000 之间</p>
+			<p>ftp 的命令：</p>
+			<ol>
+			<li>USER：登录用户名</li>
+			<li>PASS：登录密码</li>
+			<li>PASV：让服务器在数据端口监听，进入被动模式</li>
+			<li>PORT：主动模式的 ip 和两字节端口</li>
+			<li>TYPE：数据类型（A=ASCII, E=EBCDIC, I=BINARY）</li>
+			<li>QUIT：退出登录</li>
+			<li>SIZE：从服务器上返回指定文件的大小</li>
+			<li>RETR：下载文件</li>
+			<li>STOR：上传文件</li>
+			<li></li>
+			</ol>
+			<p>ftp 的响应：</p>
+			<ol>
+			<li>200：命令正常执行，即已经验证用户名和密码 ok</li>
+			<li>213：文件状态回复，文件字节大小</li>
+			<li>220：服务就绪，之后输入用户名和密码</li>
+			<li>227：进入被动模式（ip 地址，id 端口）</li>
+			<li>230：登录因特网</li>
+			<li>331：用户名验证 ok，要求输入密码</li>
+			<li>150：文件状态良好，打开数据连接</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			</ol>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
+		<div>
+			<h3></h3>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
+		<div>
+			<h3></h3>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			</div>
 	</div>
 </body>
 </html>

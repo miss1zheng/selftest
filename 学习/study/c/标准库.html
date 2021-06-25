@@ -473,7 +473,46 @@
 				nmemb：元素的个数，每个元素的大小为 size 字节<br/>
 				fp：指向 FILE 对象的指针，该 FILE 对象指定了一个输入流<br/>
 				返回值：成功返回读取的元素总数，返回值若与 nmemb 不一致则可能发生错误或到达文件末尾</li>
-			<li></li>
+			<li>int fscanf(FILE * fp, const char * format, [argument...])：根据数据格式 format ，从输入流 fp 中读入数据，存储到 argument 中，遇到空格和换行时结束<br/>
+				fp：文件描述符<br/>
+				format：格式化<br/>
+				argument...：格式化的数据<br/>
+				返回值：成功返回读入的参数的个数，失败返回 -1（EOF）
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					int main(void)<br/>
+					{<br/>
+						&nbsp; char imei[20], sn[21];<br/>
+						&nbsp; FILE *fp;<br/>
+						&nbsp; fp = fopen("./test.txt", "r");<br/>
+						&nbsp; if(fp == NULL){<br/>
+							&nbsp; &nbsp; printf("open fail\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/><br/>
+						
+						&nbsp; for(int i=0; i&lt;5; i++){<br/>
+							&nbsp; &nbsp; memset(imei, 0, 20);<br/>
+							&nbsp; &nbsp; memset(sn, 0, 21);<br/>
+							&nbsp; &nbsp; //返回参数个数，这里是两个，所有返回 2<br/>
+							&nbsp; &nbsp; int len=fscanf(fp, "IMEI:%s ,SN:%s\r\n", imei, sn);//无论在文件中还是在格式化，中间都要有 空格，否则第二个参数获取不到<br/>
+							&nbsp; &nbsp; printf("imei:%s\n", imei);<br/>
+							&nbsp; &nbsp; printf("sn:%s\n", sn);<br/>
+							&nbsp; &nbsp; printf("len:%d\n", len);<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}<br/><br/>
+					test.txt文本内容为<br/>
+					IMEI:8638660496292xx ,SN:004024210513006828yy<br/>
+					IMEI:8638660496292xx ,SN:004024210513006824yy<br/>
+					IMEI:8638660496285xx ,SN:004024210513006757yy<br/>
+					IMEI:8638660496256xx ,SN:004024210513006467yy<br/>
+					IMEI:8638660496259xx ,SN:004024210513006490yy<br/>
+					IMEI:8638660496256xx ,SN:004024210513006465yy<br/>
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1339,16 +1378,22 @@
 				&nbsp; 管道没有名字，只能在具有公共祖先的进程（父进程与子进程，或者两个兄弟进程，具有亲缘关系）之间使用 (非常重点)<br/>
 				举例：详见 dup2 函数</li>
 			<li>int dup(int oldfd)：复制文件描述符<br/>
-				返回值：返回新的文件描述符，是当前可用文件描述符中最小数值<br/>
-				dup() 和 dup2() 的区别：<br/>
-				dup2() 可以用 newfd 来指定新描述符数值，若 newfd 指向的文件已经被打开，会先将其关闭。若 newfd 等于 oldfd，就不关闭 newfd，newfd 和 oldfd 共同指向一份文件。<br/>
+				oldfd：已打开的文件描述符<br/>
+				返回值：返回当前进程可用的最小的文件描述符，这个文件描述符和 oldfd 是同个文件表中的同个文件<br/>
 				举例：详见 dup2 函数
 				</li>
 			<li>int dup2(int oldfd, int newfd)：复制文件描述符，复制的文件描述符和原来的文件描述符共享各种文件状态<br/>
 				oldfd：要被复制的文件描述符，必须是已经打开过的<br/>
 				newfd：复制后的文件描述符，可以是 0-255 任意取值，若是已打开的文件描述符则会先关闭。若 newfd 等于 oldfd，就不关闭 newfd，newfd 和 oldfd 共同指向一份文件<br/>
 				返回值，成功返回新文件描述符，失败返回 -1 并设置 errno<br/>
-				dup2() 相当于调用 fcntl(oldfd, F_DUPFD, newfd)
+				dup() 和 dup2() 的区别：<br/>
+				&nbsp; dup2() 可以用 newfd 来指定新描述符数值，若 newfd 指向的文件已经被打开，会先将其关闭。若 newfd 等于 oldfd，就不关闭 newfd，newfd 和 oldfd 共同指向一份文件。<br/>
+				&nbsp; 先判断 oldfd 和 newfd 是不是同一个值，如果是的就直接返回 newfd。如果不是的，它会先把 newfd 指向的文件关闭，然后把 oldfd 复制给 newfd 然后把 newfd 返回<br/>
+				注意：<br/>
+				&nbsp; dup2() 相当于调用 fcntl(oldfd, F_DUPFD, newfd)<br/>
+				&nbsp; dup2(fd, STDOUT_FILENO)：将标准输出流输出到 fd 指向的文件描述符，printf 就会直接输出到这个文件里而不会输出到屏幕上<br/>
+				&nbsp; 从 shell 中运行一个进程，默认会有 3 个文件描述符存在(0、１、2)，0 与进程的标准输入相关联，１ 与进程的标准输出相关联，2 与进程的标准错误输出相关联<br/>
+				&nbsp; fork 会复制一个和父进程状态一样的子进程，然后我们可以在子进程中执行 dup2 而父进程的输入输出不受影响
 				<form>
 				<fieldset>
 					<legend>** <b>举例</b> **</legend>
@@ -1393,12 +1438,13 @@
 									&nbsp; &nbsp; &nbsp; &nbsp; printf("cpy file flag is fail\n");<br/>
 									&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
 								&nbsp; &nbsp; &nbsp; }<br/>
-								&nbsp; &nbsp; &nbsp; printf("dup2 end\n");//由于输出流重定向到fd[1]，所以屏幕上不会由此数据<br/>
+								&nbsp; &nbsp; &nbsp; //注意：在输出数据的时候我是用了不带缓冲的 write 库函数，如果使用带缓冲区的 printf，则最终结果为屏幕上输出两行"Hello dup2"，而文件testdup2.dat中为空，原因就是缓冲区作怪，由于最终的目标是屏幕，所以程序最后将缓冲区的内容都输出到屏幕<br/>
+								&nbsp; &nbsp; &nbsp; write(STDOUT_FILENO,"dup2 start\n",11);//由于输出流重定向到fd[1]，所以屏幕上不会由此数据<br/>
 								&nbsp; &nbsp; &nbsp; if(dup2(out_fd, cpy_fd)&lt;0){//恢复输出流<br/>
 									&nbsp; &nbsp; &nbsp; &nbsp; printf("dup to dup2 fail\n");<br/>
 									&nbsp; &nbsp; &nbsp; &nbsp; return 0;<br/>
 								&nbsp; &nbsp; &nbsp; }<br/>
-								&nbsp; &nbsp; &nbsp; printf("ending...\n");<br/>
+								&nbsp; &nbsp; &nbsp; write(STDOUT_FILENO,"ending...\n",10);<br/>
 								&nbsp; &nbsp; &nbsp; close(fd[1]);<br/>
 								&nbsp; &nbsp; &nbsp; if (execl("/bin/sh", "ls", "-al", "/etc/passwd", (char*)0) == -1){//执行文件<br/>
 									&nbsp; &nbsp; &nbsp; &nbsp; printf("execl fail\n");<br/>
@@ -1407,6 +1453,66 @@
 							&nbsp; &nbsp; }<br/>
 						&nbsp; }<br/>
 
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				<form>
+				<fieldset>
+					<legend>** <b>父子进程举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;unistd.h><br/>
+					#include &lt;fcntl.h><br/>
+
+					int main(void)<br/>
+					{<br/>
+						&nbsp; int pid, out_fd;<br/>
+						&nbsp; int fd=open("./test.txt", O_RDWR|O_CREAT|O_APPEND, S_IRWXU|S_IRWXG|S_IRWXO);<br/>
+						&nbsp; if(fd == -1){<br/>
+							&nbsp; &nbsp; printf("open fail\n");<br/>
+							&nbsp; &nbsp; return 0;<br/>
+						&nbsp; }<br/>
+						&nbsp; pid = vfork();//进程创建<br/>
+						&nbsp; if(pid &lt; 0){//失败<br/>
+							&nbsp; &nbsp; printf("vfork is fail\n");<br/>
+							&nbsp; &nbsp; goto end;<br/>
+						&nbsp; }<br/>
+						&nbsp; else if(pid > 0){//父进程<br/>
+							&nbsp; &nbsp; //正常的输出到屏幕<br/>
+							&nbsp; &nbsp; printf("father process start\n");//由于先缓存，所以会先打印 write 的数据，然后再打印 printf 的数据<br/>
+							&nbsp; &nbsp; write(STDOUT_FILENO, "father process end\n", 19);<br/>
+						&nbsp; }<br/>
+						&nbsp; else{//子进程<br/>
+							&nbsp; &nbsp; //重定向输出到文件<br/>
+							&nbsp; &nbsp; if(fd != STDOUT_FILENO){<br/>
+								&nbsp; &nbsp; &nbsp; if((out_fd = dup(STDOUT_FILENO)) &lt; 0){//用于下面的重定向后的恢复<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("dup is fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; goto end;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; if ((dup2(fd, STDOUT_FILENO)) != STDOUT_FILENO){//重定向输出流到文件<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("to file fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; goto end;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; write(STDOUT_FILENO,"child process start\n",20);<br/>
+								&nbsp; &nbsp; &nbsp; printf("child process end\n");//由于 printf 会缓存，所以不会输出到文件，而是在运行父进程时打印到屏幕<br/>
+								&nbsp; &nbsp; &nbsp; if(dup2(STDOUT_FILENO, out_fd) &lt; 0){//恢复输出流<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("dup to dup2 fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; goto end;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; write(STDOUT_FILENO, "ending...\n", 10);//由于恢复了输出流，所以输出到屏幕<br/>
+								&nbsp; &nbsp; &nbsp; if (execl("/bin/sh", "sh", "-c", "ping -w 1 127.0.0.1", (char*)0) == -1){ //输出到文件<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("execl fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; goto end;<br/>
+								&nbsp; &nbsp; &nbsp; }<br/>
+								&nbsp; &nbsp; &nbsp; /*if (execl("/bin/sh", "ls", "-al", "/mnt/share/main.c", (char*)0) == -1){ //输出到屏幕<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; printf("execl fail\n");<br/>
+									&nbsp; &nbsp; &nbsp; &nbsp; goto end;<br/>
+								&nbsp; &nbsp; &nbsp; }*/<br/>
+
+							&nbsp; &nbsp; }<br/>
+						&nbsp; }<br/>
+					end:<br/>
+						&nbsp; close(fd);<br/>
 						&nbsp; return 0;<br/>
 					}
 				</fieldset>
@@ -1675,7 +1781,31 @@
 				</fieldset>
 				</form>
 				</li>
-			<li></li>
+			<li>char * strtok(char *s, const char *delim)：分解字符串为一组字符串<br/>
+				s：要分解的字符串<br/>
+				delim：分割符字符<br/>
+				返回值，分割后的字符串<br/>
+				注意：首次调用 s 指向要分割的字符串，之后再调用要把 s 设置为 NULL
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include<string.h><br/>
+					#include<stdio.h><br/>
+					int main(void)<br/>
+					{<br/>
+						&nbsp; char buff[100]="abcdefg,hijklmn,opq,rst,uvw,xyz";<br/>
+						&nbsp; char *p;<br/>
+						&nbsp; p=strtok(buff, ",");<br/>
+						&nbsp; printf("%s\n", p);<br/>
+						&nbsp; while(p != NULL){<br/>
+							&nbsp; &nbsp; p=strtok(NULL, ",");<br/>
+							&nbsp; &nbsp; printf("%s\n", p);<br/>
+						&nbsp; }<br/>
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -1710,7 +1840,8 @@
 				举例：int a = atoi("123");</li>
 			<li>void exit(int status)：立即终止进程<br/>
 				status：返回给父进程的状态值<br/>
-				举例：exit(0)正常退出；exit(x)异常退出（x 不为 0）</li>
+				举例：exit(0)正常退出；exit(x)异常退出（x 不为 0）<br/>
+				注意：exit(0);while(1);：这样可防止异常运行导致死机</li>
 			<li>void *malloc(size_t size)：分配动态内存空间<br/>
 				size：内存块大小，以字节为单位<br/>
 				返回值：成功返回一个指针，指向已分配大小的内存，失败返回 NULL<br/>
@@ -1813,6 +1944,14 @@
 				</fieldset>
 				</form>
 				</li>
+			<li>long atol(const char *nptr)： 把字符串转换成长整型数<br/>
+				nptr：要被转换的字符串<br/>
+				返回值：返回转换后的长整型数。如果传入的字符串为空，或者字符串包含的内容非阿拉伯数字序列，则函数返回默认值 0<br/>
+				注意：转换时会跳过前面的空格字符(就是忽略掉字符串左空格的意思)，直到遇上数字或正负符号才开始做转换，而再遇到非数字或字符串结束时('\0')才结束转换<br/>
+				atol() 与使用 strtol(nptr, (char**)NULL, 10)；结果相同</li>
+			<li></li>
+			<li></li>
+			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2230,7 +2369,10 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>struct sockaddr{<br/>  
+					&nbsp; sa_family_t sin_family;//地址族<br/>
+		　　  		&nbsp; char sa_data[14]; //14字节，包含套接字中的目标地址和端口信息<br/>
+		　　 	}; </li>
 			<li>
 			<form>
 			<fieldset>
@@ -2418,10 +2560,14 @@
 				strptr：点分十进制<br/>
 				len：strptr 的长度<br/>
 				返回值：成功返回指向结构的指针，失败返回 NULL，如 "127.0.0.1"</li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>uint16_t htons(uint16_t hostshort)：主机字节顺序转换成网络字节顺序<br/>
+				如 htons(10000)</li>
+			<li>uint16_t ntohs(uint16_t netshort)：将一个无符号短整型从网络字节顺序转换成主机字节顺序<br/>
+				</li>
+			<li>uint32_t htonl(uint32_t hostlong)：主机字节顺序转换成网络字节顺序<br/>
+				</li>
+			<li>uint32_t ntohl(uint32_t netlong)：将一个无符号长整型从网络字节顺序转换成主机字节顺序<br/>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2871,16 +3017,7 @@
 			<li>struct hostent *gethostbyname(const char *name)：用域名或主机名获取 ip 地址<br/>
 				name：指向主机名，如 "www.baidu.com"<br/>
 				返回值：window 下返回对应于给定主机名的主机信息；linux 下成功返回非空，失败返回空并设置 errno<br/>
-				window 下的头文件是 winsock2.h<br/>
-				struct hostent<br/>
-				{<br/>
-					&nbsp; char *h_name; //主机的规范名<br/>
-					&nbsp; char ** h_aliases; //主机的别名<br/>
-					&nbsp; short h_addrtype; //主机 ip 地址类型，ipv4（AF_INET）或 ipv6（AF_INET6）<br/>
-					&nbsp; short h_length; //主机 ip 地址长度<br/>
-					&nbsp; char ** h_addr_list;//主机 ip 地址，以网络字节序存储，打印 ip 时需调用 inet_ntop()<br/>
-				};<br/>
-				可用于判断是否为域名：if( (hptr = gethostbyname("www.baidu.com") ) == NULL )//不是域名</li>
+				可用于判断是否为域名：if( (gethostbyname("www.baidu.com") ) == NULL )//不是域名</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2907,7 +3044,8 @@
 				&nbsp; unsigned short int sin_port; /* Port number */<br/>
 				&nbsp; struct in_addr sin_addr; /* Internet address */<br/>
 				&nbsp; unsigned char sin_zero[8]; /*to make same size as struct sockaddr */<br/>
-			};</li>
+			};<br/>
+			此结构体还可以再 arpa/inet.h 头文件中定义</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -3491,7 +3629,7 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>winsock2.h</h3>
 			<ol>
 			<li></li>
 			<li></li>
@@ -3507,11 +3645,17 @@
 			<li></li>
 			<li></li>
 			<li></li>
-			<li></li>
+			<li>struct hostent{<br/>
+					&nbsp; char *h_name; //主机的规范名<br/>
+					&nbsp; char ** h_aliases; //主机的别名<br/>
+					&nbsp; short h_addrtype; //主机 ip 地址类型，ipv4（AF_INET）或 ipv6（AF_INET6）<br/>
+					&nbsp; short h_length; //主机 ip 地址长度<br/>
+					&nbsp; char ** h_addr_list;//主机 ip 地址，以网络字节序存储，打印 ip 时需调用 inet_ntop()<br/>
+				};</li>
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3></h3>
 			<ol>
 			<li></li>
 			<li></li>
