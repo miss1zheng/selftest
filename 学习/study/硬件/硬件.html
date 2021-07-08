@@ -55,11 +55,20 @@
 	<p>I2C：半双工、双向二线制同步串行总线，sda为双向数据线（收发），scl为双向时钟线（时钟控制），主从方式，可多主多从</p>
 	<p>PWM：脉冲宽度调制，模拟信号进行数字编码</p>
 	<p>RTC：实时时钟</p>
-	<p>SPI：sclk为串行时钟线，mosi为主输出从输入的数据线，miso为主输入从输出的数据线，cs为从设备选择线，串行外设接口，一主多从，全双工同步通信（如EEPROM、FLASH、AD转换器）</p>
+	<p>SPI：sclk 为串行时钟线，mosi 为主输出从输入的数据线，miso 为主输入从输出的数据线，cs 为从设备选择线，串行外设接口，一主多从，全双工同步通信（如 EEPROM、FLASH、AD 转换器）</p>
 	<p>WLAN：wifi无线中间件</p>
 	<p>SENSOR：传感器</p>
 	<p>TOUCH：触摸芯片</p>
-	<p>485：半双工，以一个使能引脚控制数据的收发（如发送拉低，接收拉高），以MAX485芯片为例<br/><img src="./data/max485.png" alt="max485"/></p>
+	<p>485：半双工，以一个使能引脚控制数据的收发（如发送拉低，接收拉高），以 MAX485 芯片为例<br/><img src="./data/max485.png" alt="max485"/><br/>
+		uart 转 485 实现：<br/>
+		if(send_buff != NULL){<br/>
+			&nbsp; continue;<br/>
+		}else{//数据发送完毕<br/>
+			&nbsp; if(idle_flag){//空闲标志位<br/>
+				&nbsp; &nbsp; usleep(x);//加段延时（延时时间根据实际串口参数改动，如波特率越低，延时越大）<br/>
+				&nbsp; &nbsp; pin(rs485_en, true);//拉高 485 使能脚<br/>
+			&nbsp; }<br/>
+		}</p>
 	<p>232：</p>
 	<p>方波实现：代码上是高低电平相间，然后每个电平转换加入延时，即可实现方波</p>
 	<p>电流：带电质点的定向运动形成电流，单位安培（A）</p>

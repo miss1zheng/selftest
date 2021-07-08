@@ -949,6 +949,34 @@
 				}</fieldset>
 				</form>
 				</li>
+			<li>int _vsnprintf(char* str, size_t size, const char* format, va_list ap)：用于向字符串中打印数据、数据格式用户自定义<br/>
+				str：把生成的格式化的字符串存放在这里<br/>
+				size：str 可接受的最大字符数（非字节数，UNICODE一个字符两个字节），防止产生数组越界<br/>
+				format：指定输出格式的字符串，决定了提供的可变参数的类型、个数和顺序<br/>
+				ap：可变参数<br/>
+				返回值：成功返回最终生成字符串的长度，若生成字符串的长度大于 size，则将字符串的前 size 个字符复制到 str，同时将原串的长度返回（不包含终止符）。失败返回负值并设置 errno<br/>
+				用法类似于 vsprintf，不过加了 size 的限制，防止了内存溢出（size 为 str 所指的存储空间的大小）
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;stdarg.h><br/>
+					char buff[1024];<br/>
+					int printff(char *format,...){<br/>
+						&nbsp; int n;<br/>
+						&nbsp; va_list ap;<br/>
+						&nbsp; va_start(ap,format);<br/>
+						&nbsp; n = vsprintf(buff,format,ap);<br/>
+						&nbsp; va_end(ap);<br/>
+						&nbsp; return n;<br/>
+					}<br/>
+					int main(){<br/>
+						&nbsp; printff("start......\n");<br/>
+						&nbsp; printf("%s",buff);<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -2403,7 +2431,7 @@
 					&nbsp; setsockopt(s, 6, 4, (void*)&amp;keepIdle, sizeof(keepIdle));<br/>
 					&nbsp; setsockopt(s, 6, 5, (void *)&amp;keepInterval, sizeof(keepInterval));<br/>
 					&nbsp; setsockopt(s, 6, 6, (void *)&amp;keepCount, sizeof(keepCount));<br/>
-					&nbsp; setsockopt(s, IPPROTO_TCP, TCP_NODELAY, (void *)&amp;ch_opt, sizeof(ch_opt));<br/>
+					&nbsp; setsockopt(s, IPPROTO_TCP, TCP_NODELAY, (void *)&amp;ch_opt, sizeof(ch_opt)); //禁用Nagle算法，可解决发送粘包问题<br/>
 					&nbsp; setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, (char *)&amp;timeout_recv, sizeof(struct timeval));<br/>
 					&nbsp; //服务器参数<br/>
 					&nbsp; bzero(&amp;s_add,sizeof(struct sockaddr_in));<br/>
@@ -3333,30 +3361,54 @@
 				&nbsp; LOG_PID：包含每个消息的 PID（进程号）<br/>
 				facility：指定程序的类型<br/>
 				&nbsp; LOG_AUTH：安全/认证<br/>
-		        &nbsp; LOG_AUTHPRIV：安全/认证（私有）<br/>
-		        &nbsp; LOG_CRON：cron 和 at<br/>
-		        &nbsp; LOG_DAEMON：daemon 系统守护进程，如 inetd、routed 等<br/>
-		        &nbsp; LOG_FTP：FTP 守护进程<br/>
-		        &nbsp; LOG_KERN：内核产生的消息<br/>
-		        &nbsp; LOG_LOCAL0-7：保留供本地使用<br/>
-		        &nbsp; LOG_LPR：行式打印机系统，如 lpd、lpc 等<br/>
-		        &nbsp; LOG_MAIL：邮件系统<br/>
-		        &nbsp; LOG_NEWS：新闻系统<br/>
-		        &nbsp; LOG_SYSLOG：syslogd 内部生成的消息，syslogd 守护进程本身<br/>
-		        &nbsp; LOG_USER (default)：通用用户级消息<br/>
-		        &nbsp; LOG_UUCP：UUCP 系统<br/>
+				&nbsp; LOG_AUTHPRIV：安全/认证（私有）<br/>
+				&nbsp; LOG_CRON：cron 和 at<br/>
+				&nbsp; LOG_DAEMON：daemon 系统守护进程，如 inetd、routed 等<br/>
+				&nbsp; LOG_FTP：FTP 守护进程<br/>
+				&nbsp; LOG_KERN：内核产生的消息<br/>
+				&nbsp; LOG_LOCAL0-7：保留供本地使用<br/>
+				&nbsp; LOG_LPR：行式打印机系统，如 lpd、lpc 等<br/>
+				&nbsp; LOG_MAIL：邮件系统<br/>
+				&nbsp; LOG_NEWS：新闻系统<br/>
+				&nbsp; LOG_SYSLOG：syslogd 内部生成的消息，syslogd 守护进程本身<br/>
+				&nbsp; LOG_USER (default)：通用用户级消息<br/>
+				&nbsp; LOG_UUCP：UUCP 系统<br/>
 				</li>
 			<li>void syslog(int priority, char *format, ...)：把日志消息发给系统程序 syslogd 去记录<br/>
 				priority：消息级别<br/>
 				&nbsp; LOG_EMERG：系统不可用<br/>
-		        &nbsp; LOG_ALERT：必须立即采取行动<br/>
-		        &nbsp; LOG_CRIT：临界条件<br/>
-		        &nbsp; LOG_ERR：出错条件<br/>
-		        &nbsp; LOG_WARNING：警告条件<br/>
-		        &nbsp; LOG_NOTICE：注意<br/>
-		        &nbsp; LOG_INFO：通告信息<br/>
-		        &nbsp; LOG_DEBUG：debug 调试信息<br/>
+				&nbsp; LOG_ALERT：必须立即采取行动<br/>
+				&nbsp; LOG_CRIT：临界条件<br/>
+				&nbsp; LOG_ERR：出错条件<br/>
+				&nbsp; LOG_WARNING：警告条件<br/>
+				&nbsp; LOG_NOTICE：注意<br/>
+				&nbsp; LOG_INFO：通告信息<br/>
+				&nbsp; LOG_DEBUG：debug 调试信息<br/>
 				format：消息格式，和 printf 函数一样<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>log 设置</b> **</legend>
+					#include &lt;syslog.h><br/>
+
+					int main(int argc, char **argv)<br/>
+					{<br/>
+						&nbsp; openlog("syslog_test", LOG_PID, LOG_DAEMON);<br/>
+
+						&nbsp; syslog(LOG_EMERG, "system is unusable");<br/>
+						&nbsp; syslog(LOG_ALERT, "action must be taken immediately");<br/>
+						&nbsp; syslog(LOG_CRIT, "critical conditions");<br/>
+						&nbsp; syslog(LOG_ERR, "error conditions");<br/>
+						&nbsp; syslog(LOG_WARNING, "warning conditions");<br/>
+						&nbsp; syslog(LOG_NOTICE, "normal, but significant, condition");<br/>
+						&nbsp; syslog(LOG_INFO, "informational message");<br/>
+						&nbsp; syslog(LOG_DEBUG, "debug-level message");<br/>
+
+						&nbsp; closelog();<br/>
+
+						&nbsp; return 0;<br/>
+					}
+				</fieldset>
+				</form>
 				</li>
 			<li>void closelog(void)：关闭 openlog 打开的连接</li>
 			<li>int setlogmask(int mask)：设置进程的记录有限级屏蔽字，当设置了记录优先级屏蔽字时，各条消息除非已在记录优先级屏蔽字中进行了设置，否则不被记录<br/>
@@ -3804,7 +3856,7 @@
 			<li>__TIME__：当前编译时间</li>
 			<li>__DATE__：当前编译日期</li>
 			<li>__STDC__：编译器是否遵循 ANSI C 标准，是为非 0 值</li>
-			<li></li>
+			<li>__func__：在 c99 中可代替 __FUNCTION__</li>
 			<li></li>
 			<li></li>
 			<li></li>
