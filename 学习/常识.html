@@ -272,7 +272,13 @@
 			0891683108200505F0 11 00 0D91683196032930F0 00 00 00 06 C8329BFD0E01<br/>
 			解析如下：<br/>
 			SCA：00，0891683108200505F0（长度08+地址格式91+SMSC地址683108200505F0[需要对换下，奇数位在最后补‘F’，即8613800250500]）<br/>
-			PDU-Type：11<br/>
+			PDU-Type：11（类型具体解析如下）<br/>
+			<table border="1"  cellspacing="0">
+				<caption>PDU-Type</caption>
+				<tr><td>bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+				<tr><td>参数</td><td>RP</td><td>UDHI</td><td>SRI</td><td>-</td><td>-</td><td>MMS</td><td>MTI</td><td>MTI</td></tr>
+			</table>
+			其中 MTI 2bit：消息类型，00为收到消息；01为发送消息
 			MR：00<br/>
 			DA：0D91685150800576F7（长度0d+地址格式91+目标地址685150800576F7[8615050850677]），0D91683196032930F0（0d+91+8613693092030）<br/>
 			PID：00，点到点方式<br/>

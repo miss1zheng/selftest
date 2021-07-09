@@ -368,7 +368,11 @@
 		进程间通信：<br/>
 		</p>
 	<p>linux 内核空间和用户空间</p>
-	<p></p>
+	<p>/dev/random 和 /dev/urandom 区别<br/>
+		相同点：都是 Linux 系统中提供的随机伪设备，这两个设备的任务，是提供永不为空的随机字节数据流。很多解密程序与安全应用程序（如 SSH Keys,SSL Keys 等）需要它们提供的随机数据流。<br/>
+		差异点：/dev/random 的 random pool 依赖于系统中断，因此在系统的中断数不足时，/dev/random 设备会一直封锁，尝试读取的进程就会进入等待状态，直到系统的中断数充分够用, /dev/random 设备可以保证数据的随机性。<br/>
+		&nbsp; 而 /dev/urandom 不依赖系统的中断，也就不会造成进程忙等待，但是数据的随机性也不高。<br/>
+		使用 cat 命令可以读取 /dev/random 和 /dev/urandom 的数据流（二进制数据流），可以用 od 命令转换为十六进制后查看，即 cat /dev/random | od -x<br/></p>
 	<p></p>
 	<p></p>
 	<p></p>

@@ -513,8 +513,47 @@
 				</fieldset>
 				</form>
 				</li>
-			<li></li>
-			<li></li>
+			<li>FILE * popen(const char *command, const char *type )：通过创建一个管道，调用 fork() 产生一个子进程，执行一个 shell 以运行命令来开启一个进程<br/>
+				command：是一个指向以 NULL 结束的 shell 命令字符串的指针。这行命令将被传到 bin/sh 并使用 -c 标志，shell 将执行这个命令。<br/>
+				type：type 参数只能是读或者写中的一种，得到的返回值（标准 I/O 流）也具有和 type 相应的只读或只写类型。<br/>
+				&nbsp; r：文件指针连接到 command 的标准输出；<br/>
+				&nbsp; w：文件指针连接到 command 的标准输入<br/>
+				返回值：成功返回标准 I/O 流。如果调用 fork() 或 pipe() 失败，或者不能分配内存将返回 NULL 并设置 errno。<br/>
+				<form>
+				<fieldset>
+					<legend>** <b>举例</b> **</legend>
+					#include &lt;stdio.h><br/>
+					#include &lt;string.h><br/>
+					#include &lt;stdlib.h><br/>
+
+					int main(void)<br/>
+					{<br/>
+						FILE *fp;<br/>
+						int i, cnt;<br/>
+						char temp[256],buff[2048];<br/>
+						char *p;<br/>
+						
+						cnt = 0;<br/>
+						memset(buff,0,2048);<br/>
+						sprintf(temp, "ifconfig %s", "enp0s3");<br/>
+						fp = popen(temp, "r");<br/>
+
+						if(fp){<br/>
+							while(fgets(buff, sizeof(buff), fp))<br/>
+								printf("%s\n",buff);<br/>
+							pclose(fp);<br/>
+						}<br/>
+						
+						//system("pause"); //window<br/>
+						exit(0);<br/>
+						while(1);<br/>
+						return 0;<br/>
+					}
+				</fieldset>
+				</form>
+				</li>
+			<li>int pclose(FILE *stream)：关闭标准 I/O 流，等待命令执行结束，然后返回 shell 的终止状态。如果 shell 不能被执行，则 pclose() 返回的终止状态与 shell 已执行 exit 一样<br/>
+				</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -3707,14 +3746,16 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3></h3>
+			<h3>stdint.h</h3>
 			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>uint64_t</li>
+			<li>uint32_t</li>
+			<li>uint16_t</li>
+			<li>uint8_t</li>
+			<li>int64_t</li>
+			<li>int32_t</li>
+			<li>int16_t</li>
+			<li>int8_t</li>
 			<li></li>
 			<li></li>
 			<li></li>
@@ -3727,11 +3768,11 @@
 			<ol>
 			</div><hr/>
 		<div>
-			<h3>.h</h3>
+			<h3>stdbool.h</h3>
 			<ol>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>bool</li>
+			<li>false</li>
+			<li>true</li>
 			<li></li>
 			<li></li>
 			<li></li>
