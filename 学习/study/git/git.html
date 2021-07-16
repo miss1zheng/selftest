@@ -63,11 +63,11 @@
 		<li>git checkout xxx：切换分支，使用选项 -b 即创建分支并切换到此分支上去</li>
 		<li>git clean -d -fx：为删除一些没有git add的文件，若切换时切换不过去，可以使用这个命令</li>
 		<li>git show-branch -a --color=always：有若干短划线”-”分隔，几个分支就会有几个短划线。其中短划线分割两部分，上部分为层次缩进的分支列表，下半部分为commit列表。上部分*标识当前分支，！标识其他分支，不同分支颜色不同。下部分commit列表的*和+,*标识这列中当前分支由此commit，而+标识这列中的非当前分支由此commit。颜色用于区分分支</li>
-		<li>git show -a --color=always：若commit之后还想再看下提交前后之间的有哪些地方改变了，则可以使用此命令查看</li>
+		<li>git show -a --color=always：若 commit 之后还想再看下提交前后之间的有哪些地方改变了，则可以使用此命令查看</li>
 		<li>git stash：将文件放入暂存区</li>
-		<li>git stash list：列出所有stash</li>
-		<li>git stash apply：恢复暂存区内容</li>
-		<li>git stash drop：删除暂存区</li>
+		<li>git stash list：列出所有 stash</li>
+		<li>git stash apply：恢复暂存区内容，恢复单个如 git stash apply stash@{0}</li>
+		<li>git stash drop：删除暂存区，删除单个如  git stash drop stash@{0}</li>
 		<li>git tag xxx：给当前 log 打上 tag 标签，如发布版本可打上 tag 标签，这样 git 上就能看出哪个 log 是发布版本</li>
 		<li>git tag xxx logid：给 log 为 logid 的位置打上 tag 为 xxx 的标签</li>
 		<li>git reflog：查看本地记录</li>

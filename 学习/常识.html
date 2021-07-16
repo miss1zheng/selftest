@@ -296,7 +296,7 @@
 				<tr><th>格式</th>	<th>名称</th>					<th>长度</th>	<th>描述</th></tr>
 				<tr><td>SCA</td><td>Service Center Address</td><td>1-12</td><td>短消息服务中心地址格式</td></tr>
 				<tr><td>PDU-Type</td><td>Protocol Data Unit</td><td>1</td><td>协议数据单元类型</td></tr>
-				<tr><td>DA</td><td>Destination Address</td><td>2-12</td><td>接收方地址（手机号码）</td></tr>
+				<tr><td>OA</td><td>origin Address</td><td>2-12</td><td>接收方地址（手机号码）</td></tr>
 				<tr><td>PID</td><td>Protocol Identifer</td><td>1</td><td>参数显示消息中心以何种方式处理消息内容（比如FAX,Voice）</td></tr>
 				<tr><td>DCS</td><td>Data Coding Scheme</td><td>1</td><td>参数显示用户数据编码方案</td></tr>
 				<tr><td>SCTS</td><td>Service Center Time Stamp</td><td>7</td><td>消息中心收到消息时的时间戳</td></tr>
@@ -305,14 +305,33 @@
 			</table>
 			比如：从 15050850677 接收一条短信，内容“你好”<br/>
 			0891683110402505F0240B915150800576F7000801112081600423044F60597D<br/>
-			解析如下：
+			解析如下：<br/>
+			SCA：长度+服务中心类型+号码=1+1+第一字节得出的长度（08 91 683110402505F0）<br/>
+				&nbsp; 08：是除去 08 后的字节数，即 91683110402505F0，若长度为 00，则 SCA 区整个长度只有 1；<br/>
+				&nbsp; 91：91 国际号码，81 是国内号码；<br/>
+				&nbsp; 683110402505F0：号码，两两前后对换，若为奇数个则最后位用 F 填充，这里实际为 8613010452500<br/>
 			<table border="1"  cellspacing="0">
-				<tr><td>SCA</td>			<td>PDU-Type</td><td>DA</td>				<td>PID</td><td>DCS</td><td>SCTS</td>			<td>UDL</td><td>UD</td></tr>
-				<tr><td>1-12</td>			<td>1</td>		<td>2-12</td>				<td>1</td>	<td>1</td>	<td>7</td>				<td>1</td><td>0-xx</td></tr>
-				<tr><td>0891683110402505F</td><td>24</td>	<td>0B915150800576F7</td>	<td>00</td>	<td>08</td>	<td>01112081600423</td>	<td>04</td><td>4F60597D</td></tr>
+				<tr><th>bit</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th><th>0</th></tr>
+				<tr><td>PDU-Type</td><td>RP</td><td>UDHI</td><td>SRI</td><td>-</td><td>-</td><td>MMS</td><td>MTI</td><td>MTI</td></tr>
 			</table>
-			其中 SCA 组成为：长度+类型+号码=1+1+第一字节得出的长度（08 91 683110402505F0）<br/>
+			OA：短消息发方的手机号，0B915150800576F7<br/>
+				&nbsp; 0B：后面每个字符的长度<br/>
+				&nbsp; 91：91 国际号码，81 是国内号码；<br/>
+				&nbsp; 5150800576F7：电话号码，实际为15050850677（奇数位末尾使用 F 填充）<br/>
+			PID：00：支持所有服务商<br/>
+			DCS：08：00 时 7bit 编码；08 是 UCS2 编码；具体如下<br/>
+			<table border="1"  cellspacing="0">
+				<caption>DCS</caption>
+				<tr><th>bit</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th><th>0</th></tr>
+				<tr><td>DCS</td><td>-</td><td>-</td><td>0：文本压缩<br/>1：GSM 压缩</td>
+				<td>0：令 bit0 和 bit1 无效<br/>1：令 bit0 和 bit1 有效</td>
+				<td>和 bit2 组成字符集</td><td>和 bit3 组成字符集</td><td>和 bit0 组成消息类型</td><td>和 bit1 组成消息类型</td></tr>
+				<tr><td>字符集<br/>bit3:bit2<br/>0 0：7bit 编码<br/>0 1：8bit 编码（ascii）<br/>1 0：UCS2 编码（中文）<br/>1 1：保留</td>
+				<td>消息类型<br/></td></tr>
+			</table>
 			SCTS：如 30302180635480 表示 2003/3/12,08:36:45+8<br/>
+			UDL：04<br/>
+			UD：4F60597D<br/>
 			SMS 的 pdu 工具：PDUspy.exe</li>
 		<li>卡的 ICCID 可用于识别运营商（第 5-6 位）<br/>
 			移动：00、02、04、07<br/>
